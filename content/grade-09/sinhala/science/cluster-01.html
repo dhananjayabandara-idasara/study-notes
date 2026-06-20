@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara · 9 ශ්‍රේණිය විද්‍යාව — ඇස, කන හා රුධිර සංසරණය</title>
+<style>
+  :root{
+    --navy:#0d1b3e; --navy-2:#16264f; --navy-3:#22376b;
+    --gold:#e0a92e; --gold-2:#c8901a; --gold-soft:#f6e4b8;
+    --bg:#f5f7fb; --card:#ffffff; --ink:#1a2235; --ink-soft:#4a5468; --line:#e2e7f0;
+    --A:#0e7c86;  --A-soft:#e2f3f4;  --A-deep:#0a5b63;   /* පාඩම 2 — ඇස හා කන */
+    --B:#c4533f;  --B-soft:#fbe9e4;  --B-deep:#9c3a29;   /* පාඩම 6 — රුධිර සංසරණය */
+    --ok:#1f8a4c; --warn:#b3651f; --warn-soft:#fdf0e1;
+    --shadow:0 4px 18px rgba(13,27,62,.08);
+    --shadow-lg:0 10px 40px rgba(13,27,62,.14);
+    --radius:16px;
+    --fs:'Noto Sans Sinhala','Iskoola Pota','Nirmala UI','Yu Gothic',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'Iosevka','Fira Code',ui-monospace,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fs);font-size:17px;line-height:1.78;-webkit-text-size-adjust:100%}
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:120;background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .1s linear}
+
+  header.site{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-bottom:3px solid var(--gold);box-shadow:var(--shadow)}
+  .bar{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff}
+  .logo{width:38px;height:38px;border-radius:10px;flex:none;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:grid;place-items:center;font-weight:800;color:var(--navy);font-size:21px;box-shadow:0 2px 8px rgba(224,169,46,.4)}
+  .brand b{font-size:18px;letter-spacing:.5px;line-height:1}
+  .brand small{display:block;font-size:11px;opacity:.75;letter-spacing:2px;text-transform:uppercase}
+  .crumbs{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;font-size:12.5px}
+  .crumbs span{background:rgba(255,255,255,.12);padding:3px 11px;border-radius:20px;white-space:nowrap}
+  .crumbs span.acc{background:var(--gold);color:var(--navy);font-weight:700}
+
+  main{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+
+  .hero{margin:30px 0 14px;padding:34px 28px;border-radius:24px;color:#fff;position:relative;overflow:hidden;background:radial-gradient(120% 140% at 85% 10%,var(--navy-3),var(--navy) 60%)}
+  .hero::after{content:"👁  👂  🫀  🩸";position:absolute;right:-6px;bottom:-14px;font-size:66px;font-weight:800;color:rgba(224,169,46,.10);letter-spacing:12px;white-space:nowrap;pointer-events:none}
+  .hero .eyebrow{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;font-size:12.5px;letter-spacing:1px;padding:5px 13px;border-radius:20px}
+  .hero h1{margin:.5em 0 .25em;font-size:clamp(25px,5.6vw,42px);line-height:1.25;font-weight:800}
+  .hero h1 .g{color:var(--gold)}
+  .hero p{margin:.4em 0 0;font-size:16.5px;max-width:54ch;opacity:.92}
+  .hero .pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:30px;font-size:14px}
+
+  .why{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin:18px 0;box-shadow:var(--shadow);border-left:6px solid var(--gold)}
+  .why h2{margin:.1em 0 .4em;font-size:21px;color:var(--navy)}
+  .why p{margin:.4em 0;color:var(--ink-soft);font-size:16px}
+
+  .roadmap{margin:22px 0}
+  .roadmap h2{font-size:20px;color:var(--navy);margin:0 0 4px}
+  .roadmap .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .map-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .map-card{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-top:5px solid var(--cl);transition:transform .15s,box-shadow .15s}
+  .map-card:hover,.map-card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-lg);outline:none}
+  .map-card .tag{font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--cl)}
+  .map-card h3{margin:6px 0 6px;font-size:18px;color:var(--navy)}
+  .map-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .map-card .cnt{display:inline-block;margin-top:10px;font-size:12px;background:var(--clsoft);color:var(--cl);font-weight:700;padding:3px 10px;border-radius:20px}
+
+  .part{scroll-margin-top:76px;margin:46px 0 8px;padding:20px 22px;border-radius:20px;color:#fff;background:linear-gradient(135deg,var(--cl),var(--cldeep));box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .part .pn{font-size:13px;font-weight:800;letter-spacing:1px;opacity:.85}
+  .part h2{margin:3px 0 4px;font-size:clamp(21px,4.6vw,29px);font-weight:800}
+  .part p{margin:0;opacity:.92;font-size:15px;max-width:62ch}
+  .part .src{position:absolute;right:14px;top:14px;font-size:11px;background:rgba(255,255,255,.16);padding:4px 11px;border-radius:14px}
+
+  .topic{scroll-margin-top:72px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin:16px 0;overflow:hidden;border:1px solid var(--line)}
+  .topic > .head{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none;padding:17px 20px;background:linear-gradient(0deg,#fff,var(--clsoft));border-bottom:1px solid var(--line)}
+  .topic > .head::-webkit-details-marker{display:none}
+  .topic .num{flex:none;width:40px;height:40px;border-radius:11px;background:var(--cl);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+  .topic .head h3{margin:0;font-size:18px;color:var(--navy);flex:1}
+  .topic .head .en{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+  .topic .chev{flex:none;color:var(--cl);font-size:22px;transition:transform .25s}
+  details[open] > .head .chev{transform:rotate(180deg)}
+  .topic .body{padding:6px 20px 22px}
+
+  .step{margin:22px 0 8px;display:flex;align-items:center;gap:9px}
+  .step .dot{flex:none;width:25px;height:25px;border-radius:50%;background:var(--clsoft);color:var(--cldeep);font-weight:800;font-size:13px;display:grid;place-items:center}
+  .step b{font-size:15.5px;color:var(--cldeep)}
+  p.lead{font-size:16.5px}
+  .topic p{color:var(--ink)}
+
+  .box{border-radius:13px;padding:14px 16px;margin:14px 0;font-size:15.5px}
+  .hook{background:var(--clsoft);border-left:5px solid var(--cl)}
+  .hook .ttl{font-weight:800;color:var(--cldeep)}
+  .watch{background:var(--warn-soft);border-left:5px solid var(--warn)}
+  .watch .ttl{font-weight:800;color:var(--warn);display:block;margin-bottom:3px}
+  .watch ul{margin:.3em 0;padding-left:1.15em}
+  .watch li{margin:.35em 0}
+  .safety{background:#eef7ff;border-left:5px solid #2b6cb0}
+  .safety .ttl{font-weight:800;color:#23598f;display:block;margin-bottom:3px}
+  .memo{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:13px;padding:14px 17px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+  .memo .ic{font-size:22px;flex:none}
+  .memo b{color:var(--gold)}
+  .joke{font-style:italic;color:var(--ink-soft);font-size:14.5px;background:#fcfcfe;border:1px dashed var(--line);border-radius:11px;padding:9px 14px;margin:12px 0}
+  .joke::before{content:"😄 ";font-style:normal}
+
+  .work{background:#fbfcfe;border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:13px 0}
+  .work .lbl{display:inline-block;background:var(--cl);color:#fff;font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:8px;margin-bottom:8px}
+
+  .reveal{margin:11px 0}
+  .reveal .q{font-weight:600}
+  .rbtn{margin-top:8px;background:var(--cl);color:#fff;border:none;cursor:pointer;font-family:var(--fs);font-size:14px;font-weight:700;padding:8px 16px;border-radius:24px;display:inline-flex;align-items:center;gap:7px;transition:filter .15s}
+  .rbtn:hover{filter:brightness(1.08)}
+  .rbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .ans{display:none;margin-top:10px;background:#f0fbf4;border:1px solid #bfe6cd;border-left:5px solid var(--ok);border-radius:11px;padding:11px 15px;font-size:15px}
+  .ans.show{display:block;animation:pop .25s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .ans .a{font-weight:800;color:var(--ok)}
+
+  .selfcheck{background:var(--clsoft);border-radius:13px;padding:13px 16px;margin:15px 0}
+  .selfcheck .ttl{font-weight:800;color:var(--cldeep);margin-bottom:4px}
+
+  .widget{background:#fff;border:2px solid var(--clsoft);border-radius:14px;padding:16px;margin:15px 0}
+  .widget .wt{font-weight:800;color:var(--cldeep);font-size:14.5px;margin-bottom:9px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{cursor:pointer;border:1.6px solid var(--cl);background:#fff;color:var(--cldeep);font-size:14.5px;font-weight:700;padding:7px 13px;border-radius:11px;transition:.15s;font-family:inherit}
+  .chip:hover{background:var(--clsoft)}
+  .chip.active{background:var(--cl);color:#fff}
+  .wout{margin-top:11px;font-size:15px;min-height:1.4em}
+  .wout .badge{display:inline-block;font-weight:800;padding:2px 9px;border-radius:8px;font-size:13px;margin-right:6px}
+
+  .svgwrap{margin:14px 0;text-align:center}
+  svg{max-width:100%;height:auto}
+  figcaption{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+  .tbl{width:100%;border-collapse:collapse;margin:13px 0;font-size:14.5px;overflow:hidden;border-radius:11px;box-shadow:var(--shadow)}
+  .tbl th{background:var(--cl);color:#fff;padding:9px 11px;text-align:left;font-weight:700}
+  .tbl td{padding:8px 11px;border-bottom:1px solid var(--line);background:#fff;vertical-align:top}
+  .tbl tr:nth-child(even) td{background:#fafbfe}
+  .tbl .yes{color:var(--ok);font-weight:800;text-align:center}
+  .tbl .no{color:var(--B-deep);font-weight:800;text-align:center}
+  .scroll{overflow-x:auto}
+
+  .synth{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:22px;padding:30px 26px;margin:48px 0 24px;box-shadow:var(--shadow-lg)}
+  .synth h2{color:var(--gold);margin:0 0 8px;font-size:26px}
+  .synth p{opacity:.92}
+  .synth .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0;font-weight:700}
+  .synth .chain span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 14px;border-radius:12px}
+  .synth .chain i{color:var(--gold);font-style:normal;font-size:20px}
+
+  .test{background:var(--card);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .test h2{color:var(--navy);margin:0 0 4px;font-size:24px}
+  .test .qz{counter-reset:q;}
+  .qitem{border-top:1px solid var(--line);padding:14px 0}
+  .qitem:first-of-type{border-top:none}
+  .qitem .qq{font-weight:600}
+  .qitem .qq::before{counter-increment:q;content:"ප්‍රශ්නය " counter(q) ". ";color:var(--navy);font-weight:800}
+
+  .cheat{background:#fffdf6;border:2px solid var(--gold-soft);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow)}
+  .cheat h2{color:var(--gold-2);margin:0 0 6px;font-size:24px}
+  .cheat-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .cheat-card{background:#fff;border-radius:13px;padding:14px 16px;border-top:4px solid var(--cl);box-shadow:var(--shadow)}
+  .cheat-card h4{margin:0 0 6px;color:var(--navy);font-size:15px}
+  .cheat-card ul{margin:.3em 0;padding-left:1.1em;font-size:13.7px}
+  .cheat-card li{margin:.3em 0}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 18px 10px}
+  footer .logo{display:inline-grid;width:30px;height:30px;font-size:16px;vertical-align:middle;margin-right:7px}
+  .tnote{font-size:12.5px;color:var(--ink-soft);background:#fafbfe;border:1px solid var(--line);border-radius:9px;padding:7px 12px;margin:10px 0}
+
+  @media(max-width:760px){
+    body{font-size:16px}
+    .map-grid{grid-template-columns:1fr}
+    .cheat-grid{grid-template-columns:1fr}
+    .crumbs{display:none}
+    .hero{padding:26px 20px}
+    .topic .body{padding:4px 15px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  @media print{
+    header.site,#progress,.rbtn,.chev{display:none!important}
+    .ans{display:block!important}
+    details{display:block}
+    details:not([open])>:not(summary){display:block!important}
+    .topic,.work,.box,.widget{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top"><span class="logo">I</span><span><b>IDASARA</b><small>Academy</small></span></a>
+    <div class="crumbs"><span>9 ශ්‍රේණිය</span><span>විද්‍යාව</span><span class="acc">ඇස, කන හා රුධිර සංසරණය</span></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">9 ශ්‍රේණිය · විද්‍යාව · පාඩම් 2 &amp; 6</span>
+    <h1>අපේම සිරුර — <span class="g">බලයි, අහයි</span>,<br>රුධිරය හැම තැනටම <span class="g">ගෙන යයි</span>.</h1>
+    <p>මුලින් සංවේදී ඉන්ද්‍රිය — ඇස හා කන — අඳුරගමු. ඊටපස්සේ රුධිරය ශරීරය පුරා ගෙන යන සංසරණ පද්ධතිය. ඔයාගේම සිරුර කොච්චර පුදුමාකාරද කියලා දැනගමු!</p>
+    <span class="pill">⏱ සෙමින් කියවන්න · 🔬 හැම කොටසක්ම අත්හදා බලන්න · ✅ පිළිතුරු හංගලා තියෙනවා</span>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <h2>ඇයි මේක මෙච්චර වැදගත්?</h2>
+    <p>ඔයා මේ වචන කියවන්නේ <b>ඇසින්</b>, ගුරුවරයාගේ පැහැදිලි කිරීම් අහන්නේ <b>කනින්</b>. ඒ වෙලාවෙම ඔයාගේ <b>හෘදය</b> විනාඩියකට වාර 70ක් පමණ ගැහෙමින් රුධිරය මුළු සිරුර පුරා පොම්ප කරනවා. මේ පාඩම් දෙකින් ඉගෙන ගන්නේ ඔයාගේම ශරීරයේ මේ පුදුම යන්ත්‍ර ක්‍රියා කරන හැටියි.</p>
+    <p><b>පාඩම 2</b> — සංවේදී ඉන්ද්‍රිය (ඇස, කන): ව්‍යුහය, ක්‍රියාකාරිත්වය, දෝෂ/රෝග හා ආරක්ෂාව. <b>පාඩම 6</b> — රුධිර සංසරණ පද්ධතිය: හෘදය, රුධිර නාල, රුධිරයේ සංඝටක හා පාරවිලයනය. පහළ කාඩ් එකක් tap කරලා කෙළින්ම යන්න පුළුවන් — හැබැයි පිළිවෙළට කියෙව්වොත් හොඳම.</p>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="roadmap">
+    <h2>මේ පාඩම් දෙකේ සිතියම</h2>
+    <p class="sub">පාඩම් දෙකයි, උප-මාතෘකා නවයයි.</p>
+    <div class="map-grid">
+      <a class="map-card" href="#unit2" style="--cl:var(--A);--clsoft:var(--A-soft)">
+        <span class="tag">පාඩම 2 · පොත I · පි.16</span>
+        <h3>ඇස හා කන</h3>
+        <p>ඇසෙහි ව්‍යුහය · අක්ෂි දෝෂ · අක්ෂි රෝග · කනෙහි ව්‍යුහය · කනෙහි ආබාධ.</p>
+        <span class="cnt">උප-මාතෘකා 5</span>
+      </a>
+      <a class="map-card" href="#unit6" style="--cl:var(--B);--clsoft:var(--B-soft)">
+        <span class="tag">පාඩම 6 · පොත I · පි.72</span>
+        <h3>මානව රුධිර සංසරණ පද්ධතිය</h3>
+        <p>හෘදයේ ව්‍යුහය · ධමනි/ශිරා/කේශනාලිකා · රුධිරයේ සංඝටක · රුධිර පාරවිලයනය.</p>
+        <span class="cnt">උප-මාතෘකා 4</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ##################### UNIT 2 ##################### -->
+  <section class="part" id="unit2" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <span class="src">මූලාශ්‍රය · පොත I · පි.16–36</span>
+    <div class="pn">පාඩම 2</div>
+    <h2>ඇස හා කන</h2>
+    <p>දෘෂ්ටි සංවේදනය ලබා දෙන ඇස හා ශ්‍රවණ සංවේදනය ලබා දෙන කන — ඒවායේ ව්‍යුහය, ක්‍රියාකාරිත්වය, ඇතිවිය හැකි දෝෂ/රෝග හා ආරක්ෂාව මෙහි ඉගෙන ගමු.</p>
+  </section>
+
+  <!-- 2.1 eye structure -->
+  <details class="topic" id="t21" open style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2.1</span>
+      <h3>මිනිස් ඇසෙහි ව්‍යුහය හා ක්‍රියාකාරිත්වය<span class="en">Structure &amp; function of the eye</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කැමරාවක් වගේ — ඒත් ඊට වඩා දක්ෂයි!</span> ඔයා ෆෝන් එකෙන් ෆොටෝ ගන්නවා නේද? ඇත්තටම ඔයාගේ <b>ඇසත්</b> හරියට කැමරාවක් වගේ — ආලෝකය ඇතුළට ගන්නවා, “ලෙන්ස්” එකකින් focus කරනවා, “තිරයක” පින්තූරයක් සාදනවා. ඇස = <b>දෘෂ්ටි සංවේදනය ප්‍රතිග්‍රහණය කරන අවයවය</b>. (ක්‍රියාකාරකම 2.1)</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — ප්‍රධාන කොටස් (රූප 2.2, වගුව 2.1)</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>කොටස</th><th>කෘත්‍යය</th></tr>
+        <tr><td><b>ශ්වේත සහ ස්තරය</b> (sclera)</td><td>ඇසේ පිටතම ස්තරය; ආලෝකය නොවැද්දී ආරක්ෂා කරයි, හැඩය රකියි</td></tr>
+        <tr><td><b>ස්වච්ඡය</b> (cornea)</td><td>ශ්වේත ස්තරයේ පාරදෘශ්‍ය ඉදිරි කොටස; ආලෝකය වර්තනය කර ඇතුළට යවයි</td></tr>
+        <tr><td><b>රුධිරග්‍රාහිය</b> (choroid)</td><td>ශ්වේත ස්තරයට ඇතුළතින්; ඇසට රුධිර සැපයුම ලබා දෙයි</td></tr>
+        <tr><td><b>දෘෂ්ටිවිතානය</b> (retina)</td><td>ආලෝකයට සංවේදී දඬු සෛල හා කේතු සෛල; මෙහි ප්‍රතිබිම්බය සැදේ</td></tr>
+        <tr><td><b>අක්ෂි කාචය</b> (lens)</td><td>පාරදෘශ්‍ය ද්වි-උත්තල කාචය; වක්‍රතාව වෙනස් කර දෘෂ්ටිවිතානය මත රූපය සකසයි</td></tr>
+        <tr><td><b>තාරා මණ්ඩලය</b> (iris)</td><td>ඇසට වදින ආලෝක ප්‍රමාණය පාලනය කරයි; ඇසේ පාට මෙයයි</td></tr>
+        <tr><td><b>කණිනිකාව</b> (pupil)</td><td>තාරා මණ්ඩලය මැද සිදුර; මෙයින් ආලෝකය ඇතුළු වෙයි</td></tr>
+        <tr><td><b>ප්‍රතියෝජක පේශි</b> (ciliary muscles)</td><td>අක්ෂි කාචය රඳවයි; කාචයේ වක්‍රතාව වෙනස් කරයි</td></tr>
+        <tr><td><b>අම්මිය රසය / කාච රසය</b></td><td>පාරදෘශ්‍ය දියර; ඇසේ අවකාශය පුරවා හැඩය රකියි</td></tr>
+        <tr><td><b>කහ ලපය</b> (yellow spot)</td><td>වඩාත් පැහැදිලි ප්‍රතිබිම්බය මෙහි සැදේ; වඩාත් සංවේදී</td></tr>
+        <tr><td><b>අන්ධ බින්දුව</b> (blind spot)</td><td>ආලෝකයට සංවේදී සෛල නැත; මෙහි පෙනීමක් නැත</td></tr>
+        <tr><td><b>දෘෂ්ටික ස්නායුව</b> (optic nerve)</td><td>ඇස හා මොළය සම්බන්ධ කරයි; සංවේදනය මොළයට ගෙන යයි</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ඇසෙහි හරස්කඩක්</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 290" role="img" aria-label="මිනිස් ඇසෙහි හරස්කඩක් — කොටස් නම් කර">
+          <ellipse cx="200" cy="150" rx="140" ry="110" fill="#fdeee6" stroke="#0a5b63" stroke-width="2.5"/>
+          <path d="M62 150 a140 110 0 0 1 18 -60 q-6 60 0 120 a140 110 0 0 1 -18 -60" fill="#bfe3e6" stroke="#0a5b63"/>
+          <!-- cornea front -->
+          <path d="M60 120 q-26 30 0 60 q14 -30 0 -60" fill="#d4f0f2" stroke="#0a5b63" stroke-width="2"/>
+          <!-- lens -->
+          <ellipse cx="95" cy="150" rx="14" ry="40" fill="#cfe8b0" stroke="#0a5b63" stroke-width="2"/>
+          <!-- iris -->
+          <line x1="78" y1="108" x2="95" y2="120" stroke="#0a5b63" stroke-width="3"/>
+          <line x1="78" y1="192" x2="95" y2="180" stroke="#0a5b63" stroke-width="3"/>
+          <!-- optic nerve -->
+          <rect x="332" y="140" width="60" height="22" rx="6" fill="#f4d28a" stroke="#0a5b63"/>
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11.5" fill="#0a5b63">
+            <text x="20" y="100">ස්වච්ඡය</text>
+            <text x="78" y="250" text-anchor="middle">අක්ෂි කාචය</text>
+            <text x="40" y="70">කණිනිකාව</text>
+            <text x="150" y="35" text-anchor="middle">තාරා මණ්ඩලය</text>
+            <line x1="150" y1="40" x2="92" y2="112" stroke="#0a5b63" stroke-dasharray="2 2"/>
+            <text x="300" y="40" text-anchor="middle">ශ්වේත සහ ස්තරය</text>
+            <line x1="300" y1="45" x2="300" y2="55" stroke="#0a5b63" stroke-dasharray="2 2"/>
+            <text x="350" y="95" text-anchor="middle">රුධිරග්‍රාහිය</text>
+            <text x="360" y="120" text-anchor="middle">දෘෂ්ටිවිතානය</text>
+            <text x="330" y="195" text-anchor="middle">කහ ලපය</text>
+            <line x1="330" y1="188" x2="320" y2="170" stroke="#0a5b63" stroke-dasharray="2 2"/>
+            <text x="410" y="175" text-anchor="middle">දෘෂ්ටික</text><text x="410" y="190" text-anchor="middle">ස්නායුව</text>
+            <text x="280" y="270" text-anchor="middle">කාච රසය</text>
+            <line x1="280" y1="262" x2="240" y2="180" stroke="#0a5b63" stroke-dasharray="2 2"/>
+          </g>
+        </svg>
+        <figcaption>මිනිස් ඇසෙහි හරස්කඩක්. ආලෝකය වදින්නේ වමෙන් (ස්වච්ඡය හරහා). (රූප 2.2)</figcaption>
+      </figure>
+
+      <div class="box hook"><span class="ttl">👁 පෙනීම සිදුවන හැටි</span> වස්තුවකින් එන ආලෝකය → <b>ස්වච්ඡය</b> හා <b>අක්ෂි කාචය</b> හරහා වර්තනය වෙයි → <b>දෘෂ්ටිවිතානය</b> මත <b>උඩුකුරු (inverted) ප්‍රතිබිම්බයක්</b> සැදේ → <b>දෘෂ්ටික ස්නායුව</b> හරහා සංවේදනය <b>මොළයට</b> → මොළය එය <b>නිවැරදිව (උඩු යටිකුරු නැතිව)</b> අර්ථකථනය කරයි. අක්ෂි කාචය <b>උත්තල කාචයකි</b> (ආලෝකය එක් ලක්ෂ්‍යයකට — නාභියට — ගෙනෙයි). ළඟ/දුර වස්තු බැලීමට කාචයේ <b>වක්‍රතාව ප්‍රතියෝජක පේශි මගින් වෙනස් වෙයි</b> (ප්‍රතිවාසනය).</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">ප්‍රතිබිම්බය සැදෙන කොටස කුමක්ද? ඇසේ පාට තීරණය කරන කොටස කුමක්ද?</p>
+        <p style="margin:.2em 0">→ ප්‍රතිබිම්බය සැදෙන්නේ <b>දෘෂ්ටිවිතානය</b> මත. ඇසේ පාට = <b>තාරා මණ්ඩලය</b>.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) ආලෝකය ඇතුළු වන සිදුර කුමක්ද? (b) වඩාත් පැහැදිලි පෙනීම ලැබෙන කොටස කුමක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">කණිනිකාව</span> (pupil). (b) <span class="a">කහ ලපය</span> (yellow spot).</div></div>
+
+      <div class="joke">අක්ෂි කාචය කිව්වා: “මම හැම දෙයක්ම උඩු යටිකුරු කරලා දකිනවා!” මොළය කිව්වා: “කමක් නෑ, මම ඒක හරිගස්සනවා.” 🙃</div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>ස්වච්ඡය</b> (cornea) සහ <b>අක්ෂි කාචය</b> (lens) පටලවා ගන්න එපා — ස්වච්ඡය ඉදිරිපස ස්ථිර කොටස; කාචය වක්‍රතාව වෙනස් වන කොටස.</li>
+          <li>දෘෂ්ටිවිතානය මත සැදෙන්නේ <b>උඩුකුරු</b> ප්‍රතිබිම්බයකි — එය හරිගස්සන්නේ මොළයයි.</li>
+          <li><b>අන්ධ බින්දුවේ</b> ආලෝක සංවේදී සෛල නැත — එහි පෙනීමක් නැත.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="eyeWidget" style="--cl:var(--A)">
+        <div class="wt">👁 ඇසේ කොටස tap කර එහි කෘත්‍යය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="cornea">ස්වච්ඡය</button>
+          <button class="chip" data-k="lens">අක්ෂි කාචය</button>
+          <button class="chip" data-k="iris">තාරා මණ්ඩලය</button>
+          <button class="chip" data-k="pupil">කණිනිකාව</button>
+          <button class="chip" data-k="retina">දෘෂ්ටිවිතානය</button>
+          <button class="chip" data-k="optic">දෘෂ්ටික ස්නායුව</button>
+        </div>
+        <div class="wout" id="eyeOut">උඩ කොටසක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ආලෝක ප්‍රමාණය පාලනය කරන කොටස කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">තාරා මණ්ඩලය (iris) — කණිනිකාවේ විශාලත්වය වෙනස් කරමින්.</div></div>
+        <div class="reveal"><span class="q">2. ඇසේ ප්‍රතිබිම්බය මොළයට ගෙන යන්නේ කුමකින්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">දෘෂ්ටික ස්නායුව (optic nerve).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">📷</span><div><b>“ඇස = කැමරාවක්.”</b> ස්වච්ඡය+කාචය = ලෙන්ස්; තාරා මණ්ඩලය/කණිනිකාව = ඇපචරය; දෘෂ්ටිවිතානය = තිරය/සෙන්සරය; දෘෂ්ටික ස්නායුව = කේබලය මොළයට.</div></div>
+    </div>
+  </details>
+
+  <!-- 2.2 eye defects -->
+  <details class="topic" id="t22" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2.2</span>
+      <h3>අක්ෂි දෝෂ<span class="en">Eye defects</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">පන්තියේ පිටිපස ඉඳන් වයිට්බෝඩ් එක නොපෙනේද?</span> සමහර අයට දුර තියෙන දේ අපැහැදිලියි; තවත් අයට ළඟ තියෙන පොත අපැහැදිලියි. මේවා <b>අක්ෂි දෝෂ</b> — ඇසේ හැඩය හෝ කාචයේ වක්‍රතාව හරියට වෙනස් වෙන්නේ නැති නිසා. නිවැරදි කාචයකින් (කණ්ණාඩියකින්) මේවා හදාගන්න පුළුවන්!</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — දෝෂ දෙකක්</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th> </th><th>දුර දෘෂ්ටිකත්වය<br>(long-sight)</th><th>අවිදුර දෘෂ්ටිකත්වය<br>(short-sight)</th></tr>
+        <tr><td><b>පෙනෙන්නේ</b></td><td>දුර <b>පැහැදිලි</b>, ළඟ අපැහැදිලි</td><td>ළඟ <b>පැහැදිලි</b>, දුර අපැහැදිලි</td></tr>
+        <tr><td><b>ප්‍රතිබිම්බය සැදෙන්නේ</b></td><td>දෘෂ්ටිවිතානයට <b>පිටුපසින්</b> (රූප 2.12)</td><td>දෘෂ්ටිවිතානයට <b>ඉදිරියෙන්</b> (රූප 2.16)</td></tr>
+        <tr><td><b>හේතුව</b></td><td>ඇසේ ගෝලය කෙටි / කාච වක්‍රතාව වැඩි කරගත නොහැකි</td><td>ඇසේ ගෝලය දිගු / කාච වක්‍රතාව අඩු කරගත නොහැකි</td></tr>
+        <tr><td><b>නිවැරදි කරන්නේ</b></td><td><b>උත්තල කාච</b> (convex)</td><td><b>අවතල කාච</b> (concave)</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ප්‍රතිබිම්බ පිහිටීම</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 170" role="img" aria-label="අවිදුර හා දුර දෘෂ්ටිකත්වයේ ප්‍රතිබිම්බ පිහිටීම">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11">
+            <!-- short sight -->
+            <circle cx="110" cy="70" r="48" fill="#eef7f8" stroke="#0a5b63" stroke-width="2"/>
+            <line x1="20" y1="55" x2="62" y2="60" stroke="#0a5b63"/><line x1="20" y1="85" x2="62" y2="80" stroke="#0a5b63"/>
+            <path d="M62 60 L120 70 L62 80" fill="none" stroke="#c4533f" stroke-width="1.6"/>
+            <circle cx="120" cy="70" r="3.5" fill="#c4533f"/>
+            <text x="118" y="55" font-size="10" fill="#9c3a29">ඉදිරියෙන්</text>
+            <text x="110" y="135" text-anchor="middle" font-weight="700" fill="#0a5b63">අවිදුර දෘෂ්ටිකත්වය</text>
+            <text x="110" y="150" text-anchor="middle" font-size="10" fill="#9c3a29">→ අවතල කාච</text>
+            <!-- long sight -->
+            <circle cx="350" cy="70" r="48" fill="#eef7f8" stroke="#0a5b63" stroke-width="2"/>
+            <line x1="260" y1="55" x2="302" y2="60" stroke="#0a5b63"/><line x1="260" y1="85" x2="302" y2="80" stroke="#0a5b63"/>
+            <path d="M302 60 L420 70 L302 80" fill="none" stroke="#c4533f" stroke-width="1.6" stroke-dasharray="3 2"/>
+            <circle cx="420" cy="70" r="3.5" fill="#c4533f"/>
+            <text x="402" y="55" font-size="10" fill="#9c3a29">පිටුපසින්</text>
+            <text x="350" y="135" text-anchor="middle" font-weight="700" fill="#0a5b63">දුර දෘෂ්ටිකත්වය</text>
+            <text x="350" y="150" text-anchor="middle" font-size="10" fill="#9c3a29">→ උත්තල කාච</text>
+          </g>
+        </svg>
+        <figcaption>ප්‍රතිබිම්බය දෘෂ්ටිවිතානයට ඉදිරියෙන් (අවිදුර) හෝ පිටුපසින් (දුර) සැදීම — නිවැරදි කාචයෙන් දෘෂ්ටිවිතානය මතට ගෙනෙයි.</figcaption>
+      </figure>
+      <p class="tnote"><b>මතක තබන්න:</b> උත්තල කාච ආලෝකය <b>එක් ලක්ෂ්‍යයකට ගෙනෙයි (අභිසාරී)</b>; අවතල කාච ආලෝකය <b>විසුරුවයි (අපසාරී)</b>. (රූප 2.5, 2.6)</p>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">කෙනෙකුට දුර තියෙන බස් එකේ අංකය නොපෙනේ, ළඟ පොත හොඳට පෙනේ. දෝෂය? නිවැරදි කාචය?</p>
+        <p style="margin:.2em 0">→ <b>අවිදුර දෘෂ්ටිකත්වය</b> (short-sight); නිවැරදි කරන්නේ <b>අවතල කාච</b>.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: දුර දෘෂ්ටිකත්වයේදී ප්‍රතිබිම්බය සැදෙන්නේ කොහේද? නිවැරදි කරන කාචය කුමක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">දෘෂ්ටිවිතානයට <span class="a">පිටුපසින්</span>; නිවැරදි කරන්නේ <span class="a">උත්තල කාච</span> (convex).</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>නම් පටලවා ගන්න එපා! <b>අවිදුර</b> = ළඟ පෙනෙයි, දුර නෑ (short-sight); <b>දුර</b> දෘෂ්ටිකත්වය = දුර පෙනෙයි, ළඟ නෑ (long-sight).</li>
+          <li>අවිදුර → ඉදිරියෙන් → <b>අවතල</b>; දුර → පිටුපසින් → <b>උත්තල</b>. (“අ” දෙකම යනවා එකට!)</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="defectWidget" style="--cl:var(--A)">
+        <div class="wt">🔎 රෝග ලක්ෂණය tap කර දෝෂය හා කාචය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="far">දුර නොපෙනේ, ළඟ පෙනේ</button>
+          <button class="chip" data-k="near">ළඟ නොපෙනේ, දුර පෙනේ</button>
+        </div>
+        <div class="wout" id="defectOut">උඩ එකක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. අක්ෂි දෝෂ ඇතිවීමට ප්‍රධාන හේතු දෙකක් මොනවද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ඇසේ ගෝලය දිගු/කෙටි වීම, හා කාචයේ වක්‍රතාව අවශ්‍ය පරිදි වෙනස් කරගත නොහැකි වීම.</div></div>
+        <div class="reveal"><span class="q">2. උත්තල කාචයක් ආලෝකයට කරන්නේ කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ආලෝකය එක් ලක්ෂ්‍යයකට (නාභියට) අභිසාරී කරයි (ගෙනෙයි).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">👓</span><div><b>“අවිදුර = ඉදිරියෙන් = අවතල; දුර = පිටුපසින් = උත්තල.”</b> ප්‍රතිබිම්බය කොහේද කියලා හිතුවොත් කාචය හරියට තෝරාගන්න පුළුවන්.</div></div>
+    </div>
+  </details>
+
+  <!-- 2.3 eye diseases -->
+  <details class="topic" id="t23" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2.3</span>
+      <h3>අක්ෂි රෝග හා ඇස් ආරක්ෂාව<span class="en">Eye diseases &amp; eye care</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ආච්චිගේ ඇසේ සුද…</b></span> වයසට යනකොට ඇතැම් අයගේ ඇසේ කළු ඉංගිරියාව (කණිනිකාව) කිරි පාටට හැරෙනවා දැකලා ඇති — ඒ <b>ඇසේ සුද (Cataract)</b>. දෝෂ (කාචයේ වැරැද්දක්) සහ <b>රෝග</b> (ඇසට හානියක්) දෙක එකක් නෙවෙයි!</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — බහුල රෝග දෙකක්</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>රෝගය</th><th>සිදුවන්නේ</th><th>ප්‍රතිඵලය</th></tr>
+        <tr><td><b>ඇසේ සුද</b><br>(Cataract)</td><td>අක්ෂි කාචයේ පාරදෘශ්‍ය බව අඩුවීම (ප්‍රෝටීන පරිහානිය); කාචය කිරි පැහැයෙන් දිස්වේ</td><td>ආලෝකය දෘෂ්ටිවිතානය මත හරියට focus නොවේ → සියල්ල අපැහැදිලි/බොඳ</td></tr>
+        <tr><td><b>ග්ලුකෝමාව</b><br>(Glaucoma)</td><td>දෘෂ්ටික ස්නායුවට හානි (ප්‍රධාන හේතුව — ඇසේ රුධිර පීඩනය වැඩිවීම); දියවැඩියා අයට වැඩි අවදානම්</td><td>දෘෂ්ටි පරාසය ක්‍රමයෙන් අඩු වී <b>අන්ධභාවය</b>; හානිය ආපසු හදාගත නොහැකි</td></tr>
+      </table></div>
+      <p><b>අක්ෂි ආසාදන:</b> වයිරස මගින් ඇස රතු වීම, කඳුළු, ඉදිමීම — සාමාන්‍යයෙන් “<b>ඇස් ලෙඩ</b>” ලෙස හඳුන්වයි; ස්පර්ශය මගින් පැතිරෙයි; වෛද්‍ය ප්‍රතිකාරයෙන් සුව කළ හැකි.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ග්ලුකෝමාවේ දෘෂ්ටි පරාසය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 110" role="img" aria-label="ග්ලුකෝමාව ක්‍රමයෙන් දෘෂ්ටි පරාසය අඩු කරයි">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10.5" text-anchor="middle">
+            <circle cx="60" cy="50" r="36" fill="#bfe3e6" stroke="#0a5b63"/><text x="60" y="100" fill="#0a5b63">නිරෝගී</text>
+            <circle cx="170" cy="50" r="36" fill="#0a5b63"/><circle cx="170" cy="50" r="26" fill="#bfe3e6"/><text x="170" y="100" fill="#0a5b63">ආරම්භක</text>
+            <circle cx="280" cy="50" r="36" fill="#0a5b63"/><circle cx="280" cy="50" r="15" fill="#bfe3e6"/><text x="280" y="100" fill="#0a5b63">මධ්‍යම</text>
+            <circle cx="400" cy="50" r="36" fill="#0a5b63"/><circle cx="400" cy="50" r="5" fill="#bfe3e6"/><text x="400" y="100" fill="#9c3a29">අන්ධභාවය</text>
+          </g>
+        </svg>
+        <figcaption>ග්ලුකෝමාවේදී දෘෂ්ටි පරාසය පිටතින් ක්‍රමයෙන් අඩු වෙයි. (රූප 2.25)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>ඇස් ආරක්ෂණ ක්‍රම + ඔබේ වාරය</b></div>
+      <div class="box safety"><span class="ttl">🛡️ ඇස් ආරක්ෂා කරගන්න</span>
+        තීව්‍ර ආලෝකයට කෙළින් නොබැලීම · සූර්ය ග්‍රහණ බැලීමේදී ආරක්ෂක උපකරණ · වෙල්ඩින් කිරීමේදී ආරක්ෂක ආවරණ · වෛද්‍ය උපදෙස් නැතුව බෙහෙත්/දියර නොදැමීම · දෝෂ නැති අය නිකරුණේ කණ්ණාඩි නොයෙදීම · පෞද්ගලික සනීපාරක්ෂාව · රූපවාහිනිය/පරිගණකය දිගටම නොබැලීම.</div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: ඇසේ සුද ඇතිවන්නේ ඇයි? ග්ලුකෝමාවේ ප්‍රධාන හේතුව කුමක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">ඇසේ සුද — <span class="a">අක්ෂි කාචයේ පාරදෘශ්‍ය බව අඩුවීම</span> (ප්‍රෝටීන පරිහානිය). ග්ලුකෝමාව — <span class="a">ඇසේ රුධිර පීඩනය වැඩිවීම</span> නිසා දෘෂ්ටික ස්නායුවට හානි වීම.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>දෝෂ</b> (අවිදුර/දුර — කාචයෙන් හදන්න පුළුවන්) සහ <b>රෝග</b> (ඇසේ සුද/ග්ලුකෝමා — හානියක්) පටලවා ගන්න එපා.</li>
+          <li><b>ග්ලුකෝමාවේ</b> හානිය ආපසු හදාගත නොහැකියි — කලින් හඳුනා ගැනීම වැදගත්.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. අක්ෂි කාචය කිරි පැහැයට හැරෙන රෝගය කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ඇසේ සුද (Cataract).</div></div>
+        <div class="reveal"><span class="q">2. දෘෂ්ටික ස්නායුවට හානි වී අන්ධභාවයට යා හැකි රෝගය?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ග්ලුකෝමාව (Glaucoma).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔦</span><div><b>“සුද = කාචය බොඳ; ග්ලුකෝමා = ස්නායුවට හානි.”</b> දෝෂ කණ්ණාඩියෙන් හදයි; රෝග වෛද්‍ය ප්‍රතිකාරයෙන් — ඇස් ආරක්ෂා කරගන්න!</div></div>
+    </div>
+  </details>
+
+  <!-- 2.4 ear structure -->
+  <details class="topic" id="t24" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2.4</span>
+      <h3>මිනිස් කනෙහි ව්‍යුහය හා ක්‍රියාකාරිත්වය<span class="en">Structure &amp; function of the ear</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">පෙරහැරේ බෙර හඬ කනට කොහොමද එන්නේ?</span> බෙරයක් ගහනකොට වාතය <b>කම්පනය</b> වෙනවා (ශබ්ද තරංග). ඒ තරංග ඔයාගේ කනට ඇවිත් — පටලයක් කම්පනය කරලා — මොළයට “බෙර හඬක්!” කියලා කියනවා. කන = <b>ශ්‍රවණ සංවේදනය ප්‍රතිග්‍රහණය කරන අවයවය</b>. (ක්‍රියාකාරකම 2.9)</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — ප්‍රදේශ තුනක් (රූප 2.28, වගුව 2.2)</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>ප්‍රදේශය</th><th>කොටස</th><th>කෘත්‍යය</th></tr>
+        <tr><td rowspan="3"><b>බාහිර කන</b></td><td>කන් පෙත්ත (pinna)</td><td>කාටිලේජමය; ශබ්ද තරංග බාහිර ශ්‍රවණ නාලයට යොමු කරයි</td></tr>
+        <tr><td>බාහිර ශ්‍රවණ නාලය</td><td>ශබ්ද තරංග කර්ණපටහ පටලය දක්වා ගෙන යයි</td></tr>
+        <tr><td>කර්ණපටහ පටලය (eardrum)</td><td>ශබ්ද තරංගයට අනුව කම්පනය වෙයි</td></tr>
+        <tr><td rowspan="2"><b>මැද කන</b></td><td>කර්ණ අස්ථිකා (මුද්ගරිකා, නිහාතිකා, ධරණිකා)</td><td>කුඩා අස්ථි 3ක්; කර්ණපටහ පටලයේ කම්පනය කර්ණ සංඛයට සම්ප්‍රේෂණය</td></tr>
+        <tr><td>යුස්ටේකීය නාලය</td><td>ග්‍රසනිකාවට සම්බන්ධ; කර්ණපටහ පටලයේ දෙපැත්තේ පීඩනය සමාන කරයි</td></tr>
+        <tr><td rowspan="3"><b>ඇතුළු කන</b></td><td>කර්ණ සංඛය (cochlea)</td><td>ශ්‍රවණ සංවේදනය ශ්‍රවණ ස්නායුවට සම්ප්‍රේෂණය</td></tr>
+        <tr><td>ශ්‍රවණ ස්නායුව</td><td>ශ්‍රවණ සංවේදනය මොළයට ගෙන යයි → මොළය ශබ්දය හඳුනයි</td></tr>
+        <tr><td>අර්ධ චක්‍රාකාර නාල</td><td>සිරුරේ සමබරතාව රැකගැනීමට දායක වෙයි</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ශ්‍රවණ මාර්ගය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 110" role="img" aria-label="ශබ්ද තරංගය කනින් මොළයට යන මාර්ගය">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10.5" text-anchor="middle">
+            <rect x="6" y="38" width="74" height="40" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="43" y="55" fill="#0a5b63">ශබ්ද</text><text x="43" y="70" fill="#0a5b63">තරංග</text>
+            <rect x="92" y="38" width="74" height="40" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="129" y="55" fill="#0a5b63">කර්ණපටහ</text><text x="129" y="70" fill="#0a5b63">පටලය</text>
+            <rect x="178" y="38" width="74" height="40" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="215" y="55" fill="#0a5b63">කර්ණ</text><text x="215" y="70" fill="#0a5b63">අස්ථිකා</text>
+            <rect x="264" y="38" width="74" height="40" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="301" y="55" fill="#0a5b63">කර්ණ</text><text x="301" y="70" fill="#0a5b63">සංඛය</text>
+            <rect x="350" y="38" width="74" height="40" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="387" y="55" fill="#0a5b63">ශ්‍රවණ</text><text x="387" y="70" fill="#0a5b63">ස්නායුව</text>
+            <rect x="430" y="38" width="36" height="40" rx="8" fill="#0e7c86"/><text x="448" y="62" fill="#fff">මොළය</text>
+            <g stroke="#0a5b63" stroke-width="1.6">
+              <line x1="80" y1="58" x2="90" y2="58"/><line x1="166" y1="58" x2="176" y2="58"/><line x1="252" y1="58" x2="262" y2="58"/><line x1="338" y1="58" x2="348" y2="58"/><line x1="424" y1="58" x2="428" y2="58"/>
+            </g>
+          </g>
+        </svg>
+        <figcaption>ශබ්ද තරංග → කර්ණපටහ පටලය කම්පනය → කර්ණ අස්ථිකා → කර්ණ සංඛය → ශ්‍රවණ ස්නායුව → මොළය හඳුනයි. (ක්‍රියාකාරකම 2.10)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">කර්ණ අස්ථිකා තුනේ නම් මොනවද? ඒවායේ කාර්යය කුමක්ද?</p>
+        <p style="margin:.2em 0">→ <b>මුද්ගරිකා, නිහාතිකා, ධරණිකා</b>; කර්ණපටහ පටලයේ කම්පනය කර්ණ සංඛයට ගෙන යයි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) සිරුරේ සමබරතාව රකින කනෙහි කොටස කුමක්ද? (b) කර්ණපටහ පටලයේ දෙපැත්තේ පීඩනය සමාන කරන්නේ කුමකින්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">අර්ධ චක්‍රාකාර නාල</span>. (b) <span class="a">යුස්ටේකීය නාලය</span> (ග්‍රසනිකාවට සම්බන්ධ).</div></div>
+
+      <div class="joke">කර්ණ අස්ථිකා තුන හරියට පොඩි බැන්ඩ් එකක් වගේ — මුද්ගරිකා බෙරේ ගහනවා, නිහාතිකා හා ධරණිකා ඒ රිද්මයම ඉදිරියට යවනවා! 🥁</div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>අර්ධ චක්‍රාකාර නාල <b>ඇසීමට නෙවෙයි</b> — ඒවා සිරුරේ <b>සමබරතාවට</b>.</li>
+          <li>ශ්‍රවණ සංවේදනය ශබ්දයක් ලෙස හඳුනන්නේ <b>මොළයයි</b>, කන නෙවෙයි. කන සංවේදනය එකතු කර ගෙන යයි.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="earWidget" style="--cl:var(--A)">
+        <div class="wt">👂 කනේ කොටස tap කර එහි කෘත්‍යය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="pinna">කන් පෙත්ත</button>
+          <button class="chip" data-k="drum">කර්ණපටහ පටලය</button>
+          <button class="chip" data-k="ossi">කර්ණ අස්ථිකා</button>
+          <button class="chip" data-k="eust">යුස්ටේකීය නාලය</button>
+          <button class="chip" data-k="cochlea">කර්ණ සංඛය</button>
+          <button class="chip" data-k="semi">අර්ධ චක්‍රාකාර නාල</button>
+        </div>
+        <div class="wout" id="earOut">උඩ කොටසක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ශබ්ද තරංගයට අනුව කම්පනය වන කොටස කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">කර්ණපටහ පටලය (eardrum).</div></div>
+        <div class="reveal"><span class="q">2. ශ්‍රවණ සංවේදනය මොළයට ගෙන යන්නේ කුමකින්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ශ්‍රවණ ස්නායුව (auditory nerve).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🥁</span><div><b>“පටලය ගැහෙයි → අස්ථිකා ගෙනියයි → සංඛය හරවයි → මොළය හඳුනයි.”</b> බාහිර–මැද–ඇතුළු කන තුනේ පිළිවෙළ මතක තබන්න.</div></div>
+    </div>
+  </details>
+
+  <!-- 2.5 ear disorders -->
+  <details class="topic" id="t25" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2.5</span>
+      <h3>කනෙහි ආබාධ හා කන් ආරක්ෂාව<span class="en">Ear disorders &amp; ear care</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඉස්කෝලෙ සංගීත ෂෝ එකේ ස්පීකර් එක ළඟ හිටියම කන “වෙව්” ගානවද?</span> අධික ශබ්දය කනට හානි කරන්න පුළුවන්! කනේ ආබාධ වළක්වගෙන, කන් හොඳට බලාගන්න හැටි ඉගෙන ගමු.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p class="lead">කනේ ඇතිවිය හැකි ආබාධ: <b>ශ්‍රවණය අඩු වීම</b>, <b>බිහිරි බව</b>, <b>කර්ණ අස්ථිකා සන්ධි වීම</b>. බිහිරි අයට <b>ශ්‍රවණාධාර</b> (hearing aids) උපකාරී වෙයි.</p>
+      <p>මිනිස් කනට ඇසිය හැකි <b>ශ්‍රව්‍ය සංඛ්‍යාත පරාසය = 20 Hz සිට 20,000 Hz දක්වා</b>. ඊට වැඩි තීව්‍ර ශබ්ද කනට හානි කරයි.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ශබ්ද පීඩන මට්ටම් dB(A)</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 320 150" role="img" aria-label="ශබ්ද මට්ටම් උදාහරණ">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11">
+            <rect x="30" y="14" width="260" height="20" rx="4" fill="#c4533f"/><text x="36" y="29" fill="#fff">ජෙට් යානය ~140 dB (අන්තරාදායක)</text>
+            <rect x="30" y="40" width="200" height="20" rx="4" fill="#d97765"/><text x="36" y="55" fill="#fff">රොක් සංගීතය ~110</text>
+            <rect x="30" y="66" width="150" height="20" rx="4" fill="#e08c7c"/><text x="36" y="81" fill="#fff">මාර්ග තදබදය ~90</text>
+            <rect x="30" y="92" width="100" height="20" rx="4" fill="#7fb98a"/><text x="36" y="107" fill="#16432a">කතාබහ ~60</text>
+            <rect x="30" y="118" width="55" height="20" rx="4" fill="#bcd9c4"/><text x="36" y="133" fill="#16432a">නිදන කාමරය ~25</text>
+          </g>
+        </svg>
+        <figcaption>අධික dB ශබ්ද කනට හානිකරයි. (අමතර දැනුම)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>කන් ආරක්ෂණ ක්‍රම + ඔබේ වාරය</b></div>
+      <div class="box safety"><span class="ttl">🛡️ කන් ආරක්ෂා කරගන්න</span>
+        කන තුළට බාහිර දෑ ඇතුළු නොකිරීම · අධික ශබ්දවලට කන නිරාවරණය නොකිරීම · වෛද්‍ය උපදෙස් අනුව පමණක් කන මෘදුව සේදීම · තියුණු දෑ යොදා කන නොසේදීම (ගෑරුප්පු, ඇණ වැනි) · කනට හෝ කන ආසන්නයට පහර නොදීම.</div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: මිනිස් කනට ඇසිය හැකි ශ්‍රව්‍ය සංඛ්‍යාත පරාසය කුමක්ද? බිහිරි අයට උපකාරී උපකරණය කුමක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පරාසය = <span class="a">20 Hz සිට 20,000 Hz</span> දක්වා. බිහිරි අයට <span class="a">ශ්‍රවණාධාර</span> (hearing aids).</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>පරාසය <b>20 Hz – 20,000 Hz</b> (20,000, 2000 නෙවෙයි!).</li>
+          <li>කන සේදීමට <b>තියුණු/දැඩි දෑ</b> යොදන්න එපා — කර්ණපටහ පටලයට හානි විය හැක.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. කනේ ආබාධ දෙකක් ලියන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ශ්‍රවණය අඩු වීම, බිහිරි බව (කර්ණ අස්ථිකා සන්ධි වීම ද).</div></div>
+        <div class="reveal"><span class="q">2. කනට හානි කරන ශබ්දයක් කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">අධික තීව්‍රතාවයෙන් යුත් (20,000 Hz ට වැඩි/අධික dB) ශබ්ද.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔇</span><div><b>“20 Hz–20,000 Hz අහන්න පුළුවන්; අධික ශබ්දෙන් කන රකින්න.”</b> තියුණු දෑ කනට දාන්න එපා!</div></div>
+    </div>
+  </details>
+
+  <!-- ##################### UNIT 6 ##################### -->
+  <section class="part" id="unit6" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <span class="src">මූලාශ්‍රය · පොත I · පි.72–79</span>
+    <div class="pn">පාඩම 6</div>
+    <h2>මානව රුධිර සංසරණ පද්ධතිය</h2>
+    <p>රුධිරය මුළු සිරුර පුරා පොම්ප කරන හෘදය, රුධිරය ගෙන යන නාල (ධමනි/ශිරා/කේශනාලිකා), රුධිරයේ සංඝටක හා රුධිර පාරවිලයනය මෙහි ඉගෙන ගමු.</p>
+  </section>
+
+  <!-- 6.1 heart -->
+  <details class="topic" id="t61" open style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">6.1</span>
+      <h3>මිනිස් හෘදයේ ව්‍යුහය<span class="en">Structure of the heart</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඔයාගේ මිට මෝලක ප්‍රමාණයේ පොම්පයක්!</span> ඔයාගේ හෘදය ඔයාගේ මිට පමණ ලොකුයි, විනාඩියකට වාර 70ක් පමණ ගැහෙමින් රුධිරය මුළු සිරුර පුරා පොම්ප කරනවා — ඔයා නිදාගෙන ඉද්දීත්! හෘදය = <b>රුධිර පොම්පය</b>. (ක්‍රියාකාරකම 6.1)</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — කුටීර 4ක්</b></div>
+      <p class="lead">හෘදයේ <b>කුටීර හතරක්</b>: ඉහළ දෙක = <b>කර්ණිකා</b> (atria), පහළ දෙක = <b>කෝෂිකා</b> (ventricles).</p>
+      <p>• <b>වම් කර්ණිකාව</b> · <b>වම් කෝෂිකාව</b> · <b>දකුණු කර්ණිකාව</b> · <b>දකුණු කෝෂිකාව</b>.<br>
+         • කපාට: වම් කර්ණිකාව–වම් කෝෂිකාව අතර = <b>ද්විකුණ්ඩ කපාටය</b> (bicuspid); දකුණු කර්ණිකාව–දකුණු කෝෂිකාව අතර = <b>ත්‍රිකුණ්ඩ කපාටය</b> (tricuspid).<br>
+         • මහා ධමනි ආරම්භයේ = <b>අධසඳ කපාට</b>. වම් කෝෂිකාවෙන් <b>සංස්ථානික මහා ධමනිය</b>; දකුණු කෝෂිකාවෙන් <b>පුප්ඵුසීය මහා ධමනිය</b>.<br>
+         • ශිරා කර්ණිකාවලට විවෘත: උත්තර හා අධර මහා ශිරා → දකුණු කර්ණිකාව; පුප්ඵුසීය ශිරා → වම් කර්ණිකාව.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — හෘදයේ හරස්කඩක් (රූප 6.2)</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 420 290" role="img" aria-label="මිනිස් හෘදයේ කුටීර හතර, කපාට හා රුධිර නාල">
+          <rect x="70" y="60" width="280" height="200" rx="30" fill="#fdeee6" stroke="#9c3a29" stroke-width="2.5"/>
+          <line x1="210" y1="65" x2="210" y2="255" stroke="#9c3a29" stroke-width="2" stroke-dasharray="4 3"/>
+          <line x1="70" y1="160" x2="350" y2="160" stroke="#9c3a29" stroke-width="2" stroke-dasharray="4 3"/>
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11" fill="#9c3a29" text-anchor="middle">
+            <!-- chambers labels (anatomical: patient's right = image left) -->
+            <text x="140" y="110">දකුණු</text><text x="140" y="125">කර්ණිකාව</text>
+            <text x="280" y="110">වම්</text><text x="280" y="125">කර්ණිකාව</text>
+            <text x="140" y="205">දකුණු</text><text x="140" y="220">කෝෂිකාව</text>
+            <text x="280" y="205">වම්</text><text x="280" y="220">කෝෂිකාව</text>
+            <!-- vessels -->
+            <rect x="150" y="20" width="16" height="42" fill="#3a6fb0"/><text x="120" y="35">උත්තර මහා</text><text x="120" y="48">ශිරාව</text>
+            <rect x="250" y="20" width="16" height="42" fill="#c0392b"/><text x="300" y="35">සංස්ථානික</text><text x="300" y="48">මහා ධමනිය</text>
+            <rect x="200" y="14" width="14" height="48" fill="#c0392b"/>
+            <text x="207" y="278">පුප්ඵුසීය මහා ධමනිය / ශිරා</text>
+            <!-- valves -->
+            <text x="150" y="158" font-size="10">ත්‍රිකුණ්ඩ කපාටය</text>
+            <text x="280" y="158" font-size="10">ද්විකුණ්ඩ කපාටය</text>
+          </g>
+        </svg>
+        <figcaption>හෘදයේ කුටීර 4: ඉහළ කර්ණිකා, පහළ කෝෂිකා. (රූප 2 අනුව රූපයේ වම් = රෝගියාගේ දකුණු පැත්ත.)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">වම් කර්ණිකාව හා වම් කෝෂිකාව අතර කපාටය කුමක්ද? වම් කෝෂිකාවෙන් ආරම්භ වන ධමනිය කුමක්ද?</p>
+        <p style="margin:.2em 0">→ <b>ද්විකුණ්ඩ කපාටය</b>; <b>සංස්ථානික මහා ධමනිය</b> (aorta).</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) හෘදයේ ඉහළ කුටීර දෙකට කියන්නේ? (b) පුප්ඵුසීය ශිරා විවෘත වන කුටීරය කුමක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">කර්ණිකා</span> (atria). (b) <span class="a">වම් කර්ණිකාව</span>.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>ඉහළ = <b>කර්ණිකා</b>, පහළ = <b>කෝෂිකා</b> — පටලවා ගන්න එපා.</li>
+          <li>රූප සටහනක <b>වම් පැත්ත = රෝගියාගේ දකුණු පැත්ත</b> (ඔයා දිහා බලාගෙන ඉන්න නිසා).</li>
+          <li>වම් → ද්වි<b>කුණ්ඩ</b>; දකුණු → ත්‍රි<b>කුණ්ඩ</b>. (වම 2 අකුරු, දකුණ වැඩියි → 3.)</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. දකුණු කර්ණිකාව හා දකුණු කෝෂිකාව අතර කපාටය?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ත්‍රිකුණ්ඩ කපාටය (tricuspid).</div></div>
+        <div class="reveal"><span class="q">2. දකුණු කෝෂිකාවෙන් ආරම්භ වන මහා ධමනිය?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">පුප්ඵුසීය මහා ධමනිය (pulmonary artery).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🫀</span><div><b>“ඉහළ කර්ණිකා, පහළ කෝෂිකා; වම 2-කුණ්ඩ, දකුණ 3-කුණ්ඩ.”</b> කුටීර 4, කපාට 4 — හෘදයේ සිතියම මෙයයි.</div></div>
+    </div>
+  </details>
+
+  <!-- 6.2 vessels -->
+  <details class="topic" id="t62" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">6.2</span>
+      <h3>ධමනි, ශිරා හා කේශනාලිකා<span class="en">Arteries, veins &amp; capillaries</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">මහා මාර්ග, පටු පාරවල් හා ඇතුළු පාරවල්.</span> හෘදයේ සිට රුධිරය යන්නේ ලොකු “මහා මාර්ග” (ධමනි) ඔස්සේ; ඒවා පටු පාරවලට (ධමනිකා) බෙදිලා, අන්තිමට හැම සෛලයක් ළඟටම යන ඉතා පටු “ඇතුළු පාරවල්” (කේශනාලිකා) වෙනවා; ඊටපස්සේ ආපහු හෘදයට එන පාරවල් = ශිරා.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th> </th><th>ධමනි (arteries)</th><th>ශිරා (veins)</th><th>කේශනාලිකා (capillaries)</th></tr>
+        <tr><td><b>දිශාව</b></td><td>හෘදයෙන් <b>ඉවතට</b></td><td>හෘදය <b>දෙසට</b></td><td>ධමනි ↔ ශිරා සම්බන්ධ කරයි</td></tr>
+        <tr><td><b>බිත්ති</b></td><td>ඝන, ප්‍රත්‍යාස්ථ (අධික පීඩනය දරයි)</td><td>සිහින්, ප්‍රත්‍යාස්ථ අඩු</td><td><b>තනි සෛල ස්තරයක්</b> පමණි</td></tr>
+        <tr><td><b>කපාට</b></td><td>නැත (හෘදය ළඟ හැර)</td><td><b>ඇත</b> (රුධිරය ආපසු නොයාමට)</td><td>නැත</td></tr>
+        <tr><td><b>විශේෂත්වය</b></td><td>රුධිර පීඩනය වැඩියි</td><td>රුධිර පීඩනය අඩුයි</td><td>වායු/පෝෂක <b>විසරණය</b> සෛලවලට</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — රුධිර නාල තුන</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 130" role="img" aria-label="ධමනිය, කේශනාලිකා හා ශිරාව">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11">
+            <rect x="20" y="40" width="40" height="50" rx="20" fill="#c0392b"/><circle cx="40" cy="65" r="10" fill="#fff"/>
+            <text x="40" y="110" text-anchor="middle" fill="#9c3a29">ධමනිය</text><text x="40" y="124" text-anchor="middle" font-size="9" fill="#9c3a29">ඝන බිත්ති</text>
+            <path d="M70 65 q60 -30 130 0 q60 30 120 0" fill="none" stroke="#b06a8a" stroke-width="3"/>
+            <text x="200" y="35" text-anchor="middle" fill="#9c3a29">කේශනාලිකා (තනි සෛල)</text>
+            <rect x="330" y="42" width="44" height="46" rx="20" fill="#3a6fb0"/><circle cx="352" cy="65" r="13" fill="#fff"/>
+            <line x1="345" y1="58" x2="359" y2="58" stroke="#3a6fb0" stroke-width="2"/>
+            <text x="352" y="110" text-anchor="middle" fill="#23598f">ශිරාව</text><text x="352" y="124" text-anchor="middle" font-size="9" fill="#23598f">කපාට ඇත</text>
+          </g>
+        </svg>
+        <figcaption>ධමනිය ඝන බිත්ති; ශිරාවේ කපාට; කේශනාලිකාව තනි සෛල ස්තරයක්. (රූප 6.4)</figcaption>
+      </figure>
+      <p class="tnote"><b>ඇයි ධමනි ඝන?</b> හෘදය පොම්ප කරන විට ඇතිවන <b>අධික පීඩනය</b> දරාගැනීමට. <b>ඇයි ශිරාවල කපාට?</b> අඩු පීඩනයේ රුධිරය <b>ආපසු නොයාමට</b>.</p>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">වායු හා පෝෂක සෛලවලට විසරණය වන්නේ කුමන නාලයෙන්ද? ඇයි?</p>
+        <p style="margin:.2em 0">→ <b>කේශනාලිකා</b> — එහි බිත්තිය <b>තනි සෛල ස්තරයක්</b> නිසා විසරණය පහසුයි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) හෘදය දෙසට රුධිරය ගෙන යන නාලය? (b) කපාට ඇත්තේ කුමන නාලයේද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">ශිරාව</span>. (b) <span class="a">ශිරාවල</span> (රුධිරය ආපසු නොයාමට).</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>ධමනි = හෘදයෙන් ඉවතට</b>, <b>ශිරා = හෘදයට</b>. (“ධ” = දුරට යනවා කියලා මතක තබන්න.)</li>
+          <li>කපාට ඇත්තේ <b>ශිරාවල</b> (ධමනිවල නැත, හෘදය ළඟ හැර).</li>
+          <li>විසරණය වෙන්නේ <b>කේශනාලිකාවල</b> විතරයි — බිත්තිය තනි සෛලයක් නිසා.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ධමනිවල බිත්ති ඝන වන්නේ ඇයි?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">පොම්ප කරන විට ඇතිවන අධික පීඩනය දරාගැනීමට.</div></div>
+        <div class="reveal"><span class="q">2. කේශනාලිකාවක බිත්තිය සැදී ඇත්තේ?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">තනි සෛල ස්තරයකින් (විසරණයට පහසු වීමට).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🛣️</span><div><b>“ධමනි = ඉවතට, ඝන, කපාට නෑ; ශිරා = හෘදයට, සිහින්, කපාට ඇත; කේශනාලිකා = තනි සෛල, විසරණය.”</b></div></div>
+    </div>
+  </details>
+
+  <!-- 6.3 blood components -->
+  <details class="topic" id="t63" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">6.3</span>
+      <h3>රුධිරයේ සංඝටක හා කෘත්‍ය<span class="en">Components &amp; functions of blood</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">රතු දියරයක් වගේ — ඒත් ඇතුළේ පුදුම ලෝකයක්!</span> ඇඟිල්ලක තුවාලයකින් එන රතු දියර = රුධිරය. ඒත් අණුවීක්ෂයකින් බැලුවොත් — රතු, සුදු කුඩා “දේහාණු” සහ දියර “ප්ලාස්මය”. හැම එකක්ම වෙනම වැඩක් කරනවා!</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — සංඝටක (රූප 6.5)</b></div>
+      <p class="lead">රුධිරයෙන් <b>55% = ප්ලාස්මය</b> (දියර කොටස); ඉතිරි <b>45% = දේහාණු</b> (ඝන කොටස).</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>සංඝටකය</th><th>කෘත්‍යය</th></tr>
+        <tr><td><b>රතු රුධිරාණු</b> (රක්තාණු, RBC)</td><td><b>හිමොග්ලොබින්</b> අඩංගු (රතු පැහැයට හේතුව); පෙනහළුවලින් ඔක්සිජන් සෛලවලට ප්‍රවාහනය</td></tr>
+        <tr><td><b>සුදු රුධිරාණු</b> (ශ්වේතාණු, WBC)</td><td>රෝග කාරක විනාශ කරයි + <b>ප්‍රතිදේහ</b> නිපදවයි → සිරුර ආරක්ෂා කරයි (නියුට්‍රොෆිල, ඉයොසිනොෆිල, බේසොෆිල, වසා සෛල, මොනොසයිට්)</td></tr>
+        <tr><td><b>රුධිර පට්ටිකා</b> (platelets)</td><td>තුවාලයකදී රුධිරය <b>කැටි ගස්වා</b> රුධිර වහනය නවත්වයි (සෛල කැබලි; ඩෙංගු/මී උණ වැනි ආසාදනවලදී අඩුවෙයි)</td></tr>
+        <tr><td><b>රුධිර ප්ලාස්මය</b> (plasma)</td><td>ද්‍රව්‍ය <b>ප්‍රවාහනය</b>: ජීර්ණය වූ ආහාර, බහිස්‍රාවී ද්‍රව්‍ය, හෝමෝන, ප්‍රෝටීන, එන්සයිම, වායු අවශ්‍ය තැන්වලට</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — රුධිරයේ සංඝටක ගස</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 180" role="img" aria-label="රුධිරයේ සංඝටක — ප්ලාස්මය හා දේහාණු">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11" text-anchor="middle">
+            <rect x="185" y="10" width="90" height="30" rx="8" fill="#9c3a29"/><text x="230" y="30" fill="#fff">රුධිරය</text>
+            <line x1="200" y1="40" x2="110" y2="60" stroke="#9c3a29"/><line x1="260" y1="40" x2="350" y2="60" stroke="#9c3a29"/>
+            <rect x="55" y="60" width="120" height="30" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="115" y="80" fill="#9c3a29">දේහාණු (45%)</text>
+            <rect x="290" y="60" width="120" height="30" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="350" y="80" fill="#9c3a29">ප්ලාස්මය (55%)</text>
+            <g font-size="10">
+              <line x1="80" y1="90" x2="55" y2="115" stroke="#c4533f"/><line x1="115" y1="90" x2="115" y2="115" stroke="#c4533f"/><line x1="150" y1="90" x2="175" y2="115" stroke="#c4533f"/>
+              <rect x="22" y="115" width="66" height="40" rx="7" fill="#fff" stroke="#c4533f"/><text x="55" y="133" fill="#9c3a29">රතු</text><text x="55" y="147" fill="#9c3a29">රුධිරාණු</text>
+              <rect x="92" y="115" width="66" height="40" rx="7" fill="#fff" stroke="#c4533f"/><text x="125" y="133" fill="#9c3a29">සුදු</text><text x="125" y="147" fill="#9c3a29">රුධිරාණු</text>
+              <rect x="162" y="115" width="60" height="40" rx="7" fill="#fff" stroke="#c4533f"/><text x="192" y="138" fill="#9c3a29">පට්ටිකා</text>
+              <line x1="350" y1="90" x2="350" y2="115" stroke="#c4533f"/>
+              <rect x="290" y="115" width="120" height="40" rx="7" fill="#fff" stroke="#c4533f"/><text x="350" y="133" fill="#9c3a29">ජලය +</text><text x="350" y="147" fill="#9c3a29">ද්‍රාව්‍ය/අද්‍රාව්‍ය දෑ</text>
+            </g>
+          </g>
+        </svg>
+        <figcaption>රුධිරය = දේහාණු (රතු/සුදු රුධිරාණු, පට්ටිකා) + ප්ලාස්මය. (රූප 6.5)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">රුධිරයේ රතු පැහැට හේතුව කුමක්ද? එය අඩංගු වන්නේ කොහේද?</p>
+        <p style="margin:.2em 0">→ <b>හිමොග්ලොබින්</b>; එය අඩංගු වන්නේ <b>රතු රුධිරාණු</b> තුළ; ඔක්සිජන් ප්‍රවාහනය කරයි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) තුවාලයකදී රුධිරය කැටි ගස්වන සංඝටකය? (b) ඩෙංගු රෝගියෙකුට අඩුවන සංඝටකය?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">රුධිර පට්ටිකා</span> (platelets). (b) <span class="a">රුධිර පට්ටිකා</span> ද අඩුවෙයි.</div></div>
+
+      <div class="joke">සුදු රුධිරාණු කිව්වා: “මම සිරුරේ පොලිසිය — රෝග කාරක ඇතුළු වුණොත් මම අල්ලනවා!” 👮 රතු රුධිරාණු කිව්වා: “මම delivery — ඔක්සිජන් ගෙනියනවා.” 🚚</div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>රතු/සුදු රුධිරාණු = <b>සෛල</b>; පට්ටිකා = <b>සෛල කැබලි</b> (පූර්ණ සෛල නෙවෙයි).</li>
+          <li>ඔක්සිජන් ගෙන යන්නේ <b>රතු</b> රුධිරාණු; රෝග වළක්වන්නේ <b>සුදු</b> රුධිරාණු — පටලවා ගන්න එපා.</li>
+          <li>ප්ලාස්මය = 55%, දේහාණු = 45%.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="bloodWidget" style="--cl:var(--B)">
+        <div class="wt">🩸 සංඝටකය tap කර එහි කෘත්‍යය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="rbc">රතු රුධිරාණු</button>
+          <button class="chip" data-k="wbc">සුදු රුධිරාණු</button>
+          <button class="chip" data-k="plat">රුධිර පට්ටිකා</button>
+          <button class="chip" data-k="plasma">ප්ලාස්මය</button>
+        </div>
+        <div class="wout" id="bloodOut">උඩ එකක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ප්‍රතිදේහ නිපදවන සංඝටකය කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">සුදු රුධිරාණු (white blood cells).</div></div>
+        <div class="reveal"><span class="q">2. රුධිර ප්ලාස්මයේ ප්‍රධාන කෘත්‍යය කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ද්‍රව්‍ය (ආහාර, බහිස්‍රාවී දෑ, හෝමෝන, වායු…) ප්‍රවාහනය.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🩸</span><div><b>“රතු = ඔක්සිජන් ට්‍රක්; සුදු = පොලිසිය; පට්ටිකා = කැටි ගස්වන plaster; ප්ලාස්මය = ප්‍රවාහන මාර්ගය.”</b></div></div>
+    </div>
+  </details>
+
+  <!-- 6.4 transfusion -->
+  <details class="topic" id="t64" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">6.4</span>
+      <h3>රුධිර පාරවිලයනය<span class="en">Blood transfusion</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">අනතුරකදී රුධිරය අහිමි වුණොත්?</span> රිය අනතුරකදී හෝ සැත්කමකදී කෙනෙකුට රුධිරය අහිමි වුණොත්, තවත් කෙනෙකුගේ රුධිරය දෙනවා — ඒ <b>රුධිර පාරවිලයනය</b>. ඒත් <b>ඕනෑම කෙනෙකුගේ රුධිරය ඕනෑම කෙනෙකුට දෙන්න බෑ!</b> ගැළපෙන්න ඕනේ.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — ගැළපිය යුතු කරුණු දෙකක්</b></div>
+      <p class="lead">රුධිරය දෙන්නා = <b>දායකයා</b>; ලබන්නා = <b>ප්‍රතිග්‍රාහකයා</b>. පාරවිලයනයේදී <b>(1) රුධිර ගණ</b> සහ <b>(2) රීසස් සාධකය</b> දෙකම ගැළපිය යුතුයි.</p>
+      <p><b>රුධිර ගණ:</b> සෛල තුළ ප්‍රෝටීන අනුව A, B, AB, O ලෙස ගණ හතරක්.</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>දායකයා ↓ / ප්‍රතිග්‍රාහකයා →</th><th>A</th><th>B</th><th>AB</th><th>O</th></tr>
+        <tr><td><b>A</b></td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td><b>B</b></td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td><b>AB</b></td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td><b>O</b></td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      </table></div>
+      <p>⟹ <b>AB = සර්ව ප්‍රතිග්‍රාහකයා</b> (ඕනෑම ගණයක් ලබයි); <b>O = සර්ව දායකයා</b> (ඕනෑම ගණයකට දෙයි). (වගුව 6.1)</p>
+      <p><b>රීසස් සාධකය:</b> රුධිරයේ රීසස් සාධකය ඇත්නම් <b>Rh⁺</b>, නැත්නම් <b>Rh⁻</b>. (වගුව 6.2)</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>දායකයා ↓ / ප්‍රතිග්‍රාහකයා →</th><th>Rh⁺</th><th>Rh⁻</th></tr>
+        <tr><td><b>Rh⁺</b></td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td><b>Rh⁻</b></td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — දායක ↔ ප්‍රතිග්‍රාහක</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 130" role="img" aria-label="O සර්ව දායක, AB සර්ව ප්‍රතිග්‍රාහක">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="12" text-anchor="middle">
+            <circle cx="70" cy="50" r="26" fill="#1f8a4c"/><text x="70" y="55" fill="#fff" font-weight="800">O</text>
+            <text x="70" y="95" fill="#16432a" font-size="11">සර්ව දායකයා</text>
+            <g stroke="#1f8a4c" stroke-width="2">
+              <line x1="96" y1="44" x2="180" y2="22"/><line x1="96" y1="50" x2="180" y2="50"/><line x1="96" y1="56" x2="180" y2="78"/><line x1="96" y1="60" x2="180" y2="104"/>
+            </g>
+            <g font-size="11" fill="#9c3a29">
+              <text x="205" y="26">A</text><text x="205" y="54">B</text><text x="205" y="82">AB</text><text x="205" y="108">O</text>
+            </g>
+            <circle cx="370" cy="50" r="26" fill="#c4533f"/><text x="370" y="55" fill="#fff" font-weight="800">AB</text>
+            <text x="370" y="95" fill="#9c3a29" font-size="11">සර්ව ප්‍රතිග්‍රාහකයා</text>
+            <g stroke="#c4533f" stroke-width="2">
+              <line x1="300" y1="22" x2="344" y2="44"/><line x1="300" y1="50" x2="344" y2="50"/><line x1="300" y1="78" x2="344" y2="56"/><line x1="300" y1="104" x2="344" y2="60"/>
+            </g>
+            <g font-size="11" fill="#9c3a29" text-anchor="end">
+              <text x="295" y="26">A</text><text x="295" y="54">B</text><text x="295" y="82">AB</text><text x="295" y="108">O</text>
+            </g>
+          </g>
+        </svg>
+        <figcaption>O හැම ගණයකටම දෙයි (සර්ව දායක); AB හැම ගණයකින්ම ලබයි (සර්ව ප්‍රතිග්‍රාහක). (රූප 6.7)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">A රුධිර ගණයේ දායකයෙකුට රුධිරය දිය හැක්කේ කා හටද?</p>
+        <p style="margin:.2em 0">→ වගුවට අනුව <b>A සහ AB</b> ප්‍රතිග්‍රාහකයන්ට පමණි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) සර්ව දායකයා කවුද? (b) Rh⁻ දායකයෙකුට කුමන රීසස් ප්‍රතිග්‍රාහකයන්ට දිය හැකිද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">O ගණය</span> (සර්ව දායක). (b) <span class="a">Rh⁺ සහ Rh⁻ දෙකටම</span>.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>O = සර්ව දායක</b> (දෙයි), <b>AB = සර්ව ප්‍රතිග්‍රාහක</b> (ලබයි) — දෙක පටලවා ගන්න එපා.</li>
+          <li>රුධිර ගණ <b>සහ</b> රීසස් සාධකය දෙකම ගැළපිය යුතුයි — ගණ පමණක් මදි.</li>
+          <li>ගණ නොගැළපුණොත් රුධිරය කැටි ගැහෙයි = <b>රුධිර ශ්ලේෂණය</b> (අන්තරාදායකයි).</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව — රුධිර ගණ ගැළපුම් යන්ත්‍රය</b></div>
+      <div class="widget" id="donorWidget" style="--cl:var(--B)">
+        <div class="wt">🩸 දායකයාගේ ගණය tap කර — කාටද දිය හැක්කේ බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="A">A</button>
+          <button class="chip" data-k="B">B</button>
+          <button class="chip" data-k="AB">AB</button>
+          <button class="chip" data-k="O">O</button>
+        </div>
+        <div class="wout" id="donorOut">උඩ දායක ගණයක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. රුධිර පාරවිලයනයේදී ගැළපිය යුතු කරුණු දෙක මොනවද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">රුධිර ගණය (A/B/AB/O) සහ රීසස් සාධකය (Rh⁺/Rh⁻).</div></div>
+        <div class="reveal"><span class="q">2. O⁻ රුධිරය ඇත්තේ සර්ව දායකයෙක්ද? ඇයි?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ඔව් — O ගණය හැම ගණයකටම, Rh⁻ හැම රීසස් සාධකයකටම දිය හැකි නිසා.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🅾️</span><div><b>“O දෙනවා හැමෝටම (දායක); AB ලබනවා හැමෙන්ම (ප්‍රතිග්‍රාහක). ගණ + රීසස් — දෙකම ගැළපෙන්න ඕනේ.”</b></div></div>
+    </div>
+  </details>
+
+
+  <!-- ===== SYNTHESIS ===== -->
+  <section class="synth" id="synth">
+    <h2>සියල්ල එකට බඳිමු 🧵</h2>
+    <p>මේ පාඩම් දෙකම ඔයාගේම සිරුර ගැන — එකම පුදුම යන්ත්‍රයක කොටස් දෙකක්:</p>
+    <div class="chain">
+      <span>සංවේදනය (ඇස · කන)</span><i>→</i>
+      <span>මොළය</span><i>→</i>
+      <span>සංසරණය (හෘදය · රුධිරය)</span>
+    </div>
+    <p style="margin-top:14px"><b>පාඩම 2</b> පෙන්නුවා — ඇස හා කන <b>සංවේදනය ප්‍රතිග්‍රහණය</b> කරලා <b>මොළයට</b> ස්නායු හරහා යවනවා (දෘෂ්ටික ස්නායුව, ශ්‍රවණ ස්නායුව). දෙකම මොළය මගින් අර්ථකථනය වෙනවා.</p>
+    <p><b>පාඩම 6</b> පෙන්නුවා — ඒ සියලු අවයව (ඇස, කන, මොළය ඇතුළු) වැඩ කරන්න <b>ඔක්සිජන් හා පෝෂක</b> අවශ්‍යයි; ඒවා රුධිරය (රතු රුධිරාණු + ප්ලාස්මය) මගින් <b>හෘදය පොම්ප කරලා</b> හැම සෛලයකටම ගෙන යනවා. රුධිරය නැතුව ඇසත්, කනත්, මොළයත් වැඩ කරන්නේ නෑ!</p>
+    <p style="margin-top:14px;color:var(--gold);font-weight:700">කෙටියෙන්: සංවේදී ඉන්ද්‍රිය තොරතුරු එකතු කරයි → ස්නායු මොළයට ගෙන යයි → ඒ සියල්ල ක්‍රියා කරන්න රුධිර සංසරණය ඔක්සිජන්/පෝෂක සපයයි. නිරෝගී සිරුරක් = මේ සියලු පද්ධති එකට වැඩ කිරීමයි.</p>
+  </section>
+
+  <!-- ===== TEST ===== -->
+  <section class="test" id="test">
+    <h2>අවසන් මිශ්‍ර ස්වයං-පරීක්ෂණය 📝</h2>
+    <p style="color:var(--ink-soft);margin:0 0 6px">පොත වහලා, මේ ප්‍රශ්න 10ම තනියම කරන්න. ඊටපස්සේ පිළිතුරු බලන්න. 8ක් හරිනම් — ඔයා සූදානම්! 🎉</p>
+    <div class="qz">
+
+      <div class="qitem"><div class="qq">ඇසේ ප්‍රතිබිම්බය සැදෙන කොටස කුමක්ද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">දෘෂ්ටිවිතානය</span> (retina).</div></div>
+
+      <div class="qitem"><div class="qq">ළඟ ඇති වස්තු පෙනෙන නමුත් දුර ඇති වස්තු නොපෙනෙන අක්ෂි දෝෂය? එය නිවැරදි කරන කාචය?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">අවිදුර දෘෂ්ටිකත්වය</span>; නිවැරදි කරන්නේ <span class="a">අවතල කාච</span>.</div></div>
+
+      <div class="qitem"><div class="qq">දෘෂ්ටික ස්නායුවට හානි වී අන්ධභාවයට යා හැකි අක්ෂි රෝගය කුමක්ද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ග්ලුකෝමාව</span> (Glaucoma).</div></div>
+
+      <div class="qitem"><div class="qq">කර්ණ අස්ථිකා තුනේ නම් ලියන්න.</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">මුද්ගරිකා, නිහාතිකා, ධරණිකා.</span></div></div>
+
+      <div class="qitem"><div class="qq">මිනිස් කනට ඇසිය හැකි ශ්‍රව්‍ය සංඛ්‍යාත පරාසය?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">20 Hz සිට 20,000 Hz දක්වා.</span></div></div>
+
+      <div class="qitem"><div class="qq">හෘදයේ පහළ කුටීර දෙකට කියන්නේ?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">කෝෂිකා</span> (ventricles).</div></div>
+
+      <div class="qitem"><div class="qq">කපාට ඇත්තේ කුමන රුධිර නාලයේද? ඇයි?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ශිරාවල</span> — රුධිරය ආපසු නොයාමට.</div></div>
+
+      <div class="qitem"><div class="qq">ඔක්සිජන් ප්‍රවාහනය කරන රුධිර සංඝටකය හා එහි අඩංගු වර්ණකය?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">රතු රුධිරාණු</span>; වර්ණකය <span class="a">හිමොග්ලොබින්</span>.</div></div>
+
+      <div class="qitem"><div class="qq">සර්ව දායකයා හා සර්ව ප්‍රතිග්‍රාහකයා කවුද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">සර්ව දායකයා = <span class="a">O</span>; සර්ව ප්‍රතිග්‍රාහකයා = <span class="a">AB</span>.</div></div>
+
+      <div class="qitem"><div class="qq">රුධිර පාරවිලයනයේදී ගැළපිය යුතු කරුණු දෙක මොනවද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">රුධිර ගණය (A/B/AB/O) සහ රීසස් සාධකය (Rh⁺/Rh⁻).</span></div></div>
+
+    </div>
+  </section>
+
+  <!-- ===== CHEAT SHEET ===== -->
+  <section class="cheat" id="cheat">
+    <h2>⚡ එක-පිටු කෙටි සටහන</h2>
+    <p style="color:var(--ink-soft);margin:0 0 8px">විභාගෙට කලින් අවසන් මිනිත්තු 5ට මේක විතරක් බලන්න. (Print කරාම පිළිතුරුත් පේනවා.)</p>
+    <div class="cheat-grid">
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>👁 ඇසෙහි කොටස්</h4>
+        <ul>
+          <li>ස්වච්ඡය+කාචය=වර්තනය; තාරා මණ්ඩලය/කණිනිකාව=ආලෝක පාලනය.</li>
+          <li>දෘෂ්ටිවිතානය=ප්‍රතිබිම්බය (උඩුකුරු); කහ ලපය=පැහැදිලිම; අන්ධ බින්දුව=පෙනීමක් නෑ.</li>
+          <li>දෘෂ්ටික ස්නායුව=මොළයට.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>👓 අක්ෂි දෝෂ හා රෝග</h4>
+        <ul>
+          <li>අවිදුර = ළඟ පෙනේ, ඉදිරියෙන් ප්‍රතිබිම්බය → <b>අවතල</b>.</li>
+          <li>දුර = දුර පෙනේ, පිටුපසින් → <b>උත්තල</b>.</li>
+          <li>රෝග: ඇසේ සුද (කාචය බොඳ), ග්ලුකෝමා (ස්නායුවට හානි).</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>👂 කන</h4>
+        <ul>
+          <li>බාහිර: කන් පෙත්ත, ශ්‍රවණ නාලය, කර්ණපටහ පටලය.</li>
+          <li>මැද: කර්ණ අස්ථිකා (මුද්ගරිකා/නිහාතිකා/ධරණිකා), යුස්ටේකීය නාලය.</li>
+          <li>ඇතුළු: කර්ණ සංඛය, ශ්‍රවණ ස්නායුව, අර්ධ චක්‍රාකාර නාල (සමබරතාව). පරාසය 20 Hz–20,000 Hz.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>🫀 හෘදය</h4>
+        <ul>
+          <li>කුටීර 4: ඉහළ කර්ණිකා, පහළ කෝෂිකා.</li>
+          <li>කපාට: වම ද්විකුණ්ඩ, දකුණ ත්‍රිකුණ්ඩ; මහා ධමනි ළඟ අධසඳ.</li>
+          <li>වම් කෝෂිකාව→සංස්ථානික; දකුණු කෝෂිකාව→පුප්ඵුසීය මහා ධමනිය.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>🛣️ රුධිර නාල + රුධිරය</h4>
+        <ul>
+          <li>ධමනි=ඉවතට, ඝන, කපාට නෑ; ශිරා=හෘදයට, කපාට ඇත; කේශනාලිකා=තනි සෛල, විසරණය.</li>
+          <li>ප්ලාස්මය 55% + දේහාණු 45%.</li>
+          <li>රතු=ඔක්සිජන් (හිමොග්ලොබින්); සුදු=ආරක්ෂාව (ප්‍රතිදේහ); පට්ටිකා=කැටි ගැසීම.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>🩸 රුධිර පාරවිලයනය</h4>
+        <ul>
+          <li>ගණ: A, B, AB, O. <b>O=සර්ව දායක; AB=සර්ව ප්‍රතිග්‍රාහක.</b></li>
+          <li>රීසස්: Rh⁺/Rh⁻. Rh⁻ දෙකටම දෙයි; Rh⁺ Rh⁺ට පමණි.</li>
+          <li>ගණ + රීසස් දෙකම ගැළපිය යුතුයි; නොගැළපුණොත් ශ්ලේෂණය.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <span class="logo" style="background:linear-gradient(135deg,#e0a92e,#c8901a);color:#0d1b3e;border-radius:8px;font-weight:800;place-items:center">I</span>
+  Idasara Academy · 9 ශ්‍රේණිය විද්‍යාව — 9 ශ්‍රේණිය විද්‍යා පෙළපොත (පොත I, අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුව) ඇසුරෙන්: පාඩම 2 (පි.16), පාඩම 6 (පි.72). මාධ්‍යය: සිංහල.
+</footer>
+
+<script>
+var prog=document.getElementById('progress');
+function up(){var h=document.documentElement;var s=h.scrollTop||document.body.scrollTop;var mx=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/mx*100)+'%';}
+window.addEventListener('scroll',up,{passive:true});up();
+
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.rbtn');if(!b)return;
+  var box=b.parentElement.querySelector('.ans');if(!box)return;
+  var open=box.classList.toggle('show');
+  if(open){b.textContent='පිළිතුර හංගන්න ▴';}
+  else{b.textContent=(b.getAttribute('data-short')==='1'?'පිළිතුර ▾':'පිළිතුර පෙන්වන්න ▾');}
+});
+document.querySelectorAll('.selfcheck .rbtn').forEach(function(b){b.setAttribute('data-short','1');});
+
+function wire(id,map,sv){
+  var out=document.getElementById(id+'Out');var chips=document.querySelectorAll('#'+id+'Widget .chip');if(!out)return;
+  chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');var d=map[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var('+sv+'-soft);color:var('+sv+'-deep)">'+d[0]+'</span> '+d[1];});});
+}
+wire('eye',{
+  cornea:['ස්වච්ඡය','පාරදෘශ්‍ය ඉදිරි කොටස — ආලෝකය වර්තනය කරයි.'],
+  lens:['අක්ෂි කාචය','වක්‍රතාව වෙනස් කර දෘෂ්ටිවිතානය මත රූපය සකසයි.'],
+  iris:['තාරා මණ්ඩලය','ආලෝක ප්‍රමාණය පාලනය; ඇසේ පාට.'],
+  pupil:['කණිනිකාව','තාරා මණ්ඩලය මැද සිදුර — ආලෝකය ඇතුළු වෙයි.'],
+  retina:['දෘෂ්ටිවිතානය','ආලෝක සංවේදී සෛල; ප්‍රතිබිම්බය මෙහි සැදේ.'],
+  optic:['දෘෂ්ටික ස්නායුව','සංවේදනය මොළයට ගෙන යයි.']
+},'--A');
+wire('defect',{
+  far:['අවිදුර දෘෂ්ටිකත්වය','ප්‍රතිබිම්බය දෘෂ්ටිවිතානයට ඉදිරියෙන් → අවතල කාච.'],
+  near:['දුර දෘෂ්ටිකත්වය','ප්‍රතිබිම්බය දෘෂ්ටිවිතානයට පිටුපසින් → උත්තල කාච.']
+},'--A');
+wire('ear',{
+  pinna:['කන් පෙත්ත','ශබ්ද තරංග ශ්‍රවණ නාලයට යොමු කරයි.'],
+  drum:['කර්ණපටහ පටලය','ශබ්දයට අනුව කම්පනය වෙයි.'],
+  ossi:['කර්ණ අස්ථිකා','කම්පනය කර්ණ සංඛයට ගෙන යයි.'],
+  eust:['යුස්ටේකීය නාලය','පටලයේ දෙපැත්තේ පීඩනය සමාන කරයි.'],
+  cochlea:['කර්ණ සංඛය','සංවේදනය ශ්‍රවණ ස්නායුවට.'],
+  semi:['අර්ධ චක්‍රාකාර නාල','සිරුරේ සමබරතාව රකියි.']
+},'--A');
+wire('blood',{
+  rbc:['රතු රුධිරාණු','හිමොග්ලොබින් — ඔක්සිජන් ප්‍රවාහනය.'],
+  wbc:['සුදු රුධිරාණු','රෝග කාරක විනාශ + ප්‍රතිදේහ.'],
+  plat:['රුධිර පට්ටිකා','තුවාලයේ රුධිරය කැටි ගස්වයි.'],
+  plasma:['ප්ලාස්මය','ද්‍රව්‍ය ප්‍රවාහනය (55%).']
+},'--B');
+
+/* donor compatibility */
+(function(){
+  var map={A:'A, AB',B:'B, AB',AB:'AB පමණයි',O:'A, B, AB, O (හැමෝටම!)'};
+  var note={A:'',B:'',AB:'',O:' — O = සර්ව දායකයා'};
+  var out=document.getElementById('donorOut');var chips=document.querySelectorAll('#donorWidget .chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');
+    out.innerHTML='<span class="badge" style="background:var(--B-soft);color:var(--B-deep)">'+c.dataset.k+' දායක</span> දිය හැක්කේ → <b>'+map[c.dataset.k]+'</b>'+note[c.dataset.k];});});
+})();
+</script>
+</body>
+</html>

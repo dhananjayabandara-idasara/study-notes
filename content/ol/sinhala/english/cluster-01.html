@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Idasara Academy — සා/පෙළ ඉංග්‍රීසි | I ප්‍රශ්න පත්‍රය: කෙටි පිළිතුරු</title>
+<title>Idasara Academy — O/L English | Paper I: Short Answers &amp; Gap-Filling</title>
 <style>
   :root{
     --navy:#0B2545; --navy-2:#13315C; --navy-3:#1B3F73;
@@ -15,14 +15,12 @@
     --s4:#2E7D52; --s4-soft:#E4F2E9;   /* reading - green */
     --s5:#2B6CB0; --s5-soft:#E4EEF8;   /* info transfer - blue */
     --pos:#1B7F4B; --neg:#C0392B;
-    --sin:"Noto Sans Sinhala","Iskoola Pota","Nirmala UI","Malithi Web",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    --eng:"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+    --ui:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,"Noto Sans Sinhala",sans-serif;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0; font-family:var(--sin); color:var(--ink); background:var(--paper); line-height:1.75; font-size:17px; -webkit-text-size-adjust:100%;}
+  body{margin:0; font-family:var(--ui); color:var(--ink); background:var(--paper); line-height:1.7; font-size:17px; -webkit-text-size-adjust:100%;}
   .wrap{max-width:880px; margin:0 auto; padding:0 16px;}
-  .en{font-family:var(--eng);}
 
   #progress{position:fixed; top:0; left:0; height:4px; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-2)); z-index:60; transition:width .15s;}
   nav.chips{position:sticky; top:0; z-index:50; background:rgba(11,37,69,.97); backdrop-filter:blur(6px); box-shadow:0 2px 12px rgba(0,0,0,.18);}
@@ -38,11 +36,11 @@
   .brand .name{font-weight:800; letter-spacing:.14em; font-size:15px;}
   .brand .tag{font-size:11.5px; color:var(--gold-2); letter-spacing:.22em; text-transform:uppercase;}
   .eyebrow{display:inline-flex; gap:8px; align-items:center; font-size:13px; color:var(--gold-2); border:1px solid rgba(224,199,102,.4); padding:5px 12px; border-radius:999px;}
-  header.hero h1{font-size:clamp(26px,6.4vw,42px); line-height:1.2; margin:16px 0 6px; font-weight:800;}
+  header.hero h1{font-size:clamp(26px,6.2vw,42px); line-height:1.2; margin:16px 0 6px; font-weight:800;}
   header.hero .sub{color:#D6E0EC; max-width:640px; font-size:16.5px;}
   header.hero .meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
   header.hero .meta span{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); padding:6px 13px; border-radius:10px; font-size:13.5px; font-weight:600;}
-  .floaters{position:absolute; inset:0; z-index:1; opacity:.13; pointer-events:none; font-weight:800; font-family:var(--eng);}
+  .floaters{position:absolute; inset:0; z-index:1; opacity:.13; pointer-events:none; font-weight:800;}
   .floaters span{position:absolute; color:var(--gold-2); font-size:26px;}
 
   section.lesson{padding:34px 0 8px;}
@@ -92,12 +90,11 @@
   .mem{background:linear-gradient(135deg,#0B2545,#1B3F73); color:#fff; border-radius:13px; padding:14px 16px; margin:16px 0; display:flex; gap:12px; align-items:flex-start;}
   .mem .k{font-size:22px;} .mem b{color:var(--gold-2);}
 
-  /* bilingual example */
   .eg{border-left:4px solid var(--s3); background:#F8FAFD; border-radius:0 12px 12px 0; padding:12px 16px; margin:12px 0;}
-  .eg .en{font-size:16.5px;} .eg .si{font-size:14px; color:var(--muted); margin-top:4px;}
+  .eg .x{font-size:16.5px;} .eg .note{font-size:14px; color:var(--muted); margin-top:4px;}
   .hl{background:#fff3cf; color:#7a5e0a; font-weight:700; border-radius:4px; padding:0 4px;}
   .corr{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0;}
-  .corr .c{flex:1 1 220px; border-radius:11px; padding:10px 13px; font-family:var(--eng); font-size:15.5px;}
+  .corr .c{flex:1 1 220px; border-radius:11px; padding:10px 13px; font-size:15.5px;}
   .corr .bad{background:#FDECEA; border:1px solid #F1B0A6;} .corr .bad::before{content:"✗ "; color:var(--neg); font-weight:800;}
   .corr .good{background:#F0FBF4; border:1px solid #BFE6CC;} .corr .good::before{content:"✓ "; color:var(--pos); font-weight:800;}
 
@@ -122,19 +119,19 @@
   table.tbl tr:nth-child(even) td{background:#FAFBFD;}
   .scroller{overflow-x:auto; -webkit-overflow-scrolling:touch;}
   .chips2{display:flex; flex-wrap:wrap; gap:7px; margin:8px 0;}
-  .chips2 span{font-family:var(--eng); background:#fff; border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:14px; font-weight:600; color:var(--navy);}
+  .chips2 span{background:#fff; border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:14px; font-weight:600; color:var(--navy);}
 
   .widget{border:1px solid var(--line); border-radius:14px; padding:16px; margin:16px 0; background:linear-gradient(180deg,#fff,#FAFBFD);}
   .widget .wh{font-weight:800; font-size:15px; display:flex; gap:8px; align-items:center; margin-bottom:10px;}
-  .widget .qtext{font-family:var(--eng); font-size:16.5px; margin-bottom:10px;}
+  .widget .qtext{font-size:16.5px; margin-bottom:10px;}
   .widget .opts{display:flex; flex-wrap:wrap; gap:8px;}
-  .widget .opts button{font-family:var(--eng); font-weight:600; font-size:15px; padding:9px 15px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); cursor:pointer; transition:.15s;}
+  .widget .opts button{font-family:var(--ui); font-weight:600; font-size:15px; padding:9px 15px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); cursor:pointer; transition:.15s;}
   .widget .opts button:hover{border-color:var(--navy);}
   .widget .opts button.right{background:#E1F4E9; border-color:var(--pos); color:var(--pos);}
   .widget .opts button.wrong{background:#FDECEA; border-color:var(--neg); color:var(--neg);}
   .widget .opts button:focus-visible{outline:3px solid var(--gold-2);}
   .widget .fb{margin-top:10px; font-size:15px; min-height:18px;}
-  .widget .nextbtn{font-family:var(--sin); margin-top:10px; font-weight:700; font-size:14px; padding:8px 14px; border:none; border-radius:10px; background:var(--navy); color:#fff; cursor:pointer;}
+  .widget .nextbtn{margin-top:10px; font-weight:700; font-size:14px; padding:8px 14px; border:none; border-radius:10px; background:var(--navy); color:#fff; cursor:pointer;}
 
   .synth{background:linear-gradient(160deg,var(--navy),var(--navy-2)); color:#fff; border-radius:18px; padding:26px 22px; margin:30px 0;}
   .synth h2{margin-top:0; color:var(--gold-2);}
@@ -161,19 +158,19 @@
 </style>
 </head>
 <body>
-<div id="progress" role="progressbar" aria-label="කියවීමේ ප්‍රගතිය"></div>
+<div id="progress" role="progressbar" aria-label="Reading progress"></div>
 
-<nav class="chips" aria-label="සංචලනය">
+<nav class="chips" aria-label="Section navigation">
   <div class="row">
-    <a href="#top">මුල</a>
-    <a href="#q1">1 · රූප හා වචන</a>
-    <a href="#q2">2 · දෙබස්</a>
-    <a href="#q3">3 · ව්‍යාකරණ</a>
-    <a href="#q4">4 · කියවීම</a>
-    <a href="#q5">5 · තොරතුරු හුවමාරුව</a>
-    <a href="#synth">උපාය මාර්ග</a>
-    <a href="#test">ස්වයං පරීක්ෂණය</a>
-    <a href="#cheat">කෙටි සටහන</a>
+    <a href="#top">Top</a>
+    <a href="#q1">1 · Picture &amp; Word</a>
+    <a href="#q2">2 · Dialogue</a>
+    <a href="#q3">3 · Grammar</a>
+    <a href="#q4">4 · Reading</a>
+    <a href="#q5">5 · Info Transfer</a>
+    <a href="#synth">Strategy</a>
+    <a href="#test">Self-Test</a>
+    <a href="#cheat">Cheat Sheet</a>
   </div>
 </nav>
 
@@ -185,133 +182,127 @@
   </div>
   <div class="wrap">
     <div class="brand">
-      <div class="mark">ඉ</div>
+      <div class="mark">i</div>
       <div><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div>
     </div>
-    <span class="eyebrow">📘 සා/පෙළ · ඉංග්‍රීසි · සිංහල මාධ්‍යයෙන් මඟ පෙන්වීම</span>
-    <h1>I ප්‍රශ්න පත්‍රය — කෙටි පිළිතුරු හා හිස්තැන් පිරවීම</h1>
-    <p class="sub">පහසුම ලකුණු මෙතනයි! රූප ගැලපීම, දෙබස්, ව්‍යාකරණ, කියවීම හා තොරතුරු හුවමාරුව — එක එක ‘ප්‍රශ්න වර්ගය’ ඔයාට මුළුමනින්ම තේරුම් කරදෙමු.</p>
-    <div class="meta"><span>📝 ප්‍රශ්න වර්ග 5ක්</span><span>⚡ පහසු ලකුණු මුලින්</span><span>✍️ සෑම එකකම පුහුණුව</span><span>📖 Pupil's Book + ඒකක 1–14</span></div>
+    <span class="eyebrow">📘 G.C.E. O/L · English · English medium</span>
+    <h1>Paper I — Short Answers &amp; Gap-Filling</h1>
+    <p class="sub">This is where the easiest marks live! Picture matching, dialogues, grammar, reading and information transfer — every question type, made crystal clear.</p>
+    <div class="meta"><span>📝 5 question types</span><span>⚡ easy marks first</span><span>✍️ practice in every section</span><span>📖 Pupil's Book + Units 1–14</span></div>
   </div>
 </header>
 
 <main class="wrap">
 
   <section class="why" id="intro">
-    <h2>මේ පත්‍රය ඇයි වැදගත්ද? 🎯</h2>
-    <p>රහසක් කියන්නද? <b>I ප්‍රශ්න පත්‍රය = පහසුම ලකුණු!</b> මෙය ‘දන්නවද නැද්ද’ පරීක්ෂාවක්. <b>වැරදි පිළිතුරුවලට ලකුණු කැපීමක් නෑ</b> — ඒ නිසා කිසිම හිස්තැනක් හිස්ව තබන්න එපා! අනුමානයක් වුණත් ලියන්න.</p>
-    <div class="markbox"><b>💡 අත්‍යවශ්‍ය උපාය:</b> පහසු ප්‍රශ්න වර්ග (රූප ගැලපීම, දෙබස්) <b>මුලින්ම, ඉක්මනින්</b> කරලා ලකුණු බෑගයට දාගන්න. ඊට පස්සේ ව්‍යාකරණ, කියවීම වැනි ඒවාට කල් දෙන්න.</div>
-    <p>පහත කාඩ් එකක් තට්ටු කරලා ඕනෑම ප්‍රශ්න වර්ගයකට යන්න 👇</p>
+    <h2>Why does this paper matter? 🎯</h2>
+    <p>Here's a secret: <b>Paper I = the easiest marks!</b> It's a "do you know it or not" test. <b>There is no negative marking</b> — so never, ever leave a blank! Even a smart guess can earn you a mark.</p>
+    <div class="markbox"><b>💡 The key strategy:</b> Do the easy question types (picture matching, dialogues) <b>first and fast</b> to bank marks. Then spend your remaining time on grammar and reading.</div>
+    <p>Tap any card below to jump straight to a question type 👇</p>
     <div class="roadmap">
-      <a class="road-card" href="#q1" style="border-top:4px solid var(--s1)"><span class="num">1</span><b>රූප හා වචන ගැලපීම</b><small>Picture &amp; word matching</small><br><span class="tagm easy">පහසු ලකුණු</span></a>
-      <a class="road-card" href="#q2" style="border-top:4px solid var(--s2)"><span class="num">2</span><b>දෙබස් හිස්තැන්</b><small>Dialogue gap-fill</small><br><span class="tagm easy">පහසු ලකුණු</span></a>
-      <a class="road-card" href="#q3" style="border-top:4px solid var(--s3)"><span class="num">3</span><b>ව්‍යාකරණ</b><small>Grammar in context</small><br><span class="tagm easy">වැඩිම ඉගෙනගත හැකි</span></a>
-      <a class="road-card" href="#q4" style="border-top:4px solid var(--s4)"><span class="num">4</span><b>කියවීමේ අවබෝධය</b><small>Reading comprehension</small><br><span class="tagm mid">මධ්‍යම</span></a>
-      <a class="road-card" href="#q5" style="border-top:4px solid var(--s5)"><span class="num">5</span><b>තොරතුරු හුවමාරුව</b><small>Information transfer</small></a>
+      <a class="road-card" href="#q1" style="border-top:4px solid var(--s1)"><span class="num">1</span><b>Picture &amp; Word Matching</b><small>Match images to words</small><br><span class="tagm easy">easy marks</span></a>
+      <a class="road-card" href="#q2" style="border-top:4px solid var(--s2)"><span class="num">2</span><b>Dialogue Gap-Fill</b><small>Complete the conversation</small><br><span class="tagm easy">easy marks</span></a>
+      <a class="road-card" href="#q3" style="border-top:4px solid var(--s3)"><span class="num">3</span><b>Grammar in Context</b><small>Correct errors / choose word</small><br><span class="tagm easy">most learnable</span></a>
+      <a class="road-card" href="#q4" style="border-top:4px solid var(--s4)"><span class="num">4</span><b>Reading Comprehension</b><small>Read &amp; answer</small><br><span class="tagm mid">medium</span></a>
+      <a class="road-card" href="#q5" style="border-top:4px solid var(--s5)"><span class="num">5</span><b>Information Transfer</b><small>Notice → form, table → text</small></a>
     </div>
   </section>
 
   <!-- ===================== Q1: PICTURE & WORD MATCHING ===================== -->
   <section class="lesson" id="q1">
     <div class="lesson-head" style="background:linear-gradient(150deg,var(--s1),#0a5b63)">
-      <div class="badge">1</div><div class="kicker">ප්‍රශ්න වර්ගය 1 · පහසු ලකුණු</div>
-      <h2>රූප හා වචන ගැලපීම</h2>
-      <p>රූපයක් බලා, ගැලපෙන විස්තරය/වචනය තෝරන්න. හැමෝටම මුලින්ම ලකුණු!</p>
+      <div class="badge">1</div><div class="kicker">Question type 1 · easy marks</div>
+      <h2>Picture &amp; Word Matching</h2>
+      <p>Look at a picture and choose the matching description or word. The first easy marks for everyone!</p>
     </div>
-    <div class="objectives"><b>මේ කොටස අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
-      <ul><li>පෙනුම විස්තර කරන වචන (face, hair, features) හඳුනා ගැනීමට</li><li>ස්ථාන නිපාත (next to, behind…) රූප සමඟ ගැලපීමට</li><li>ක්‍රියා/පිසීමේ වචන රූප සමඟ ගැලපීමට</li></ul>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>recognise words that describe appearance (face, hair, features)</li><li>match prepositions of place (next to, behind…) to pictures</li><li>match action / cooking verbs to pictures</li></ul>
     </div>
 
     <details class="sub" open>
-      <summary><span class="dot" style="background:var(--s1)">1a</span> පෙනුම විස්තර කිරීම (Describing appearance) <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s1)">1a</span> Describing appearance <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">ඔයාගේ යාළුවෙක් අතුරුදහන් වුණා කියලා පොලීසියට කියනවා නම් — “<b>round face, curly hair, a beard</b>” වගේ වචන ඕනේ නේද? පෙනුම විස්තර කරන වචන ටික දන්නවා නම්, මේ ප්‍රශ්නය විනාඩියකින් ඉවරයි!</div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Imagine a friend has gone missing and you must describe them to the police — you'd need words like "<b>round face, curly hair, a beard</b>", right? Know these appearance words and this question is done in a minute!</div>
 
-        <div class="step"><span class="n">2</span> වචන මාලාව (Pupil's Book Unit 1 · People / Unit 10 · Personality)</div>
+        <div class="step"><span class="n">2</span> The words (Pupil's Book — Unit 1 People / Unit 10 Personality)</div>
         <div class="scroller"><table class="tbl">
-          <tr><th>කාණ්ඩය</th><th class="en">English words</th></tr>
-          <tr><td>මුහුණේ හැඩය</td><td class="en">round, oval, square face</td></tr>
-          <tr><td>කොණ්ඩය</td><td class="en">straight / wavy / curly / fair / black hair · bald</td></tr>
-          <tr><td>අනෙකුත් ලක්ෂණ</td><td class="en">beard (රැවුල), moustache, pointed nose, sharp eyes, fair / dark complexion</td></tr>
+          <tr><th>Category</th><th>English words</th></tr>
+          <tr><td>Face shape</td><td>round, oval, square face</td></tr>
+          <tr><td>Hair</td><td>straight / wavy / curly / fair / black hair · bald</td></tr>
+          <tr><td>Other features</td><td>beard, moustache, pointed nose, sharp eyes, fair / dark complexion</td></tr>
         </table></div>
-        <div class="eg"><div class="en">She has an <span class="hl">oval face</span> with <span class="hl">long wavy</span> hair and <span class="hl">sharp eyes</span>.</div>
-          <div class="si">පෙනුම විස්තරයේදී <b>has / has got</b> යොදන්න.</div></div>
+        <div class="eg"><div class="x">She <span class="hl">has</span> an <span class="hl">oval face</span> with <span class="hl">long wavy</span> hair and <span class="hl">sharp eyes</span>.</div>
+          <div class="note">Use <b>has / has got</b> when describing appearance.</div></div>
 
-        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
-        <div class="box watch"><div class="h">⚠ පොදු වැරැද්ද</div>“<span class="en">a beard</span>” (රැවුල) සහ “<span class="en">a moustache</span>” (උඩු රැවුල) පටලවා ගන්න එපා. <b>hair</b> = uncountable (hairs ලෙස බහුවචන කරන්න එපා).</div>
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Common mistake</div>Don't mix up "a beard" (on the chin) and "a moustache" (above the lip). And <b>hair</b> is uncountable — never write "hairs".</div>
 
-        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
-        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
-          <li>රැවුල සඳහා වචනය? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">beard</div></details></li>
-          <li>“හිස කෙස් නැති” පුද්ගලයෙක්? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">bald</div></details></li>
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>Word for facial hair on the chin? <details class="reveal"><summary>Answer</summary><div class="ans">beard</div></details></li>
+          <li>A person with no hair on the head? <details class="reveal"><summary>Answer</summary><div class="ans">bald</div></details></li>
         </ol></div>
-        <div class="mem"><span class="k">🔑</span><div><b>මුහුණ (shape) → කොණ්ඩය (hair) → විශේෂ ලක්ෂණ (features).</b> විස්තරයට <b>has got</b>.</div></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Face (shape) → Hair → Features.</b> Describe with <b>has / has got</b>.</div></div>
       </div>
     </details>
 
     <details class="sub">
-      <summary><span class="dot" style="background:var(--s1)">1b</span> ස්ථාන නිපාත (Prepositions of place) <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s1)">1b</span> Prepositions of place <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">කඩේ කොහෙද කියලා කාටහරි කියනකොට — “<b>next to</b> the bank, <b>opposite</b> the temple” වගේ වචන ඕනේ. සිතියම් රූප සමඟ මේවා ගලපන්න.</div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">When you tell someone where the kade (shop) is — "<b>next to</b> the bank, <b>opposite</b> the temple" — you're using prepositions of place. Match these to map pictures.</div>
 
-        <div class="step"><span class="n">3</span> ඇසට පෙනෙන්න — පෙට්ටිය හා බළලා 🐱</div>
-        <svg viewBox="0 0 560 160" role="img" aria-label="ස්ථාන නිපාත රූප සටහන — on, in, under, next to, in front of, behind" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px">
-          <g font-family="var(--eng)" font-size="12.5" text-anchor="middle" fill="#16202E">
-            <!-- on -->
-            <rect x="20" y="44" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="43" cy="36" r="8" fill="var(--s1)"/><text x="43" y="92" font-weight="700">on</text><text x="43" y="106" font-size="10" fill="var(--muted)">උඩ</text>
-            <!-- in -->
-            <rect x="110" y="44" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="133" cy="59" r="8" fill="var(--s1)"/><text x="133" y="92" font-weight="700">in</text><text x="133" y="106" font-size="10" fill="var(--muted)">ඇතුළේ</text>
-            <!-- under -->
-            <rect x="200" y="40" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="223" cy="82" r="8" fill="var(--s1)"/><text x="223" y="104" font-weight="700">under</text><text x="223" y="118" font-size="10" fill="var(--muted)">යට</text>
-            <!-- next to -->
-            <rect x="300" y="44" width="40" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="356" cy="59" r="8" fill="var(--s1)"/><text x="328" y="92" font-weight="700">next to</text><text x="328" y="106" font-size="10" fill="var(--muted)">ළඟ</text>
-            <!-- in front of -->
-            <rect x="410" y="40" width="44" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="432" cy="80" r="8" fill="var(--s1)"/><text x="432" y="104" font-weight="700">in front of</text><text x="432" y="118" font-size="10" fill="var(--muted)">ඉදිරිපිට</text>
-            <!-- behind -->
-            <rect x="500" y="46" width="44" height="30" rx="4" fill="#fff" stroke="var(--s1)" stroke-width="2"/><circle cx="522" cy="40" r="8" fill="var(--s1)" opacity=".55"/><text x="522" y="92" font-weight="700">behind</text><text x="522" y="106" font-size="10" fill="var(--muted)">පිටුපස</text>
+        <div class="step"><span class="n">3</span> See it — the cat and the box 🐱</div>
+        <svg viewBox="0 0 560 160" role="img" aria-label="Prepositions of place diagram — on, in, under, next to, in front of, behind" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px">
+          <g font-size="12.5" text-anchor="middle" fill="#16202E">
+            <rect x="20" y="44" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="43" cy="36" r="8" fill="var(--s1)"/><text x="43" y="94" font-weight="700">on</text>
+            <rect x="120" y="44" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="143" cy="59" r="8" fill="var(--s1)"/><text x="143" y="94" font-weight="700">in</text>
+            <rect x="220" y="40" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="243" cy="82" r="8" fill="var(--s1)"/><text x="243" y="104" font-weight="700">under</text>
+            <rect x="320" y="44" width="40" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="376" cy="59" r="8" fill="var(--s1)"/><text x="348" y="94" font-weight="700">next to</text>
+            <rect x="430" y="40" width="44" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="452" cy="80" r="8" fill="var(--s1)"/><text x="452" y="104" font-weight="700">in front of</text>
+            <rect x="515" y="46" width="40" height="30" rx="4" fill="#fff" stroke="var(--s1)" stroke-width="2"/><circle cx="535" cy="40" r="8" fill="var(--s1)" opacity=".55"/><text x="535" y="94" font-weight="700">behind</text>
           </g>
         </svg>
         <div class="chips2"><span>between</span><span>opposite</span><span>near</span><span>at the corner of</span><span>along</span></div>
-        <div class="eg"><div class="en">The post office is <span class="hl">opposite</span> the school and <span class="hl">next to</span> the bank.</div></div>
+        <div class="eg"><div class="x">The post office is <span class="hl">opposite</span> the school and <span class="hl">next to</span> the bank.</div></div>
 
-        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
-        <div class="box watch"><div class="h">⚠ බොහෝවිට පටලවන</div><b>opposite</b> (ඉදිරිපස, මුහුණට මුහුණ) ≠ <b>next to</b> (පැත්තෙන්). <b>behind</b> (පිටුපස) ≠ <b>in front of</b> (ඉදිරිපිට).</div>
-        <div class="mem"><span class="k">🔑</span><div><b>in/on/at/under = තනි වස්තුවට; next to/opposite/between = වෙනත් එකක් සමඟ සැසඳීමට.</b></div></div>
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Often confused</div><b>opposite</b> (facing, across from) ≠ <b>next to</b> (beside). <b>behind</b> (at the back) ≠ <b>in front of</b>.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>in/on/at/under = one object; next to/opposite/between = relative to another object.</b></div></div>
       </div>
     </details>
 
     <details class="sub">
-      <summary><span class="dot" style="background:var(--s1)">1c</span> ක්‍රියා හා පිසීමේ වචන (Action / cooking verbs) <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s1)">1c</span> Action &amp; cooking verbs <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">අම්මා කෑම හදනකොට — “<b>slice</b> the onions, <b>fry</b> the fish, <b>knead</b> the dough”. රෙසිපි රූප සමඟ මේ ක්‍රියා ගලපන්න! (Pupil's Book Unit 8 · Healthy Food)</div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">When amma cooks — "<b>slice</b> the onions, <b>fry</b> the fish, <b>knead</b> the dough". Match these verbs to recipe pictures! (Pupil's Book — Unit 8 Healthy Food)</div>
 
-        <div class="step"><span class="n">2</span> පිසීමේ ක්‍රියා</div>
+        <div class="step"><span class="n">2</span> Cooking verbs</div>
         <div class="scroller"><table class="tbl">
-          <tr><th class="en">Verb</th><th>තේරුම</th></tr>
-          <tr><td class="en">sift</td><td>පෙනේරෙන් පෙනීම (පිටි)</td></tr>
-          <tr><td class="en">dice</td><td>කුඩා හතරැස් කැබලිවලට කැපීම</td></tr>
-          <tr><td class="en">slice</td><td>තුනී පෙති වලට කැපීම</td></tr>
-          <tr><td class="en">grate</td><td>කෝරනය / ගාගැනීම (පොල්)</td></tr>
-          <tr><td class="en">knead</td><td>පිටි ගුලිය මැදීම</td></tr>
-          <tr><td class="en">fry / boil / peel</td><td>බැදීම / තැම්බීම / ලෙලි ඉවත් කිරීම</td></tr>
+          <tr><th>Verb</th><th>Meaning</th></tr>
+          <tr><td>sift</td><td>pass flour through a sieve</td></tr>
+          <tr><td>dice</td><td>cut into small cubes</td></tr>
+          <tr><td>slice</td><td>cut into thin flat pieces</td></tr>
+          <tr><td>grate</td><td>shred (e.g. coconut) on a grater</td></tr>
+          <tr><td>knead</td><td>press and fold dough</td></tr>
+          <tr><td>fry / boil / peel</td><td>cook in oil / cook in water / remove the skin</td></tr>
         </table></div>
 
-        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
-        <div class="box watch"><div class="h">⚠ රූපය හොඳට බලන්න</div>රූපයේ <b>ප්‍රධාන ක්‍රියාව හෝ වස්තුව</b> කෙරෙහි පමණක් අවධානය යොමු කරන්න — සියලු විස්තර කියවන්න ඕනේ නෑ. <b>slice</b> (පෙති) vs <b>dice</b> (හතරැස් කැබලි) පටලවා ගන්න එපා.</div>
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Look at the picture carefully</div>Focus only on the <b>main action or object</b> — you don't have to read every detail. Don't confuse <b>slice</b> (thin pieces) with <b>dice</b> (cubes).</div>
 
-        <!-- WIDGET 1: match the word -->
+        <!-- WIDGET 1 -->
         <div class="widget" id="w1">
-          <div class="wh">🎮 වචනය ගලපන්න — විස්තරයට හරි වචනය තෝරන්න</div>
+          <div class="wh">🎮 Match the word — choose the right verb for the meaning</div>
           <div class="qtext" id="w1q"></div>
           <div class="opts" id="w1o"></div>
           <div class="fb" id="w1f" aria-live="polite"></div>
-          <button class="nextbtn" id="w1n">ඊළඟ ප්‍රශ්නය →</button>
+          <button class="nextbtn" id="w1n">Next question →</button>
         </div>
 
-        <div class="mem"><span class="k">🔑</span><div><b>රූපයේ ‘ක්‍රියාව’ බලන්න → ඒ ක්‍රියාවේ වචනය තෝරන්න.</b></div></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Spot the action in the picture → pick the verb for that action.</b></div></div>
       </div>
     </details>
   </section>
@@ -319,66 +310,66 @@
   <!-- ===================== Q2: DIALOGUE ===================== -->
   <section class="lesson" id="q2">
     <div class="lesson-head" style="background:linear-gradient(150deg,var(--s2),#4a2f78)">
-      <div class="badge">2</div><div class="kicker">ප්‍රශ්න වර්ගය 2 · පහසු ලකුණු</div>
-      <h2>දෙබස් හිස්තැන් පිරවීම</h2>
-      <p>සංවාදයක අතුරුදහන් වූ පේළි සම්පූර්ණ කරන්න. එදිනෙදා කථන ඉංග්‍රීසිය.</p>
+      <div class="badge">2</div><div class="kicker">Question type 2 · easy marks</div>
+      <h2>Dialogue Gap-Fill</h2>
+      <p>Complete the missing lines of a conversation. This tests everyday spoken English.</p>
     </div>
-    <div class="objectives"><b>මේ කොටස අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
-      <ul><li>සන්දර්භය අනුව ආචාරශීලී යෙදුම් තෝරා ගැනීමට</li><li>කෙටි පිළිතුරු (So do I / Neither have I) නිවැරදිව යෙදීමට</li><li>හිස්තැනට පසු එන පේළිය ඉඟියක් ලෙස භාවිතයට</li></ul>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>choose polite/appropriate phrases to fit the context</li><li>use short-answer agreements (So do I / Neither have I) correctly</li><li>use the line after the blank as a clue</li></ul>
     </div>
 
     <details class="sub" open>
-      <summary><span class="dot" style="background:var(--s2)">2a</span> එකඟතා කෙටි පිළිතුරු — “So do I / Neither do I” <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s2)">2a</span> Agreement short answers — "So do I / Neither do I" <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">යාළුවා: “I love cricket.” ඔයා: “<b>So do I!</b>” (මාත් එහෙමයි.) මේ පුංචි පිළිතුරු — විභාගයේ බහුලව එනවා, ගොඩක් අය වරද්දනවා. රහස ඉගෙන ගත්තොත් — ක්ෂණික ලකුණු!</div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Friend: "I love cricket." You: "<b>So do I!</b>" These little replies appear in the exam every year — and many students get them wrong. Learn the trick = instant marks!</div>
 
-        <div class="step"><span class="n">2</span> රහස: මුල් වාක්‍යයේ ‘සහායක ක්‍රියාව’ එලෙසම ගන්න</div>
+        <div class="step"><span class="n">2</span> The secret: keep the auxiliary from the first sentence</div>
         <div class="scroller"><table class="tbl">
-          <tr><th>මුල් වාක්‍යය</th><th>එකඟ වෙනවා නම්</th></tr>
-          <tr><td class="en">I <b>like</b> tea. (ධන)</td><td class="en">So do I. (මාත්)</td></tr>
-          <tr><td class="en">I <b>don't</b> like tea. (සෘණ)</td><td class="en">Neither do I. (මමත් නැහැ)</td></tr>
-          <tr><td class="en">I <b>have</b> finished.</td><td class="en">So have I.</td></tr>
-          <tr><td class="en">I <b>haven't</b> finished.</td><td class="en">Neither have I.</td></tr>
-          <tr><td class="en">I <b>can</b> swim.</td><td class="en">So can I.</td></tr>
+          <tr><th>First sentence</th><th>If you agree</th></tr>
+          <tr><td>I <b>like</b> tea. (positive)</td><td>So do I.</td></tr>
+          <tr><td>I <b>don't</b> like tea. (negative)</td><td>Neither do I.</td></tr>
+          <tr><td>I <b>have</b> finished.</td><td>So have I.</td></tr>
+          <tr><td>I <b>haven't</b> finished.</td><td>Neither have I.</td></tr>
+          <tr><td>I <b>can</b> swim.</td><td>So can I.</td></tr>
         </table></div>
-        <div class="box rule"><b>📏 රීතිය:</b> <b>ධන</b> වාක්‍යයකට → <span class="en">So + (auxiliary) + I.</span> &nbsp; <b>සෘණ</b> වාක්‍යයකට → <span class="en">Neither + (auxiliary) + I.</span> Auxiliary එක (do/have/can/am…) <b>මුල් වාක්‍යයෙන්ම</b> ගන්න!</div>
+        <div class="box rule"><b>📏 The rule:</b> For a <b>positive</b> sentence → <b>So + (auxiliary) + I.</b> For a <b>negative</b> sentence → <b>Neither + (auxiliary) + I.</b> Take the auxiliary (do/have/can/am…) <b>straight from the first sentence!</b></div>
 
-        <div class="turn"><div class="q">✏️ ඔබේ වාරය: A: “I don't eat meat.” → B?</div>
-          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans en">Neither do I. (සෘණ වාක්‍යයක් → Neither + do + I)</div></details></div>
+        <div class="turn"><div class="q">✏️ Your turn: A: "I don't eat meat." → B?</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">Neither do I. (negative sentence → Neither + do + I)</div></details></div>
 
-        <!-- WIDGET 2: short answer quiz -->
+        <!-- WIDGET 2 -->
         <div class="widget" id="w2">
-          <div class="wh">🎮 කෙටි පිළිතුර තෝරන්න</div>
+          <div class="wh">🎮 Choose the short answer</div>
           <div class="qtext" id="w2q"></div>
           <div class="opts" id="w2o"></div>
           <div class="fb" id="w2f" aria-live="polite"></div>
-          <button class="nextbtn" id="w2n">ඊළඟ ප්‍රශ්නය →</button>
+          <button class="nextbtn" id="w2n">Next question →</button>
         </div>
 
-        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
-        <div class="box watch"><div class="h">⚠ Auxiliary එක මාරු කරන්න එපා</div>“I went…” වැනි simple past වලට → <b>So did I</b> (do→did). “I am happy.” → <b>So am I</b>. මුල් වාක්‍යයේ tense/auxiliary එලෙසම තබාගන්න.</div>
-        <div class="mem"><span class="k">🔑</span><div><b>ධන → So; සෘණ → Neither. Auxiliary මුල් වාක්‍යයෙන්ම + I.</b></div></div>
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Don't change the auxiliary</div>For simple-past statements like "I went…" → <b>So did I</b> (do→did). "I am happy." → <b>So am I</b>. Keep the same tense/auxiliary as the first sentence.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Positive → So; Negative → Neither. Auxiliary from the first sentence + I.</b></div></div>
       </div>
     </details>
 
     <details class="sub">
-      <summary><span class="dot" style="background:var(--s2)">2b</span> සන්දර්භය හා ආචාරශීලී මට්ටම (Register &amp; context) <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s2)">2b</span> Register &amp; context <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">2</span> සන්දර්භය අනුව භාෂාව (Pupil's Book Unit 4 · Let's talk / Unit 11 · The right career)</div>
-        <div class="plain"><p>සංවාදය සිදුවන තැන අනුව වචන මාලාව වෙනස්: <b>හෝටලයකදී, සම්මුඛ පරීක්ෂණයකදී, කඩයකදී, මිතුරන් අතර</b>.</p></div>
+        <div class="step"><span class="n">2</span> Match the language to the setting (Pupil's Book — Unit 4 Let's talk / Unit 11 The right career)</div>
+        <div class="plain"><p>The words change with the place: a <b>hotel</b>, an <b>interview</b>, a <b>shop</b>, or <b>between friends</b>.</p></div>
         <div class="corr">
-          <div class="c good">(Interview) “Certainly, sir. I worked as a trainee for two years.”</div>
-          <div class="c bad">(Interview) “Yeah, whatever, two years or so.”</div>
+          <div class="c good">(Interview) "Certainly, sir. I worked as a trainee for two years."</div>
+          <div class="c bad">(Interview) "Yeah, whatever, two years or so."</div>
         </div>
-        <div class="eg"><div class="en">(Hotel) Receptionist: “Good morning. <span class="hl">How may I help you?</span>” &nbsp; Guest: “I'd like to check in, please.”</div>
-          <div class="si">ආචාරශීලී යෙදුම්: <span class="en">Could you…?, May I…?, I'd like…, Certainly, Thank you.</span></div></div>
+        <div class="eg"><div class="x">(Hotel) Receptionist: "Good morning. <span class="hl">How may I help you?</span>" &nbsp; Guest: "I'd like to check in, please."</div>
+          <div class="note">Polite phrases: Could you…?, May I…?, I'd like…, Certainly, Thank you.</div></div>
 
-        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
-        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
-          <li>හිස්තැනක් පුරවන්න කලින් කරන්න ඕනේ මොකක්ද? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">සම්පූර්ණ දෙබසම කියවන්න — විශේෂයෙන් හිස්තැනට <b>පසු</b> එන පේළිය ඉඟියක් දෙයි.</div></details></li>
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>What should you do before filling a blank? <details class="reveal"><summary>Answer</summary><div class="ans">Read the whole dialogue — especially the line <b>after</b> the blank; it usually hints what fits.</div></details></li>
         </ol></div>
-        <div class="mem"><span class="k">🔑</span><div><b>හිස්තැනට පසු පේළිය කියවන්න. ආචාරශීලී මට්ටම ගලපන්න (ගුරුවරයෙකුට ≠ යාළුවෙකුට).</b></div></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Read the line after the blank. Match the politeness level (a teacher ≠ a friend).</b></div></div>
       </div>
     </details>
   </section>
@@ -386,119 +377,119 @@
   <!-- ===================== Q3: GRAMMAR ===================== -->
   <section class="lesson" id="q3">
     <div class="lesson-head" style="background:linear-gradient(150deg,var(--s3),#9c3f24)">
-      <div class="badge">3</div><div class="kicker">ප්‍රශ්න වර්ගය 3 · වැඩිම ඉගෙනගත හැකි!</div>
-      <h2>සන්දර්භය තුළ ව්‍යාකරණ</h2>
-      <p>වැරදි සංශෝධනය හෝ නිවැරදි ස්වරූපය තේරීම — tense, articles, prepositions, ගැලපීම.</p>
+      <div class="badge">3</div><div class="kicker">Question type 3 · the most learnable!</div>
+      <h2>Grammar in Context</h2>
+      <p>Correct the errors, or fill blanks with the right form — tense, articles, prepositions, agreement.</p>
     </div>
-    <div class="objectives"><b>මේ කොටස අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
-      <ul><li>අතීත කාල 4 (Pupil's Book p.11) නිවැරදිව භාවිතයට</li><li>Articles, prepositions, subject–verb agreement හැසිරවීමට</li><li>Prefixes/Suffixes යොදා වචන සෑදීමට</li></ul>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>use the four past tenses correctly (Pupil's Book p.11)</li><li>handle articles, prepositions and subject–verb agreement</li><li>form words using prefixes and suffixes</li></ul>
     </div>
-    <div class="markbox"><b>⭐ වැදගත්ම ඉඟිය:</b> මෙය මුළු පත්‍රයේම <b>වඩාත්ම ඉගෙනගත හැකි</b> කොටසයි. Tense සහ subject–verb agreement <b>සෑම වසරකම</b> එනවා — පැරණි ප්‍රශ්න පත්‍ර පුරුදු කරන්න!</div>
+    <div class="markbox"><b>⭐ Most important tip:</b> This is the <b>most learnable</b> part of the whole paper. Tense and subject–verb agreement come up <b>every single year</b> — practise past papers here!</div>
 
     <details class="sub" open>
-      <summary><span class="dot" style="background:var(--s3)">3a</span> කාල (Tenses) — Pupil's Book Revision point, පි. 11 <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s3)">3a</span> Tenses — Pupil's Book Revision point, p.11 <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">කාලය හරියට ‘කාල යන්ත්‍රයක්’ වගේ ⏰ — සිදුවීම කවදද කියලා verb එක මාරු වෙනවා. අතීත සිදුවීම් ලියනකොට අතීත කාල 4ක් තියෙනවා.</div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">A tense is like a time machine ⏰ — the verb changes to show when something happened. To write about the past, English has four past tenses.</div>
 
-        <div class="step"><span class="n">2</span> අතීත කාල 4 (පෙළපොතේ උදාහරණ සමඟ)</div>
+        <div class="step"><span class="n">2</span> The four past tenses (with the book's own examples)</div>
         <div class="scroller"><table class="tbl">
-          <tr><th>කාලය</th><th>භාවිතය</th><th class="en">උදාහරණය (PB p.11)</th></tr>
-          <tr><td><b>Simple Past</b></td><td>අතීතයේ එක් වරක් සිදු වූ ක්‍රියාව</td><td class="en">On my last birthday, I <b>donated</b> some books.</td></tr>
-          <tr><td><b>Past Continuous</b></td><td>අතීත මොහොතක දිගටම සිදුවෙමින් තිබූ ක්‍රියාව</td><td class="en">I <b>was waiting</b> for a letter when the postman delivered it.</td></tr>
-          <tr><td><b>Past Perfect</b></td><td>තවත් අතීත ක්‍රියාවකට <b>පෙර</b> අවසන් වූ ක්‍රියාව</td><td class="en">My father <b>had visited</b> the library before he organized this.</td></tr>
-          <tr><td><b>Past Perfect Continuous</b></td><td>අතීතයේ පටන්ගෙන දිගටම සිදු වූ ක්‍රියාව</td><td class="en">He <b>had been waiting</b> for a long time to get those books.</td></tr>
+          <tr><th>Tense</th><th>Use</th><th>Example (PB p.11)</th></tr>
+          <tr><td><b>Simple Past</b></td><td>a single action at a point in the past</td><td>On my last birthday, I <b>donated</b> some books.</td></tr>
+          <tr><td><b>Past Continuous</b></td><td>an action going on at a point in the past</td><td>I <b>was waiting</b> for a letter when the postman delivered it.</td></tr>
+          <tr><td><b>Past Perfect</b></td><td>an action completed <b>before</b> another past action</td><td>My father <b>had visited</b> the library before he organized this.</td></tr>
+          <tr><td><b>Past Perfect Continuous</b></td><td>an action that began in the past and went on</td><td>He <b>had been waiting</b> for a long time to get those books.</td></tr>
         </table></div>
         <div class="corr">
           <div class="c bad">By the time we arrived, the train <b>left</b>.</div>
           <div class="c good">By the time we arrived, the train <b>had left</b>.</div>
         </div>
-        <div class="turn"><div class="q">✏️ ඔබේ වාරය: “While I ___ (cook), the phone rang.”</div>
-          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans en">was cooking (දිගටම සිදුවෙමින් → Past Continuous)</div></details></div>
-        <div class="mem"><span class="k">🔑</span><div><b>මුලින් වුණ අතීත ක්‍රියාවට → had + V3 (Past Perfect).</b> දිගටම → was/were + V-ing.</div></div>
+        <div class="turn"><div class="q">✏️ Your turn: "While I ___ (cook), the phone rang."</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">was cooking (an action going on → Past Continuous)</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>The earlier past action → had + V3 (Past Perfect).</b> An ongoing action → was/were + V-ing.</div></div>
       </div>
     </details>
 
     <details class="sub">
       <summary><span class="dot" style="background:var(--s3)">3b</span> Articles (a / an / the) <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">2</span> සරල රීති</div>
-        <div class="box rule"><b>a</b> — ව්‍යඤ්ජන ශබ්දයකට පෙර (<span class="en">a boy, a university</span>). <b>an</b> — ස්වර ශබ්දයකට පෙර (<span class="en">an apple, an hour</span>). <b>the</b> — නිශ්චිත/දැනටමත් සඳහන් කළ දෙයකට (<span class="en">the sun, the book I bought</span>).</div>
+        <div class="step"><span class="n">2</span> Simple rules</div>
+        <div class="box rule"><b>a</b> — before a consonant <i>sound</i> (a boy, a university). <b>an</b> — before a vowel <i>sound</i> (an apple, an hour). <b>the</b> — for something specific or already mentioned (the sun, the book I bought).</div>
         <div class="corr">
           <div class="c bad">She is <b>a</b> honest girl. · I saw <b>a</b> elephant.</div>
           <div class="c good">She is <b>an</b> honest girl. · I saw <b>an</b> elephant.</div>
         </div>
-        <div class="box watch"><div class="h">⚠ ශබ්දය බලන්න, අකුර නෙවෙයි!</div><span class="en">an</span> <b>hour</b> (h නිහඬ → ස්වර ශබ්දය); <span class="en">a</span> <b>university</b> (“yu” → ව්‍යඤ්ජන ශබ්දය). අකුර නෙවෙයි, <b>ශබ්දය</b>!</div>
-        <div class="mem"><span class="k">🔑</span><div><b>ස්වර ශබ්දය → an; ව්‍යඤ්ජන ශබ්දය → a; නිශ්චිත දෙයක් → the.</b></div></div>
+        <div class="box watch"><div class="h">⚠ Listen to the sound, not the letter!</div><b>an</b> hour (the "h" is silent → vowel sound); <b>a</b> university (the "yu" → consonant sound). Sound, not spelling!</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Vowel sound → an; consonant sound → a; specific thing → the.</b></div></div>
       </div>
     </details>
 
     <details class="sub">
       <summary><span class="dot" style="background:var(--s3)">3c</span> Prepositions (in / on / at …) <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">2</span> කාලය සඳහා — AT / ON / IN</div>
-        <div class="box rule"><b>at</b> + නියම වේලාව (<span class="en">at 5 o'clock</span>). <b>on</b> + දින/දිනය (<span class="en">on Monday, on April 14th</span>). <b>in</b> + මාස/අවුරුදු (<span class="en">in May, in 2026</span>).</div>
-        <div class="eg"><div class="en">We celebrate Avurudu <span class="hl">in</span> April, <span class="hl">on</span> the 14th, <span class="hl">at</span> the auspicious time.</div></div>
-        <div class="box watch"><div class="h">⚠ since vs for</div><b>since</b> = නියම ලක්ෂ්‍යයක සිට (<span class="en">since 2015</span>); <b>for</b> = කාල පරාසයක් (<span class="en">for three years</span>).</div>
-        <div class="mem"><span class="k">🔑</span><div><b>කුඩාම → AT (වේලාව); මධ්‍යම → ON (දවස); ලොකුම → IN (මාසය).</b></div></div>
+        <div class="step"><span class="n">2</span> For time — AT / ON / IN</div>
+        <div class="box rule"><b>at</b> + a clock time (at 5 o'clock). <b>on</b> + a day/date (on Monday, on April 14th). <b>in</b> + a month/year (in May, in 2026).</div>
+        <div class="eg"><div class="x">We celebrate Avurudu <span class="hl">in</span> April, <span class="hl">on</span> the 14th, <span class="hl">at</span> the auspicious time.</div></div>
+        <div class="box watch"><div class="h">⚠ since vs for</div><b>since</b> = from a point in time (since 2015); <b>for</b> = a length of time (for three years).</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Smallest → AT (time); medium → ON (day); largest → IN (month/year).</b></div></div>
       </div>
     </details>
 
     <details class="sub">
-      <summary><span class="dot" style="background:var(--s3)">3d</span> Subject–Verb Agreement (උක්ත–ආඛ්‍යාත ගැලපීම) <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s3)">3d</span> Subject–Verb Agreement <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">2</span> රීතිය</div>
-        <div class="plain"><p>ඒක වචන උක්තයකට → ඒක වචන ක්‍රියාව (<span class="en">He <b>plays</b></span>); බහු වචන උක්තයකට → බහු වචන ක්‍රියාව (<span class="en">They <b>play</b></span>).</p></div>
+        <div class="step"><span class="n">2</span> The rule</div>
+        <div class="plain"><p>A singular subject takes a singular verb (He <b>plays</b>); a plural subject takes a plural verb (They <b>play</b>).</p></div>
         <div class="corr">
           <div class="c bad">She <b>have</b> finished. · The students <b>was</b> happy.</div>
           <div class="c good">She <b>has</b> finished. · The students <b>were</b> happy.</div>
         </div>
-        <div class="box watch"><div class="h">⚠ අක්‍රමවත් බහු වචන</div><span class="en">criterion→criteria, medium→media, syllabus→syllabi</span> — මේවා <b>බහු වචන</b>! “The criteria <b>are</b> strict.” (criteria is නෙවෙයි).</div>
-        <div class="mem"><span class="k">🔑</span><div><b>මුලින්ම Subject එක ඒකද බහුද බලන්න → ඊට ගැලපෙන verb.</b></div></div>
+        <div class="box watch"><div class="h">⚠ Irregular plurals</div>criterion→criteria, medium→media, syllabus→syllabi — these are <b>plural</b>! "The criteria <b>are</b> strict." (not "is").</div>
+        <div class="mem"><span class="k">🔑</span><div><b>First decide if the subject is singular or plural → match the verb.</b></div></div>
       </div>
     </details>
 
     <details class="sub">
-      <summary><span class="dot" style="background:var(--s3)">3e</span> වචන සෑදීම — Prefixes &amp; Suffixes (PB Revision point) <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s3)">3e</span> Word formation — Prefixes &amp; Suffixes (PB Revision point) <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">2</span> Affix දෙ වර්ගය</div>
+        <div class="step"><span class="n">2</span> The two kinds of affix</div>
         <div class="scroller"><table class="tbl">
-          <tr><th></th><th>Prefix (මුලට)</th><th>Suffix (අගට)</th></tr>
-          <tr><td>කරන්නේ</td><td><b>අර්ථය</b> වෙනස් (word-class එක <b>මාරු වෙන්නේ නෑ</b>)</td><td><b>word-class එක</b> බොහෝවිට මාරු කරයි</td></tr>
-          <tr><td class="en">e.g.</td><td class="en">in-, un-, im-, ir-, dis-, mis-, re-</td><td class="en">-ize, -ful, -less, -ness, -ly, -tion, -ment, -ous</td></tr>
-          <tr><td class="en">sample</td><td class="en">significant → <b>in</b>significant</td><td class="en">vandal (n) → vandal<b>ize</b> (v)</td></tr>
+          <tr><th></th><th>Prefix (at the start)</th><th>Suffix (at the end)</th></tr>
+          <tr><td>Effect</td><td>changes the <b>meaning</b> (usually <b>not</b> the word-class)</td><td>often changes the <b>word-class</b></td></tr>
+          <tr><td>e.g.</td><td>in-, un-, im-, ir-, dis-, mis-, re-</td><td>-ize, -ful, -less, -ness, -ly, -tion, -ment, -ous</td></tr>
+          <tr><td>sample</td><td>significant → <b>in</b>significant</td><td>vandal (n) → vandal<b>ize</b> (v)</td></tr>
         </table></div>
-        <div class="eg"><div class="en">forget (verb) → forget<span class="hl">ful</span> (adj) · happy (adj) → happi<span class="hl">ness</span> (noun) · quick (adj) → quick<span class="hl">ly</span> (adverb)</div>
-          <div class="si">Suffix එකෙන් වචනයේ ‘රැකියාව’ (word-class) මාරු වෙනවා.</div></div>
-        <div class="turn"><div class="q">✏️ ඔබේ වාරය: “She answered with great ___ (confident).”</div>
-          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans en">confidence (මෙතන noun එකක් ඕනේ → confident → confidence)</div></details></div>
+        <div class="eg"><div class="x">forget (verb) → forget<span class="hl">ful</span> (adj) · happy (adj) → happi<span class="hl">ness</span> (noun) · quick (adj) → quick<span class="hl">ly</span> (adverb)</div>
+          <div class="note">A suffix changes the word's "job" (word-class).</div></div>
+        <div class="turn"><div class="q">✏️ Your turn: "She answered with great ___ (confident)."</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">confidence (a noun is needed here → confident → confidence)</div></details></div>
 
-        <!-- WIDGET 3: grammar fix quiz -->
+        <!-- WIDGET 3 -->
         <div class="widget" id="w3">
-          <div class="wh">🎮 නිවැරදි ස්වරූපය තෝරන්න (Grammar)</div>
+          <div class="wh">🎮 Choose the correct form (Grammar)</div>
           <div class="qtext" id="w3q"></div>
           <div class="opts" id="w3o"></div>
           <div class="fb" id="w3f" aria-live="polite"></div>
-          <button class="nextbtn" id="w3n">ඊළඟ ප්‍රශ්නය →</button>
+          <button class="nextbtn" id="w3n">Next question →</button>
         </div>
 
-        <div class="step"><span class="n">7</span> මතක උපක්‍රමය</div>
-        <div class="mem"><span class="k">🔑</span><div><b>Prefix = අර්ථය මාරු (un-/dis- = ‘නැති’); Suffix = word-class මාරු (-ly→adverb, -ness→noun).</b></div></div>
+        <div class="step"><span class="n">7</span> Memory hook</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Prefix = changes meaning (un-/dis- = "not"); Suffix = changes word-class (-ly→adverb, -ness→noun).</b></div></div>
       </div>
     </details>
 
     <details class="sub">
       <summary><span class="dot" style="background:var(--s3)">3f</span> Modals · Reported speech · Conjunctions (PB) <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">2</span> ඉක්මන් සාරාංශය</div>
+        <div class="step"><span class="n">2</span> Quick summary</div>
         <div class="scroller"><table class="tbl">
-          <tr><th>කරුණ</th><th>රීතිය / උදාහරණ</th></tr>
-          <tr><td><b>Modals</b> (උපදෙස්/අණ)</td><td class="en">should, must, mustn't, ought to · “You <b>should</b> revise daily.”</td></tr>
-          <tr><td><b>Reported speech</b></td><td class="en">tense පියවරක් පස්සට · “I am tired” → He said he <b>was</b> tired.</td></tr>
-          <tr><td><b>Conjunctions</b></td><td class="en">although, because, while, so, but · “<b>Although</b> it rained, we played.”</td></tr>
+          <tr><th>Point</th><th>Rule / example</th></tr>
+          <tr><td><b>Modals</b> (advice/obligation)</td><td>should, must, mustn't, ought to · "You <b>should</b> revise daily."</td></tr>
+          <tr><td><b>Reported speech</b></td><td>tense shifts back one step · "I am tired" → He said he <b>was</b> tired.</td></tr>
+          <tr><td><b>Conjunctions</b></td><td>although, because, while, so, but · "<b>Although</b> it rained, we played."</td></tr>
         </table></div>
-        <div class="box watch"><div class="h">⚠ Reported speech backshift</div>say + that; tell + (කාට) + that. tense පස්සට: am→was, like→liked, will→would, today→that day.</div>
-        <div class="mem"><span class="k">🔑</span><div><b>Reported: tense පස්සට + pronoun මාරු + today→that day.</b></div></div>
+        <div class="box watch"><div class="h">⚠ Reported-speech backshift</div>say + that; tell + (someone) + that. Shift the tense back: am→was, like→liked, will→would, today→that day.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Reported: tense back + change pronouns + today→that day.</b></div></div>
       </div>
     </details>
   </section>
@@ -506,32 +497,32 @@
   <!-- ===================== Q4: READING ===================== -->
   <section class="lesson" id="q4">
     <div class="lesson-head" style="background:linear-gradient(150deg,var(--s4),#1f5a3a)">
-      <div class="badge">4</div><div class="kicker">ප්‍රශ්න වර්ගය 4 · මධ්‍යම</div>
-      <h2>කියවීමේ අවබෝධය</h2>
-      <p>ඡේදයක් කියවා ප්‍රශ්නවලට පිළිතුරු. සමහර පිළිතුරු කෙලින්ම; සමහර ඒවා ඔබේම වචනවලින්.</p>
+      <div class="badge">4</div><div class="kicker">Question type 4 · medium</div>
+      <h2>Reading Comprehension</h2>
+      <p>Read a passage and answer questions. Some answers are direct; some need your own words.</p>
     </div>
-    <div class="objectives"><b>මේ කොටස අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
-      <ul><li>ප්‍රශ්නයේ ‘යතුරු වචනය’ යොදා ඡේදයෙන් පිළිතුර සොයන්නට</li><li>සර්වනාම (it/they/this) යොමුව හඳුනන්නට</li><li>“ඔබේම වචනවලින්” පිළිතුරු ලිවීමට (පිටපත් නොකර)</li></ul>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>use the question's keyword to find the answer in the passage</li><li>identify pronoun reference (it/they/this)</li><li>answer "in your own words" without copying</li></ul>
     </div>
 
     <details class="sub" open>
-      <summary><span class="dot" style="background:var(--s4)">4a</span> පාඨ වර්ග හා පිළිතුර සෙවීම <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s4)">4a</span> Text types &amp; finding answers <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">පුවත්පතක ශීර්ෂයක් යට පුංචි අකුරෙන් විස්තර තියෙනවා නේද? දැන්වීම් (notices), පුවත්පත් ලිපි (articles), චරිතාපදාන (autobiography) — මේවා කියවලා කරුණු සොයන්න පුරුදු වෙන්න.</div>
-        <div class="step"><span class="n">2</span> රන් ක්‍රමය (3 පියවර)</div>
-        <div class="box rule"><b>① ප්‍රශ්නයේ යතුරු වචනය යටින් ඉරි අඳින්න.</b> ② ඒ වචනය (හෝ එහි අර්ථය) ඡේදයෙන් සොයන්න. ③ ඒ වාක්‍යය ආශ්‍රයෙන් පිළිතුර ලියන්න.</div>
-        <div class="eg"><div class="en">Nimal bought a new phone. <span class="hl">It</span> was very expensive.</div>
-          <div class="si">මෙහි <b>It</b> = the new phone. (සර්වනාමයක් — කලින් වාක්‍යයේ නාම පදය හොයන්න!)</div></div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Under a newspaper headline there's small text with the details, right? Notices, newspaper articles, and autobiographies all work like that — practise reading them and pulling out the key facts.</div>
+        <div class="step"><span class="n">2</span> The golden method (3 steps)</div>
+        <div class="box rule"><b>① Underline the keyword in the question.</b> ② Find that word (or its meaning) in the passage. ③ Write your answer based on that sentence.</div>
+        <div class="eg"><div class="x">Nimal bought a new phone. <span class="hl">It</span> was very expensive.</div>
+          <div class="note">Here <b>It</b> = the new phone. (A pronoun — look back to the noun before it!)</div></div>
 
-        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
-        <div class="box watch"><div class="h">⚠ “In your own words” — පිටපත් කරන්න එපා!</div>“ඔබේම වචනවලින්” ප්‍රශ්නයකදී ඡේදය එලෙසම පිටපත් කළොත් <b>ලකුණ අහිමියි</b>. අර්ථය <b>නැවත වචනවලින්</b> (paraphrase) ලියන්න — synonyms යොදන්න (big→large, happy→glad).</div>
-        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
-        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
-          <li>“The students cheered. <b>They</b> were happy.” — They = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">the students.</div></details></li>
-          <li>“ඔබේම වචනවලින්” ප්‍රශ්නයකට කරන්නේ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">අර්ථය නැවත වචනවලින් ලිවීම (paraphrase) — පිටපත් කිරීම නෙවෙයි.</div></details></li>
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ "In your own words" — don't copy!</div>If the question says "in your own words" and you copy the passage exactly, you <b>lose the mark</b>. Rewrite the meaning (paraphrase) — use synonyms (big→large, happy→glad).</div>
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>"The students cheered. <b>They</b> were happy." — They = ? <details class="reveal"><summary>Answer</summary><div class="ans">the students.</div></details></li>
+          <li>What do you do for an "own words" question? <details class="reveal"><summary>Answer</summary><div class="ans">Paraphrase the meaning — don't copy.</div></details></li>
         </ol></div>
-        <div class="mem"><span class="k">🔑</span><div><b>යතුරු වචනය → ඡේදයෙන් සොයන්න. “own words” = paraphrase, copy නොකරන්න.</b></div></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Keyword → find it in the passage. "Own words" = paraphrase, never copy.</b></div></div>
       </div>
     </details>
   </section>
@@ -539,95 +530,95 @@
   <!-- ===================== Q5: INFO TRANSFER ===================== -->
   <section class="lesson" id="q5">
     <div class="lesson-head" style="background:linear-gradient(150deg,var(--s5),#1f4e80)">
-      <div class="badge">5</div><div class="kicker">ප්‍රශ්න වර්ගය 5</div>
-      <h2>තොරතුරු හුවමාරුව</h2>
-      <p>එක් ආකෘතියකින් තවත් ආකෘතියකට — notice→form, table→sentences, chart→description.</p>
+      <div class="badge">5</div><div class="kicker">Question type 5</div>
+      <h2>Information Transfer</h2>
+      <p>Move information from one form to another — notice → form, table → sentences, chart → description.</p>
     </div>
-    <div class="objectives"><b>මේ කොටස අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
-      <ul><li>දැන්වීමක්/ඡේදයක් කියවා පෝරම, වගු පිරවීමට</li><li>ප්‍රස්ථාර තොරතුරු වාක්‍ය බවට පත් කිරීමට</li><li>නම්, දින, සංඛ්‍යා නිවැරදිව පිටපත් කිරීමට</li></ul>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>read a notice/passage and fill in forms and tables</li><li>turn chart data into sentences</li><li>copy names, dates and numbers accurately</li></ul>
     </div>
 
     <details class="sub" open>
-      <summary><span class="dot" style="background:var(--s5)">5a</span> පෝරම/වගු පිරවීම හා ප්‍රස්ථාර විස්තරය <span class="chev">›</span></summary>
+      <summary><span class="dot" style="background:var(--s5)">5a</span> Filling forms/tables &amp; describing charts <span class="chev">›</span></summary>
       <div class="sub-body">
-        <div class="step"><span class="n">1</span> හිතන්න…</div>
-        <div class="hook">බැංකුවක ගිණුමක් අරින්න <b>application form</b> එකක් පුරවනවද? මේකත් එහෙමයි — දැන්වීමකින් (notice) තොරතුරු අරගෙන පෝරමයකට දාන්න. (Pupil's Book Unit 6 · Information)</div>
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Ever filled an application form to open a bank account? This is the same — take information from a notice and put it into a form. (Pupil's Book — Unit 6 Information)</div>
 
-        <div class="step"><span class="n">2</span> ප්‍රස්ථාර විස්තර කරන වචන (bar/pie charts)</div>
+        <div class="step"><span class="n">2</span> Words to describe charts (bar / pie)</div>
         <div class="scroller"><table class="tbl">
-          <tr><th class="en">Word</th><th>අර්ථය / භාවිතය</th></tr>
-          <tr><td class="en">the most / most of</td><td>වැඩිම — <span class="en">Most students chose cricket.</span></td></tr>
-          <tr><td class="en">the least</td><td>අඩුම — <span class="en">Hockey was the least popular.</span></td></tr>
-          <tr><td class="en">many / some / a few</td><td>ගණන් ප්‍රමාණ — <span class="en">A few preferred tennis.</span></td></tr>
+          <tr><th>Word</th><th>Meaning / use</th></tr>
+          <tr><td>the most / most of</td><td>the largest — "Most students chose cricket."</td></tr>
+          <tr><td>the least</td><td>the smallest — "Hockey was the least popular."</td></tr>
+          <tr><td>many / some / a few</td><td>amounts — "A few preferred tennis."</td></tr>
         </table></div>
 
-        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
-        <div class="box watch"><div class="h">⚠ අවසන් ලකුණු 3 ඉතිරි කරගන්න</div>① <b>අසන දේට පමණක්</b> පිළිතුරු දෙන්න — අමතර විස්තර ලකුණු අහිමි කරයි. ② නම්, දින, සංඛ්‍යා <b>දී ඇති පරිදිම</b> පිටපත් කරන්න. ③ <b>අක්ෂර වින්‍යාසය (spelling)</b> ගැන සැලකිලිමත් — මෙහි පහසුවෙන් මග හැරෙන පාඩුවක්!</div>
-        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
-        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
-          <li>‘වැඩිම’ සඳහා වචනය? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">the most</div></details></li>
-          <li>පෝරමයකට නමක් පිටපත් කරනකොට වැදගත්ම දේ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">අක්ෂර වින්‍යාසය නිවැරදිව — දී ඇති පරිදිම.</div></details></li>
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Save your last 3 marks</div>① Answer <b>only what is asked</b> — extra invented details lose marks. ② Copy names, dates and numbers <b>exactly as given</b>. ③ Mind your <b>spelling</b> — an easy place to drop marks!</div>
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>Word for "the largest amount"? <details class="reveal"><summary>Answer</summary><div class="ans">the most</div></details></li>
+          <li>When copying a name onto a form, what matters most? <details class="reveal"><summary>Answer</summary><div class="ans">Correct spelling — exactly as given.</div></details></li>
         </ol></div>
-        <div class="mem"><span class="k">🔑</span><div><b>අසන දේට පමණක්; නම්/දින/සංඛ්‍යා දී ඇති පරිදිම; spelling පරෙස්සමින්.</b></div></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Answer only what's asked; copy names/dates/numbers exactly; watch your spelling.</b></div></div>
       </div>
     </details>
   </section>
 
   <!-- ===================== SYNTHESIS ===================== -->
   <section class="synth" id="synth">
-    <h2>සියල්ල එකට — විභාග උපාය මාර්ගය 🏆</h2>
-    <p>I ප්‍රශ්න පත්‍රය ලියන <b>ඥානවන්ත අනුපිළිවෙළ</b>:</p>
-    <div class="order"><span>1 රූප ගැලපීම</span><span class="ar">→</span><span>2 දෙබස්</span><span class="ar">→</span><span>3 ව්‍යාකරණ</span><span class="ar">→</span><span>5 තොරතුරු හුවමාරුව</span><span class="ar">→</span><span>4 කියවීම</span></div>
+    <h2>Putting it all together — exam strategy 🏆</h2>
+    <p>The smart <b>order</b> to attempt Paper I:</p>
+    <div class="order"><span>1 Picture matching</span><span class="ar">→</span><span>2 Dialogue</span><span class="ar">→</span><span>3 Grammar</span><span class="ar">→</span><span>5 Info transfer</span><span class="ar">→</span><span>4 Reading</span></div>
     <p style="opacity:.95">
-      • <b>පහසු ලකුණු මුලින්ම</b> (රූප, දෙබස්) — විශ්වාසය ගොඩනඟා ලකුණු බෑගයට.<br>
-      • <b>ව්‍යාකරණ</b> — වැඩිම පුහුණුවෙන් ලකුණු වැඩිම. tense + agreement හැම වසරකම.<br>
-      • <b>කියවීම අන්තිමට</b> — වැඩිම කාලය ගන්නා නිසා, අනෙක් ලකුණු සුරැකගෙන.<br>
-      • <b>රන් රීතිය:</b> කිසිම හිස්තැනක් හිස්ව තබන්න එපා — වැරදුණත් ලකුණු කැපීමක් නෑ!</p>
+      • <b>Easy marks first</b> (picture, dialogue) — build confidence and bank marks.<br>
+      • <b>Grammar</b> — most marks for your practice; tense + agreement come every year.<br>
+      • <b>Reading last</b> — it takes the most time, so protect your other marks first.<br>
+      • <b>The golden rule:</b> never leave a blank — there's no negative marking!</p>
   </section>
 
   <!-- ===================== MIXED TEST ===================== -->
   <section id="test">
-    <h2 style="text-align:center;margin-top:30px">🏁 අවසන් ස්වයං පරීක්ෂණය</h2>
-    <p style="text-align:center;color:var(--muted)">පළමුව ඔබම කරන්න — පසුව පිළිතුර බලන්න.</p>
-    <div class="selfcheck"><div class="h">1–2 · රූප / දෙබස්</div><ol>
-      <li>“තුනී පෙති වලට කැපීම” සඳහා verb? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">slice</div></details></li>
-      <li>A: “I haven't seen that film.” → B (එකඟ)? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">Neither have I.</div></details></li>
+    <h2 style="text-align:center;margin-top:30px">🏁 Final Self-Test</h2>
+    <p style="text-align:center;color:var(--muted)">Try each one yourself first — then reveal the answer.</p>
+    <div class="selfcheck"><div class="h">1–2 · Picture / Dialogue</div><ol>
+      <li>Verb for "cut into thin flat pieces"? <details class="reveal"><summary>Answer</summary><div class="ans">slice</div></details></li>
+      <li>A: "I haven't seen that film." → B (agreeing)? <details class="reveal"><summary>Answer</summary><div class="ans">Neither have I.</div></details></li>
     </ol></div>
-    <div class="selfcheck"><div class="h">3 · ව්‍යාකරණ</div><ol>
-      <li>නිවැරදි කරන්න: “She have eaten before I came.” <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">She <b>had eaten</b> before I came. (Past Perfect + has→had)</div></details></li>
-      <li>“He is ___ honest man.” (a/an) <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">an (h නිහඬ → ස්වර ශබ්දය)</div></details></li>
-      <li>“We have lived here ___ 2015.” (since/for) <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">since (නියම ලක්ෂ්‍යයක්)</div></details></li>
-      <li>“care” → adjective form? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">careful (suffix -ful)</div></details></li>
+    <div class="selfcheck"><div class="h">3 · Grammar</div><ol>
+      <li>Correct it: "She have eaten before I came." <details class="reveal"><summary>Answer</summary><div class="ans">She <b>had eaten</b> before I came. (Past Perfect + has→had)</div></details></li>
+      <li>"He is ___ honest man." (a/an) <details class="reveal"><summary>Answer</summary><div class="ans">an (silent "h" → vowel sound)</div></details></li>
+      <li>"We have lived here ___ 2015." (since/for) <details class="reveal"><summary>Answer</summary><div class="ans">since (a point in time)</div></details></li>
+      <li>"care" → adjective form? <details class="reveal"><summary>Answer</summary><div class="ans">careful (suffix -ful)</div></details></li>
     </ol></div>
-    <div class="selfcheck"><div class="h">4–5 · කියවීම / තොරතුරු</div><ol>
-      <li>“Kamala won a prize. <b>It</b> made her proud.” — It = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">a prize / winning the prize.</div></details></li>
-      <li>ප්‍රස්ථාරයක ‘අඩුම’ සඳහා වචනය? <details class="reveal"><summary>පිළිතුර</summary><div class="ans en">the least</div></details></li>
+    <div class="selfcheck"><div class="h">4–5 · Reading / Info Transfer</div><ol>
+      <li>"Kamala won a prize. <b>It</b> made her proud." — It = ? <details class="reveal"><summary>Answer</summary><div class="ans">a prize / winning the prize.</div></details></li>
+      <li>Word for "the smallest" on a chart? <details class="reveal"><summary>Answer</summary><div class="ans">the least</div></details></li>
     </ol></div>
   </section>
 
   <!-- ===================== CHEAT SHEET ===================== -->
   <section class="cheat" id="cheat">
-    <h2>📋 කෙටි සටහන (Cheat Sheet)</h2>
-    <p style="color:var(--muted);margin-top:0">විභාගයට පෙර මේ පිටුව විතරක් බැලුවත් ඇති.</p>
+    <h2>📋 Cheat Sheet</h2>
+    <p style="color:var(--muted);margin-top:0">Skim just this page right before the exam.</p>
     <div class="grid">
-      <div class="cc s1"><h4>1 · රූප ගැලපීම</h4>පෙනුම: round/oval face, wavy/curly hair, beard.<br>ස්ථානය: next to, opposite, behind, between.<br>පිසීම: sift, dice, slice, grate, knead, fry.</div>
-      <div class="cc s2"><h4>2 · දෙබස්</h4>ධන → <b>So + aux + I</b>; සෘණ → <b>Neither + aux + I</b>.<br>හිස්තැනට පසු පේළිය කියවන්න.<br>ආචාරශීලී මට්ටම ගලපන්න.</div>
-      <div class="cc s3"><h4>3 · ව්‍යාකරණ</h4>අතීත: had+V3 (perfect), was+V-ing (cont.).<br>an=ස්වර ශබ්දය; AT වේලාව/ON දවස/IN මාසය.<br>Subject ↔ verb; prefix=අර්ථය, suffix=word-class.</div>
-      <div class="cc s4"><h4>4 · කියවීම</h4>යතුරු වචනය → ඡේදයෙන් සොයන්න.<br>සර්වනාම: it/they = කලින් නාම පදය.<br>“own words” = paraphrase (copy නොකරන්න).</div>
-      <div class="cc s5"><h4>5 · තොරතුරු හුවමාරුව</h4>most/least/many/a few.<br>අසන දේට පමණක්; නම්/දින/සංඛ්‍යා එලෙසම.<br>spelling පරෙස්සමින්!</div>
+      <div class="cc s1"><h4>1 · Picture matching</h4>Appearance: round/oval face, wavy/curly hair, beard.<br>Place: next to, opposite, behind, between.<br>Cooking: sift, dice, slice, grate, knead, fry.</div>
+      <div class="cc s2"><h4>2 · Dialogue</h4>Positive → <b>So + aux + I</b>; negative → <b>Neither + aux + I</b>.<br>Read the line after the blank.<br>Match the politeness level.</div>
+      <div class="cc s3"><h4>3 · Grammar</h4>Past: had+V3 (perfect), was+V-ing (continuous).<br>an=vowel sound; AT time/ON day/IN month.<br>Subject ↔ verb; prefix=meaning, suffix=word-class.</div>
+      <div class="cc s4"><h4>4 · Reading</h4>Keyword → find it in the passage.<br>Pronouns: it/they = the noun before.<br>"Own words" = paraphrase (don't copy).</div>
+      <div class="cc s5"><h4>5 · Info Transfer</h4>most/least/many/a few.<br>Answer only what's asked; copy names/dates exactly.<br>Watch your spelling!</div>
     </div>
   </section>
 
 </main>
 
-<a class="top-link" href="#top" aria-label="ඉහළට">↑</a>
+<a class="top-link" href="#top" aria-label="Back to top">↑</a>
 
 <footer>
   <div class="wrap">
-    <div class="brand" style="justify-content:center"><div class="mark">ඉ</div>
+    <div class="brand" style="justify-content:center"><div class="mark">i</div>
       <div style="text-align:left"><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div></div>
-    <p style="margin:14px 0 4px">සා/පෙළ ඉංග්‍රීසි · I ප්‍රශ්න පත්‍රය — පහසු ලකුණු ඔබේ අතේ.</p>
-    <p class="ref">මූලාශ්‍රය: Grade 11 English Pupil's Book (Educational Publications Department) · Units 1–14 (Revision points: Tenses p.11, Prefixes &amp; Suffixes, Reported Speech, Modals). රූප/පිටු අංක ඔබේ පොතේ ඒවා සමඟ සසඳා බලන්න.</p>
+    <p style="margin:14px 0 4px">G.C.E. O/L English · Paper I — easy marks in your hands.</p>
+    <p class="ref">Source: Grade 11 English Pupil's Book (Educational Publications Department) · Units 1–14 (Revision points: Tenses p.11, Prefixes &amp; Suffixes, Reported Speech, Modals). Cross-check page/figure numbers against your own copy.</p>
   </div>
 </footer>
 
@@ -638,13 +629,11 @@
   function prog(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;bar.style.width=(sc/mx*100)+'%';}
   addEventListener('scroll',prog,{passive:true}); prog();
 
-  // accordion-lite per lesson
   document.querySelectorAll('section.lesson').forEach(function(sec){
     var subs=sec.querySelectorAll('details.sub');
     subs.forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ subs.forEach(function(o){ if(o!==d)o.open=false; }); } }); });
   });
 
-  // generic MCQ quiz builder
   function quiz(id,data){
     var i=0, qEl=document.getElementById(id+'q'), oEl=document.getElementById(id+'o'),
         fEl=document.getElementById(id+'f'), nEl=document.getElementById(id+'n');
@@ -654,9 +643,9 @@
         var b=document.createElement('button'); b.textContent=opt;
         b.addEventListener('click',function(){
           Array.prototype.forEach.call(oEl.children,function(x){x.disabled=true;});
-          if(opt===q.a){ b.className='right'; fEl.innerHTML='<span style="color:#1B7F4B;font-weight:700">✓ හරි!</span> '+(q.why||''); }
+          if(opt===q.a){ b.className='right'; fEl.innerHTML='<span style="color:#1B7F4B;font-weight:700">✓ Correct!</span> '+(q.why||''); }
           else { b.className='wrong'; Array.prototype.forEach.call(oEl.children,function(x){ if(x.textContent===q.a)x.className='right'; });
-            fEl.innerHTML='<span style="color:#C0392B;font-weight:700">✗ </span>හරි පිළිතුර: <b>'+q.a+'</b>. '+(q.why||''); }
+            fEl.innerHTML='<span style="color:#C0392B;font-weight:700">✗ </span>Correct answer: <b>'+q.a+'</b>. '+(q.why||''); }
         });
         oEl.appendChild(b);
       });
@@ -666,23 +655,23 @@
   }
 
   quiz('w1',[
-    {q:'තුනී පෙති වලට කැපීම:',opts:['dice','slice','knead'],a:'slice',why:'slice = තුනී පෙති; dice = හතරැස් කැබලි.'},
-    {q:'පිටි ගුලිය මැදීම:',opts:['knead','grate','sift'],a:'knead'},
-    {q:'පොල් කෝරනය / ගාගැනීම:',opts:['peel','grate','boil'],a:'grate'},
-    {q:'“උඩු රැවුල” සඳහා වචනය:',opts:['beard','moustache','bald'],a:'moustache',why:'beard = රැවුල; moustache = උඩු රැවුල.'}
+    {q:'cut into thin flat pieces:',opts:['dice','slice','knead'],a:'slice',why:'slice = thin pieces; dice = cubes.'},
+    {q:'press and fold dough:',opts:['knead','grate','sift'],a:'knead'},
+    {q:'shred coconut on a grater:',opts:['peel','grate','boil'],a:'grate'},
+    {q:'hair above the lip:',opts:['beard','moustache','bald'],a:'moustache',why:'beard = on the chin; moustache = above the lip.'}
   ]);
   quiz('w2',[
-    {q:'A: “I like rice & curry.” → B (එකඟ):',opts:['So do I.','Neither do I.','So am I.'],a:'So do I.',why:'ධන + like(do) → So do I.'},
-    {q:'A: “I can\'t swim.” → B (එකඟ):',opts:['So can I.','Neither can I.','Neither do I.'],a:'Neither can I.',why:'සෘණ + can → Neither can I.'},
-    {q:'A: “I have finished.” → B:',opts:['So have I.','So do I.','Neither have I.'],a:'So have I.'},
-    {q:'A: “I didn\'t go.” → B:',opts:['So did I.','Neither did I.','Neither do I.'],a:'Neither did I.',why:'සෘණ past → Neither did I.'}
+    {q:'A: "I like rice & curry." → B (agree):',opts:['So do I.','Neither do I.','So am I.'],a:'So do I.',why:'positive + like(do) → So do I.'},
+    {q:'A: "I can\'t swim." → B (agree):',opts:['So can I.','Neither can I.','Neither do I.'],a:'Neither can I.',why:'negative + can → Neither can I.'},
+    {q:'A: "I have finished." → B:',opts:['So have I.','So do I.','Neither have I.'],a:'So have I.'},
+    {q:'A: "I didn\'t go." → B:',opts:['So did I.','Neither did I.','Neither do I.'],a:'Neither did I.',why:'negative past → Neither did I.'}
   ]);
   quiz('w3',[
-    {q:'By the time we reached, the bus ___.',opts:['leaves','had left','was leaving'],a:'had left',why:'මුලින් වුණ අතීත ක්‍රියාව → Past Perfect (had + V3).'},
-    {q:'She is ___ university student.',opts:['a','an','the'],a:'a',why:'“university” = “yu” ව්‍යඤ්ජන ශබ්දය → a.'},
-    {q:'The media ___ reported it.',opts:['has','have','is'],a:'have',why:'media = බහු වචන → have.'},
+    {q:'By the time we reached, the bus ___.',opts:['leaves','had left','was leaving'],a:'had left',why:'the earlier past action → Past Perfect (had + V3).'},
+    {q:'She is ___ university student.',opts:['a','an','the'],a:'a',why:'"university" starts with a "yu" consonant sound → a.'},
+    {q:'The media ___ reported it.',opts:['has','have','is'],a:'have',why:'media is plural → have.'},
     {q:'happy → noun form:',opts:['happily','happiness','happier'],a:'happiness',why:'-ness → noun.'},
-    {q:'We have known them ___ 2010.',opts:['for','since','at'],a:'since',why:'නියම ලක්ෂ්‍යයක් → since.'}
+    {q:'We have known them ___ 2010.',opts:['for','since','at'],a:'since',why:'a point in time → since.'}
   ]);
 })();
 </script>
