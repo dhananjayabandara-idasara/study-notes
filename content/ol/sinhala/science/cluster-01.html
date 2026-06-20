@@ -3,577 +3,859 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>සා/පෙළ විද්‍යාව · ජීවය හා ජීවන ක්‍රියාවලි | Idasara Academy</title>
+<title>Idasara · සා/පෙළ විද්‍යාව — සෛලය හා ජීවය</title>
 <style>
   :root{
-    --navy:#0f2747;--navy2:#1b3a63;--gold:#c8962a;--gold-soft:#f3e6c8;
-    --ink:#1c2530;--muted:#5c6b7a;--line:#dfe4ea;--bg:#f6f8fb;--card:#fff;
-    --chem:#7a5bb0;--cell:#0f766e;--life:#2f8f3e;--class:#2b6fb3;--ptis:#3c8a3c;--atis:#c0344b;
-    --shadow:0 1px 2px rgba(15,39,71,.06),0 8px 24px rgba(15,39,71,.07);--radius:16px;
-    font-family:'Noto Sans Sinhala','Yaldevi','Iskoola Pota','Nirmala UI',system-ui,-apple-system,sans-serif;
+    --navy:#0d1b3e; --navy-2:#16264f; --navy-3:#22376b;
+    --gold:#e0a92e; --gold-2:#c8901a; --gold-soft:#f6e4b8;
+    --bg:#f5f7fb; --card:#ffffff; --ink:#1a2235; --ink-soft:#4a5468; --line:#e2e7f0;
+    --A:#0e7c86;  --A-soft:#e2f3f4;  --A-deep:#0a5b63;   /* 10 ශ්‍රේණිය */
+    --B:#c4533f;  --B-soft:#fbe9e4;  --B-deep:#9c3a29;   /* 11 ශ්‍රේණිය — පටක */
+    --ok:#1f8a4c; --warn:#b3651f; --warn-soft:#fdf0e1;
+    --shadow:0 4px 18px rgba(13,27,62,.08);
+    --shadow-lg:0 10px 40px rgba(13,27,62,.14);
+    --radius:16px;
+    --fs:'Noto Sans Sinhala','Iskoola Pota','Nirmala UI','Yu Gothic',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'Iosevka','Fira Code',ui-monospace,Consolas,monospace;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.75;font-size:17px;-webkit-text-size-adjust:100%}
-  .en{font-family:'Segoe UI',system-ui,sans-serif}
-  .wrap{max-width:900px;margin:0 auto;padding:0 18px 80px}
-  /* progress bar */
-  #prog{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--gold),#e6b955);z-index:99}
-  /* header */
-  header.top{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:0 0 22px 22px;padding:24px 22px 26px;box-shadow:var(--shadow)}
-  header .kic{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
-  header .kic b{color:var(--gold)}
-  header h1{margin:.4rem 0 .2rem;font-size:1.75rem;line-height:1.3}
-  header p{margin:.4rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:62ch}
-  /* why + roadmap */
-  .why{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:var(--radius);padding:16px 20px;margin:20px 0;color:#5a4410;font-size:.95rem}
-  .why b{color:#3a2a06}
-  .roadmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 6px}
-  a.rm{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-left:5px solid var(--navy);border-radius:12px;padding:11px 13px;box-shadow:var(--shadow);transition:.15s;font-size:.9rem}
-  a.rm:hover{transform:translateY(-2px)}
-  a.rm b{display:block;font-size:.95rem}a.rm small{color:var(--muted)}
-  a.rm.A{border-left-color:var(--chem)}a.rm.B{border-left-color:var(--cell)}a.rm.C{border-left-color:var(--life)}
-  a.rm.D{border-left-color:var(--class)}a.rm.E{border-left-color:var(--ptis)}a.rm.F{border-left-color:var(--atis)}
-  /* sections */
-  details.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin:18px 0;box-shadow:var(--shadow);overflow:hidden}
-  details.sec>summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;gap:13px;font-weight:800;font-size:1.18rem;color:#fff}
-  details.sec>summary::-webkit-details-marker{display:none}
-  details.sec>summary .chev{margin-left:auto;font-size:.8rem;transition:transform .2s}
-  details.sec[open]>summary .chev{transform:rotate(90deg)}
-  details.sec>summary .pill{flex:none;width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:1rem}
-  .sA>summary{background:linear-gradient(135deg,#6d28d9,#8b5cf6)}
-  .sB>summary{background:linear-gradient(135deg,#0b5752,#0f766e)}
-  .sC>summary{background:linear-gradient(135deg,#256b2e,#2f8f3e)}
-  .sD>summary{background:linear-gradient(135deg,#234e86,#2b6fb3)}
-  .sE>summary{background:linear-gradient(135deg,#2c6e2c,#3c8a3c)}
-  .sF>summary{background:linear-gradient(135deg,#8f1d33,#c0344b)}
-  .sec .body{padding:6px 20px 20px}
-  .src{font-size:.78rem;color:var(--muted);background:#eef1f5;border-radius:8px;padding:5px 10px;display:inline-block;margin:8px 0}
-  h3{font-size:1.06rem;margin:20px 0 6px;color:var(--navy)}
-  h4{font-size:.98rem;margin:16px 0 4px;color:var(--navy2)}
-  p{margin:10px 0}strong{color:var(--ink)}
-  /* 7-step blocks */
-  .step{border-radius:12px;padding:13px 16px;margin:12px 0;border:1px solid transparent}
-  .step .lbl{display:inline-flex;gap:7px;font-weight:800;font-size:.78rem;letter-spacing:.02em;margin-bottom:5px;text-transform:uppercase}
-  .step p{margin:5px 0}
-  .hook{background:#fff7e8;border-color:#f0dcb0}.hook .lbl{color:var(--gold)}
-  .watch{background:#fdecef;border-color:#f6cdd4}.watch .lbl{color:var(--atis)}
-  .mem{background:#eef6f0;border-color:#bfe0c8}.mem .lbl{color:var(--life)}
-  .work{background:#eef1f8;border-color:#cdd9f0}.work .lbl{color:var(--class)}
-  .analogy{background:#f3effb;border-color:#ddd0f3}.analogy .lbl{color:var(--chem)}
-  ul,ol{margin:8px 0;padding-left:22px}li{margin:3px 0}
-  /* tables */
-  .tw{overflow-x:auto;margin:12px 0}
-  table{border-collapse:collapse;width:100%;min-width:440px;font-size:.92rem}
-  th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
-  th{background:var(--navy);color:#fff;font-size:.84rem}
-  td .y{color:var(--life);font-weight:800}td .n{color:var(--atis);font-weight:800}
-  .term{font-weight:700;color:var(--cell)}
-  /* chips & tree */
-  .chips{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
-  .chips span{background:#eef1f5;border:1px solid var(--line);border-radius:999px;padding:3px 11px;font-size:.85rem;font-weight:600}
-  .tree{border:2px solid var(--line);border-radius:12px;padding:24px 12px 12px;position:relative;margin:12px 0}
-  .tree>.tl{position:absolute;top:-12px;left:14px;background:var(--card);padding:1px 11px;border-radius:999px;font-weight:700;font-size:.82rem;border:2px solid var(--line)}
-  .trow{display:flex;gap:10px;flex-wrap:wrap}.trow>*{flex:1 1 200px}
-  .tbox{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fbfcfe;font-size:.9rem}
-  .tbox b{color:var(--navy)}
-  /* reveal */
-  details.rv{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:#fbfcfe}
-  details.rv>summary{list-style:none;cursor:pointer;padding:10px 14px;font-weight:600;font-size:.92rem;color:var(--class);display:flex;gap:8px}
-  details.rv>summary::-webkit-details-marker{display:none}
-  details.rv>summary::before{content:"▸";transition:.2s;color:var(--gold)}
-  details.rv[open]>summary::before{transform:rotate(90deg)}
-  details.rv .ans{padding:0 14px 12px;font-size:.92rem}
-  details.rv .ans .a{background:#eef6f0;border-radius:8px;padding:7px 11px;font-weight:600;color:var(--life);margin:4px 0}
-  .qx{font-weight:600;margin:10px 0 2px}
-  /* svg fig */
-  .fig{text-align:center;margin:14px 0}
-  .fig svg{max-width:100%;height:auto}
-  .cap{font-size:.8rem;color:var(--muted);margin-top:4px}
-  .legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:.84rem;color:var(--muted);justify-content:center;margin-top:6px}
-  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:middle}
-  /* cheat sheet */
-  .cheat{background:var(--navy);color:#eaf0f8;border-radius:var(--radius);padding:22px;margin:20px 0}
-  .cheat h2{color:var(--gold);margin:0 0 12px;font-size:1.3rem}
-  .cheat h4{color:var(--gold-soft);margin:14px 0 4px}
-  .cheat .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-  .cheat .c{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:12px 14px;font-size:.88rem}
-  .cheat .c b{color:#fff}
-  /* misc */
-  .synth{background:linear-gradient(135deg,#eef1f8,#f6f8fb);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:20px 0}
-  .flow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;margin:10px 0;font-weight:700;color:var(--navy)}
-  .flow .ar{color:var(--gold)}
-  #top{position:fixed;right:16px;bottom:16px;background:var(--navy);color:#fff;border:none;border-radius:50%;width:46px;height:46px;font-size:1.1rem;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:90}
-  footer{text-align:center;margin-top:26px;color:var(--muted);font-size:.82rem;line-height:1.8}
-  footer b{color:var(--gold)}
-  @media(max-width:560px){body{font-size:16px}header h1{font-size:1.4rem}.wrap{padding:0 13px 70px}.sec .body{padding:6px 14px 16px}}
-  @media print{#prog,#top,.roadmap,details.sec>summary .chev{display:none}details.sec,details.rv{open:true}.sec .body{display:block!important}}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fs);font-size:17px;line-height:1.78;-webkit-text-size-adjust:100%}
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:120;background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .1s linear}
+
+  header.site{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-bottom:3px solid var(--gold);box-shadow:var(--shadow)}
+  .bar{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff}
+  .logo{width:38px;height:38px;border-radius:10px;flex:none;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:grid;place-items:center;font-weight:800;color:var(--navy);font-size:21px;box-shadow:0 2px 8px rgba(224,169,46,.4)}
+  .brand b{font-size:18px;letter-spacing:.5px;line-height:1}
+  .brand small{display:block;font-size:11px;opacity:.75;letter-spacing:2px;text-transform:uppercase}
+  .crumbs{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;font-size:12.5px}
+  .crumbs span{background:rgba(255,255,255,.12);padding:3px 11px;border-radius:20px;white-space:nowrap}
+  .crumbs span.acc{background:var(--gold);color:var(--navy);font-weight:700}
+
+  main{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+
+  .hero{margin:30px 0 14px;padding:34px 28px;border-radius:24px;color:#fff;position:relative;overflow:hidden;background:radial-gradient(120% 140% at 85% 10%,var(--navy-3),var(--navy) 60%)}
+  .hero::after{content:"🔬 🧬 🌱 🩸";position:absolute;right:-6px;bottom:-14px;font-size:66px;font-weight:800;color:rgba(224,169,46,.10);letter-spacing:12px;white-space:nowrap;pointer-events:none}
+  .hero .eyebrow{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;font-size:12.5px;letter-spacing:1px;padding:5px 13px;border-radius:20px}
+  .hero h1{margin:.5em 0 .25em;font-size:clamp(25px,5.6vw,42px);line-height:1.25;font-weight:800}
+  .hero h1 .g{color:var(--gold)}
+  .hero p{margin:.4em 0 0;font-size:16.5px;max-width:55ch;opacity:.92}
+  .hero .pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:30px;font-size:14px}
+
+  .why{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin:18px 0;box-shadow:var(--shadow);border-left:6px solid var(--gold)}
+  .why h2{margin:.1em 0 .4em;font-size:21px;color:var(--navy)}
+  .why p{margin:.4em 0;color:var(--ink-soft);font-size:16px}
+
+  .roadmap{margin:22px 0}
+  .roadmap h2{font-size:20px;color:var(--navy);margin:0 0 4px}
+  .roadmap .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .map-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+  .map-card{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);border-top:5px solid var(--cl);transition:transform .15s,box-shadow .15s}
+  .map-card:hover,.map-card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-lg);outline:none}
+  .map-card .tag{font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--cl)}
+  .map-card h3{margin:6px 0 6px;font-size:16.5px;color:var(--navy)}
+  .map-card p{margin:0;font-size:13px;color:var(--ink-soft)}
+
+  .part{scroll-margin-top:76px;margin:46px 0 8px;padding:20px 22px;border-radius:20px;color:#fff;background:linear-gradient(135deg,var(--cl),var(--cldeep));box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .part .pn{font-size:13px;font-weight:800;letter-spacing:1px;opacity:.85}
+  .part h2{margin:3px 0 4px;font-size:clamp(21px,4.6vw,29px);font-weight:800}
+  .part p{margin:0;opacity:.92;font-size:15px;max-width:62ch}
+  .part .src{position:absolute;right:14px;top:14px;font-size:11px;background:rgba(255,255,255,.16);padding:4px 11px;border-radius:14px}
+
+  .topic{scroll-margin-top:72px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin:16px 0;overflow:hidden;border:1px solid var(--line)}
+  .topic > .head{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none;padding:17px 20px;background:linear-gradient(0deg,#fff,var(--clsoft));border-bottom:1px solid var(--line)}
+  .topic > .head::-webkit-details-marker{display:none}
+  .topic .num{flex:none;width:42px;height:42px;border-radius:11px;background:var(--cl);color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px}
+  .topic .head h3{margin:0;font-size:18px;color:var(--navy);flex:1}
+  .topic .head .en{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+  .topic .chev{flex:none;color:var(--cl);font-size:22px;transition:transform .25s}
+  details[open] > .head .chev{transform:rotate(180deg)}
+  .topic .body{padding:6px 20px 22px}
+
+  .step{margin:22px 0 8px;display:flex;align-items:center;gap:9px}
+  .step .dot{flex:none;width:25px;height:25px;border-radius:50%;background:var(--clsoft);color:var(--cldeep);font-weight:800;font-size:13px;display:grid;place-items:center}
+  .step b{font-size:15.5px;color:var(--cldeep)}
+  p.lead{font-size:16.5px}
+  .topic p{color:var(--ink)}
+
+  .box{border-radius:13px;padding:14px 16px;margin:14px 0;font-size:15.5px}
+  .hook{background:var(--clsoft);border-left:5px solid var(--cl)}
+  .hook .ttl{font-weight:800;color:var(--cldeep)}
+  .watch{background:var(--warn-soft);border-left:5px solid var(--warn)}
+  .watch .ttl{font-weight:800;color:var(--warn);display:block;margin-bottom:3px}
+  .watch ul{margin:.3em 0;padding-left:1.15em}
+  .watch li{margin:.35em 0}
+  .lab-exp{background:#eef7ff;border-left:5px solid #2b6cb0}
+  .lab-exp .ttl{font-weight:800;color:#23598f;display:block;margin-bottom:3px}
+  .memo{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:13px;padding:14px 17px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+  .memo .ic{font-size:22px;flex:none}
+  .memo b{color:var(--gold)}
+  .joke{font-style:italic;color:var(--ink-soft);font-size:14.5px;background:#fcfcfe;border:1px dashed var(--line);border-radius:11px;padding:9px 14px;margin:12px 0}
+  .joke::before{content:"😄 ";font-style:normal}
+
+  .work{background:#fbfcfe;border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:13px 0}
+  .work .lbl{display:inline-block;background:var(--cl);color:#fff;font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:8px;margin-bottom:8px}
+  .eqn{font-family:var(--mono);font-size:14.5px;line-height:1.9;overflow-x:auto;background:#fff;border:1px dashed var(--cl);border-radius:9px;padding:8px 12px;margin:8px 0}
+
+  .reveal{margin:11px 0}
+  .reveal .q{font-weight:600}
+  .rbtn{margin-top:8px;background:var(--cl);color:#fff;border:none;cursor:pointer;font-family:var(--fs);font-size:14px;font-weight:700;padding:8px 16px;border-radius:24px;display:inline-flex;align-items:center;gap:7px;transition:filter .15s}
+  .rbtn:hover{filter:brightness(1.08)}
+  .rbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .ans{display:none;margin-top:10px;background:#f0fbf4;border:1px solid #bfe6cd;border-left:5px solid var(--ok);border-radius:11px;padding:11px 15px;font-size:15px}
+  .ans.show{display:block;animation:pop .25s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .ans .a{font-weight:800;color:var(--ok)}
+
+  .selfcheck{background:var(--clsoft);border-radius:13px;padding:13px 16px;margin:15px 0}
+  .selfcheck .ttl{font-weight:800;color:var(--cldeep);margin-bottom:4px}
+
+  .widget{background:#fff;border:2px solid var(--clsoft);border-radius:14px;padding:16px;margin:15px 0}
+  .widget .wt{font-weight:800;color:var(--cldeep);font-size:14.5px;margin-bottom:9px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{cursor:pointer;border:1.6px solid var(--cl);background:#fff;color:var(--cldeep);font-size:14px;font-weight:700;padding:7px 12px;border-radius:11px;transition:.15s;font-family:inherit}
+  .chip:hover{background:var(--clsoft)}
+  .chip.active{background:var(--cl);color:#fff}
+  .wout{margin-top:11px;font-size:15px;min-height:1.4em}
+  .wout .badge{display:inline-block;font-weight:800;padding:2px 9px;border-radius:8px;font-size:13px;margin-right:6px}
+
+  .svgwrap{margin:14px 0;text-align:center}
+  svg{max-width:100%;height:auto}
+  figcaption{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+  .tbl{width:100%;border-collapse:collapse;margin:13px 0;font-size:14px;overflow:hidden;border-radius:11px;box-shadow:var(--shadow)}
+  .tbl th{background:var(--cl);color:#fff;padding:9px 10px;text-align:left;font-weight:700}
+  .tbl td{padding:8px 10px;border-bottom:1px solid var(--line);background:#fff;vertical-align:top}
+  .tbl tr:nth-child(even) td{background:#fafbfe}
+  .scroll{overflow-x:auto}
+
+  .synth{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:22px;padding:30px 26px;margin:48px 0 24px;box-shadow:var(--shadow-lg)}
+  .synth h2{color:var(--gold);margin:0 0 8px;font-size:26px}
+  .synth p{opacity:.92}
+  .synth .chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0;font-weight:700;font-size:14px}
+  .synth .chain span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:12px}
+  .synth .chain i{color:var(--gold);font-style:normal;font-size:18px}
+
+  .test{background:var(--card);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .test h2{color:var(--navy);margin:0 0 4px;font-size:24px}
+  .test .qz{counter-reset:q;}
+  .qitem{border-top:1px solid var(--line);padding:14px 0}
+  .qitem:first-of-type{border-top:none}
+  .qitem .qq{font-weight:600}
+  .qitem .qq::before{counter-increment:q;content:"ප්‍රශ්නය " counter(q) ". ";color:var(--navy);font-weight:800}
+
+  .cheat{background:#fffdf6;border:2px solid var(--gold-soft);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow)}
+  .cheat h2{color:var(--gold-2);margin:0 0 6px;font-size:24px}
+  .cheat-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .cheat-card{background:#fff;border-radius:13px;padding:14px 16px;border-top:4px solid var(--cl);box-shadow:var(--shadow)}
+  .cheat-card h4{margin:0 0 6px;color:var(--navy);font-size:15px}
+  .cheat-card ul{margin:.3em 0;padding-left:1.1em;font-size:13.5px}
+  .cheat-card li{margin:.3em 0}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 18px 10px}
+  footer .logo{display:inline-grid;width:30px;height:30px;font-size:16px;vertical-align:middle;margin-right:7px}
+  .tnote{font-size:12.5px;color:var(--ink-soft);background:#fafbfe;border:1px solid var(--line);border-radius:9px;padding:7px 12px;margin:10px 0}
+
+  @media(max-width:760px){
+    body{font-size:16px}
+    .map-grid,.cheat-grid{grid-template-columns:1fr}
+    .crumbs{display:none}
+    .hero{padding:26px 20px}
+    .topic .body{padding:4px 15px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  @media print{
+    header.site,#progress,.rbtn,.chev{display:none!important}
+    .ans{display:block!important}
+    details{display:block}
+    details:not([open])>:not(summary){display:block!important}
+    .topic,.work,.box,.widget{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
 </style>
 </head>
 <body>
-<div id="prog"></div>
+<div id="progress" aria-hidden="true"></div>
 
-<header class="top">
-  <div class="wrap" style="padding-bottom:0">
-    <div class="kic">Idasara Academy · සා/පෙළ <b>විද්‍යාව</b> · ජීව විද්‍යාව</div>
-    <h1>ජීවය හා ජීවන ක්‍රියාවලි</h1>
-    <p>සෛලය හා ජීවය යනු කුමක්ද — ජීව විද්‍යාවේ <b>අත්තිවාරම</b>. රසායනික පදනමේ සිට සෛල, ලක්ෂණ, වර්ගීකරණය හා පටක දක්වා.</p>
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top"><span class="logo">I</span><span><b>IDASARA</b><small>Academy</small></span></a>
+    <div class="crumbs"><span>සා/පෙළ</span><span>විද්‍යාව</span><span class="acc">සෛලය හා ජීවය</span></div>
   </div>
 </header>
 
-<div class="wrap">
+<main id="top">
 
-  <div class="why">
-    <b>ඇයි මේක වැදගත්?</b> පුතේ/දුවේ, ජීව විද්‍යාවේ <strong>හැම පාඩමක්ම</strong> ගොඩනැගෙන්නේ මේ කාණ්ඩය මතයි. ශරීරය හදන රසායන → සෛලය → සෛල එකතු වී පටක → පටක එකතු වී අවයව. මේ දාමය එක පාරක් තේරුම් ගත්තොත්, ඉස්සරහ එන හැම පාඩමක්ම ලේසියි. <b>බය වෙන්න එපා — අපි පොඩි පියවරෙන් යමු, හැම පියවරකම පොඩි ජයක්!</b> 🌟
-  </div>
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">සා/පෙළ · විද්‍යාව · ජීව විද්‍යා පදනම</span>
+    <h1>සියල්ල <span class="g">සෛලය</span> මත ගොඩනැගේ —<br>ජීවය යනු <span class="g">කුමක්ද?</span></h1>
+    <p>ජීව විද්‍යාවේ සියල්ලටම පදනම මෙයයි. රසායනික පදනමේ සිට සෛලය, ජීවීන්ගේ ලක්ෂණ, වර්ගීකරණය හා පටක දක්වා — මේ කාණ්ඩය මුලින්ම තේරුම් ගත්තොත් ඉස්සරහ හැම පාඩමක්ම පහසුයි.</p>
+    <span class="pill">⏱ සෙමින් කියවන්න · 🔬 හැම කොටසක්ම අත්හදා බලන්න · ✅ පිළිතුරු හංගලා තියෙනවා</span>
+  </section>
 
-  <h3 style="margin-top:18px">📍 මෙහි ඇති දේ (රිංගා බලන්න)</h3>
-  <div class="roadmap">
-    <a class="rm A" href="#A"><b>A · රසායනික පදනම</b><small>Chemical basis · 10 ඒ.1</small></a>
-    <a class="rm B" href="#B"><b>B · සෛල හා විභජනය</b><small>Cells · 10 ඒ.6</small></a>
-    <a class="rm C" href="#C"><b>C · ජීවීන්ගේ ලක්ෂණ</b><small>Characteristics · 10 ඒ.8</small></a>
-    <a class="rm D" href="#D"><b>D · වර්ගීකරණය හා නම්</b><small>Classification · 10 ඒ.13</small></a>
-    <a class="rm E" href="#E"><b>E · ශාක පටක</b><small>Plant tissues · 11 ඒ.1</small></a>
-    <a class="rm F" href="#F"><b>F · සත්ව පටක</b><small>Animal tissues · 11 ඒ.1</small></a>
-  </div>
+  <!-- WHY -->
+  <section class="why">
+    <h2>ඇයි මේක මෙච්චර වැදගත්?</h2>
+    <p>ඔයාගේ සිරුර, මේ වචන කියවන ඇස, ගසක කොළයක්, කඩේ අල කැබැල්ලක් — හැම ජීවියෙක්ම සෑදී ඇත්තේ <b>සෛල</b>වලින්. සෛලය = ජීවයේ මූලික ඒකකය. මේ කාණ්ඩය ඉගෙන ගත්තම, “ජීවය යනු කුමක්ද?” කියන මූලික ප්‍රශ්නයට පැහැදිලි පිළිතුරක් ලැබෙනවා.</p>
+    <p>මෙහි කොටස් 6යි: ① ජීවයේ රසායනික පදනම → ② සෛල ව්‍යුහය හා විභජනය → ③ ජීවීන්ගේ ලක්ෂණ → ④ වර්ගීකරණය හා නම් කිරීම → ⑤ ශාක පටක → ⑥ සත්ව පටක. පහළ කාඩ් එකක් tap කරලා කෙළින්ම යන්න පුළුවන් — හැබැයි පිළිවෙළට කියෙව්වොත් හොඳම.</p>
+  </section>
 
-  <!-- ============ A. CHEMICAL BASIS ============ -->
-  <details class="sec sA" id="A" open>
-    <summary><span class="pill">A</span> ජීවයේ රසායනික පදනම <span class="chev">▶</span></summary>
+  <!-- ROADMAP -->
+  <section class="roadmap">
+    <h2>මේ කාණ්ඩයේ සිතියම</h2>
+    <p class="sub">10 ශ්‍රේණියේ කොටස් 4ක් + 11 ශ්‍රේණියේ පටක කොටස් 2ක්.</p>
+    <div class="map-grid">
+      <a class="map-card" href="#t1" style="--cl:var(--A);--clsoft:var(--A-soft)"><span class="tag">10 ශ්‍රේ · පොත I පා.1</span><h3>① ජීවයේ රසායනික පදනම</h3><p>කාබොහයිඩ්‍රේට · ප්‍රෝටීන · ලිපිඩ · නියුක්ලෙයික් අම්ල · ජලය · ලවණ · විටමින්.</p></a>
+      <a class="map-card" href="#t2" style="--cl:var(--A);--clsoft:var(--A-soft)"><span class="tag">10 ශ්‍රේ · පොත I පා.6</span><h3>② සෛල ව්‍යුහය හා විභජනය</h3><p>සෛල වාදය · ඉන්ද්‍රිකා · ශාක vs සත්ව · අනුනන/ඌනන විභජනය.</p></a>
+      <a class="map-card" href="#t3" style="--cl:var(--A);--clsoft:var(--A-soft)"><span class="tag">10 ශ්‍රේ · පොත I පා.8</span><h3>③ ජීවීන්ගේ ලක්ෂණ</h3><p>සංවිධානය · පෝෂණය · ශ්වසනය · උද්දීපනය · බහිස්‍රාවය · චලනය · ප්‍රජනනය · වර්ධනය.</p></a>
+      <a class="map-card" href="#t4" style="--cl:var(--A);--clsoft:var(--A-soft)"><span class="tag">10 ශ්‍රේ · පොත II පා.13</span><h3>④ වර්ගීකරණය හා නම් කිරීම</h3><p>අධිරාජධානි 3 · රාජධානි 5 · ශාක/සත්ව කාණ්ඩ · ද්වීපද නාමකරණය.</p></a>
+      <a class="map-card" href="#t5" style="--cl:var(--B);--clsoft:var(--B-soft)"><span class="tag">11 ශ්‍රේ · පොත I පා.1</span><h3>⑤ ශාක පටක</h3><p>විභාජක පටක · සරල ස්ථිර · සංකීර්ණ ස්ථිර (ශෛලම/ජ්ලෝයම).</p></a>
+      <a class="map-card" href="#t6" style="--cl:var(--B);--clsoft:var(--B-soft)"><span class="tag">11 ශ්‍රේ · පොත I පා.1</span><h3>⑥ සත්ව පටක</h3><p>අපිවිෂද · සම්බන්ධක (රුධිර) · පේශි · ස්නායු.</p></a>
+    </div>
+  </section>
+
+  <!-- ##################### PART A ##################### -->
+  <section class="part" id="partA" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <span class="src">මූලාශ්‍රය · 10 ශ්‍රේණිය පොත I &amp; II</span>
+    <div class="pn">A කොටස · 10 ශ්‍රේණිය</div>
+    <h2>රසායනික පදනමේ සිට වර්ගීකරණය දක්වා</h2>
+    <p>ජීවය සෑදී ඇත්තේ මොන රසායනික ද්‍රව්‍යවලින්ද, සෛලය මොන වගේද, ජීවියෙක් කියන්නේ මොකද්ද, සහ ජීවීන් කොහොමද කාණ්ඩවලට බෙදෙන්නේ — මෙහි ඉගෙන ගමු.</p>
+  </section>
+
+  <!-- 1 chemical basis -->
+  <details class="topic" id="t1" open style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">①</span>
+      <h3>ජීවයේ රසායනික පදනම<span class="en">Chemical basis of life</span></h3><span class="chev">▾</span></summary>
     <div class="body">
-      <div class="src">📖 මූලාශ්‍රය: 10 ශ්‍රේණිය විද්‍යාව · I කොටස · පරිච්ඡේදය 1 (පි. 1–22)</div>
 
-      <div class="step hook"><span class="lbl">🎣 හූක්</span>
-        <p>රසවත් රයිස් ඇන් කරියක් හිතන්න! 🍚 බත් (පිෂ්ඨය), පරිප්පු/මාළු (ප්‍රෝටීන්), පොල්/තෙල් (ලිපිඩ), එළවළු (විටමින, ලවණ), වතුර. <strong>ඇත්තටම ඔයාගේ ශරීරයත් මේ රසායන වර්ග ටිකෙන්මයි හැදිලා තියෙන්නේ!</strong> ඉතින් අද අපි බලමු ජීවියෙක් කියන්නේ මොන රසායනවලින්ද කියලා.</p>
-      </div>
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඔයත් රසායනික ද්‍රව්‍යවලින් හදපු එකක්!</span> ඔයාගේ සිරුරෙන් 65%ක්ම ඔක්සිජන්, 18%ක් කාබන්, 10%ක් හයිඩ්‍රජන්, 3%ක් නයිට්‍රජන් — මේ මූලද්‍රව්‍ය 4න්ම 96%ක්! හැම ජීවියෙක්ම සෑදී ඇත්තේ රසායනික සංයෝග කිහිපයකින්. ඒවා මොනවද කියලා බලමු.</div>
 
-      <p>ජීවීන්ගේ දේහ විවිධ <strong>රසායනික සංයෝග රැසකින්</strong> සැදී ඇත. ඒවා ප්‍රධාන වශයෙන් මූලද්‍රව්‍ය <strong>හතරකින්</strong> — <span class="term">කාබන් (C), හයිඩ්‍රජන් (H), ඔක්සිජන් (O), නයිට්‍රජන් (N)</span> — සෑදී ඇත. (අමතරව සල්ෆර් S, පොස්පරස් P, සෝඩියම් Na, කැල්සියම් Ca, යකඩ Fe ආදිය ද.)</p>
-      <p>ප්‍රධාන <strong>ජෛව අණු වර්ග 4</strong>ක් + ජලය + ඛනිජ ලවණ + විටමින — මෙන්න ජීවයේ රසායනික පදනම:</p>
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p class="lead">ජීවී ද්‍රව්‍ය කොටස් දෙකකි: <b>කාබනික</b> (කාබන් අඩංගු) සහ <b>අකාබනික</b>. ප්‍රධාන කාබනික සංයෝග <b>4ක්</b> + විටමින්; අකාබනික = ජලය, ඛනිජ ලවණ, වායු.</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>සංයෝගය</th><th>මූලද්‍රව්‍ය</th><th>ඒකකය / උදාහරණ</th><th>ප්‍රධාන කෘත්‍යය</th></tr>
+        <tr><td><b>කාබොහයිඩ්‍රේට</b></td><td>C, H, O (H:O = 2:1)</td><td>ග්ලූකෝස්, සුක්‍රෝස්, පිෂ්ටය</td><td>ශක්ති ප්‍රභවය, ආහාර සංචිතය</td></tr>
+        <tr><td><b>ප්‍රෝටීන</b></td><td>C, H, O, N (+S)</td><td>ඇමයිනෝ අම්ල (20)</td><td>ව්‍යුහ, එන්සයිම, හෝමෝන, ප්‍රතිදේහ</td></tr>
+        <tr><td><b>ලිපිඩ</b> (තෙල්/මේද)</td><td>C, H, O (O අඩුයි)</td><td>මේද අම්ල + ග්ලිසරෝල්</td><td>වැඩි ශක්තිය, පටල, තාප පරිවාරක</td></tr>
+        <tr><td><b>නියුක්ලෙයික් අම්ල</b></td><td>C, H, O, N, P</td><td>DNA, RNA (නියුක්ලියොටයිඩ)</td><td>ආවේණික තොරතුරු, ප්‍රෝටීන සංශ්ලේෂණය</td></tr>
+        <tr><td><b>ජලය</b> (අකාබනික)</td><td>H, O</td><td>H₂O</td><td>ද්‍රාවක, ප්‍රවාහන මාධ්‍ය, උෂ්ණත්ව පාලනය</td></tr>
+        <tr><td><b>ඛනිජ ලවණ</b></td><td>Ca, P, K, Fe, I…</td><td>අයන</td><td>අස්ථි/දත්, හිමොග්ලොබින්, හෝමෝන</td></tr>
+        <tr><td><b>විටමින්</b></td><td>කාබනික</td><td>A,B,C,D,E,K</td><td>ජෛව රසායනික ප්‍රතික්‍රියා සඳහා</td></tr>
+      </table></div>
 
-      <div class="fig">
-        <svg viewBox="0 0 360 80" role="img" aria-label="ප්‍රධාන මූලද්‍රව්‍ය C H O N">
-          <g font-family="sans-serif" text-anchor="middle">
-            <rect x="6" y="14" width="78" height="52" rx="11" fill="#3b3b3b"/><text x="45" y="44" fill="#fff" font-size="22" font-weight="700">C</text><text x="45" y="60" fill="#fff" font-size="9">කාබන්</text>
-            <rect x="94" y="14" width="78" height="52" rx="11" fill="#1f7fc2"/><text x="133" y="44" fill="#fff" font-size="22" font-weight="700">H</text><text x="133" y="60" fill="#fff" font-size="9">හයිඩ්‍රජන්</text>
-            <rect x="182" y="14" width="78" height="52" rx="11" fill="#c0344b"/><text x="221" y="44" fill="#fff" font-size="22" font-weight="700">O</text><text x="221" y="60" fill="#fff" font-size="9">ඔක්සිජන්</text>
-            <rect x="270" y="14" width="84" height="52" rx="11" fill="#6d28d9"/><text x="312" y="44" fill="#fff" font-size="22" font-weight="700">N</text><text x="312" y="60" fill="#fff" font-size="9">නයිට්‍රජන්</text>
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — කාබොහයිඩ්‍රේට වර්ග</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 160" role="img" aria-label="කාබොහයිඩ්‍රේට වර්ග තුන">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11" text-anchor="middle">
+            <rect x="170" y="8" width="130" height="28" rx="8" fill="#0e7c86"/><text x="235" y="27" fill="#fff" font-weight="700">කාබොහයිඩ්‍රේට</text>
+            <g stroke="#0a5b63" stroke-width="1.6"><line x1="235" y1="36" x2="75" y2="56"/><line x1="235" y1="36" x2="235" y2="56"/><line x1="235" y1="36" x2="395" y2="56"/></g>
+            <g fill="#e2f3f4" stroke="#0e7c86"><rect x="10" y="56" width="130" height="30" rx="7"/><rect x="170" y="56" width="130" height="30" rx="7"/><rect x="330" y="56" width="130" height="30" rx="7"/></g>
+            <text x="75" y="70" fill="#0a5b63" font-weight="700">මොනොසැකරයිඩ</text><text x="75" y="83" fill="#0a5b63" font-size="9.5">C₆H₁₂O₆</text>
+            <text x="235" y="70" fill="#0a5b63" font-weight="700">ඩයිසැකරයිඩ</text><text x="235" y="83" fill="#0a5b63" font-size="9.5">C₁₂H₂₂O₁₁</text>
+            <text x="395" y="70" fill="#0a5b63" font-weight="700">පොලිසැකරයිඩ</text><text x="395" y="83" fill="#0a5b63" font-size="9.5">(C₆H₁₀O₅)ₙ</text>
+            <g font-size="10" fill="#4a5468">
+              <text x="75" y="105">ග්ලූකෝස්</text><text x="75" y="120">ෆ්‍රක්ටෝස්</text><text x="75" y="135">ගැලැක්ටෝස්</text>
+              <text x="235" y="105">මෝල්ටෝස්</text><text x="235" y="120">සුක්‍රෝස්</text><text x="235" y="135">ලැක්ටෝස්</text>
+              <text x="395" y="105">පිෂ්ටය</text><text x="395" y="120">සෙලියුලෝස්</text><text x="395" y="135">ග්ලයිකෝජන්</text>
+            </g>
           </g>
         </svg>
-        <div class="cap">රූපය A1 · ජෛව අණු සාදන ප්‍රධාන මූලද්‍රව්‍ය — මතක තබාගන්න: <b>“CHON”</b></div>
-      </div>
+        <figcaption>මොනොසැකරයිඩ (තනි ඒකක) → ඩයිසැකරයිඩ (2) → පොලිසැකරයිඩ (රාශියක්). පොලිසැකරයිඩ පැණි රසක් නැත, ජලයේ අද්‍රාව්‍යයි.</figcaption>
+      </figure>
+      <div class="box hook"><span class="ttl">🧪 ප්‍රෝටීන හා එන්සයිම</span> ප්‍රෝටීන = <b>ඇමයිනෝ අම්ල</b> (20ක්) බහුඅවයවීකරණයෙන් සෑදුණු දම; සරලම ඇමයිනෝ අම්ලය ග්ලයිසීන්. <b>එන්සයිම</b> = ජෛව රසායනික ප්‍රතික්‍රියා වේගවත් කරන ප්‍රෝටීනමය උත්ප්‍රේරක (උදා: ඇමයිලේස්). ලිපිඩ = <b>මේද අම්ල + ග්ලිසරෝල්</b>.</div>
 
-      <h3>§1.1 කාබොහයිඩ්‍රේට (Carbohydrates) — p.2</h3>
-      <p>අඩංගු: <span class="term">C, H, O</span>. ශරීරයට <strong>ප්‍රධාන ශක්ති ප්‍රභවය</strong>. සරලෙන් සංකීර්ණයට පියවර 3ක්:</p>
-      <div class="tw"><table>
-        <tr><th>වර්ගය</th><th>අර්ථය</th><th>උදාහරණ</th></tr>
-        <tr><td><b>මොනොසැකරයිඩ</b><br><span class="en" style="font-size:.8rem">monosaccharide</span></td><td>සරලම සීනි (ඒකකය 1)</td><td>ග්ලූකෝස්, ෆ්‍රක්ටෝස්, ගැලැක්ටෝස්</td></tr>
-        <tr><td><b>ඩයිසැකරයිඩ</b><br><span class="en" style="font-size:.8rem">disaccharide</span></td><td>මොනො 2ක එකතුව</td><td>මෝල්ටෝස්, සුක්‍රෝස්, ලැක්ටෝස්</td></tr>
-        <tr><td><b>පොලිසැකරයිඩ</b><br><span class="en" style="font-size:.8rem">polysaccharide</span></td><td>මොනො රාශියක දාමයක්</td><td>පිෂ්ඨය, සෙලියුලෝස්, ග්ලයිකෝජන්</td></tr>
-      </table></div>
-      <p>කාර්ය: ශක්තිය (ග්ලූකෝස්), ශක්ති ගබඩාව (පිෂ්ඨය/ග්ලයිකෝජන්), ශාක සෛල බිත්තිය (සෙලියුලෝස්).</p>
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="lab-exp"><span class="ttl">🔬 හඳුනාගැනීමේ පරීක්ෂණ (පොත)</span>
+        පිෂ්ටය: අයඩීන් → <b>නිල්/දුඹුරු</b>. ග්ලූකෝස්: බෙනඩික්ට් + රත් කිරීම → නිල්→කොළ→…→<b>ගඩොල් රතු</b>. සුක්‍රෝස්: බෙනඩික්ට් → වෙනසක් නැත (අම්ලයෙන් ජලාපචනය කළ පසු රතු). ප්‍රෝටීන: බයුරෙට් (NaOH + කොපර් සල්ෆේට්) → <b>දම් පැහැය</b>. ලිපිඩ: සුඩාන් III → <b>රතු ස්තරය</b>.</div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) පිෂ්ටය/ග්ලූකෝස්/ග්ලයිකෝජන් අතරින් සත්ව සංචිත කාබොහයිඩ්‍රේටය? (b) ප්‍රෝටීන හඳුනන පරීක්ෂණය?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">ග්ලයිකෝජන්</span> (පිෂ්ටය = ශාක සංචිතය). (b) <span class="a">බයුරෙට් පරීක්ෂණය</span> → දම් පැහැය.</div></div>
 
-      <h3>§1.2 ප්‍රෝටීන (Proteins) — p.7</h3>
-      <p>අඩංගු: <span class="term">C, H, O, N</span>. තැනුම් ඒකකය = <strong>ඇමයිනෝ අම්ල (amino acids)</strong>. කාර්ය: <strong>එන්සයිම, හෝමෝන, ප්‍රතිදේහ</strong> ලෙස ක්‍රියා; ශරීර වර්ධනය හා අලුත්වැඩියාව.</p>
+      <div class="joke">කාබොහයිඩ්‍රේට කිව්වා: “මම ක්ෂණික ශක්තිය දෙනවා!” ලිපිඩ කිව්වා: “මම වැඩිපුර ශක්තිය හංගගෙන ඉන්නවා — emergency එකට!” 🔋</div>
 
-      <h3>§1.3 ලිපිඩ (Lipids) — p.10</h3>
-      <p>අඩංගු: <span class="term">C, H, O</span> — නමුත් කාබොහයිඩ්‍රේට වලට වඩා <strong>ඔක්සිජන් අඩුයි</strong>. කාර්ය: <strong>ශක්ති ගබඩාව</strong> (කා.හ. වලට වඩා වැඩි ශක්තියක්), දේහ උෂ්ණත්වය පවත්වා ගැනීම, සෛල පටල සෑදීම.</p>
-
-      <h3>§1.4 නියුක්ලෙයික් අම්ල (Nucleic acids) — p.12</h3>
-      <p>ප්‍රවේණික තොරතුරු ගබඩා කරන අණු. වර්ග 2ක්: <span class="term">DNA</span> — ප්‍රවේණික තොරතුරු ගබඩා කරයි; <span class="term">RNA</span> — ප්‍රෝටීන් සංස්ලේෂණයට වැදගත්.</p>
-
-      <h3>§1.5 ජලය (Water) — p.15</h3>
-      <p>ජීවයට <strong>අත්‍යවශ්‍යම</strong> සංඝටකය (ශරීරයෙන් වැඩි ප්‍රමාණයක්). කාර්ය: <strong>විශ්ව ද්‍රාවකය</strong>, ද්‍රව්‍ය ප්‍රවාහනය, රසායනික ප්‍රතික්‍රියාවලට මාධ්‍යය, දේහ උෂ්ණත්ව පාලනය.</p>
-
-      <h3>§1.6 ඛනිජ ලවණ (Mineral salts) — p.16</h3>
-      <div class="tw"><table>
-        <tr><th>ඛනිජය</th><th>කාර්යය</th></tr>
-        <tr><td>කැල්සියම් (Ca)</td><td>අස්ථි හා දත් ශක්තිමත් කිරීම</td></tr>
-        <tr><td>යකඩ (Fe)</td><td>හිමොග්ලෝබින් සෑදීම (ඔක්සිජන් ප්‍රවාහනය)</td></tr>
-        <tr><td>අයඩීන් (I)</td><td>තයිරොක්සින් හෝමෝනයට</td></tr>
-        <tr><td>සෝඩියම්/පොටෑසියම් (Na/K)</td><td>ස්නායු හා පේශි ක්‍රියා, දේහ තරල සමතුලිතතාව</td></tr>
-      </table></div>
-
-      <h3>§1.7 විටමින (Vitamins) — p.19</h3>
-      <p><strong>සුළු ප්‍රමාණවලින්</strong> අවශ්‍ය, දේහ ක්‍රියා නියාමනය කරන සංයෝග. ඌනතාවෙන් රෝග (ඌනතා රෝග):</p>
-      <div class="tw"><table>
-        <tr><th>විටමින්</th><th>ප්‍රභවය</th><th>ඌනතා රෝගය</th></tr>
-        <tr><td>A</td><td>කැරට්, අමු එළවළු</td><td>රාත්‍රී අන්ධතාව</td></tr>
-        <tr><td>C</td><td>අඹ, නෙල්ලි, දෙහි</td><td>ස්කර්වි (විදුරුමස් රුධිර වහනය)</td></tr>
-        <tr><td>D</td><td>හිරු එළිය, මාළු තෙල්</td><td>රිකට්ස් (අස්ථි දුර්වල)</td></tr>
-      </table></div>
-
-      <div class="step work"><span class="lbl">✍️ වැඩ කළ උදාහරණය</span>
-        <p><b>ප්‍රශ්නය:</b> ග්ලූකෝස්, පිෂ්ඨය, ඇමයිනෝ අම්ල, DNA — මේවා අයත් ජෛව අණු වර්ග හඳුනන්න.</p>
-        <p><b>පියවර:</b> ග්ලූකෝස් → කාබොහයිඩ්‍රේට (මොනොසැකරයිඩ) · පිෂ්ඨය → කාබොහයිඩ්‍රේට (පොලිසැකරයිඩ) · ඇමයිනෝ අම්ල → ප්‍රෝටීන වල තැනුම් ඒකකය · DNA → නියුක්ලෙයික් අම්ල.</p>
-        <details class="rv"><summary>ඔයාගේ වාරය: “මෝල්ටෝස්” සහ “ප්‍රතිදේහ (antibody)” අයත් වන්නේ?</summary>
-          <div class="ans"><p class="a">මෝල්ටෝස් → කාබොහයිඩ්‍රේට (ඩයිසැකරයිඩ) · ප්‍රතිදේහ → ප්‍රෝටීන.</p></div></details>
-      </div>
-
-      <div class="step watch"><span class="lbl">🚨 පරෙස්සම් වෙන්න!</span>
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
         <ul>
-          <li>ලිපිඩ වල <strong>C, H, O</strong> තියෙනවා — N නැහැ! N තියෙන්නේ <strong>ප්‍රෝටීන</strong> හා <strong>නියුක්ලෙයික් අම්ල</strong> වල පමණයි.</li>
-          <li>ලිපිඩ = කා.හ. වලට වඩා <strong>ඔක්සිජන් අඩුයි</strong> (ඔක්සිජන් වැඩි නෙවෙයි!).</li>
-          <li>විටමින = ඉතා <strong>සුළු ප්‍රමාණ</strong>; ඒත් නැතුව බැරි (ඌනතා රෝග).</li>
+          <li>පිෂ්ටය (ශාක) සහ ග්ලයිකෝජන් (සත්ව) — සංචිත කාබොහයිඩ්‍රේට දෙකම; පටලවා ගන්න එපා.</li>
+          <li>ලැක්ටෝස් = <b>ශාකවල නැති</b> එකම සීනි වර්ගය (කිරිවල පමණයි).</li>
+          <li>ප්‍රෝටීන <b>පමණයි</b> නයිට්‍රජන් (N) අඩංගු; කාබොහයිඩ්‍රේට/ලිපිඩවල N නැත.</li>
         </ul>
       </div>
 
-      <div class="step"><span class="lbl" style="color:var(--class)">❓ ඉක්මන් පරීක්ෂණය</span>
-        <details class="rv"><summary>1. ප්‍රෝටීන වල තැනුම් ඒකකය මොකක්ද?</summary><div class="ans"><p class="a">ඇමයිනෝ අම්ල.</p></div></details>
-        <details class="rv"><summary>2. ශාක සෛල බිත්තිය සෑදෙන කාබොහයිඩ්‍රේටය?</summary><div class="ans"><p class="a">සෙලියුලෝස් (පොලිසැකරයිඩ).</p></div></details>
-        <details class="rv"><summary>3. ප්‍රවේණික තොරතුරු ගබඩා කරන අණුව?</summary><div class="ans"><p class="a">DNA (නියුක්ලෙයික් අම්ල).</p></div></details>
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="bioMolWidget" style="--cl:var(--A)">
+        <div class="wt">🧬 සංයෝගය tap කර මූලද්‍රව්‍ය/කෘත්‍යය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="carb">කාබොහයිඩ්‍රේට</button>
+          <button class="chip" data-k="prot">ප්‍රෝටීන</button>
+          <button class="chip" data-k="lipid">ලිපිඩ</button>
+          <button class="chip" data-k="nucleic">නියුක්ලෙයික් අම්ල</button>
+          <button class="chip" data-k="water">ජලය</button>
+        </div>
+        <div class="wout" id="bioMolOut">උඩ එකක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. DNA/RNA වල අඩංගු මූලද්‍රව්‍ය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">C, H, O, N සහ <b>P (පොස්පරස්)</b>.</div></div>
+        <div class="reveal"><span class="q">2. ශරීර බරෙන් ~⅔ ක් වන අකාබනික සංයෝගය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">ජලය (water).</div></div>
       </div>
 
-      <div class="step mem"><span class="lbl">🧠 මතක උපක්‍රමය</span>
-        <p>ජෛව අණු 4: <b>“කා-ප්‍රෝ-ලි-නි”</b> (කාබොහයිඩ්‍රේට · ප්‍රෝටීන · ලිපිඩ · නියුක්ලෙයික් අම්ල). N තියෙන්නේ <b>ප්‍රෝ + නි</b> දෙකේ විතරයි!</p>
-      </div>
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🧪</span><div><b>“කා-ප්‍රෝ-ලි-නි + ජලය-ලවණ-විටමින්.”</b> කාබනික 4 (කාබොහයිඩ්‍රේට, ප්‍රෝටීන, ලිපිඩ, නියුක්ලෙයික්) + අකාබනික 3 (ජලය, ලවණ, විටමින්) = ජීවයේ රසායනික පදනම.</div></div>
     </div>
   </details>
 
-  <!-- ============ B. CELLS ============ -->
-  <details class="sec sB" id="B">
-    <summary><span class="pill">B</span> ශාක හා සත්ව සෛල ව්‍යුහය හා සෛල විභජනය <span class="chev">▶</span></summary>
+  <!-- 2 cell structure -->
+  <details class="topic" id="t2" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">②</span>
+      <h3>ශාක හා සත්ව සෛල ව්‍යුහය හා සෛල විභජනය<span class="en">Cell structure &amp; division</span></h3><span class="chev">▾</span></summary>
     <div class="body">
-      <div class="src">📖 මූලාශ්‍රය: 10 ශ්‍රේණිය විද්‍යාව · I කොටස · පරිච්ඡේදය 6 (පි. 108–120)</div>
 
-      <div class="step hook"><span class="lbl">🎣 හූක්</span>
-        <p>ගඩොල් ගෙයක් හිතන්න 🧱 — එක එක ගඩොලින් මුළු ගෙයම හැදෙනවා. ශරීරයත් එහෙමයි: <strong>කුඩාම ‘ගඩොල’ = සෛලය (cell)</strong>. ඔයාගේ ශරීරයේ සෛල <strong>ට්‍රිලියන</strong> ගණනක් තියෙනවා — ඒත් ඔක්කොම පටන් ගත්තේ එක සෛලයකින්!</p>
-      </div>
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කිරල කෑල්ලක… කාමර!</span> 1665 දී රොබට් හූක් (Robert Hooke) කිරල කෑල්ලක් අණුවීක්ෂයෙන් බලද්දී කුඩා “කාමර” දැක්කා. ඔහු ඒවාට <b>සෛල (cells)</b> කියලා නම් කළා. අද අපි දන්නවා — හැම ජීවියෙක්ම සෛලවලින් සෑදී ඇති බව!</div>
 
-      <h3>§6.1–6.2 සෛලය යනු කුමක්ද?</h3>
-      <p>සෛලය = ජීවයේ <strong>මූලික ව්‍යුහමය හා ක්‍රියාකාරී ඒකකය</strong> (basic structural &amp; functional unit of life). සියලු ජීවීන් සෛල එකකින් හෝ වැඩි ගණනකින් සෑදී ඇත — මෙයයි <strong>සෛල සංකල්පය</strong>.</p>
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — සෛල වාදය</b></div>
+      <p class="lead"><b>සෛල වාදය (Cell theory):</b></p>
+      <p>① සෛලය = ජීවයේ <b>ව්‍යුහමය හා කෘත්‍යමය</b> ඒකකය. <br>② සියලු ජීවීන් සෑදී ඇත්තේ එක් සෛලයකින් හෝ සෛල කිහිපයකින්. <br>③ නව සෛල ඇතිවන්නේ කලින් පැවති සෛලවලින්. (ෂ්ලයිඩන් හා ෂ්වාන් 1838; විර්කො)</p>
+      <p>ඉන්ද්‍රිකා (organelles) සියල්ලම අඩංගු සෛලයක් <b>දර්ශීය සෛලය</b> (typical cell) ලෙස හඳුන්වයි.</p>
 
-      <h3>§6.3–6.4 සෛලයක ව්‍යුහය හා ඉන්ද්‍රියිකා</h3>
-      <p>පහත ශාක සෛලයක රූපය. අංක දිහා බලා, පැත්තේ විස්තරය කියවන්න:</p>
-      <div class="fig">
-        <svg viewBox="0 0 360 250" role="img" aria-label="ශාක සෛලයක ව්‍යුහය">
-          <rect x="8" y="8" width="344" height="234" rx="30" fill="#e3f5e6" stroke="#2f8f3e" stroke-width="6"/>
-          <rect x="18" y="18" width="324" height="214" rx="24" fill="#f4fbf7" stroke="#0f766e" stroke-width="2"/>
-          <rect x="150" y="80" width="186" height="140" rx="40" fill="#e1f1fb" stroke="#1f7fc2" stroke-width="2"/>
-          <circle cx="86" cy="98" r="40" fill="#efe8fd" stroke="#6d28d9" stroke-width="2.5"/><circle cx="86" cy="98" r="12" fill="#6d28d9"/>
-          <ellipse cx="92" cy="190" rx="34" ry="17" fill="#fdf0dc" stroke="#c2680a" stroke-width="2.5"/>
-          <ellipse cx="250" cy="52" rx="26" ry="13" fill="#cdeacf" stroke="#2f8f3e" stroke-width="2.5"/>
-          <circle cx="150" cy="56" r="3.5" fill="#3b3b3b"/><circle cx="60" cy="160" r="3.5" fill="#3b3b3b"/><circle cx="120" cy="214" r="3.5" fill="#3b3b3b"/>
-          <g font-family="sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">
-            <circle cx="28" cy="30" r="11" fill="#0b5752"/><text x="28" y="35">1</text>
-            <circle cx="32" cy="58" r="11" fill="#0b5752"/><text x="32" y="63">2</text>
-            <circle cx="86" cy="98" r="11" fill="#0b5752"/><text x="86" y="103">3</text>
-            <circle cx="92" cy="190" r="11" fill="#0b5752"/><text x="92" y="195">4</text>
-            <circle cx="150" cy="56" r="11" fill="#0b5752"/><text x="150" y="61">5</text>
-            <circle cx="250" cy="52" r="11" fill="#0b5752"/><text x="250" y="57">6</text>
-            <circle cx="240" cy="150" r="11" fill="#0b5752"/><text x="240" y="155">7</text>
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ශාක සෛලය vs සත්ව සෛලය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 230" role="img" aria-label="ශාක සෛලය හා සත්ව සෛලය සැසඳීම">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10">
+            <!-- plant cell (rectangular) -->
+            <rect x="14" y="20" width="200" height="170" rx="6" fill="#eafaf3" stroke="#2e7d52" stroke-width="3"/>
+            <rect x="22" y="28" width="184" height="154" rx="4" fill="#f4fff9" stroke="#86bd9c"/>
+            <ellipse cx="70" cy="70" rx="22" ry="20" fill="#cdb4e0" stroke="#6d4aa0"/><text x="70" y="73" text-anchor="middle">න්‍යෂ්ටිය</text>
+            <rect x="90" y="100" width="90" height="55" rx="8" fill="#bfe0ff" stroke="#2b6cb0"/><text x="135" y="130" text-anchor="middle">විශාල රික්තකය</text>
+            <ellipse cx="150" cy="55" rx="16" ry="9" fill="#4caf50"/><text x="150" y="45" text-anchor="middle" fill="#2e7d52">හරිතලව</text>
+            <ellipse cx="45" cy="150" rx="14" ry="7" fill="#e08c7c"/>
+            <text x="114" y="208" text-anchor="middle" font-weight="700" fill="#2e7d52">ශාක සෛලය</text>
+            <text x="60" y="16" text-anchor="middle" fill="#2e7d52">සෛල බිත්තිය</text>
+            <!-- animal cell (round) -->
+            <ellipse cx="350" cy="105" rx="100" ry="80" fill="#fdeee6" stroke="#c4533f" stroke-width="3"/>
+            <ellipse cx="335" cy="95" rx="24" ry="22" fill="#cdb4e0" stroke="#6d4aa0"/><text x="335" y="98" text-anchor="middle">න්‍යෂ්ටිය</text>
+            <ellipse cx="395" cy="70" rx="16" ry="8" fill="#e08c7c"/><text x="405" y="60" fill="#9c3a29">මයිටො</text>
+            <ellipse cx="390" cy="130" rx="9" ry="9" fill="#bfe0ff" stroke="#2b6cb0"/><text x="412" y="133" fill="#23598f">කුඩා රික්තක</text>
+            <circle cx="320" cy="150" r="4" fill="#9c3a29"/><circle cx="345" cy="155" r="4" fill="#9c3a29"/>
+            <text x="350" y="200" text-anchor="middle" font-weight="700" fill="#9c3a29">සත්ව සෛලය</text>
           </g>
         </svg>
-        <div class="cap">රූපය B1 · ශාක සෛලයක ව්‍යුහය (10 ශ්‍රේ. රූ. 6.3 ආශ්‍රයෙන්)</div>
-      </div>
-      <ol style="padding-left:20px">
-        <li><b>සෛල බිත්තිය</b> — ශාක සෛලයේ <em>පමණයි</em>; සෙලියුලෝස් වලින්; අජීවී, ආරක්ෂිත.</li>
-        <li><b>ප්ලාස්ම පටලය</b> — අර්ධ පාරගම්‍ය; ද්‍රව්‍ය ඇතුළු/පිට වීම පාලනය.</li>
-        <li><b>න්‍යෂ්ටිය</b> — සියලු ක්‍රියා පාලනය; <b>DNA</b> අඩංගු.</li>
-        <li><b>මයිටොකොන්ඩ්‍රියා</b> — ශ්වසනයෙන් ශක්තිය නිපදවයි (“සෛලයේ ජව බලාගාරය”).</li>
-        <li><b>රයිබොසෝම</b> — ප්‍රෝටීන් සංස්ලේෂණය.</li>
-        <li><b>හරිතලව</b> — ශාක සෛලයේ <em>පමණයි</em>; ප්‍රභාසංස්ලේෂණය.</li>
-        <li><b>රික්තකය</b> — සෛල යුෂ; ශාක සෛලයේ විශාල මධ්‍ය රික්තකයක්.</li>
-      </ol>
-
-      <h3>ශාක සෛලය vs සත්ව සෛලය</h3>
-      <div class="tw"><table>
-        <tr><th>කොටස</th><th>ශාක සෛලය</th><th>සත්ව සෛලය</th></tr>
-        <tr><td>සෛල බිත්තිය</td><td class="y">✓</td><td class="n">✗</td></tr>
-        <tr><td>හරිතලව</td><td class="y">✓</td><td class="n">✗</td></tr>
-        <tr><td>රික්තකය</td><td>විශාල මධ්‍ය එකක්</td><td>කුඩා / නැත</td></tr>
-        <tr><td>න්‍යෂ්ටිය · පටලය · මයිටො · රයිබො</td><td class="y">✓</td><td class="y">✓</td></tr>
+        <figcaption>ශාක සෛලය: සෛල බිත්තිය + විශාල රික්තකය + හරිතලව. සත්ව සෛලය: බිත්තියක් නැත, රික්තක කුඩා/නැත, හරිතලව නැත.</figcaption>
+      </figure>
+      <div class="scroll"><table class="tbl">
+        <tr><th>සත්ව සෛලය</th><th>ශාක සෛලය</th></tr>
+        <tr><td>සෛල බිත්තියක් <b>නැත</b></td><td>සෛල බිත්තියක් <b>ඇත</b> (සෙලියුලෝස්)</td></tr>
+        <tr><td>රික්තක කුඩා/තාවකාලික</td><td>විශාල මධ්‍ය රික්තකයක්</td></tr>
+        <tr><td>හරිතලව <b>නැත</b></td><td>බොහෝ විට හරිතලව <b>ඇත</b></td></tr>
       </table></div>
+      <p class="tnote"><b>ප්‍රධාන ඉන්ද්‍රිකා:</b> සෛල බිත්තිය (රඳවයි/ආරක්ෂාව) · ප්ලාස්ම පටලය (අර්ධ පාරගම්‍ය, ඇතුළු/පිටවීම පාලනය) · සෛල ප්ලාස්මය (ප්‍රතික්‍රියා සිදුවන තැන) · න්‍යෂ්ටිය (පාලනය, වර්ණදේහ) · මයිටොකොන්ඩ්‍රියම් (“බල මැදිරිය” — ශක්තිය) · ගොල්ගි සංකීර්ණය (ඇසුරුම්) · රයිබොසෝම (ප්‍රෝටීන සංශ්ලේෂණය) · අන්තඃප්ලාස්මීය ජාලිකා (ප්‍රවාහනය) · රික්තකය (ජලය/සංචිත).</p>
 
-      <h3>§6.5 සෛල විභජනය (Cell division)</h3>
-      <div class="tw"><table>
-        <tr><th>ලක්ෂණය</th><th>අනූනන විභජනය (Mitosis)</th><th>ඌනන විභජනය (Meiosis)</th></tr>
-        <tr><td>කාර්යය</td><td>දේහ වර්ධනය හා අලුත්වැඩියාව</td><td>ජන්මාණු (gametes) නිපදවීම — ලිංගික ප්‍රජනනය</td></tr>
-        <tr><td>වර්ණදේහ ගණන</td><td><b>අනූනන = අඩු නොවේ</b> (සමානයි)</td><td><b>ඌනන = ඌන වේ</b> (අඩකින්)</td></tr>
-        <tr><td>නිපදවෙන සෛල</td><td>එක සමාන සෛල 2ක්</td><td>වෙනස් සෛල 4ක්</td></tr>
+      <div class="step"><span class="dot">4</span><b>සෛල විභජනය + ඔබේ වාරය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 130" role="img" aria-label="අනුනන හා ඌනන විභජනය">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10.5" text-anchor="middle">
+            <circle cx="55" cy="40" r="20" fill="#e2f3f4" stroke="#0e7c86"/><text x="55" y="44" fill="#0a5b63" font-weight="700">2n</text>
+            <text x="120" y="20" fill="#0a5b63" font-weight="700">අනුනන</text>
+            <circle cx="170" cy="25" r="16" fill="#e2f3f4" stroke="#0e7c86"/><text x="170" y="29" fill="#0a5b63">2n</text>
+            <circle cx="170" cy="62" r="16" fill="#e2f3f4" stroke="#0e7c86"/><text x="170" y="66" fill="#0a5b63">2n</text>
+            <line x1="75" y1="40" x2="154" y2="28" stroke="#0a5b63"/><line x1="75" y1="40" x2="154" y2="60" stroke="#0a5b63"/>
+            <text x="120" y="100" fill="#4a5468" font-size="9.5">සර්ව සම සෛල 2ක්</text>
+
+            <circle cx="280" cy="62" r="20" fill="#fbe9e4" stroke="#c4533f"/><text x="280" y="66" fill="#9c3a29" font-weight="700">2n</text>
+            <text x="345" y="20" fill="#9c3a29" font-weight="700">ඌනන</text>
+            <g fill="#fbe9e4" stroke="#c4533f"><circle cx="410" cy="22" r="13"/><circle cx="410" cy="50" r="13"/><circle cx="410" cy="78" r="13"/><circle cx="410" cy="106" r="13"/></g>
+            <g fill="#9c3a29"><text x="410" y="26">n</text><text x="410" y="54">n</text><text x="410" y="82">n</text><text x="410" y="110">n</text></g>
+            <g stroke="#9c3a29"><line x1="300" y1="62" x2="396" y2="24"/><line x1="300" y1="62" x2="396" y2="50"/><line x1="300" y1="62" x2="396" y2="78"/><line x1="300" y1="62" x2="396" y2="104"/></g>
+          </g>
+        </svg>
+        <figcaption>අනුනන (mitosis): 2n→2n, සර්ව සම සෛල 2ක්. ඌනන (meiosis): 2n→n, විවිධ සෛල 4ක් (ජන්මාණු).</figcaption>
+      </figure>
+      <div class="scroll"><table class="tbl">
+        <tr><th> </th><th>අනුනන විභජනය (Mitosis)</th><th>ඌනන විභජනය (Meiosis)</th></tr>
+        <tr><td>වර්ණදේහ සංඛ්‍යාව</td><td>එලෙසම (2n → 2n)</td><td>අඩකට (2n → n)</td></tr>
+        <tr><td>දුහිතෘ සෛල</td><td>2ක් (සර්ව සම)</td><td>4ක් (විවිධ)</td></tr>
+        <tr><td>අවස්ථා</td><td>1ක්</td><td>2ක්</td></tr>
+        <tr><td>වැදගත්කම</td><td>දේහ වර්ධනය, තුවාල සුවය, අලිංගික ප්‍රජනනය</td><td>ජන්මාණු සෑදීම, ආවේණික විවිධත්වය</td></tr>
       </table></div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: මිනිස් දේහ සෛලයක වර්ණදේහ 46ක් (2n). ඌනන විභජනයෙන් සෑදෙන ජන්මාණුවක වර්ණදේහ කීයද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">23 (n)</span> — ඌනන විභජනයේදී වර්ණදේහ සංඛ්‍යාව අඩකට පත් වෙයි. (ජනනය → n + n → 2n = 46.)</div></div>
 
-      <div class="step work"><span class="lbl">✍️ වැඩ කළ උදාහරණය</span>
-        <p><b>ප්‍රශ්නය:</b> අණ්වීක්ෂයෙන් සෛලයක් බැලූ විට <strong>සෛල බිත්තියක්</strong> සහ <strong>විශාල මධ්‍ය රික්තකයක්</strong> පෙනේ. මෙය ශාක ද සත්ව ද සෛලයක්ද?</p>
-        <p><b>පියවර:</b> සෛල බිත්තිය + විශාල මධ්‍ය රික්තකය → මේවා <strong>ශාක සෛලයේ පමණයි</strong> → එබැවින් <b>ශාක සෛලයක්</b>.</p>
-        <details class="rv"><summary>ඔයාගේ වාරය: දේහ වර්ධනයට වැදගත් වන විභජනය මොකක්ද?</summary><div class="ans"><p class="a">අනූනන විභජනය (Mitosis).</p></div></details>
-      </div>
-
-      <div class="step watch"><span class="lbl">🚨 පරෙස්සම් වෙන්න!</span>
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
         <ul>
-          <li>සෛල බිත්තිය හා හරිතලව <strong>සත්ව සෛලයේ නැහැ</strong>. (ප්ලාස්ම පටලය නම් දෙකේම ඇත!)</li>
-          <li>Mitosis = <b>අඩු නොවන</b>; Meiosis = <b>අඩකින් අඩු වන</b>. නම් පටලවා ගන්න එපා!</li>
+          <li>අනුනන = <b>අ</b>ඩු <b>නො</b>වන (2n→2n); ඌනන = <b>ඌ</b>න (අඩු) වන (2n→n). නම් මතක තබන්න.</li>
+          <li>මයිටොකොන්ඩ්‍රියම් (ශක්තිය) සහ රයිබොසෝම (ප්‍රෝටීන) පටලවා ගන්න එපා.</li>
+          <li>හරිතලව ඇත්තේ <b>ශාක</b> සෛලවල පමණයි (සත්ව සෛලවල නැත).</li>
         </ul>
       </div>
 
-      <div class="step"><span class="lbl" style="color:var(--class)">❓ ඉක්මන් පරීක්ෂණය</span>
-        <details class="rv"><summary>1. “සෛලයේ ජව බලාගාරය” යනු?</summary><div class="ans"><p class="a">මයිටොකොන්ඩ්‍රියා.</p></div></details>
-        <details class="rv"><summary>2. ප්‍රභාසංස්ලේෂණය සිදුවන ඉන්ද්‍රියිකාව?</summary><div class="ans"><p class="a">හරිතලව (ශාක සෛලයේ පමණයි).</p></div></details>
-        <details class="rv"><summary>3. ජන්මාණු සෑදෙන විභජනය?</summary><div class="ans"><p class="a">ඌනන විභජනය (Meiosis).</p></div></details>
-      </div>
-
-      <div class="step mem"><span class="lbl">🧠 මතක උපක්‍රමය</span>
-        <p>ශාක සෛලයේ <b>අමතර 3</b>: <b>බිත්තිය · හරිතලව · විශාල රික්තකය</b>. &nbsp; විභජනය: <b>අනූනන=අඩු නෑ, ඌනන=ඌන වෙයි.</b></p>
-      </div>
-    </div>
-  </details>
-
-  <!-- ============ C. CHARACTERISTICS ============ -->
-  <details class="sec sC" id="C">
-    <summary><span class="pill">C</span> ජීවීන්ගේ ලක්ෂණ <span class="chev">▶</span></summary>
-    <div class="body">
-      <div class="src">📖 මූලාශ්‍රය: 10 ශ්‍රේණිය විද්‍යාව · I කොටස · පරිච්ඡේදය 8 (පි. 135–152)</div>
-
-      <div class="step hook"><span class="lbl">🎣 හූක්</span>
-        <p>ගලක් සහ පූසෙක් — දෙකම ‘දෙයක්’. ඒත් පූසා <strong>ජීවියෙක්</strong>, ගල <strong>අජීවියෙක්</strong>. කොහොමද වෙන් කරන්නේ? ජීවියෙක්ගේ <strong>ලක්ෂණ 8</strong>ක් තියෙනවා — අද ඒවා ඉගෙන ගමු!</p>
-      </div>
-
-      <p>සජීවී ද්‍රව්‍ය අජීවී ද්‍රව්‍ය වලින් වෙන් කරන <strong>ලක්ෂණ 8</strong>ක් (§8.1–8.8):</p>
-      <div class="tw"><table>
-        <tr><th>#</th><th>ලක්ෂණය</th><th>අර්ථය</th></tr>
-        <tr><td>8.1</td><td><b>සෛලීය සංවිධානය</b></td><td>සෛල එකකින් හෝ වැඩි ගණනකින් සෑදී තිබීම</td></tr>
-        <tr><td>8.2</td><td><b>පෝෂණය</b></td><td>වර්ධනයට/ශක්තියට ආහාර ලබා ගැනීම</td></tr>
-        <tr><td>8.3</td><td><b>ශ්වසනය</b></td><td>ආහාර ඔක්සිකරණයෙන් ශක්තිය නිදහස් කිරීම</td></tr>
-        <tr><td>8.4</td><td><b>උද්දීප්‍යතාව හා සමායෝජනය</b></td><td>පරිසර වෙනස්වලට ප්‍රතිචාර දැක්වීම</td></tr>
-        <tr><td>8.5</td><td><b>බහිස්ස්‍රාවය</b></td><td>පරිවෘත්තීය අපද්‍රව්‍ය ඉවත් කිරීම</td></tr>
-        <tr><td>8.6</td><td><b>චලනය</b></td><td>දේහය/දේහ කොටස් චලනය</td></tr>
-        <tr><td>8.7</td><td><b>ප්‍රජනනය</b></td><td>තම වර්ගයා පවත්වා ගැනීමට නව ජීවීන් බිහි කිරීම</td></tr>
-        <tr><td>8.8</td><td><b>වර්ධනය හා විකසනය</b></td><td>ප්‍රමාණය හා සංකීර්ණත්වය වැඩි වීම</td></tr>
-      </table></div>
-
-      <div class="step analogy"><span class="lbl">🔗 මතක උපමාව</span>
-        <p>ඉංග්‍රීසියෙන් ලක්ෂණ 7 මතක තබාගන්න: <b>“MRS GREN”</b> — <span class="en">Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition</span>. ඊට <b>+ C</b> (Cellular organization) එකතු කළාම — <b>ලක්ෂණ 8මයි!</b></p>
-      </div>
-
-      <div class="step work"><span class="lbl">✍️ වැඩ කළ උදාහරණය</span>
-        <p><b>ප්‍රශ්නය:</b> “මෝටර් රථයක් චලනය වෙයි, ඉන්ධන දහනය කරයි (ශක්තිය), දුම පිට කරයි.” මෝටර් රථය ජීවියෙක්ද? ඇයි?</p>
-        <p><b>පියවර:</b> චලනය ✓, ශක්තිය ✓, අපද්‍රව්‍ය ✓ — ඒත් <strong>සෛලවලින් සෑදී නැත, වර්ධනය නැත, ප්‍රජනනය නැත</strong>. ලක්ෂණ 8ම තිබිය යුතුයි → එබැවින් මෝටර් රථය <b>ජීවියෙක් නොවේ</b>.</p>
-        <details class="rv"><summary>ඔයාගේ වාරය: බීජයක් පැළ වී ශාකයක් වීම මොන ලක්ෂණ 2ක්ද පෙන්වන්නේ?</summary><div class="ans"><p class="a">වර්ධනය හා විකසනය; (පෝෂණය ද).</p></div></details>
-      </div>
-
-      <div class="step watch"><span class="lbl">🚨 පරෙස්සම් වෙන්න!</span>
-        <p>එක් ලක්ෂණයක් තිබුණා කියලා ජීවියෙක් වෙන්නේ නෑ! (ගිනි දැල්ල ‘වර්ධනය, චලනය, ශක්තිය’ පෙන්නුවත් — සෛල නෑ, ප්‍රජනනය නෑ → අජීවියි.) <strong>ලක්ෂණ 8ම</strong> තිබිය යුතුයි.</p>
-      </div>
-
-      <div class="step"><span class="lbl" style="color:var(--class)">❓ ඉක්මන් පරීක්ෂණය</span>
-        <details class="rv"><summary>1. ආහාර ඔක්සිකරණයෙන් ශක්තිය නිදහස් කිරීම?</summary><div class="ans"><p class="a">ශ්වසනය.</p></div></details>
-        <details class="rv"><summary>2. පරිසර වෙනස්වලට ප්‍රතිචාර දැක්වීම?</summary><div class="ans"><p class="a">උද්දීප්‍යතාව හා සමායෝජනය.</p></div></details>
-        <details class="rv"><summary>3. “MRS GREN + C” යනු කුමක්ද?</summary><div class="ans"><p class="a">ජීවීන්ගේ ලක්ෂණ 8 මතක තබාගැනීමේ උපක්‍රමය.</p></div></details>
-      </div>
-
-      <div class="step mem"><span class="lbl">🧠 මතක උපක්‍රමය</span>
-        <p><b>MRS GREN + C</b> = ලක්ෂණ 8! (වෛරස් — ජීවී මෙන්ම අජීවී ලක්ෂණ ද පෙන්වන විශේෂිත කාණ්ඩයකි.)</p>
-      </div>
-    </div>
-  </details>
-
-  <!-- ============ D. CLASSIFICATION ============ -->
-  <details class="sec sD" id="D">
-    <summary><span class="pill">D</span> ජීවීන් වර්ගීකරණය හා නම් කිරීම <span class="chev">▶</span></summary>
-    <div class="body">
-      <div class="src">📖 මූලාශ්‍රය: 10 ශ්‍රේණිය විද්‍යාව · II කොටස · පරිච්ඡේදය 13 (පි. 1–27)</div>
-
-      <div class="step hook"><span class="lbl">🎣 හූක්</span>
-        <p>කඩේකට ගියාම බඩු පෙළගස්සලා — සබන් එක තැනක, බිස්කට් තැනක, පරිප්පු තැනක. ඇයි? <strong>හොයාගන්න ලේසි නිසා!</strong> 🛒 විද්‍යාඥයෝත් ලක්ෂ ගණනක් ජීවීන් ‘පෙළගස්සනවා’ — ඒකට කියන්නේ <strong>වර්ගීකරණය</strong>.</p>
-      </div>
-
-      <h3>§13.1 ජීවීන් වර්ගීකරණය</h3>
-      <p>පොදු ලක්ෂණ අනුව ජීවීන් කාණ්ඩවලට බෙදීම = <strong>වර්ගීකරණය (classification)</strong>.</p>
-      <h4>§13.1.1 වර්ගීකරණයේ වැදගත්කම</h4>
-      <ul>
-        <li>ජීවීන් පිළිබඳ <strong>පහසුවෙන් අධ්‍යයනය</strong> කළ හැකි වීම.</li>
-        <li>නම් කළ ජීවියෙකුගේ <strong>අනන්‍යතාව</strong> පහසුවෙන් හඳුනා ගැනීම.</li>
-        <li>ජීවීන් අතර <strong>සම්බන්ධතා</strong> හඳුනා ගැනීම.</li>
-      </ul>
-      <h4>වර්ගීකරණ ක්‍රම</h4>
-      <div class="tw"><table>
-        <tr><th>ක්‍රමය</th><th>පදනම</th></tr>
-        <tr><td>කෘත්‍රිම වර්ගීකරණය</td><td>වාසස්ථාන/බාහිර උපාංග වැනි සරල ලක්ෂණ (උදා: පියාපත් ඇති/නැති)</td></tr>
-        <tr><td>ස්වාභාවික වර්ගීකරණය</td><td>පරිණාමික බන්ධුතා හා ව්‍යුහමය සමානකම් (නූතන ක්‍රමය)</td></tr>
-      </table></div>
-      <h4>වර්ගීකරණ ධූරාවලිය (විශාලයේ සිට කුඩාවට)</h4>
-      <div class="flow"><span>රාජධානිය</span><span class="ar">→</span><span>වංශය</span><span class="ar">→</span><span>වර්ගය</span><span class="ar">→</span><span>ගෝත්‍රය</span><span class="ar">→</span><span>කුලය</span><span class="ar">→</span><span>ගණය</span><span class="ar">→</span><span>විශේෂය</span></div>
-      <p style="font-size:.86rem;color:var(--muted);text-align:center">(රාජධානි 5: මොනේරා · ප්‍රොටිස්ටා · ෆන්ගයි · ප්ලාන්ටේ · ඇනිමාලියා)</p>
-
-      <h3>§13.2 ජීවීන් නාමකරණය — ද්විපද නාමකරණය (p.24)</h3>
-      <p>ජීවියෙකුට ජාත්‍යන්තරව පිළිගත් විද්‍යාත්මක නාමයක් දීම. පද <strong>දෙකකි</strong> — <span class="term">ගණය (Genus)</span> + <span class="term">විශේෂය (Species)</span>:</p>
-      <div class="fig">
-        <div style="display:inline-flex;gap:12px;align-items:baseline;background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:12px 20px;font-size:1.3rem">
-          <span class="en" style="font-style:italic;font-weight:800;color:var(--cell)">Homo</span>
-          <span class="en" style="font-style:italic;color:var(--chem)">sapiens</span>
-          <span style="font-size:.8rem;color:var(--muted)">= මිනිසා</span>
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="orgWidget" style="--cl:var(--A)">
+        <div class="wt">🔬 ඉන්ද්‍රිකාව tap කර කෘත්‍යය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="nuc">න්‍යෂ්ටිය</button>
+          <button class="chip" data-k="mito">මයිටොකොන්ඩ්‍රියම්</button>
+          <button class="chip" data-k="ribo">රයිබොසෝම</button>
+          <button class="chip" data-k="wall">සෛල බිත්තිය</button>
+          <button class="chip" data-k="vac">රික්තකය</button>
+          <button class="chip" data-k="mem">ප්ලාස්ම පටලය</button>
         </div>
-        <div class="cap">රූපය D1 · ද්විපද නාමය: ගණය (Homo) + විශේෂය (sapiens)</div>
+        <div class="wout" id="orgOut">උඩ එකක් tap කරන්න…</div>
       </div>
-      <div class="step watch"><span class="lbl">🚨 ලිවීමේ රීති (පරෙස්සම්!)</span>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. සෛලයේ “බල මැදිරිය” ලෙස හැඳින්වෙන්නේ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">මයිටොකොන්ඩ්‍රියම් (aerobic respiration → ශක්තිය).</div></div>
+        <div class="reveal"><span class="q">2. තුවාල සුව වීම සිදුවන්නේ කුමන විභජනයෙන්ද?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">අනුනන විභජනය (mitosis).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🧫</span><div><b>“සෛලය = ජීවයේ කුඩාම ඒකකය; ශාකයට බිත්තිය+හරිතලව+රික්තකය වැඩියි. අනුනන=එලෙසම, ඌනන=අඩකට.”</b></div></div>
+    </div>
+  </details>
+
+  <!-- 3 characteristics -->
+  <details class="topic" id="t3" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">③</span>
+      <h3>ජීවීන්ගේ ලක්ෂණ<span class="en">Characteristics of living things</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ගලක් ජීවියෙක්ද? බල්ලෙක් ජීවියෙක්ද?</span> බල්ලා කනවා, හුස්ම ගන්නවා, දුවනවා, පැටවුන් හදනවා — ගල කරන්නේ නෑ. ජීවියෙක්ද අජීවියෙක්ද කියලා තීරණය කරන්නේ <b>පොදු ලක්ෂණ 8ක්</b> අනුවයි.</div>
+
+      <div class="step"><span class="dot">2·3</span><b>සරල විදිහට + ඇසට පේන්න — ලක්ෂණ 8</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 150" role="img" aria-label="ජීවීන්ගේ පොදු ලක්ෂණ අට">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10" text-anchor="middle">
+            <g fill="#e2f3f4" stroke="#0e7c86"><rect x="8" y="12" width="108" height="28" rx="14"/><rect x="124" y="12" width="108" height="28" rx="14"/><rect x="240" y="12" width="108" height="28" rx="14"/><rect x="356" y="12" width="106" height="28" rx="14"/>
+            <rect x="8" y="56" width="108" height="28" rx="14"/><rect x="124" y="56" width="108" height="28" rx="14"/><rect x="240" y="56" width="108" height="28" rx="14"/><rect x="356" y="56" width="106" height="28" rx="14"/></g>
+            <g fill="#0a5b63" font-weight="700"><text x="62" y="31">සෛලීය සංවිධානය</text><text x="178" y="31">පෝෂණය</text><text x="294" y="31">ශ්වසනය</text><text x="409" y="31">උද්දීපනය</text>
+            <text x="62" y="75">බහිස්‍රාවය</text><text x="178" y="75">චලනය</text><text x="294" y="75">ප්‍රජනනය</text><text x="409" y="75">වර්ධනය</text></g>
+            <text x="235" y="115" fill="#4a5468" font-size="11">මේ 8ම පෙන්වන්නේ ජීවියෙක්; අජීවියෙක් මේවා පෙන්වන්නේ නැත.</text>
+          </g>
+        </svg>
+      </figure>
+      <div class="scroll"><table class="tbl">
+        <tr><th>ලක්ෂණය</th><th>අර්ථය</th></tr>
+        <tr><td><b>සෛලීය සංවිධානය</b></td><td>එක/බහු සෛලික; සෛලය→පටක→ඉන්ද්‍රිය→පද්ධතිය→ජීවියා</td></tr>
+        <tr><td><b>පෝෂණය</b></td><td>ශක්ති/ද්‍රව්‍ය ලබාගැනීම; ස්වයංපෝෂී (ප්‍රභාසංශ්ලේෂණය) / විෂමපෝෂී</td></tr>
+        <tr><td><b>ශ්වසනය</b></td><td>සෛල තුළ ආහාරයෙන් ශක්තිය නිදහස් කිරීම (O₂ අවශෝෂණය, CO₂ පිටකිරීම)</td></tr>
+        <tr><td><b>උද්දීපනය හා සමායෝජනය</b></td><td>උත්තේජනවලට ප්‍රතිචාර (ආලෝක/ශබ්ද/රසායනික); ස්නායු හා හෝමෝන</td></tr>
+        <tr><td><b>බහිස්‍රාවය</b></td><td>පරිවර්තීය අපද්‍රව්‍ය ඉවත් කිරීම (යූරියා, CO₂, ජලය)</td></tr>
+        <tr><td><b>චලනය</b></td><td>දේහයේ/කොටස්වල සෙලවීම; ශාකවල වර්ධක චලන</td></tr>
+        <tr><td><b>ප්‍රජනනය</b></td><td>නව ජීවීන් බිහි කිරීම; ලිංගික (ජන්මාණු) / අලිංගික</td></tr>
+        <tr><td><b>වර්ධනය හා විකසනය</b></td><td>ප්‍රමාණයෙන් විශාල වීම + විශේෂණය වීම</td></tr>
+      </table></div>
+      <div class="box hook"><span class="ttl">🌿 ප්‍රභාසංශ්ලේෂණය</span>
+        <div class="eqn">6CO₂ + 6H₂O — (ආලෝක ශක්තිය / හරිතප්‍රද) → C₆H₁₂O₆ + 6O₂</div>
+        ස්වයංපෝෂී ශාක හරිතප්‍රද (chlorophyll) ආධාරයෙන් ආහාර නිපදවයි; විෂමපෝෂී (සතුන්) අන් ජීවීන්ගෙන් ආහාර ලබයි.</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">මිනිසාගේ බහිස්‍රාවී අපද්‍රව්‍ය හා ඉවත් කරන ඉන්ද්‍රිය ලියන්න.</p>
+        <p style="margin:.2em 0">→ පෙනහළු (CO₂, ජලය), වකුගඩු (යූරියා/මූත්‍ර), සම (ඩහදිය — ජලය/ලවණ).</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) ස්වයංපෝෂී හා විෂමපෝෂී වෙනස කුමක්ද? (b) ශක්තිය නිදහස් කරන ලක්ෂණය?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) ස්වයංපෝෂී = ආහාර තමා නිපදවයි (ශාක); විෂමපෝෂී = අන් ජීවීන්ගෙන් ලබයි (සතුන්). (b) <span class="a">ශ්වසනය</span>.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
         <ul>
-          <li>ගණයේ පළමු අකුර <strong>කැපිටල්</strong>; විශේෂය <strong>සිම්පල්</strong>. (<span class="en">Homo sapiens</span> — <span class="en">homo Sapiens</span> නෙවෙයි!)</li>
-          <li>දෙකම <strong>ඇලකුරෙන් (italic)</strong>, නැත්නම් <strong>ඉරක් යටින්</strong> ඇඳ ලියන්න.</li>
+          <li>ශාකත් <b>ශ්වසනය</b> කරයි (රෑ-දවල් දෙකේම); ප්‍රභාසංශ්ලේෂණය වෙනම දෙයක්.</li>
+          <li>ශාකත් <b>උද්දීපනය</b> පෙන්වයි (නිදිකුම්බා ස්පර්ශෙන් හැකිලෙයි; ආලෝකයට වර්ධනය).</li>
+          <li>වර්ධනය ≠ විකසනය — වර්ධනය = ප්‍රමාණය; විකසනය = විශේෂණය.</li>
         </ul>
       </div>
 
-      <div class="step work"><span class="lbl">✍️ වැඩ කළ උදාහරණය</span>
-        <p><b>ප්‍රශ්නය:</b> ද්විපද නාමයක පද දෙක මොනවද? <span class="en">Panthera leo</span> හි ‘Panthera’ නියෝජනය කරන්නේ?</p>
-        <p><b>පියවර:</b> පද 2 = ගණය + විශේෂය. ‘Panthera’ = <b>ගණය (Genus)</b>; ‘leo’ = විශේෂය.</p>
-        <details class="rv"><summary>ඔයාගේ වාරය: කෘත්‍රිම හා ස්වාභාවික වර්ගීකරණ අතර මූලික වෙනස?</summary><div class="ans"><p class="a">කෘත්‍රිම = සරල බාහිර ලක්ෂණ මත; ස්වාභාවික = පරිණාමික බන්ධුතා/ව්‍යුහමය සමානකම් මත.</p></div></details>
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ජීවීන්ගේ පොදු ලක්ෂණ අට ලියන්න.</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">සෛලීය සංවිධානය, පෝෂණය, ශ්වසනය, උද්දීපනය/සමායෝජනය, බහිස්‍රාවය, චලනය, ප්‍රජනනය, වර්ධනය/විකසනය.</div></div>
+        <div class="reveal"><span class="q">2. සංවිධාන මට්ටම් පිළිවෙළ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">සෛලය → පටක → ඉන්ද්‍රිය/අවයව → පද්ධතිය → ජීවියා.</div></div>
       </div>
 
-      <div class="step"><span class="lbl" style="color:var(--class)">❓ ඉක්මන් පරීක්ෂණය</span>
-        <details class="rv"><summary>1. වර්ගීකරණයේ වැදගත්කම් 1ක් කියන්න.</summary><div class="ans"><p class="a">ජීවීන් පහසුවෙන් අධ්‍යයනය කළ හැකි වීම (හෝ අනන්‍යතා/සම්බන්ධතා හඳුනාගැනීම).</p></div></details>
-        <details class="rv"><summary>2. ද්විපද නාමයේ පළමු පදය (capital) කුමක්ද?</summary><div class="ans"><p class="a">ගණය (Genus).</p></div></details>
-      </div>
-
-      <div class="step mem"><span class="lbl">🧠 මතක උපක්‍රමය</span><p>ද්විපද = <b>“ගණ + විශේ”</b> (Genus capital, species small, දෙකම italic). ධූරාවලිය ලොකුවෙන් → පොඩියට, අන්තිමම = <b>විශේෂය</b>.</p></div>
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🐝</span><div><b>“සංවිධානය · පෝෂණය · ශ්වසනය · උද්දීපනය · බහිස්‍රාවය · චලනය · ප්‍රජනනය · වර්ධනය”</b> — මේ 8ම තියෙනවා නම් ඒක ජීවියෙක්!</div></div>
     </div>
   </details>
 
-  <!-- ============ E. PLANT TISSUES ============ -->
-  <details class="sec sE" id="E">
-    <summary><span class="pill">E</span> ශාක පටක <span class="chev">▶</span></summary>
+  <!-- 4 classification -->
+  <details class="topic" id="t4" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">④</span>
+      <h3>ජීවීන් වර්ගීකරණය හා නම් කිරීම<span class="en">Classification &amp; naming</span></h3><span class="chev">▾</span></summary>
     <div class="body">
-      <div class="src">📖 මූලාශ්‍රය: 11 ශ්‍රේණිය විද්‍යාව · පරිච්ඡේදය 1 · §1.1 (පි. 1–9)</div>
 
-      <div class="step hook"><span class="lbl">🎣 හූක්</span>
-        <p>එක වගේ වැඩක් කරන මිනිස්සු කණ්ඩායමක් — හරියට ක්‍රිකට් කණ්ඩායමක් 🏏. <strong>එක වගේ සෛල කණ්ඩායමක්</strong> එකම වැඩක් කරනවා නම් → ඒක <strong>පටකයක් (tissue)</strong>!</p>
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කඩේ බඩු රාක්කවල පිළිවෙළට…</span> සුපිරි වෙළඳසැලක බඩු වර්ග අනුව රාක්කවලට බෙදලා තියෙනවා නේ — හොයාගන්න ලේසියි. ඒ වගේ විද්‍යාඥයෝ ජීවී මිලියන ගණනක් <b>කාණ්ඩවලට</b> (ටැක්සා) බෙදනවා. ඒකට <b>වර්ගීකරණය</b> කියනවා.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — වර්ගීකරණ මට්ටම් (ටැක්සා)</b></div>
+      <p>අධිරාජධානිය (domain) → රාජධානිය (kingdom) → කාණ්ඩය/වංශය (phylum/division) → වර්ගය (class) → ගෝත්‍රය (order) → කුලය (family) → ගණය (genus) → විශේෂය (species). උදා: මිනිසා = <i>Homo sapiens</i>; පොල් = <i>Cocos nucifera</i>.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — අධිරාජධානි 3 හා රාජධානි 5</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 175" role="img" aria-label="අධිරාජධානි තුන හා රාජධානි">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10" text-anchor="middle">
+            <rect x="170" y="6" width="130" height="24" rx="8" fill="#0e7c86"/><text x="235" y="22" fill="#fff" font-weight="700">ජීවීන් (පොදු මුතුන්)</text>
+            <g stroke="#0a5b63"><line x1="235" y1="30" x2="70" y2="46"/><line x1="235" y1="30" x2="235" y2="46"/><line x1="235" y1="30" x2="400" y2="46"/></g>
+            <g fill="#e2f3f4" stroke="#0e7c86"><rect x="12" y="46" width="116" height="26" rx="7"/><rect x="177" y="46" width="116" height="26" rx="7"/><rect x="342" y="46" width="116" height="26" rx="7"/></g>
+            <g fill="#0a5b63" font-weight="700"><text x="70" y="63">ආකියා</text><text x="235" y="63">බැක්ටීරියා</text><text x="400" y="63">ඉයුකැරියා</text></g>
+            <text x="70" y="92" fill="#4a5468" font-size="9">අන්ත පරිසර</text><text x="235" y="92" fill="#4a5468" font-size="9">බැක්ටීරියා, සයනො</text>
+            <text x="400" y="86" fill="#4a5468" font-size="9">න්‍යෂ්ටිය ඇති</text>
+            <g stroke="#9c3a29"><line x1="400" y1="72" x2="330" y2="108"/><line x1="400" y1="72" x2="390" y2="108"/><line x1="400" y1="72" x2="450" y2="108"/><line x1="400" y1="72" x2="270" y2="108"/></g>
+            <g fill="#fbe9e4" stroke="#c4533f" font-size="9"><rect x="245" y="108" width="55" height="22" rx="6"/><rect x="305" y="108" width="55" height="22" rx="6"/><rect x="365" y="108" width="55" height="22" rx="6"/><rect x="423" y="108" width="44" height="22" rx="6"/></g>
+            <g fill="#9c3a29" font-weight="700" font-size="9"><text x="272" y="123">ප්‍රොටිස්ටා</text><text x="332" y="123">ෆන්ගයි</text><text x="392" y="123">ප්ලාන්ටේ</text><text x="445" y="123">ඇනිමා</text></g>
+            <text x="235" y="155" fill="#4a5468" font-size="10">රාජධානි 5: බැක්ටීරියා · ප්‍රොටිස්ටා · ෆන්ගයි · ප්ලාන්ටේ · ඇනිමාලියා</text>
+          </g>
+        </svg>
+        <figcaption>Carl Woese (1990) අධිරාජධානි 3; Whittaker (1969) රාජධානි 5. ඉයුකැරියා තුළ රාජධානි 4ක්.</figcaption>
+      </figure>
+      <div class="scroll"><table class="tbl">
+        <tr><th>රාජධානිය</th><th>ලක්ෂණ</th><th>උදාහරණ</th></tr>
+        <tr><td>බැක්ටීරියා</td><td>ප්‍රාග් න්‍යෂ්ටික, එක සෛලික</td><td>බැක්ටීරියා, සයනොබැක්ටීරියා</td></tr>
+        <tr><td>ප්‍රොටිස්ටා</td><td>න්‍යෂ්ටික, පටක නැති</td><td>ඇල්ගී (Ulva), ප්‍රොටොසෝවා (Paramecium)</td></tr>
+        <tr><td>ෆන්ගයි</td><td>කයිටින් බිත්ති, විෂමපෝෂී, වියෝජක</td><td>හතු (Agaricus), යීස්ට්, Penicillium</td></tr>
+        <tr><td>ප්ලාන්ටේ</td><td>සෙලියුලෝස් බිත්ති, හරිතප්‍රද, ස්වයංපෝෂී</td><td>අපුෂ්ප + සපුෂ්ප ශාක</td></tr>
+        <tr><td>ඇනිමාලියා</td><td>විෂමපෝෂී, බහු සෛලික</td><td>අපෘෂ්ඨ + පෘෂ්ඨවංශීන්</td></tr>
+      </table></div>
+      <p><b>ශාක:</b> අපුෂ්ප (මල් නැති — බීජ නැති: <i>Marchantia</i>; බීජ ඇති/Gymnosperms: <i>Cycas, Pinus</i>) · සපුෂ්ප (Angiosperms — ඒකබීජපත්‍රී <i>පොල්</i> / ද්විබීජපත්‍රී <i>අඹ</i>). &nbsp; <b>සත්ව:</b> අපෘෂ්ඨවංශීන් (Cnidaria, Annelida, Mollusca, Arthropoda, Echinodermata) · පෘෂ්ඨවංශීන් (මත්ස්‍ය, උභයජීවී, උරග, පක්ෂී, ක්ෂීරපායී).</p>
+
+      <div class="step"><span class="dot">4</span><b>ද්වීපද නාමකරණය + ඔබේ වාරය</b></div>
+      <div class="box hook" style="background:#f6f4fd;border-color:#6d4aa0"><span class="ttl" style="color:#42357a">✍️ ද්වීපද නාමකරණය (Binomial nomenclature)</span> කාල් ලිනේයස් හඳුන්වා දුන්නා. ජීවී නාමය = <b>ගණ නාමය + විශේෂ නාමය</b> (ලතින්). උදා: <i>Homo sapiens</i>. නීති: ගණ නාමය <b>ලොකු අකුරෙන්</b>, විශේෂ නාමය කුඩා අකුරෙන්; ඇල අකුරෙන් (italic) හෝ වෙන වෙනම යටි ඉරි ඇඳ.</div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) පොල් ගසේ විද්‍යාත්මක නාමය? (b) ද්වීපද නාමයක කොටස් දෙක මොනවද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a"><i>Cocos nucifera</i></span>. (b) <span class="a">ගණ නාමය + විශේෂ නාමය</span>.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>ආකියා හා බැක්ටීරියා = <b>ප්‍රාග් න්‍යෂ්ටික</b> (න්‍යෂ්ටියක් නැත); අනෙක් රාජධානි 4 = න්‍යෂ්ටික.</li>
+          <li>ඒකබීජපත්‍රී (පොල්) = බීජ පත්‍ර 1, සමාන්තර නාරටි; ද්විබීජපත්‍රී (අඹ) = බීජ පත්‍ර 2, ජාලක නාරටි.</li>
+          <li>ද්වීපද නාමයේ ගණ නාමය <b>ලොකු</b> අකුරෙන්, විශේෂය කුඩා අකුරෙන්.</li>
+        </ul>
       </div>
-      <p><strong>පටකය</strong> = සමාන සම්භවයක් හා සමාන කාර්යයක් ඇති සෛල සමූහයක්. ශාක පටක, <strong>විභජන හැකියාව</strong> මත පදනම්ව ප්‍රධාන කාණ්ඩ 2කි:</p>
 
-      <div class="tree"><span class="tl">ශාක පටක</span>
-        <div class="trow">
-          <div class="tbox"><b>විභාජක පටක</b> <span class="en">(Meristematic)</span><br>සක්‍රීයව බෙදී <b>නව සෛල</b> නිපදවයි. (මයිටොකොන්ඩ්‍රියා වැඩියි.) ශාක වර්ධනය මෙයින්.
-            <div class="chips" style="margin-top:6px"><span>අග්‍රස්ථ (apical)</span><span>අන්තරස්ථ (intercalary)</span><span>පාර්ශ්වික (lateral)</span></div></div>
-          <div class="tbox"><b>ස්ථිර පටක</b> <span class="en">(Permanent)</span><br>විභජනය නැවතුණු, නිශ්චිත කාර්යයකට විශේෂණය වූ.<br>
-            <b>සරල:</b> <span class="chips" style="display:inline-flex"><span>මෘදුස්තර (parenchyma)</span><span>ස්ථූලකෝණාස්තර (collenchyma)</span><span>දෘඪස්තර (sclerenchyma)</span></span><br>
-            <b>සංකීර්ණ:</b> <span class="chips" style="display:inline-flex"><span>ශෛලමය — ජලය</span><span>ප්ලෝයමය — ආහාර</span></span></div>
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="kingWidget" style="--cl:var(--A)">
+        <div class="wt">🌍 රාජධානිය tap කර ලක්ෂණ බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="bac">බැක්ටීරියා</button>
+          <button class="chip" data-k="pro">ප්‍රොටිස්ටා</button>
+          <button class="chip" data-k="fun">ෆන්ගයි</button>
+          <button class="chip" data-k="pla">ප්ලාන්ටේ</button>
+          <button class="chip" data-k="ani">ඇනිමාලියා</button>
         </div>
+        <div class="wout" id="kingOut">උඩ එකක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. අධිරාජධානි තුන මොනවද?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">ආකියා, බැක්ටීරියා, ඉයුකැරියා.</div></div>
+        <div class="reveal"><span class="q">2. කයිටින් බිත්ති ඇති, විෂමපෝෂී වියෝජක රාජධානිය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">ෆන්ගයි (Fungi).</div></div>
       </div>
 
-      <div class="step work"><span class="lbl">✍️ වැඩ කළ උදාහරණය</span>
-        <p><b>ප්‍රශ්නය:</b> ශාකයක් උසට වැඩෙන්නේ කවර පටකයක ක්‍රියාකාරිත්වයෙන්ද? ජලය උඩට ගෙන යන පටකය?</p>
-        <p><b>පියවර:</b> උසට වැඩීම → <b>අග්‍රස්ථ විභාජක පටකය</b>. ජලය පරිවහනය → <b>ශෛලමය (xylem)</b>.</p>
-        <details class="rv"><summary>ඔයාගේ වාරය: ආහාර පරිවහනය කරන සංකීර්ණ පටකය?</summary><div class="ans"><p class="a">ප්ලෝයමය (phloem).</p></div></details>
-      </div>
-
-      <div class="step watch"><span class="lbl">🚨 පරෙස්සම් වෙන්න!</span>
-        <p><b>ශෛලමය (Xylem) = ජලය</b> (root→leaf, උඩට). <b>ප්ලෝයමය (Phloem) = ආහාර</b>. දෙක පටලවා ගන්න එපා! විභාජක = බෙදෙනවා; ස්ථිර = බෙදෙන්නේ නෑ.</p>
-      </div>
-
-      <div class="step"><span class="lbl" style="color:var(--class)">❓ ඉක්මන් පරීක්ෂණය</span>
-        <details class="rv"><summary>1. නව සෛල නිපදවන පටක?</summary><div class="ans"><p class="a">විභාජක පටක (Meristematic).</p></div></details>
-        <details class="rv"><summary>2. සරල ස්ථිර පටක 3 කියන්න.</summary><div class="ans"><p class="a">මෘදුස්තර, ස්ථූලකෝණාස්තර, දෘඪස්තර.</p></div></details>
-      </div>
-
-      <div class="step mem"><span class="lbl">🧠 මතක උපක්‍රමය</span><p><b>ශෛලමය/Xylem = X</b> ‘ජ’ල; <b>ප්ලෝයමය/Phloem = ‘ෆ්’</b> ➜ ‘food’ (ආහාර)!</p></div>
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🗂️</span><div><b>“අධිරාජධානි 3, රාජධානි 5; නම 2යි — ගණ + විශේෂ.”</b> ලොකු→කුඩා කාණ්ඩ පිළිවෙළ සහ ද්වීපද නාමය මතක තබන්න.</div></div>
     </div>
   </details>
 
-  <!-- ============ F. ANIMAL TISSUES ============ -->
-  <details class="sec sF" id="F">
-    <summary><span class="pill">F</span> සත්ව පටක <span class="chev">▶</span></summary>
+  <!-- ##################### PART B ##################### -->
+  <section class="part" id="partB" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <span class="src">මූලාශ්‍රය · 11 ශ්‍රේණිය පොත I · පාඩම 1</span>
+    <div class="pn">B කොටස · 11 ශ්‍රේණිය</div>
+    <h2>ජීවී පටක (ශාක හා සත්ව පටක)</h2>
+    <p>එකම කෘත්‍යයක් කරන, පොදු සම්භවයක් ඇති සෛල සමූහයක් = <b>පටක</b> (tissue). ශාකවල හා සතුන්ගේ විවිධ පටක වර්ග මෙහි ඉගෙන ගමු.</p>
+  </section>
+
+  <!-- 5 plant tissues -->
+  <details class="topic" id="t5" open style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">⑤</span>
+      <h3>ශාක පටක<span class="en">Plant tissues</span></h3><span class="chev">▾</span></summary>
     <div class="body">
-      <div class="src">📖 මූලාශ්‍රය: 11 ශ්‍රේණිය විද්‍යාව · පරිච්ඡේදය 1 · §1.2 (පි. 10+)</div>
 
-      <div class="step hook"><span class="lbl">🎣 හූක්</span>
-        <p>ඔයාගේ සම, මස්පිඬු, ඇට, ලේ, මොළය — මේ ඔක්කොම වෙනස් ‘පටක’! සතුන්ගේ දේහයේ <strong>ප්‍රධාන පටක වර්ග 4</strong>ක් — එක එක වෙනස් වැඩක්.</p>
-      </div>
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ගසක් වැඩෙන්නේ කොහොමද?</span> ගසක් උසට වැඩෙනවා, ගනට වැඩෙනවා, ජලය මුල සිට කොළ දක්වා ගෙනියනවා. මේ හැම එකකටම වෙනම <b>පටක</b> වර්ග තියෙනවා. “පටකය” කියන්නේ එකම වැඩක් කරන සෛල කණ්ඩායමක්.</div>
 
-      <div class="tw"><table>
-        <tr><th>පටකය</th><th>කාර්යය</th><th>උදාහරණ</th></tr>
-        <tr><td><b>අභිච්ඡද පටක</b><br><span class="en" style="font-size:.8rem">Epithelial</span></td><td>දේහයේ බාහිර/අභ්‍යන්තර පෘෂ්ඨ ආවරණය; ආරක්ෂාව, අවශෝෂණය, ශ්‍රාවය</td><td>සම, ආමාශ බිත්තිය</td></tr>
-        <tr><td><b>සම්බන්ධක පටක</b><br><span class="en" style="font-size:.8rem">Connective</span></td><td>අවයව/පටක එකිනෙක සම්බන්ධ කිරීම, ආධාරය</td><td>රුධිරය, අස්ථි, කාටිලේජ</td></tr>
-        <tr><td><b>පේශි පටක</b><br><span class="en" style="font-size:.8rem">Muscle</span></td><td>සංකෝචනය/ඉහිල් වීමෙන් චලනය</td><td>සිනිඳු, සැකිලි, හෘද පේශි</td></tr>
-        <tr><td><b>ස්නායු පටක</b><br><span class="en" style="font-size:.8rem">Nervous</span></td><td>පණිවිඩ (ආවේග) සම්ප්‍රේෂණය</td><td>මූලික ඒකකය: නියුරෝනය</td></tr>
+      <div class="step"><span class="dot">2·3</span><b>සරල විදිහට + ඇසට පේන්න — ශාක පටක වර්ගීකරණය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 200" role="img" aria-label="ශාක පටක වර්ගීකරණ ගස">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10" text-anchor="middle">
+            <rect x="185" y="6" width="100" height="24" rx="8" fill="#c4533f"/><text x="235" y="22" fill="#fff" font-weight="700">ශාක පටක</text>
+            <line x1="235" y1="30" x2="120" y2="46" stroke="#9c3a29"/><line x1="235" y1="30" x2="350" y2="46" stroke="#9c3a29"/>
+            <rect x="60" y="46" width="120" height="26" rx="7" fill="#fbe9e4" stroke="#c4533f"/><text x="120" y="63" fill="#9c3a29" font-weight="700">විභාජක පටක</text>
+            <rect x="290" y="46" width="120" height="26" rx="7" fill="#fbe9e4" stroke="#c4533f"/><text x="350" y="63" fill="#9c3a29" font-weight="700">ස්ථිර පටක</text>
+            <g font-size="9" fill="#4a5468"><text x="120" y="88">අග්‍රස්ථ · අන්තරස්ථ</text><text x="120" y="100">· පාර්ශ්වික</text></g>
+            <line x1="350" y1="72" x2="290" y2="92" stroke="#9c3a29"/><line x1="350" y1="72" x2="410" y2="92" stroke="#9c3a29"/>
+            <rect x="232" y="92" width="116" height="24" rx="7" fill="#fff" stroke="#c4533f"/><text x="290" y="108" fill="#9c3a29" font-weight="700" font-size="9">සරල ස්ථිර</text>
+            <rect x="356" y="92" width="110" height="24" rx="7" fill="#fff" stroke="#c4533f"/><text x="411" y="108" fill="#9c3a29" font-weight="700" font-size="9">සංකීර්ණ ස්ථිර</text>
+            <g font-size="8.5" fill="#4a5468"><text x="290" y="135">මෘදුස්තර</text><text x="290" y="147">ස්ථූලකෝණාස්තර</text><text x="290" y="159">දෘඪස්තර</text>
+            <text x="411" y="135">ශෛලම</text><text x="411" y="147">ජ්ලෝයම</text></g>
+          </g>
+        </svg>
+      </figure>
+      <div class="scroll"><table class="tbl">
+        <tr><th>පටකය</th><th>ලක්ෂණ</th><th>කෘත්‍යය</th></tr>
+        <tr><td><b>විභාජක</b> (meristematic)</td><td>කුඩා සෛල, විභජනය වෙයි; අග්‍රස්ථ/අන්තරස්ථ/පාර්ශ්වික</td><td>වර්ධනය (උස/දිග/ගන)</td></tr>
+        <tr><td><b>මෘදුස්තර</b> (parenchyma)</td><td>සජීවී, විශාල රික්තක, තුනී බිත්ති</td><td>ප්‍රභාසංශ්ලේෂණය, ආහාර/ජල සංචිතය</td></tr>
+        <tr><td><b>ස්ථූලකෝණාස්තර</b> (collenchyma)</td><td>සජීවී, කොන්වල බිත්ති ඝන</td><td>නම්‍යශීලී යාන්ත්‍රික සහාය</td></tr>
+        <tr><td><b>දෘඪස්තර</b> (sclerenchyma)</td><td>අජීවී, ලිග්නින් බිත්ති; තන්තු + උපල</td><td>දැඩි යාන්ත්‍රික සහාය</td></tr>
+        <tr><td><b>ශෛලම</b> (xylem)</td><td>සංකීර්ණ; වාහිනී, වාහකාභ…</td><td>ජලය + ලවණ මුල→ඉහළට</td></tr>
+        <tr><td><b>ජ්ලෝයම</b> (phloem)</td><td>සංකීර්ණ; පෙනේර නල, සහචර සෛල…</td><td>ආහාර (සුක්‍රෝස්) කොළ→සෙසු තැන්</td></tr>
       </table></div>
 
-      <h4>පේශි පටක වර්ග 3</h4>
-      <div class="chips"><span>සිනිඳු පේශි — අනිච්ඡානුග පාලනය</span><span>සැකිලි පේශි — ඉච්ඡානුග පාලනය</span><span>හෘද පේශි — හෘදයේ පමණයි</span></div>
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">ජලය මුල සිට කොළ දක්වා ගෙන යන්නේ කුමන පටකයෙන්ද? ආහාර ප්‍රවාහනය කරන්නේ?</p>
+        <p style="margin:.2em 0">→ ජලය = <b>ශෛලම පටකය</b> (xylem); ආහාර = <b>ජ්ලෝයම පටකය</b> (phloem).</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) විභජනය වන ශාක පටකය? (b) අජීවී, ලිග්නින් බිත්ති ඇති සහායක පටකය?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">විභාජක පටක</span> (meristematic). (b) <span class="a">දෘඪස්තර පටකය</span> (sclerenchyma).</div></div>
 
-      <div class="step work"><span class="lbl">✍️ වැඩ කළ උදාහරණය</span>
-        <p><b>ප්‍රශ්නය:</b> රුධිරය, අස්ථි, කාටිලේජ අයත් පටක වර්ගය? මොළයේ පණිවිඩ ගෙන යන පටකයේ ඒකකය?</p>
-        <p><b>පියවර:</b> රුධිර/අස්ථි/කාටිලේජ → <b>සම්බන්ධක පටක</b>. පණිවිඩ → ස්නායු පටක; ඒකකය = <b>නියුරෝනය</b>.</p>
-        <details class="rv"><summary>ඔයාගේ වාරය: අතේ පේශි (කැමැත්තෙන් චලනය) අයත් වර්ගය?</summary><div class="ans"><p class="a">සැකිලි පේශි (ඉච්ඡානුග).</p></div></details>
+      <div class="joke">ශෛලම කිව්වා: “මම ජලය උඩට ගෙනියනවා!” ජ්ලෝයම කිව්වා: “මම ආහාර දෙපැත්තටම බෙදනවා — මම delivery service එක!” 🚚</div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>ශෛලම = ජලය (උඩට)</b>; <b>ජ්ලෝයම = ආහාර (දෙපැත්තට)</b> — පටලවා ගන්න එපා.</li>
+          <li>මෘදුස්තර/ස්ථූලකෝණාස්තර = <b>සජීවී</b>; දෘඪස්තර = <b>අජීවී</b>.</li>
+          <li>විභාජක පටක <b>පමණයි</b> විභජනය වෙන්නේ; ස්ථිර පටක විභජනය වෙන්නේ නෑ.</li>
+        </ul>
       </div>
 
-      <div class="step watch"><span class="lbl">🚨 පරෙස්සම් වෙන්න!</span>
-        <p><strong>රුධිරය = සම්බන්ධක පටකයක්</strong>! (පුදුමයි නේද — ඒත් ඇත්ත.) හෘද පේශි <strong>හෘදයේ පමණයි</strong>. සිනිඳු = අපේ කැමැත්තෙන් නොව (අනිච්ඡානුග); සැකිලි = කැමැත්තෙන් (ඉච්ඡානුග).</p>
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="plantTisWidget" style="--cl:var(--B)">
+        <div class="wt">🌱 පටකය tap කර කෘත්‍යය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="meri">විභාජක</button>
+          <button class="chip" data-k="paren">මෘදුස්තර</button>
+          <button class="chip" data-k="coll">ස්ථූලකෝණාස්තර</button>
+          <button class="chip" data-k="scler">දෘඪස්තර</button>
+          <button class="chip" data-k="xylem">ශෛලම</button>
+          <button class="chip" data-k="phloem">ජ්ලෝයම</button>
+        </div>
+        <div class="wout" id="plantTisOut">උඩ එකක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ආහාර සංචිතය කරන ශාක පටකය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">මෘදුස්තර (parenchyma) — උදා: අර්තාපල්, බතල.</div></div>
+        <div class="reveal"><span class="q">2. ද්විබීජපත්‍රී කඳෙහි හමුවන පාර්ශ්වික විභාජකය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">කැම්බියම (cambium) — කඳ ගන වැඩ කරයි.</div></div>
       </div>
 
-      <div class="step"><span class="lbl" style="color:var(--class)">❓ ඉක්මන් පරීක්ෂණය</span>
-        <details class="rv"><summary>1. දේහ පෘෂ්ඨ ආවරණය කරන පටකය?</summary><div class="ans"><p class="a">අභිච්ඡද පටක.</p></div></details>
-        <details class="rv"><summary>2. ස්නායු පටකයේ මූලික ඒකකය?</summary><div class="ans"><p class="a">නියුරෝනය.</p></div></details>
-        <details class="rv"><summary>3. පේශි පටක වර්ග 3?</summary><div class="ans"><p class="a">සිනිඳු, සැකිලි, හෘද.</p></div></details>
-      </div>
-
-      <div class="step mem"><span class="lbl">🧠 මතක උපක්‍රමය</span><p>සත්ව පටක 4: <b>“අ-ස-පේ-ස්නා”</b> (අභිච්ඡද · සම්බන්ධක · පේශි · ස්නායු). රුධිරයත් සම්බන්ධකයි!</p></div>
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🌳</span><div><b>“විභාජක වර්ධනය; මෘදු-ස්ථූල-දෘඪ සහාය; ශෛලම ජලයට, ජ්ලෝයම ආහාරයට.”</b></div></div>
     </div>
   </details>
 
-  <!-- ============ SYNTHESIS ============ -->
-  <div class="synth">
-    <h2 style="margin-top:0;color:var(--navy)">🧩 සියල්ල එකට — ‘ජීවයේ සංවිධාන මට්ටම්’</h2>
-    <p>මේ පොකුර ඇත්තටම <strong>එක දාමයක්</strong>! කුඩාවේ සිට ලොකුවට:</p>
-    <div class="flow" style="font-size:1.02rem">
-      <span>රසායන (A)</span><span class="ar">→</span><span>සෛල (B)</span><span class="ar">→</span><span>පටක (E,F)</span><span class="ar">→</span><span>අවයව</span><span class="ar">→</span><span>ජීවියා</span>
-    </div>
-    <p>රසායනවලින් <b>සෛල</b> හැදෙනවා; සමාන සෛල එකතු වී <b>පටක</b> (ශාක/සත්ව); පටක එකතු වී <b>අවයව</b>; අවයව එකතු වී <b>ජීවියා</b> — එම ජීවියා <b>ලක්ෂණ 8</b> (C) පෙන්වයි, සහ අපි ඔහුව <b>වර්ගීකරණය &amp; නම්</b> (D) කරනවා. එක පින්තූරයක්!</p>
-  </div>
-
-  <!-- ============ MIXED TEST ============ -->
-  <details class="sec sD" id="test" open>
-    <summary><span class="pill">✓</span> මිශ්‍ර ස්වයං-පරීක්ෂණය (විභාග මට්ටම) <span class="chev">▶</span></summary>
+  <!-- 6 animal tissues -->
+  <details class="topic" id="t6" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">⑥</span>
+      <h3>සත්ව පටක<span class="en">Animal tissues</span></h3><span class="chev">▾</span></summary>
     <div class="body">
-      <p style="color:var(--muted)">මුලින් ඔයාම උත්තර දීලා, ඊට පස්සේ විවෘත කරන්න. 👇</p>
-      <p class="qx">1. (පහසු) ප්‍රෝටීන හා නියුක්ලෙයික් අම්ල දෙකේම අඩංගු, නමුත් කාබොහයිඩ්‍රේට/ලිපිඩ වල නැති මූලද්‍රව්‍යය?</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">නයිට්‍රජන් (N).</p></div></details>
 
-      <p class="qx">2. (පහසු) සත්ව සෛලයක නොමැති, ශාක සෛලයක ඇති කොටස් තුනක් ලියන්න.</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">සෛල බිත්තිය, හරිතලව, විශාල මධ්‍ය රික්තකය.</p></div></details>
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඔයාගේ සිරුරේ සෛල වර්ග 210ක්!</span> මිනිස් දේහය හදන්න විවිධ සෛල වර්ග 210ක් පමණ එකතු වෙනවා. ඒවා කෘත්‍යය අනුව කාණ්ඩ <b>හතරකට</b> බෙදෙනවා — ආස්තරණයට, සම්බන්ධ කිරීමට, චලනයට, සංඥා ගෙනයාමට.</div>
 
-      <p class="qx">3. (සාමාන්‍ය) ජීවීන්ගේ ලක්ෂණ 8න් 4ක් ලියන්න.</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">උදා: සෛලීය සංවිධානය, පෝෂණය, ශ්වසනය, උද්දීප්‍යතාව, බහිස්ස්‍රාවය, චලනය, ප්‍රජනනය, වර්ධනය — ඕනෑම 4ක්.</p></div></details>
+      <div class="step"><span class="dot">2·3</span><b>සරල විදිහට + ඇසට පේන්න — සත්ව පටක 4</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>පටකය</th><th>ලක්ෂණ</th><th>කෘත්‍යය / පිහිටීම</th></tr>
+        <tr><td><b>අපිවිෂද</b> (Epithelial)</td><td>සෛල තදින් ඇසිරී, පාදස්ථ පටලයක් මත; රුධිර සැපයුමක් නැත</td><td>ආස්තරණය/ආරක්ෂාව, අවශෝෂණය, ස්‍රාවය; සම, ආහාර මාර්ගය, රුධිර නාල</td></tr>
+        <tr><td><b>සම්බන්ධක</b> (Connective)</td><td>සෛල + තන්තු පුරකයක් (matrix) තුළ; බොහෝවිට රුධිර සැපයුම</td><td>අවයව/පටක සම්බන්ධ, සහාය; අස්ථි, <b>රුධිරය</b></td></tr>
+        <tr><td><b>පේශි</b> (Muscle)</td><td>සංකෝචනය/ඉහිලීම; රුධිර සැපයුම වැඩි</td><td>චලනය; සිනිඳු/කංකාල/හෘත්</td></tr>
+        <tr><td><b>ස්නායු</b> (Nervous)</td><td>ඒකකය = නියුරෝන</td><td>ආවේග සම්ප්‍රේෂණය</td></tr>
+      </table></div>
+      <p><b>පේශි පටක 3:</b> <b>සිනිඳු</b> (තර්කුරූපී, තනි න්‍යෂ්ටික, ගාඛනය නැත, අනිච්ඡානුග — ආහාර මාර්ග/රුධිර නාල බිත්ති) · <b>කංකාල</b> (සිලින්ඩරාකාර, බහු න්‍යෂ්ටික, ගාඛන, ඉච්ඡානුග — අස්ථිවලට බැඳී, චලනය) · <b>හෘත්</b> (ශාඛිත, තනි න්‍යෂ්ටික, ගාඛන, අන්තරස්ථාපිත මඬල, අනිච්ඡානුග, හෘදයේ පමණයි).</p>
 
-      <p class="qx">4. (සාමාන්‍ය) <span class="en" style="font-style:italic">Mangifera indica</span> (අඹ) යන නාමයේ ‘Mangifera’ සහ ‘indica’ නියෝජනය කරන්නේ? ලිවීමේ රීති 2ක් කියන්න.</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">Mangifera = ගණය (capital); indica = විශේෂය (simple). රීති: ගණය capital + විශේෂය simple; දෙකම italic/ඉරක් යටින්.</p></div></details>
+      <div class="step"><span class="dot">3·b</span><b>නියුරෝනයක ව්‍යුහය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 130" role="img" aria-label="නියුරෝනයක ව්‍යුහය">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10">
+            <circle cx="90" cy="65" r="30" fill="#fbe9e4" stroke="#c4533f" stroke-width="2"/><circle cx="90" cy="65" r="11" fill="#cdb4e0" stroke="#6d4aa0"/>
+            <g stroke="#9c3a29" stroke-width="1.6"><line x1="65" y1="50" x2="40" y2="35"/><line x1="62" y1="68" x2="34" y2="70"/><line x1="68" y1="85" x2="46" y2="100"/></g>
+            <text x="40" y="25" fill="#9c3a29">අනුග්‍රාහිකා</text>
+            <text x="90" y="110" text-anchor="middle" fill="#9c3a29">සෛල දේහය</text>
+            <line x1="120" y1="65" x2="330" y2="65" stroke="#c4533f" stroke-width="5"/>
+            <g fill="#f4d28a" stroke="#c8901a"><rect x="150" y="58" width="24" height="14" rx="6"/><rect x="200" y="58" width="24" height="14" rx="6"/><rect x="250" y="58" width="24" height="14" rx="6"/></g>
+            <text x="220" y="48" text-anchor="middle" fill="#9c3a29">අක්සනය (මයිලින් කොපුව)</text>
+            <g stroke="#9c3a29" stroke-width="1.6"><line x1="330" y1="65" x2="360" y2="50"/><line x1="330" y1="65" x2="362" y2="65"/><line x1="330" y1="65" x2="360" y2="82"/></g>
+            <text x="380" y="68" fill="#9c3a29">උපාංග කුඩම්බි</text>
+          </g>
+        </svg>
+        <figcaption>නියුරෝනය: අනුග්‍රාහිකා (උත්තේජනය ලබයි) → සෛල දේහය → අක්සනය (ආවේගය ඉවතට). මයිලින් කොපුව → වේගය වැඩියි.</figcaption>
+      </figure>
+      <p>නියුරෝන වර්ග 3: <b>සංවේදක</b> (ප්‍රතිග්‍රාහකවලින් → මධ්‍ය ස්නායු පද්ධතියට) · <b>අන්තර්භාර</b> (මධ්‍ය ස්නායු පද්ධතිය තුළ) · <b>වාලක</b> (මධ්‍ය ස්නායු පද්ධතියෙන් → කාරක/පේශි).</p>
 
-      <p class="qx">5. (විභාග මට්ටම) “ශාකයක කඳ ශක්තිමත්ව සිටගෙන තිබීමටත්, ජලය මුල්වල සිට පත්‍ර දක්වා යාමටත්” දායක වන පටක දෙක නම් කරන්න.</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">ආධාරය/ශක්තිය → දෘඪස්තර (sclerenchyma) [සැර කඳට]; ජලය පරිවහනය → ශෛලමය (xylem). (ස්ථූලකෝණාස්තර ද ආධාරයට.)</p></div></details>
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">හෘදයේ පමණක් හමුවන, අන්තරස්ථාපිත මඬල ඇති පේශි පටකය?</p>
+        <p style="margin:.2em 0">→ <b>හෘත් පේශි පටකය</b> (cardiac); අනිච්ඡානුග, උපතේ සිට මරණය දක්වා ක්‍රියාකරයි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) රුධිරය අයිති පටක වර්ගය? (b) අස්ථිවලට බැඳී චලනයට දායක පේශිය?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">සම්බන්ධක පටක</span> (රුධිර පටකය — විශේෂිත). (b) <span class="a">කංකාල පේශි පටකය</span>.</div></div>
 
-      <p class="qx">6. (විභාග මට්ටම) අනූනන හා ඌනන විභජන අතර වෙනස 2ක් (කාර්යය + වර්ණදේහ ගණන) ලියන්න.</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">අනූනන (Mitosis): දේහ වර්ධනය/අලුත්වැඩියාව, වර්ණදේහ ගණන <b>සමාන</b>. ඌනන (Meiosis): ජන්මාණු සෑදීම, වර්ණදේහ ගණන <b>අඩකින් අඩු</b>.</p></div></details>
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>කංකාල පේශි = <b>ඉච්ඡානුග</b> (අපේ කැමැත්තට); සිනිඳු හා හෘත් = <b>අනිච්ඡානුග</b>.</li>
+          <li>රුධිරය = <b>සම්බන්ධක</b> පටකයකි (පේශි/අපිවිෂද නෙවෙයි!).</li>
+          <li>අපිවිෂද පටකයට <b>රුධිර සැපයුමක් නැත</b> (පාදස්ථ පටලයෙන් පෝෂණය).</li>
+        </ul>
+      </div>
 
-      <p class="qx">7. (විභාග මට්ටම) රුධිරය කවර සත්ව පටක වර්ගයටද අයත්? එහි එක් කාර්යයක් කියන්න.</p>
-      <details class="rv"><summary>පිළිතුර</summary><div class="ans"><p class="a">සම්බන්ධක පටක. කාර්යය: ද්‍රව්‍ය (ඔක්සිජන්/පෝෂක/අපද්‍රව්‍ය) ප්‍රවාහනය හා ශරීර කොටස් සම්බන්ධ කිරීම.</p></div></details>
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="animTisWidget" style="--cl:var(--B)">
+        <div class="wt">🩺 පටකය/සෛලය tap කර විස්තරය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="epi">අපිවිෂද</button>
+          <button class="chip" data-k="conn">සම්බන්ධක</button>
+          <button class="chip" data-k="smooth">සිනිඳු පේශි</button>
+          <button class="chip" data-k="skel">කංකාල පේශි</button>
+          <button class="chip" data-k="card">හෘත් පේශි</button>
+          <button class="chip" data-k="nerve">ස්නායු</button>
+        </div>
+        <div class="wout" id="animTisOut">උඩ එකක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ආවේග සම්ප්‍රේෂණය කරන පටකය හා ඒකකය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">ස්නායු පටකය; ඒකකය = නියුරෝන.</div></div>
+        <div class="reveal"><span class="q">2. සත්ව පටක ප්‍රධාන වර්ග හතර?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">අපිවිෂද, සම්බන්ධක, පේශි, ස්නායු.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🧠</span><div><b>“අ-සම්-පේ-ස්නා: අපිවිෂද (ආවරණය), සම්බන්ධක (සම්බන්ධ/රුධිර), පේශි (චලනය), ස්නායු (ආවේග).”</b> පේශි 3: සිනිඳු · කංකාල · හෘත්.</div></div>
     </div>
   </details>
 
-  <!-- ============ CHEAT SHEET ============ -->
-  <div class="cheat" id="cheat">
-    <h2>📝 එක් පිටුවේ සාරාංශය (Cheat Sheet)</h2>
-    <div class="grid">
-      <div class="c"><b>A · රසායන (CHON)</b><br>කාබොහයි(C,H,O) · ප්‍රෝටීන(+N, ඇමයිනෝ අම්ල) · ලිපිඩ(C,H,O අඩු O) · නියුක්ලෙයික්(DNA/RNA, +N) · ජලය · ඛනිජ · විටමින.</div>
-      <div class="c"><b>B · සෛල</b><br>ශාකයට අමතර 3: බිත්තිය·හරිතලව·විශාල රික්තකය. මයිටො=ශක්තිය · න්‍යෂ්ටිය=DNA · රයිබො=ප්‍රෝටීන්. Mitosis=අඩු නෑ; Meiosis=ඌන.</div>
-      <div class="c"><b>C · ලක්ෂණ 8</b><br>MRS GREN + C: චලනය·ශ්වසනය·උද්දීප්‍ය·වර්ධනය·ප්‍රජනනය·බහිස්ස්‍රාව·පෝෂණය + සෛලීය සංවිධානය.</div>
-      <div class="c"><b>D · වර්ගීකරණය</b><br>රාජධානිය→…→ගණය→විශේෂය. ද්විපද: <i>Genus</i>(capital)+<i>species</i>(small), italic.</div>
-      <div class="c"><b>E · ශාක පටක</b><br>විභාජක(අග්‍ර/අන්තර/පාර්ශ්ව) · ස්ථිර[සරල: මෘදු/ස්ථූල/දෘඪ · සංකීර්ණ: ශෛලමය=ජලය, ප්ලෝයම=ආහාර].</div>
-      <div class="c"><b>F · සත්ව පටක 4</b><br>අභිච්ඡද · සම්බන්ධක(ලේ,අස්ථි) · පේශි(සිනිඳු/සැකිලි/හෘද) · ස්නායු(නියුරෝන).</div>
+
+  <!-- ===== SYNTHESIS ===== -->
+  <section class="synth" id="synth">
+    <h2>සියල්ල එකට බඳිමු 🧵</h2>
+    <p>මේ කොටස් 6ම එකම කතාවක් — <b>ජීවය කුඩාම මට්ටමේ සිට ලොකුම මට්ටම දක්වා</b> ගොඩනැගෙන හැටි:</p>
+    <div class="chain">
+      <span>රසායනික ද්‍රව්‍ය</span><i>→</i><span>සෛල ඉන්ද්‍රිකා</span><i>→</i><span>සෛලය</span><i>→</i><span>පටක</span><i>→</i><span>ජීවියා</span><i>→</i><span>වර්ගීකරණය</span>
     </div>
-  </div>
+    <p style="margin-top:14px"><b>①</b> කාබොහයිඩ්‍රේට, ප්‍රෝටීන, ලිපිඩ, නියුක්ලෙයික් අම්ල — මේවායින් <b>②</b> සෛල ඉන්ද්‍රිකා සැදෙනවා (පටල = ලිපිඩ+ප්‍රෝටීන; න්‍යෂ්ටියේ DNA = නියුක්ලෙයික් අම්ල). <b>③</b> ඒ සෛල කරන වැඩම තමයි “ජීවීන්ගේ ලක්ෂණ 8”. <b>⑤⑥</b> බහු සෛලික ජීවීන්ගේ සමාන සෛල එකතු වෙලා <b>පටක</b> හැදෙනවා. <b>④</b> අන්තිමට, මේ සියලු ජීවීන් කාණ්ඩවලට බෙදලා වර්ගීකරණය කරනවා.</p>
+    <p style="margin-top:14px;color:var(--gold);font-weight:700">කෙටියෙන්: රසායනික ද්‍රව්‍ය → ඉන්ද්‍රිකා → සෛලය → පටක → ජීවියා. මේ එක් සංකල්පයෙන් මුළු ජීව විද්‍යාවම පැහැදිලි වෙනවා — ඒකයි මේක මුලින්ම ඉගෙන ගන්න කියන්නේ.</p>
+  </section>
 
-  <footer>
-    <b>Idasara Academy</b> · අපි බලගන්වමු · අපි නිදහස් කරමු · අපි ශක්තිමත් කරමු<br>
-    සා/පෙළ විද්‍යාව · ජීවය හා ජීවන ක්‍රියාවලි · 10–11 ශ්‍රේණි විෂය නිර්දේශ ආශ්‍රයෙන්.<br>
-    <span style="font-size:.78rem">මූලාශ්‍ර: 10 ශ්‍රේ. විද්‍යා පෙළපොත (I &amp; II කොටස්), 11 ශ්‍රේ. විද්‍යා පෙළපොත. රූප/පිටු අංක ඔබේ පොතේ ඒවා සමඟ සසඳා බලන්න.</span>
-  </footer>
-</div>
+  <!-- ===== TEST ===== -->
+  <section class="test" id="test">
+    <h2>අවසන් මිශ්‍ර ස්වයං-පරීක්ෂණය 📝</h2>
+    <p style="color:var(--ink-soft);margin:0 0 6px">පොත වහලා, මේ ප්‍රශ්න 12ම තනියම කරන්න. ඊටපස්සේ පිළිතුරු බලන්න. 9ක් හරිනම් — ඔයා සූදානම්! 🎉</p>
+    <div class="qz">
+      <div class="qitem"><div class="qq">N (නයිට්‍රජන්) අඩංගු කාබනික සංයෝග වර්ගය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">ප්‍රෝටීන</span> (නියුක්ලෙයික් අම්ලවලද N ඇත).</div></div>
+      <div class="qitem"><div class="qq">පිෂ්ටය හඳුනන පරීක්ෂණයේ වර්ණ විපර්යාසය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans">අයඩීන් → <span class="a">නිල්/දුඹුරු</span> පැහැය.</div></div>
+      <div class="qitem"><div class="qq">සෛල වාදය මුල් වරට කිරල සෛල නිරීක්ෂණය කළ විද්‍යාඥයා?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">රොබට් හූක්</span> (1665).</div></div>
+      <div class="qitem"><div class="qq">ශාක සෛලයක ඇති, සත්ව සෛලයක නැති ඉන්ද්‍රිකා/ව්‍යුහ 3ක්?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">සෛල බිත්තිය, විශාල මධ්‍ය රික්තකය, හරිතලව.</span></div></div>
+      <div class="qitem"><div class="qq">ඌනන විභජනයෙන් 2n=46 සෛලයකින් සෑදෙන සෛල ගණන හා වර්ණදේහ සංඛ්‍යාව?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans">සෛල <span class="a">4ක්</span>, එක එකක <span class="a">23 (n)</span>.</div></div>
+      <div class="qitem"><div class="qq">ස්වයංපෝෂී ශාක ආහාර නිපදවන ක්‍රියාවලිය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">ප්‍රභාසංශ්ලේෂණය</span> (6CO₂+6H₂O→C₆H₁₂O₆+6O₂).</div></div>
+      <div class="qitem"><div class="qq">ප්‍රාග් න්‍යෂ්ටික අධිරාජධානි දෙක?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">ආකියා හා බැක්ටීරියා.</span></div></div>
+      <div class="qitem"><div class="qq">පොල් = ඒකබීජපත්‍රී; අඹ = ?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">ද්විබීජපත්‍රී</span> (dicot).</div></div>
+      <div class="qitem"><div class="qq">ජලය මුල සිට ඉහළට ගෙන යන ශාක පටකය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">ශෛලම පටකය</span> (xylem).</div></div>
+      <div class="qitem"><div class="qq">අජීවී, ලිග්නින් සහිත සහායක ශාක පටකය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">දෘඪස්තර පටකය</span> (sclerenchyma).</div></div>
+      <div class="qitem"><div class="qq">රුධිරය අයිති සත්ව පටක වර්ගය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">සම්බන්ධක පටක.</span></div></div>
+      <div class="qitem"><div class="qq">අන්තරස්ථාපිත මඬල ඇති, හෘදයේ පමණක් ඇති පේශිය?</div><button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button><div class="ans"><span class="a">හෘත් පේශි පටකය.</span></div></div>
+    </div>
+  </section>
 
-<button id="top" aria-label="ඉහළට">↑</button>
+  <!-- ===== CHEAT SHEET ===== -->
+  <section class="cheat" id="cheat">
+    <h2>⚡ එක-පිටු කෙටි සටහන</h2>
+    <p style="color:var(--ink-soft);margin:0 0 8px">විභාගෙට කලින් අවසන් මිනිත්තු 5ට මේක විතරක් බලන්න. (Print කරාම පිළිතුරුත් පේනවා.)</p>
+    <div class="cheat-grid">
+      <div class="cheat-card" style="--cl:var(--A)"><h4>🧪 රසායනික පදනම</h4><ul>
+        <li>කාබනික 4: කාබොහයිඩ්‍රේට·ප්‍රෝටීන·ලිපිඩ·නියුක්ලෙයික්.</li>
+        <li>අකාබනික: ජලය·ලවණ·විටමින්. N ඇත්තේ ප්‍රෝටීන/නියුක්ලෙයික්වල.</li>
+        <li>පරීක්ෂණ: පිෂ්ටය→අයඩීන් නිල්; ග්ලූකෝස්→බෙනඩික්ට් ගඩොල් රතු; ප්‍රෝටීන→බයුරෙට් දම්.</li>
+      </ul></div>
+      <div class="cheat-card" style="--cl:var(--A)"><h4>🔬 සෛලය</h4><ul>
+        <li>සෛල වාදය: ඒකකය·සියල්ල සෛලවලින්·නව සෛල පැරණි සෛලවලින්.</li>
+        <li>ශාකයට: බිත්තිය+විශාල රික්තකය+හරිතලව (සත්ව සෛලයට නැත).</li>
+        <li>අනුනන=2n→2n (සම 2); ඌනන=2n→n (විවිධ 4, ජන්මාණු).</li>
+      </ul></div>
+      <div class="cheat-card" style="--cl:var(--A)"><h4>🐝 ජීවීන්ගේ ලක්ෂණ 8</h4><ul>
+        <li>සංවිධානය·පෝෂණය·ශ්වසනය·උද්දීපනය·බහිස්‍රාවය·චලනය·ප්‍රජනනය·වර්ධනය.</li>
+        <li>මට්ටම්: සෛලය→පටක→ඉන්ද්‍රිය→පද්ධතිය→ජීවියා.</li>
+      </ul></div>
+      <div class="cheat-card" style="--cl:var(--A)"><h4>🗂️ වර්ගීකරණය</h4><ul>
+        <li>අධිරාජධානි 3 (ආකියා/බැක්ටීරියා/ඉයුකැරියා); රාජධානි 5.</li>
+        <li>ශාක: අපුෂ්ප/සපුෂ්ප (ඒක/ද්විබීජපත්‍රී). සත්ව: අපෘෂ්ඨ/පෘෂ්ඨවංශීන්.</li>
+        <li>නම 2යි: ගණ + විශේෂ (Linnaeus).</li>
+      </ul></div>
+      <div class="cheat-card" style="--cl:var(--B)"><h4>🌱 ශාක පටක</h4><ul>
+        <li>විභාජක = වර්ධනය (අග්‍රස්ථ/අන්තරස්ථ/පාර්ශ්වික).</li>
+        <li>සරල ස්ථිර: මෘදුස්තර·ස්ථූලකෝණාස්තර·දෘඪස්තර.</li>
+        <li>සංකීර්ණ: ශෛලම (ජලය↑)·ජ්ලෝයම (ආහාර).</li>
+      </ul></div>
+      <div class="cheat-card" style="--cl:var(--B)"><h4>🩺 සත්ව පටක</h4><ul>
+        <li>අපිවිෂද (ආවරණය)·සම්බන්ධක (රුධිර)·පේශි·ස්නායු.</li>
+        <li>පේශි 3: සිනිඳු·කංකාල (ඉච්ඡානුග)·හෘත් (අන්තරස්ථාපිත මඬල).</li>
+        <li>නියුරෝන 3: සංවේදක·අන්තර්භාර·වාලක.</li>
+      </ul></div>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <span class="logo" style="background:linear-gradient(135deg,#e0a92e,#c8901a);color:#0d1b3e;border-radius:8px;font-weight:800;place-items:center">I</span>
+  Idasara Academy · සා/පෙළ විද්‍යාව — 10 ශ්‍රේණිය (පොත I පා.1,6,8; පොත II පා.13) හා 11 ශ්‍රේණිය (පොත I පා.1) ඇසුරෙන් (අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුව). මාධ්‍යය: සිංහල.
+</footer>
+
 <script>
-  // progress bar + back-to-top
-  var pb=document.getElementById('prog'),tb=document.getElementById('top');
-  function upd(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,
-    mx=(h.scrollHeight-h.clientHeight)||1;pb.style.width=(sc/mx*100)+'%';
-    tb.style.display=sc>400?'block':'none';}
-  addEventListener('scroll',upd);addEventListener('load',upd);
-  tb.onclick=function(){scrollTo({top:0,behavior:'smooth'});};
+var prog=document.getElementById('progress');
+function up(){var h=document.documentElement;var s=h.scrollTop||document.body.scrollTop;var mx=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/mx*100)+'%';}
+window.addEventListener('scroll',up,{passive:true});up();
+
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.rbtn');if(!b)return;
+  var box=b.parentElement.querySelector('.ans');if(!box)return;
+  var open=box.classList.toggle('show');
+  if(open){b.textContent='පිළිතුර හංගන්න ▴';}
+  else{b.textContent=(b.getAttribute('data-short')==='1'?'පිළිතුර ▾':'පිළිතුර පෙන්වන්න ▾');}
+});
+document.querySelectorAll('.selfcheck .rbtn').forEach(function(b){b.setAttribute('data-short','1');});
+
+function wire(id,map,sv){
+  var out=document.getElementById(id+'Out');var chips=document.querySelectorAll('#'+id+'Widget .chip');if(!out)return;
+  chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');var d=map[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var('+sv+'-soft);color:var('+sv+'-deep)">'+d[0]+'</span> '+d[1];});});
+}
+wire('bioMol',{
+  carb:['කාබොහයිඩ්‍රේට','C,H,O (2:1). ශක්තිය/සංචිතය. උදා: පිෂ්ටය.'],
+  prot:['ප්‍රෝටීන','C,H,O,N. ඇමයිනෝ අම්ල; එන්සයිම/හෝමෝන/ප්‍රතිදේහ.'],
+  lipid:['ලිපිඩ','C,H,O (O අඩු). වැඩි ශක්තිය, පටල, තාප පරිවාරක.'],
+  nucleic:['නියුක්ලෙයික් අම්ල','C,H,O,N,P. DNA/RNA — ආවේණික තොරතුරු.'],
+  water:['ජලය','අකාබනික; ද්‍රාවක, ප්‍රවාහනය, උෂ්ණත්ව පාලනය.']
+},'--A');
+wire('org',{
+  nuc:['න්‍යෂ්ටිය','සෛල ක්‍රියා පාලනය; වර්ණදේහ (ආවේණික තොරතුරු).'],
+  mito:['මයිටොකොන්ඩ්‍රියම්','aerobic ශ්වසනය → ශක්තිය (“බල මැදිරිය”).'],
+  ribo:['රයිබොසෝම','ප්‍රෝටීන සංශ්ලේෂණය.'],
+  wall:['සෛල බිත්තිය','සෙලියුලෝස්; ශාකයට හැඩය/සහාය/ආරක්ෂාව.'],
+  vac:['රික්තකය','ජලය/සංචිත/වර්ණක; ශාකයේ විශාල.'],
+  mem:['ප්ලාස්ම පටලය','අර්ධ පාරගම්‍ය; ඇතුළු/පිටවීම පාලනය.']
+},'--A');
+wire('king',{
+  bac:['බැක්ටීරියා','ප්‍රාග් න්‍යෂ්ටික, එක සෛලික; සර්වව්‍යාප්ත.'],
+  pro:['ප්‍රොටිස්ටා','න්‍යෂ්ටික, පටක නැති; ඇල්ගී/ප්‍රොටොසෝවා.'],
+  fun:['ෆන්ගයි','කයිටින් බිත්ති, විෂමපෝෂී, වියෝජක; හතු/යීස්ට්.'],
+  pla:['ප්ලාන්ටේ','හරිතප්‍රද, ස්වයංපෝෂී; සෙලියුලෝස් බිත්ති.'],
+  ani:['ඇනිමාලියා','විෂමපෝෂී, බහු සෛලික; අපෘෂ්ඨ/පෘෂ්ඨවංශීන්.']
+},'--A');
+wire('plantTis',{
+  meri:['විභාජක','විභජනය → වර්ධනය (අග්‍රස්ථ/අන්තරස්ථ/පාර්ශ්වික).'],
+  paren:['මෘදුස්තර','සජීවී; ප්‍රභාසංශ්ලේෂණය, ආහාර/ජල සංචිතය.'],
+  coll:['ස්ථූලකෝණාස්තර','සජීවී; නම්‍යශීලී යාන්ත්‍රික සහාය.'],
+  scler:['දෘඪස්තර','අජීවී, ලිග්නින්; දැඩි සහාය (තන්තු/උපල).'],
+  xylem:['ශෛලම','ජලය + ලවණ මුල → ඉහළට; සහාය.'],
+  phloem:['ජ්ලෝයම','ආහාර (සුක්‍රෝස්) කොළ → සෙසු තැන්.']
+},'--B');
+wire('animTis',{
+  epi:['අපිවිෂද','ආස්තරණය/ආරක්ෂාව; රුධිර සැපයුමක් නැත.'],
+  conn:['සම්බන්ධක','පුරකයක් + තන්තු; සම්බන්ධ/සහාය. රුධිරය මෙයට.'],
+  smooth:['සිනිඳු පේශි','තර්කුරූපී, අනිච්ඡානුග; ආහාර මාර්ග/නාල බිත්ති.'],
+  skel:['කංකාල පේශි','ගාඛන, බහු න්‍යෂ්ටික, ඉච්ඡානුග; චලනය.'],
+  card:['හෘත් පේශි','ශාඛිත, අන්තරස්ථාපිත මඬල, අනිච්ඡානුග; හෘදයේ පමණයි.'],
+  nerve:['ස්නායු','නියුරෝන; ආවේග සම්ප්‍රේෂණය.']
+},'--B');
 </script>
 </body>
 </html>
