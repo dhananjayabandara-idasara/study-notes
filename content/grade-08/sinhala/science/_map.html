@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 ශ්‍රේණිය විද්‍යාව — සම්පූර්ණ සිතියම · ඉඩසර ඇකඩමිය</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --bio:#2f8f5b; --chem:#7a5bb0; --phys:#2b6fb3; --earth:#c8962a;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Noto Sans Sinhala','Iskoola Pota','Segoe UI',system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.74rem;letter-spacing:.05em;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.5rem}
+  header p{margin:.5rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:66ch}
+  .strategy{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:12px;padding:14px 18px;margin:16px 0 4px;font-size:.92rem;color:#5a4410}
+  .strategy b{color:#3a2a06}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:16px 2px 6px;font-size:.84rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.84rem;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:14px 0 6px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:1rem;color:var(--navy)}
+  .cluster .why{margin:0 0 14px;font-size:.85rem;color:var(--muted)}
+  .chain{position:relative;margin-left:4px}
+  .step{position:relative;padding:6px 0 16px 42px}
+  .step::before{content:'';position:absolute;left:14px;top:6px;bottom:0;border-left:2px dashed #c4ccd6}
+  .step:last-child::before{bottom:auto;height:24px}
+  .step .uno{position:absolute;left:0;top:4px;width:30px;height:30px;border-radius:9px;color:#fff;font-weight:700;font-size:.82rem;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+  .step .name{font-size:.96rem;font-weight:600;color:var(--ink)}
+  .step .en{font-size:.76rem;color:var(--muted);font-weight:400}
+  .tagpg{display:inline-block;font-size:.66rem;font-weight:700;color:var(--muted);background:#eef1f5;border:1px solid var(--line);border-radius:20px;padding:1px 8px;margin:0 6px;vertical-align:middle;white-space:nowrap}
+  ul.subs{margin:7px 0 0;padding:0;list-style:none}
+  ul.subs li{font-size:.85rem;color:#37424f;padding:2px 0 2px 16px;position:relative}
+  ul.subs li::before{content:'';position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:#b6c0cc}
+  ul.subs li .sn{color:var(--muted);font-weight:600;font-size:.78rem;margin-right:3px}
+  ul.subs li em{color:var(--muted);font-style:normal;font-size:.76rem}
+  footer{margin-top:24px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.7}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.step{padding-left:38px}.tagpg{margin-left:0;display:inline-block;margin-top:2px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">ඉඩසර ඇකඩමිය · විද්‍යාව · 8 ශ්‍රේණිය</div>
+    <h1>8 ශ්‍රේණිය විද්‍යාව — සම්පූර්ණ සිතියම</h1>
+    <p>විද්‍යාව යනු වෙන් වෙන් පාඩම් 15ක් නොවේ. එය විශාල ධාරා 4කි — <b>ජීව ලෝකය</b>, <b>පදාර්ථය</b>, <b>ශක්තිය හා විද්‍යුතය</b>, සහ <b>පෘථිවිය හා අභ්‍යවකාශය</b>. පෙළපොත I හා II කොටස්වල විසිරී ඇති ඒකක, මේ ධාරා අනුව නැවත සකස් කර, එකිනෙක සම්බන්ධ වන ආකාරයටම මෙහි පෙන්වා ඇත. දාමය අනුගමනය කරන්න — එක පාඩමක් අනික තේරුම් ගන්න උපකාරී වෙයි.</p>
+  </header>
+
+  <div class="strategy">
+    <b>මෙය කියවන්න — සිතියම පාවිච්චි කරන හැටි.</b> සෑම ඒකකයක් යටම එහි සියලුම උප මාතෘකා (1.1, 1.2 …) ලැයිස්තුගත කර ඇත — <b>එකක්වත් අත්හැර නැත</b>. එක එක ඒකකය ළඟ ඇති <span class="tagpg">පොත I · පි.01</span> වැනි ටැගයෙන්, එය පෙළපොතේ <b>කොතැනද</b> (I හෝ II කොටස + පිටු අංකය) පහසුවෙන් සොයාගන්න. ධාරාවක් තුළ ඊතලය (↓) පෙන්වන්නේ <b>මුලින් ඉගෙන ගත යුතු අනුපිළිවෙළයි</b> — උදා: ක්ෂුද්‍ර ජීවීන් මුලින්, පසුව ආහාර පරිරක්ෂණය.
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--bio)"></i>ජීව ලෝකය (ජීව විද්‍යාව)</span>
+    <span><i class="dot" style="background:var(--chem)"></i>පදාර්ථය (රසායන විද්‍යාව)</span>
+    <span><i class="dot" style="background:var(--phys)"></i>ශක්තිය, බල හා විද්‍යුතය (භෞතික විද්‍යාව)</span>
+    <span><i class="dot" style="background:var(--earth)"></i>පෘථිවිය හා අභ්‍යවකාශය</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">සියල්ල විවෘත කරන්න</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">සියල්ල වසන්න</button>
+  </div>
+
+  <!-- ====== STRAND 1 · LIVING WORLD ====== -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--bio)"></span>1 · ජීව ලෝකය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· ජීව විද්‍යාව</span> <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>ක්ෂුද්‍ර ජීවීන් හා අපගේ ආහාර</h3>
+        <p class="why">ඇසට නොපෙනෙන ක්ෂුද්‍ර ජීවීන් මුලින් හඳුනාගෙන, ඔවුන් ආහාර නරක් කරන ආකාරය තේරුම් ගත්තම — “ආහාර පරිරක්ෂණය” ඇයි, කොහොමද කරන්නේ කියා ස්වභාවිකවම තේරෙයි.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">01</span>
+            <div class="name">ක්ෂුද්‍ර ජීවීන්ගේ වැදගත්කම <span class="tagpg">පොත I · පි.01</span><span class="en">Importance of microorganisms</span></div>
+            <ul class="subs">
+              <li><span class="sn">1.1</span> ක්ෂුද්‍ර ජීවීන් <em>· Microorganisms</em></li>
+              <li><span class="sn">1.2</span> ක්ෂුද්‍ර ජීවීන් ආහාර මත ඇති කරන බලපෑම <em>· Effect on food</em></li>
+              <li><span class="sn">1.3</span> ක්ෂුද්‍ර ජීවීන් මගින් මිනිසාට හා මිනිස ක්‍රියාකාරකම්වලට ඇති වන බලපෑම <em>· Effect on humans &amp; activities</em></li>
+            </ul>
+          </div>
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">13</span>
+            <div class="name">ආහාර පරිරක්ෂණය <span class="tagpg">පොත II · පි.80</span><span class="en">Food preservation &nbsp;(රසායන විද්‍යාවටත් සම්බන්ධයි)</span></div>
+            <ul class="subs">
+              <li><span class="sn">13.1</span> ආහාර පරිරක්ෂණයේ අවශ්‍යතාව <em>· Need for preservation</em></li>
+              <li><span class="sn">13.2</span> ආහාර පරිරක්ෂණ ක්‍රම <em>· Methods</em></li>
+              <li><span class="sn">13.3</span> ආහාර පරිරක්ෂක <em>· Preservatives</em></li>
+              <li><span class="sn">13.4</span> ආහාර පරිරක්ෂණයේ වාසි හා අවාසි <em>· Pros &amp; cons</em></li>
+              <li><span class="sn">13.5</span> ආහාර ඇසුරුම් ලේබලයක අඩංගු තොරතුරු <em>· Food label information</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>ජීවීන් වර්ගීකරණය හා ජීවන චක්‍ර</h3>
+        <p class="why">පළමුව ජීවීන් කාණ්ඩවලට බෙදා හඳුනාගෙන, පසුව එක් එක් වර්ගයා තම පරම්පරාව පවත්වාගන්නා ආකාරය (ජීවන චක්‍ර) බලමු.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">02</span>
+            <div class="name">සත්ත්ව වර්ගීකරණය <span class="tagpg">පොත I · පි.12</span><span class="en">Animal classification</span></div>
+            <ul class="subs">
+              <li><span class="sn">2.1</span> ප්‍රධාන අපෘෂ්ඨවංශී කාණ්ඩ <em>· Major invertebrate groups</em></li>
+              <li><span class="sn">2.2</span> ප්‍රධාන පෘෂ්ඨවංශී කාණ්ඩ <em>· Major vertebrate groups</em></li>
+            </ul>
+          </div>
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">12</span>
+            <div class="name">ජීවීන්ගේ ජීවන චක්‍ර <span class="tagpg">පොත II · පි.62</span><span class="en">Life cycles of organisms</span></div>
+            <ul class="subs">
+              <li><span class="sn">12.1</span> සතුන්ගේ ජීවන චක්‍ර <em>· Animal life cycles</em></li>
+              <li><span class="sn">12.2</span> ශාකවල ජීවන චක්‍ර <em>· Plant life cycles</em></li>
+              <li><span class="sn">12.3</span> ජීවන චක්‍ර පිළිබඳ අධ්‍යයනයේ වැදගත්කම <em>· Importance of studying life cycles</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>ශාක ලෝකය — ව්‍යුහයේ සිට ක්‍රියාවලියට</h3>
+        <p class="why">ශාකයක කොටස් (පත්‍ර, කඳ, මුල්) හා ඒවායේ කෘත්‍ය මුලින් ඉගෙන ගත්තම, ඒ කොටස් මගින්ම සිදුවන ජෛව ක්‍රියාවලි (ප්‍රභාසංශ්ලේෂණය, පරිවහනය) තේරුම් ගැනීම ලේසියි.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">03</span>
+            <div class="name">ශාක කොටස්වල විවිධත්වය හා කෘත්‍ය <span class="tagpg">පොත I · පි.24</span><span class="en">Diversity &amp; function of plant parts</span></div>
+            <ul class="subs">
+              <li><span class="sn">3.1</span> ශාක පත්‍රවල විවිධත්වය හා කෘත්‍ය <em>· Leaves</em></li>
+              <li><span class="sn">3.2</span> ශාක කඳෙහි විවිධත්වය හා කෘත්‍ය <em>· Stems</em></li>
+              <li><span class="sn">3.3</span> ශාක මුල්වල විවිධත්වය හා කෘත්‍ය <em>· Roots</em></li>
+            </ul>
+          </div>
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">11</span>
+            <div class="name">ශාකවල ප්‍රධාන ජෛව ක්‍රියාවලි <span class="tagpg">පොත II · පි.46</span><span class="en">Main biological processes in plants</span></div>
+            <ul class="subs">
+              <li><span class="sn">11.1</span> ප්‍රභාසංශ්ලේෂණය <em>· Photosynthesis</em></li>
+              <li><span class="sn">11.2</span> පරිවහනය <em>· Transport</em></li>
+              <li><span class="sn">11.3</span> උත්ස්වේදනය <em>· Transpiration</em></li>
+              <li><span class="sn">11.4</span> බින්දුදය <em>· Guttation</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>මානව සිරුර</h3>
+        <p class="why">අපටම සමීපම ජීව විද්‍යාව — අපගේම සිරුරේ ඉන්ද්‍රිය පද්ධති ක්‍රියා කරන ආකාරය.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--bio)">09</span>
+            <div class="name">මානව ඉන්ද්‍රිය පද්ධති <span class="tagpg">පොත II · පි.01</span><span class="en">Human organ systems</span></div>
+            <ul class="subs">
+              <li><span class="sn">9.1</span> මානව බහිස්ස්‍රාවී ඉන්ද්‍රිය හා බහිස්ස්‍රාවී ඵල <em>· Excretory organs &amp; products</em></li>
+              <li><span class="sn">9.2</span> මානව ස්නායු පද්ධතිය <em>· Nervous system</em></li>
+              <li><span class="sn">9.3</span> මානව සම <em>· Skin</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ====== STRAND 2 · MATTER ====== -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--chem)"></span>2 · පදාර්ථය හා එහි විපර්යාස <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· රසායන විද්‍යාව</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>පදාර්ථය තේරුම් ගැනීම — ගුණයේ සිට විපර්යාසය දක්වා</h3>
+        <p class="why">පදාර්ථය යනු කුමක්ද, එහි ගුණ මොනවාද කියා මුලින් දැනගෙන, පසුව පදාර්ථය වෙනස් වන ආකාර (භෞතික/රසායනික විපර්යාස, දහනය, මලකඩ බැඳීම, උදාසීනීකරණය) අධ්‍යයනය කරමු. දෙක එකම පවුලයි.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--chem)">04</span>
+            <div class="name">පදාර්ථයේ ගුණ <span class="tagpg">පොත I · පි.39</span><span class="en">Properties of matter</span></div>
+            <ul class="subs">
+              <li><span class="sn">4.1</span> පදාර්ථයේ අසන්තත ස්වභාවය <em>· Particulate nature of matter</em></li>
+              <li><span class="sn">4.2</span> පදාර්ථයේ භෞතික ගුණ ප්‍රයෝජනයට ගැනීම <em>· Using physical properties</em></li>
+            </ul>
+          </div>
+          <div class="step">
+            <span class="uno" style="background:var(--chem)">08</span>
+            <div class="name">පදාර්ථයේ විපර්යාස <span class="tagpg">පොත I · පි.105</span><span class="en">Changes in matter</span></div>
+            <ul class="subs">
+              <li><span class="sn">8.1</span> භෞතික විපර්යාස හා රසායනික විපර්යාස <em>· Physical &amp; chemical changes</em></li>
+              <li><span class="sn">8.2</span> අවස්ථා විපර්යාස, භෞතික විපර්යාස ලෙස <em>· Changes of state</em></li>
+              <li><span class="sn">8.3</span> රසායනික විපර්යාස <em>· Chemical changes</em></li>
+              <li><span class="sn">8.4</span> දහනය <em>· Combustion</em></li>
+              <li><span class="sn">8.5</span> ලෝහ මලින වීම <em>· Rusting / corrosion</em></li>
+              <li><span class="sn">8.6</span> උදාසීනීකරණය <em>· Neutralization</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ====== STRAND 3 · ENERGY / ELECTRICITY ====== -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--phys)"></span>3 · ශක්තිය, බල හා විද්‍යුතය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· භෞතික විද්‍යාව</span> <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>ශබ්දය</h3>
+        <p class="why">කම්පනයෙන් හඬ හටගන්නා ආකාරය — සංගීත භාණ්ඩ තුළින් තරංග පිළිබඳ පළමු අත්දැකීම.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--phys)">05</span>
+            <div class="name">ධ්වනිය <span class="tagpg">පොත I · පි.61</span><span class="en">Sound</span></div>
+            <ul class="subs">
+              <li><span class="sn">5.1</span> පටල කම්පනය වීමෙන් හඬ උපදවන සංගීත භාණ්ඩ <em>· Membrane / percussion</em></li>
+              <li><span class="sn">5.2</span> වායු කඳක් කම්පනයෙන් හඬ උපදවන සංගීත භාණ්ඩ <em>· Wind / air-column</em></li>
+              <li><span class="sn">5.3</span> තන්තු/දඬු කම්පනය වීමෙන් හඬ උපදවන සංගීත භාණ්ඩ <em>· String instruments</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>චුම්බකත්වයේ සිට විද්‍යුතය දක්වා</h3>
+        <p class="why">චුම්බක මුලින් ඉගෙන ගන්න. ඊළඟට විදුලි ධාරාව, විභවය හා ප්‍රතිරෝධය මනින හැටි. අවසානයේ සම්පූර්ණ පරිපථ හා විද්‍යුත් ධාරාවේ ඵල හතර — තාපන, ප්‍රකාශ, <b>චුම්බක</b> (යළිත් චුම්බකයටම සම්බන්ධයි!) හා රසායනික.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--phys)">06</span>
+            <div class="name">චුම්බක <span class="tagpg">පොත I · පි.76</span><span class="en">Magnets</span></div>
+            <ul class="subs">
+              <li><span class="sn">6.1</span> චුම්බකයක ධ්‍රැව <em>· Poles of a magnet</em></li>
+              <li><span class="sn">6.2</span> චුම්බකයක චුම්බක ක්ෂේත්‍රය <em>· Magnetic field</em></li>
+              <li><span class="sn">6.3</span> මාලිමාව <em>· Compass</em></li>
+              <li><span class="sn">6.4</span> භූ චුම්බකත්වය <em>· Earth's magnetism</em></li>
+              <li><span class="sn">6.5</span> තාවකාලික චුම්බක හා ස්ථීර චුම්බක <em>· Temporary &amp; permanent magnets</em></li>
+            </ul>
+          </div>
+          <div class="step">
+            <span class="uno" style="background:var(--phys)">07</span>
+            <div class="name">ධාරා විද්‍යුතය පිළිබඳ මිනුම් <span class="tagpg">පොත I · පි.93</span><span class="en">Measurements in current electricity</span></div>
+            <ul class="subs">
+              <li><span class="sn">7.1</span> විද්‍යුත් ධාරාව <em>· Electric current</em></li>
+              <li><span class="sn">7.2</span> විභව අන්තරය <em>· Potential difference</em></li>
+              <li><span class="sn">7.3</span> සන්නායකයක ප්‍රතිරෝධය <em>· Resistance of a conductor</em></li>
+            </ul>
+          </div>
+          <div class="step">
+            <span class="uno" style="background:var(--phys)">10</span>
+            <div class="name">විද්‍යුතය <span class="tagpg">පොත II · පි.18</span><span class="en">Electricity</span></div>
+            <ul class="subs">
+              <li><span class="sn">10.1</span> කෝෂ හා බල්බ සම්බන්ධ කරන විවිධ ආකාර <em>· Connecting cells &amp; bulbs</em></li>
+              <li><span class="sn">10.2</span> සරල විද්‍යුත් පරිපථ <em>· Simple circuits</em></li>
+              <li><span class="sn">10.3</span> ධාරා පාලන උපාංග <em>· Current control devices</em></li>
+              <li><span class="sn">10.4</span> ගෘහස්ථ විද්‍යුත් උවාරණ <em>· Household electrical fittings</em></li>
+              <li><span class="sn">10.5</span> විද්‍යුත් ධාරාවේ තාපන ඵලය <em>· Heating effect</em></li>
+              <li><span class="sn">10.6</span> විද්‍යුත් ධාරාවේ ප්‍රකාශ ඵලය <em>· Lighting effect</em></li>
+              <li><span class="sn">10.7</span> විද්‍යුත් ධාරාවේ චුම්බක ඵලය <em>· Magnetic effect</em></li>
+              <li><span class="sn">10.8</span> විද්‍යුත් ධාරාවේ රසායනික ඵලය <em>· Chemical effect</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ====== STRAND 4 · EARTH & SPACE ====== -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--earth)"></span>4 · පෘථිවිය හා අභ්‍යවකාශය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· පෘථිවි හා අභ්‍යවකාශ විද්‍යාව</span> <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>අපගේ සෞරග්‍රහ මණ්ඩලය</h3>
+        <p class="why">පෘථිවියෙන් පිට, අභ්‍යවකාශය දෙසට — සූර්යයා, ග්‍රහලෝක, ඍතු, චන්ද්‍ර කලා හා මිනිස් අභ්‍යවකාශ ගවේෂණ දක්වා.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--earth)">14</span>
+            <div class="name">සෞරග්‍රහ මණ්ඩලය ආශ්‍රිත සංසිද්ධි හා ගවේෂණ <span class="tagpg">පොත II · පි.97</span><span class="en">Solar system phenomena &amp; exploration</span></div>
+            <ul class="subs">
+              <li><span class="sn">14.1</span> සෞරග්‍රහ මණ්ඩලය <em>· The solar system</em></li>
+              <li><span class="sn">14.2</span> ඍතු විපර්යාස ඇති වීම <em>· Seasons</em></li>
+              <li><span class="sn">14.3</span> චන්ද්‍ර කලා ඇති වීම <em>· Phases of the Moon</em></li>
+              <li><span class="sn">14.4</span> සෞරග්‍රහ මණ්ඩලය ආශ්‍රිත වැදගත් සංසිද්ධි <em>· Eclipses &amp; key phenomena</em></li>
+              <li><span class="sn">14.5</span> අභ්‍යවකාශ ගවේෂණය <em>· Space exploration</em></li>
+              <li><span class="sn">14.6</span> කෘත්‍රිම චන්ද්‍රිකා <em>· Artificial satellites</em></li>
+              <li><span class="sn">14.7</span> තරු රටා <em>· Star patterns / constellations</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>පෘථිවියේ ස්වාභාවික ආපදා</h3>
+        <p class="why">යළිත් පෘථිවියට — සොබාදහමේ අවදානම් මොනවාද, ඒවාට මුහුණ දෙන්නේ කෙසේද.</p>
+        <div class="chain">
+          <div class="step">
+            <span class="uno" style="background:var(--earth)">15</span>
+            <div class="name">ස්වාභාවික ආපදා <span class="tagpg">පොත II · පි.128</span><span class="en">Natural disasters</span></div>
+            <ul class="subs">
+              <li><span class="sn">15.1</span> නියඟය <em>· Drought</em></li>
+              <li><span class="sn">15.2</span> ගංවතුර <em>· Floods</em></li>
+              <li><span class="sn">15.3</span> නායයෑම <em>· Landslides</em></li>
+              <li><span class="sn">15.4</span> අකුණු <em>· Lightning</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <footer>
+    අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුවේ 8 ශ්‍රේණිය විද්‍යා පෙළපොත (I හා II කොටස්) මත පදනම්ව සකස් කරන ලදී. ඒකක 15 · උප මාතෘකා 61 — සියල්ල ඇතුළත්.<br>
+    <span class="brand">ඉඩසර ඇකඩමිය</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

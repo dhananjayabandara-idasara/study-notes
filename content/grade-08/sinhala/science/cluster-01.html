@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara · 8 ශ්‍රේණිය විද්‍යාව — ක්ෂුද්‍ර ජීවීන් හා අපගේ ආහාර</title>
+<style>
+  :root{
+    --navy:#0d1b3e; --navy-2:#16264f; --navy-3:#22376b;
+    --gold:#e0a92e; --gold-2:#c8901a; --gold-soft:#f6e4b8;
+    --bg:#f5f7fb; --card:#ffffff; --ink:#1a2235; --ink-soft:#4a5468; --line:#e2e7f0;
+    --A:#0e7c86;  --A-soft:#e2f3f4;  --A-deep:#0a5b63;   /* පාඩම 1 — ක්ෂුද්‍ර ජීවීන් */
+    --B:#c4533f;  --B-soft:#fbe9e4;  --B-deep:#9c3a29;   /* පාඩම 13 — ආහාර පරිරක්ෂණය */
+    --ok:#1f8a4c; --warn:#b3651f; --warn-soft:#fdf0e1;
+    --shadow:0 4px 18px rgba(13,27,62,.08);
+    --shadow-lg:0 10px 40px rgba(13,27,62,.14);
+    --radius:16px;
+    --fs:'Noto Sans Sinhala','Iskoola Pota','Nirmala UI','Yu Gothic',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'Iosevka','Fira Code',ui-monospace,'Cascadia Code',Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fs);font-size:17px;line-height:1.78;-webkit-text-size-adjust:100%}
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:120;background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .1s linear}
+
+  header.site{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-bottom:3px solid var(--gold);box-shadow:var(--shadow)}
+  .bar{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff}
+  .logo{width:38px;height:38px;border-radius:10px;flex:none;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:grid;place-items:center;font-weight:800;color:var(--navy);font-size:21px;box-shadow:0 2px 8px rgba(224,169,46,.4)}
+  .brand b{font-size:18px;letter-spacing:.5px;line-height:1}
+  .brand small{display:block;font-size:11px;opacity:.75;letter-spacing:2px;text-transform:uppercase}
+  .crumbs{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;font-size:12.5px}
+  .crumbs span{background:rgba(255,255,255,.12);padding:3px 11px;border-radius:20px;white-space:nowrap}
+  .crumbs span.acc{background:var(--gold);color:var(--navy);font-weight:700}
+
+  main{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+
+  .hero{margin:30px 0 14px;padding:34px 28px;border-radius:24px;color:#fff;position:relative;overflow:hidden;background:radial-gradient(120% 140% at 85% 10%,var(--navy-3),var(--navy) 60%)}
+  .hero::after{content:"🦠  ❄  ⚗  🍞";position:absolute;right:-6px;bottom:-14px;font-size:70px;font-weight:800;color:rgba(224,169,46,.10);letter-spacing:12px;white-space:nowrap;pointer-events:none}
+  .hero .eyebrow{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;font-size:12.5px;letter-spacing:1px;padding:5px 13px;border-radius:20px}
+  .hero h1{margin:.5em 0 .25em;font-size:clamp(25px,5.6vw,42px);line-height:1.25;font-weight:800}
+  .hero h1 .g{color:var(--gold)}
+  .hero p{margin:.4em 0 0;font-size:16.5px;max-width:54ch;opacity:.92}
+  .hero .pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:30px;font-size:14px}
+
+  .why{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin:18px 0;box-shadow:var(--shadow);border-left:6px solid var(--gold)}
+  .why h2{margin:.1em 0 .4em;font-size:21px;color:var(--navy)}
+  .why p{margin:.4em 0;color:var(--ink-soft);font-size:16px}
+
+  .roadmap{margin:22px 0}
+  .roadmap h2{font-size:20px;color:var(--navy);margin:0 0 4px}
+  .roadmap .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .map-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .map-card{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-top:5px solid var(--cl);transition:transform .15s,box-shadow .15s}
+  .map-card:hover,.map-card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-lg);outline:none}
+  .map-card .tag{font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--cl)}
+  .map-card h3{margin:6px 0 6px;font-size:18px;color:var(--navy)}
+  .map-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .map-card .cnt{display:inline-block;margin-top:10px;font-size:12px;background:var(--clsoft);color:var(--cl);font-weight:700;padding:3px 10px;border-radius:20px}
+
+  .part{scroll-margin-top:76px;margin:46px 0 8px;padding:20px 22px;border-radius:20px;color:#fff;background:linear-gradient(135deg,var(--cl),var(--cldeep));box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .part .pn{font-size:13px;font-weight:800;letter-spacing:1px;opacity:.85}
+  .part h2{margin:3px 0 4px;font-size:clamp(21px,4.6vw,29px);font-weight:800}
+  .part p{margin:0;opacity:.92;font-size:15px;max-width:62ch}
+  .part .src{position:absolute;right:14px;top:14px;font-size:11px;background:rgba(255,255,255,.16);padding:4px 11px;border-radius:14px}
+
+  .topic{scroll-margin-top:72px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin:16px 0;overflow:hidden;border:1px solid var(--line)}
+  .topic > .head{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none;padding:17px 20px;background:linear-gradient(0deg,#fff,var(--clsoft));border-bottom:1px solid var(--line)}
+  .topic > .head::-webkit-details-marker{display:none}
+  .topic .num{flex:none;width:40px;height:40px;border-radius:11px;background:var(--cl);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+  .topic .head h3{margin:0;font-size:18px;color:var(--navy);flex:1}
+  .topic .head .en{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+  .topic .chev{flex:none;color:var(--cl);font-size:22px;transition:transform .25s}
+  details[open] > .head .chev{transform:rotate(180deg)}
+  .topic .body{padding:6px 20px 22px}
+
+  .step{margin:22px 0 8px;display:flex;align-items:center;gap:9px}
+  .step .dot{flex:none;width:25px;height:25px;border-radius:50%;background:var(--clsoft);color:var(--cldeep);font-weight:800;font-size:13px;display:grid;place-items:center}
+  .step b{font-size:15.5px;color:var(--cldeep)}
+  p.lead{font-size:16.5px}
+  .topic p{color:var(--ink)}
+
+  .box{border-radius:13px;padding:14px 16px;margin:14px 0;font-size:15.5px}
+  .hook{background:var(--clsoft);border-left:5px solid var(--cl)}
+  .hook .ttl{font-weight:800;color:var(--cldeep)}
+  .watch{background:var(--warn-soft);border-left:5px solid var(--warn)}
+  .watch .ttl{font-weight:800;color:var(--warn);display:block;margin-bottom:3px}
+  .watch ul{margin:.3em 0;padding-left:1.15em}
+  .watch li{margin:.35em 0}
+  .safety{background:#eef7ff;border-left:5px solid #2b6cb0}
+  .safety .ttl{font-weight:800;color:#23598f;display:block;margin-bottom:3px}
+  .memo{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:13px;padding:14px 17px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+  .memo .ic{font-size:22px;flex:none}
+  .memo b{color:var(--gold)}
+  .joke{font-style:italic;color:var(--ink-soft);font-size:14.5px;background:#fcfcfe;border:1px dashed var(--line);border-radius:11px;padding:9px 14px;margin:12px 0}
+  .joke::before{content:"😄 ";font-style:normal}
+
+  .work{background:#fbfcfe;border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:13px 0}
+  .work .lbl{display:inline-block;background:var(--cl);color:#fff;font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:8px;margin-bottom:8px}
+
+  .reveal{margin:11px 0}
+  .reveal .q{font-weight:600}
+  .rbtn{margin-top:8px;background:var(--cl);color:#fff;border:none;cursor:pointer;font-family:var(--fs);font-size:14px;font-weight:700;padding:8px 16px;border-radius:24px;display:inline-flex;align-items:center;gap:7px;transition:filter .15s}
+  .rbtn:hover{filter:brightness(1.08)}
+  .rbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .ans{display:none;margin-top:10px;background:#f0fbf4;border:1px solid #bfe6cd;border-left:5px solid var(--ok);border-radius:11px;padding:11px 15px;font-size:15px}
+  .ans.show{display:block;animation:pop .25s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .ans .a{font-weight:800;color:var(--ok)}
+
+  .selfcheck{background:var(--clsoft);border-radius:13px;padding:13px 16px;margin:15px 0}
+  .selfcheck .ttl{font-weight:800;color:var(--cldeep);margin-bottom:4px}
+
+  .widget{background:#fff;border:2px solid var(--clsoft);border-radius:14px;padding:16px;margin:15px 0}
+  .widget .wt{font-weight:800;color:var(--cldeep);font-size:14.5px;margin-bottom:9px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{cursor:pointer;border:1.6px solid var(--cl);background:#fff;color:var(--cldeep);font-size:14.5px;font-weight:700;padding:7px 13px;border-radius:11px;transition:.15s;font-family:inherit}
+  .chip:hover{background:var(--clsoft)}
+  .chip.active{background:var(--cl);color:#fff}
+  .wout{margin-top:11px;font-size:15px;min-height:1.4em}
+  .wout .badge{display:inline-block;font-weight:800;padding:2px 9px;border-radius:8px;font-size:13px;margin-right:6px}
+  .slider{width:100%;accent-color:var(--B)}
+
+  .svgwrap{margin:14px 0;text-align:center}
+  svg{max-width:100%;height:auto}
+  figcaption{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+  .tbl{width:100%;border-collapse:collapse;margin:13px 0;font-size:14.5px;overflow:hidden;border-radius:11px;box-shadow:var(--shadow)}
+  .tbl th{background:var(--cl);color:#fff;padding:9px 11px;text-align:left;font-weight:700}
+  .tbl td{padding:8px 11px;border-bottom:1px solid var(--line);background:#fff;vertical-align:top}
+  .tbl tr:nth-child(even) td{background:#fafbfe}
+  .scroll{overflow-x:auto}
+
+  .synth{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:22px;padding:30px 26px;margin:48px 0 24px;box-shadow:var(--shadow-lg)}
+  .synth h2{color:var(--gold);margin:0 0 8px;font-size:26px}
+  .synth p{opacity:.92}
+  .synth .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0;font-weight:700}
+  .synth .chain span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 14px;border-radius:12px}
+  .synth .chain i{color:var(--gold);font-style:normal;font-size:20px}
+
+  .test{background:var(--card);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .test h2{color:var(--navy);margin:0 0 4px;font-size:24px}
+  .test .qz{counter-reset:q;}
+  .qitem{border-top:1px solid var(--line);padding:14px 0}
+  .qitem:first-of-type{border-top:none}
+  .qitem .qq{font-weight:600}
+  .qitem .qq::before{counter-increment:q;content:"ප්‍රශ්නය " counter(q) ". ";color:var(--navy);font-weight:800}
+
+  .cheat{background:#fffdf6;border:2px solid var(--gold-soft);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow)}
+  .cheat h2{color:var(--gold-2);margin:0 0 6px;font-size:24px}
+  .cheat-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .cheat-card{background:#fff;border-radius:13px;padding:14px 16px;border-top:4px solid var(--cl);box-shadow:var(--shadow)}
+  .cheat-card h4{margin:0 0 6px;color:var(--navy);font-size:15px}
+  .cheat-card ul{margin:.3em 0;padding-left:1.1em;font-size:13.7px}
+  .cheat-card li{margin:.3em 0}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 18px 10px}
+  footer .logo{display:inline-grid;width:30px;height:30px;font-size:16px;vertical-align:middle;margin-right:7px}
+  .tnote{font-size:12.5px;color:var(--ink-soft);background:#fafbfe;border:1px solid var(--line);border-radius:9px;padding:7px 12px;margin:10px 0}
+
+  @media(max-width:760px){
+    body{font-size:16px}
+    .map-grid{grid-template-columns:1fr}
+    .cheat-grid{grid-template-columns:1fr}
+    .crumbs{display:none}
+    .hero{padding:26px 20px}
+    .topic .body{padding:4px 15px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  @media print{
+    header.site,#progress,.rbtn,.chev{display:none!important}
+    .ans{display:block!important}
+    details{display:block}
+    details:not([open])>:not(summary){display:block!important}
+    .topic,.work,.box,.widget{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top"><span class="logo">I</span><span><b>IDASARA</b><small>Academy</small></span></a>
+    <div class="crumbs"><span>8 ශ්‍රේණිය</span><span>විද්‍යාව</span><span class="acc">ක්ෂුද්‍ර ජීවීන් හා අපගේ ආහාර</span></div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">8 ශ්‍රේණිය · විද්‍යාව · පාඩම් 1 &amp; 13</span>
+    <h1>ඇසට නොපෙනෙන <span class="g">ක්ෂුද්‍ර ජීවීන්</span> —<br>ඔවුන් අපේ <span class="g">ආහාර</span> ගොඩනඟයි, නරක් කරයි.</h1>
+    <p>ඇසට නොපෙනෙන කුඩා ජීවීන් මුලින් අඳුරගමු. ඔවුන් ආහාර නරක් කරන හැටි තේරුම් ගත්තම — “ආහාර පරිරක්ෂණය” ඇයි, කොහොමද කරන්නේ කියා ස්වභාවිකවම තේරෙයි.</p>
+    <span class="pill">⏱ සෙමින් කියවන්න · 🔬 හැම කොටසක්ම අත්හදා බලන්න · ✅ පිළිතුරු හංගලා තියෙනවා</span>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <h2>ඇයි මේක මෙච්චර වැදගත්?</h2>
+    <p>ඔයා කවදාහරි දැකලා ඇති — පාන් මත කොළ පැහැති පුස්, කිරි කැටි ගැහෙන හැටි, මාළු නරක් වෙන හැටි. මේ සියල්ලට හේතුව <b>ඇසට නොපෙනෙන ක්ෂුද්‍ර ජීවීන්</b> ය. නමුත් ඒම ජීවීන්ම තමයි කිරි මිදීම, යෝගට්, පාන්, විනාකිරි, කොම්පෝස්ට් සෑදීමටත් අපිට උදව් කරන්නේ. ඒ නිසා ඔවුන් අපේ <b>මිතුරෝ සහ සතුරෝ</b> දෙගොල්ලම වෙනවා.</p>
+    <p>මේ පාඩම් දෙක එකම කතාවක දෙකොටසක්: <b>පාඩම 1</b> ක්ෂුද්‍ර ජීවීන් මොනවද, ඔවුන් කරන හොඳ–නරක මොනවද කියා කියයි; <b>පාඩම 13</b> ඒ නරක් වීම නවත්වා ආහාර කල් තබා ගන්නේ කොහොමද කියා කියයි. පහළ කාඩ් එකක් tap කරලා කෙළින්ම යන්න පුළුවන් — හැබැයි පිළිවෙළට කියෙව්වොත් හොඳම.</p>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="roadmap">
+    <h2>මේ පාඩම් දෙකේ සිතියම</h2>
+    <p class="sub">පාඩම් දෙකයි, උප-මාතෘකා අටයි.</p>
+    <div class="map-grid">
+      <a class="map-card" href="#unit1" style="--cl:var(--A);--clsoft:var(--A-soft)">
+        <span class="tag">පාඩම 1 · පොත I · පි.1</span>
+        <h3>ක්ෂුද්‍ර ජීවීන්ගේ වැදගත්කම</h3>
+        <p>ක්ෂුද්‍ර ජීවීන් මොනවද · ආහාර මත බලපෑම · මිනිසාට හිතකර හා අහිතකර බලපෑම්.</p>
+        <span class="cnt">උප-මාතෘකා 3</span>
+      </a>
+      <a class="map-card" href="#unit13" style="--cl:var(--B);--clsoft:var(--B-soft)">
+        <span class="tag">පාඩම 13 · පොත II · පි.80</span>
+        <h3>ආහාර පරිරක්ෂණය</h3>
+        <p>අවශ්‍යතාව · පරිරක්ෂණ ක්‍රම · පරිරක්ෂක · වාසි හා අවාසි · ලේබල තොරතුරු.</p>
+        <span class="cnt">උප-මාතෘකා 5</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ##################### UNIT 1 ##################### -->
+  <section class="part" id="unit1" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <span class="src">මූලාශ්‍රය · පොත I · පි.1–11</span>
+    <div class="pn">පාඩම 1</div>
+    <h2>ක්ෂුද්‍ර ජීවීන්ගේ වැදගත්කම</h2>
+    <p>ඇසට නොපෙනෙන ජීවීන් මොනවද, ඔවුන් ආහාර මත ඇති කරන වෙනස්කම් මොනවද, සහ මිනිසාට ඔවුන්ගෙන් වෙන හොඳ–නරක මොනවද කියා මෙහි ඉගෙන ගමු.</p>
+  </section>
+
+  <!-- 1.1 microorganisms -->
+  <details class="topic" id="t11" open style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">1.1</span>
+      <h3>ක්ෂුද්‍ර ජීවීන්<span class="en">Microorganisms</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">පොකුණු වතුර බින්දුවක… මුළු ලෝකයක්!</span> ගමේ පොකුණෙන් වතුර බින්දුවක් අරගෙන අණුවීක්ෂයකින් බැලුවොත් — ඇසට කිසිසේත් නොපෙනුණු, පීනන, දඟලන කුඩා ජීවීන් සිය ගණනක්! මේ “ඇසට නොපෙනෙන” ජීවීන්ට කියන්නේ <b>ක්ෂුද්‍ර ජීවීන් (Microorganisms)</b> කියලයි. (ක්‍රියාකාරකම 1.1)</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p class="lead"><b>තනි සෛලයකින් හෝ සෛල කිහිපයකින් සැදුණු, පියවි ඇසට පැහැදිලිව නොපෙනෙන, අණුවීක්ෂයක් මගින් පමණක් නිරීක්ෂණය කළ හැකි ජීවීන්ට</b> ක්ෂුද්‍ර ජීවීන් කියනවා. (පොත, පි.1)</p>
+      <p>මොවුන් <b>සෑම පරිසරයකම</b> ජීවත් වෙනවා — හිම කඳු, කාන්තාර, සාගර පතුල, උණු දිය උල්පත් පවා! ක්ෂුද්‍ර ජීවී වර්ග කිහිපයක් (රූප 1.2):</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>ක්ෂුද්‍ර ජීවියා</th><th>කාණ්ඩය</th><th>උදාහරණ</th></tr>
+        <tr><td><b>බැක්ටීරියා</b> (Bacteria)</td><td>බැක්ටීරියා</td><td>දඬු/වටකුරු හැඩැති</td></tr>
+        <tr><td><b>යීස්ට්</b> (Yeast)</td><td>දිලීර</td><td>පාන්/පැසවීමට</td></tr>
+        <tr><td><b>ක්ලැමිඩොමොනාස්</b> (Chlamydomonas)</td><td>ඇල්ගී</td><td>කොළ පැහැති</td></tr>
+        <tr><td><b>මියුකර්</b> (Mucor)</td><td>දිලීර</td><td>පාන් මත පුස්</td></tr>
+        <tr><td><b>ඇමීබා</b> (Amoeba)</td><td>ප්‍රොටොසෝවා</td><td>හැඩය වෙනස් වෙයි</td></tr>
+        <tr><td><b>පැරමීසියම්</b> (Paramecium)</td><td>ප්‍රොටොසෝවා</td><td>සෙරෙප්පු හැඩැති</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 200" role="img" aria-label="ක්ෂුද්‍ර ජීවී වර්ග හයක සරල රූප">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="12" fill="#0a5b63" text-anchor="middle">
+            <!-- bacteria -->
+            <rect x="20" y="30" width="36" height="14" rx="7" fill="#7fc1c7"/><ellipse cx="80" cy="37" rx="9" ry="9" fill="#7fc1c7"/>
+            <text x="55" y="70">බැක්ටීරියා</text>
+            <!-- yeast -->
+            <circle cx="170" cy="34" r="13" fill="#cfe8b0" stroke="#0a5b63"/><circle cx="186" cy="26" r="6" fill="#cfe8b0" stroke="#0a5b63"/>
+            <text x="175" y="70">යීස්ට්</text>
+            <!-- algae -->
+            <ellipse cx="290" cy="34" rx="14" ry="11" fill="#5fae54"/><line x1="290" y1="23" x2="290" y2="14" stroke="#0a5b63"/>
+            <text x="290" y="70">ක්ලැමිඩොමොනාස්</text>
+            <!-- mucor -->
+            <line x1="420" y1="50" x2="420" y2="22" stroke="#8a6d3b" stroke-width="2"/><circle cx="420" cy="18" r="7" fill="#6b4f2a"/>
+            <line x1="408" y1="50" x2="408" y2="28" stroke="#8a6d3b" stroke-width="2"/><circle cx="408" cy="24" r="6" fill="#6b4f2a"/>
+            <text x="416" y="70">මියුකර් (දිලීර)</text>
+            <!-- amoeba -->
+            <path d="M70 120 q-20 -18 8 -26 q26 -10 30 8 q22 6 4 24 q-10 22 -28 8 q-24 0 -14 -14 z" fill="#e3b7c9" stroke="#9c3a6a"/>
+            <circle cx="72" cy="120" r="6" fill="#9c3a6a"/>
+            <text x="70" y="170">ඇමීබා</text>
+            <!-- paramecium -->
+            <ellipse cx="230" cy="120" rx="40" ry="16" fill="#bcd4ef" stroke="#23598f"/>
+            <g stroke="#23598f"><line x1="195" y1="106" x2="190" y2="100"/><line x1="215" y1="104" x2="212" y2="97"/><line x1="245" y1="104" x2="248" y2="97"/><line x1="266" y1="108" x2="272" y2="103"/></g>
+            <text x="230" y="170">පැරමීසියම්</text>
+            <!-- virus -->
+            <circle cx="400" cy="120" r="15" fill="#d98c8c" stroke="#9c3a29"/>
+            <g stroke="#9c3a29"><line x1="400" y1="105" x2="400" y2="98"/><line x1="415" y1="120" x2="422" y2="120"/><line x1="400" y1="135" x2="400" y2="142"/><line x1="385" y1="120" x2="378" y2="120"/></g>
+            <text x="400" y="170">වයිරස*</text>
+          </g>
+        </svg>
+        <figcaption>ක්ෂුද්‍ර ජීවී වර්ග. *වයිරස — ජීවී/අජීවී යැයි විවාදයක් ඇති, ඉලෙක්ට්‍රෝන අණුවීක්ෂයෙන් පමණක් පෙනෙන ඉතා කුඩා කාණ්ඩයකි.</figcaption>
+      </figure>
+      <div class="box hook" style="background:#eef7e9;border-color:#86bd9c"><span class="ttl">📜 අමතර දැනුම — ඉතිහාසය</span> ක්ෂුද්‍ර ජීවීන් මුල් වරට නිරීක්ෂණය කළේ <b>1674 දී ඇන්ටන් වෑන් ලීවන්හූක් (Antonie van Leeuwenhoek)</b> නම් නෙදර්ලන්ත විද්‍යාඥයාය. (රූප 1.3)</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">“යීස්ට්” යනු කුමන කාණ්ඩයේ ක්ෂුද්‍ර ජීවියෙක්ද? එහි එක් ප්‍රයෝජනයක් කුමක්ද?</p>
+        <p style="margin:.2em 0">→ යීස්ට් යනු <b>දිලීර</b> කාණ්ඩයේ ක්ෂුද්‍ර ජීවියෙකි; <b>පාන් පිපීමට/පැසවීමට</b> යොදා ගනී.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: ක්ෂුද්‍ර ජීවීන් නිරීක්ෂණයට අවශ්‍ය උපකරණය කුමක්ද? ක්ලැමිඩොමොනාස් අයිති කාණ්ඩය කුමක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">අණුවීක්ෂය</span> (microscope). ක්ලැමිඩොමොනාස් අයිති වන්නේ <span class="a">ඇල්ගී</span> කාණ්ඩයටය.</div></div>
+
+      <div class="joke">ක්ෂුද්‍ර ජීවියෙක් ලොකුම පාටිය දාලත් කවුරුවත් ආවේ නෑ — මොකද කවුරුවත්ට ඌව <b>පේන්නේ නෑ</b> නේ! 🔬</div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>ක්ෂුද්‍ර ජීවීන් <b>සියල්ලම නරක</b> නෙවෙයි — බොහෝ දෙනෙක් අපිට ඉතා ප්‍රයෝජනවත්.</li>
+          <li><b>වයිරස</b> ක්ෂුද්‍ර ජීවී කාණ්ඩයට පැහැදිලිවම අයිති නෑ — ජීවී/අජීවී ලක්ෂණ දෙකම පෙන්වයි.</li>
+          <li>“අණුවීක්ෂීය” කියන්නේ ඇසට නොපෙනෙන කියන එකයි — ඒ නිසා ලොකු හතු (mushroom) ක්ෂුද්‍ර ජීවියෙක් නෙවෙයි.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="microWidget" style="--cl:var(--A)">
+        <div class="wt">🔬 අත්හදා බලන්න — ක්ෂුද්‍ර ජීවියා tap කර කාණ්ඩය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="bac">බැක්ටීරියා</button>
+          <button class="chip" data-k="yeast">යීස්ට්</button>
+          <button class="chip" data-k="chla">ක්ලැමිඩොමොනාස්</button>
+          <button class="chip" data-k="mucor">මියුකර්</button>
+          <button class="chip" data-k="amoeba">ඇමීබා</button>
+          <button class="chip" data-k="para">පැරමීසියම්</button>
+        </div>
+        <div class="wout" id="microOut">උඩ ජීවියෙක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ක්ෂුද්‍ර ජීවීන් යනු කුමක්ද? (නිර්වචනය)</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">තනි සෛලයකින් හෝ සෛල කිහිපයකින් සැදුණු, ඇසට නොපෙනෙන, අණුවීක්ෂයෙන් පමණක් නිරීක්ෂණය කළ හැකි ජීවීන්.</div></div>
+        <div class="reveal"><span class="q">2. ක්ෂුද්‍ර ජීවී වර්ග හතරක් ලියන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">බැක්ටීරියා, යීස්ට්/දිලීර, ඇල්ගී, ප්‍රොටොසෝවා (ඇමීබා/පැරමීසියම්).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔬</span><div><b>“ඇසට නෑ — අණුවීක්ෂයට ඔව්.”</b> පියවි ඇසට නොපෙනෙන, අණුවීක්ෂයෙන් පෙනෙන කුඩා ජීවියා = ක්ෂුද්‍ර ජීවියා.</div></div>
+    </div>
+  </details>
+
+  <!-- 1.2 effect on food -->
+  <details class="topic" id="t12" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">1.2</span>
+      <h3>ක්ෂුද්‍ර ජීවීන් ආහාර මත ඇති කරන බලපෑම<span class="en">Effect on food</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඊයේ ඉතුරු වුණ පාන් පෙත්ත…</span> දවස් දෙක තුනක් තිබ්බම පාන් පෙත්ත මත කොළ–කළු පැහැති පුස් එනවා, ගඳ ගහනවා. කවුද මේක කළේ? නැවතත් — ක්ෂුද්‍ර ජීවීන්! ආහාර මත වැඩිලා ඒවා <b>නරක්</b> කරනවා.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p class="lead">ක්ෂුද්‍ර ජීවී ක්‍රියාකාරිත්වය නිසා ආහාරයක <b>ලක්ෂණ හතරක්</b> වෙනස් වෙනවා — ඒවා නරක් වීමේ ලකුණු:</p>
+      <p><b>① වර්ණය</b> (පාට වෙනස) · <b>② වයනය</b> (මෘදු/ඇලෙන) · <b>③ ගන්ධය</b> (ගඳ) · <b>④ පෙනුම</b> (පුස්/විකෘති). (පැවරුම 1.1, වගුව 1.1 — පැය 24/48/72ට පසු නිරීක්ෂණය)</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — හේතුව → ප්‍රතිඵලය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 150" role="img" aria-label="ක්ෂුද්‍ර ජීවී, තෙතමනය, උෂ්ණත්වය එකතු වී ආහාරය නරක් කරයි">
+          <g font-family="'Noto Sans Sinhala',sans-serif">
+            <rect x="14" y="20" width="120" height="28" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="74" y="39" text-anchor="middle" font-size="12.5" fill="#0a5b63">ක්ෂුද්‍ර ජීවීන්</text>
+            <rect x="14" y="56" width="120" height="28" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="74" y="75" text-anchor="middle" font-size="12.5" fill="#0a5b63">තෙතමනය (ජලය)</text>
+            <rect x="14" y="92" width="120" height="28" rx="8" fill="#e2f3f4" stroke="#0e7c86"/><text x="74" y="111" text-anchor="middle" font-size="12.5" fill="#0a5b63">උෂ්ණත්වය (25–30°C)</text>
+            <path d="M134 34 C 175 70, 175 70, 205 70" stroke="#0a5b63" fill="none" stroke-width="2"/>
+            <path d="M134 70 H205" stroke="#0a5b63" fill="none" stroke-width="2"/>
+            <path d="M134 106 C 175 70, 175 70, 205 70" stroke="#0a5b63" fill="none" stroke-width="2"/>
+            <polygon points="205,70 196,65 196,75" fill="#0a5b63"/>
+            <rect x="210" y="54" width="90" height="32" rx="8" fill="#0e7c86"/><text x="255" y="74" text-anchor="middle" font-size="12.5" fill="#fff">වර්ධනය</text>
+            <path d="M300 70 H330" stroke="#c4533f" stroke-width="2"/><polygon points="330,70 321,65 321,75" fill="#c4533f"/>
+            <rect x="334" y="40" width="124" height="60" rx="9" fill="#fff" stroke="#c4533f"/>
+            <text x="396" y="60" text-anchor="middle" font-size="12" fill="#9c3a29">ආහාරය නරක් වෙයි</text>
+            <text x="396" y="78" text-anchor="middle" font-size="10.5" fill="#9c3a29">වර්ණය·වයනය</text>
+            <text x="396" y="92" text-anchor="middle" font-size="10.5" fill="#9c3a29">ගන්ධය·පෙනුම</text>
+          </g>
+        </svg>
+        <figcaption>ක්ෂුද්‍ර ජීවී + ජලය + හිතකර උෂ්ණත්වය → වර්ධනය → ආහාරය නරක් වීම. (රූප 1.4 — පාන් මත දිලීර)</figcaption>
+      </figure>
+
+      <div class="box hook"><span class="ttl">🎈 යීස්ට් — සීනි කා වායුව හදයි (ක්‍රියාකාරකම 1.3)</span> සීනි + යීස්ට් + මඳ උණුසුම් ජලය බෝතලයකට දමා කටට බැලූනයක් සවි කළොත්, මිනිත්තු 20කින් බැලූනය පිම්බෙනවා! යීස්ට් සීනි මත ක්‍රියා කර <b>කාබන් ඩයොක්සයිඩ් වායුව</b> නිපදවන නිසයි. <b>එතිල් මධ්‍යසාරයත්</b> (alcohol) නිපදවෙනවා. බේකරියේදී මේ වායුව තමයි පාන් පුම්බා මෘදු කරන්නේ. (රූප 1.5, 1.6)</div>
+
+      <div class="step"><span class="dot">4</span><b>නරක් වීමේ වර්ග තුන + ඔබේ වාරය</b></div>
+      <p>ආහාරයේ ප්‍රධාන සංඝටකය අනුව නරක් වීමේ <b>ක්‍රියාවලිය වෙනස්</b> වෙනවා:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>ආහාර වර්ගය</th><th>ක්‍රියාවලිය</th><th>උදාහරණ</th></tr>
+        <tr><td><b>සීනි බහුල</b></td><td><b>පැසීම</b> (fermentation)</td><td>පලතුරු, යුෂ</td></tr>
+        <tr><td><b>ප්‍රෝටීන බහුල</b></td><td><b>ප්‍රතිහීනවනය</b> (putrefaction)</td><td>මස්, මාළු, බිත්තර</td></tr>
+        <tr><td><b>ලිපිඩ (මේද) බහුල</b></td><td><b>මුඩු වීම</b> (rancidity)</td><td>පොල් තෙල්, බටර්</td></tr>
+      </table></div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: මාළු කෑල්ලක් නරක් වෙන්නේ කුමන ක්‍රියාවලියෙන්ද? ඇයි?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ප්‍රතිහීනවනය (putrefaction)</span> — මාළු <b>ප්‍රෝටීන බහුල</b> ආහාරයක් නිසා.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>පැසීම/ප්‍රතිහීනවනය/මුඩු වීම පටලවා ගන්න එපා — <b>සීනි→පැසීම, ප්‍රෝටීන→ප්‍රතිහීනවනය, මේද→මුඩු වීම.</b></li>
+          <li>ක්ෂුද්‍ර ජීවී වර්ධනයට <b>තෙතමනය හා උෂ්ණත්වය</b> ප්‍රධාන සාධක දෙකයි — වියළි/සීතල ආහාර ඉක්මනින් නරක් වෙන්නේ නෑ.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ක්ෂුද්‍ර ජීවී වර්ධනයට අවශ්‍ය තත්ත්ව හතර මොනවද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">සුදුසු උපස්තරයක් (ආහාරය), තෙතමනය (ජලය), හිතකර උෂ්ණත්වය, හිතකර pH පරාසය.</div></div>
+        <div class="reveal"><span class="q">2. යීස්ට් සීනි මත ක්‍රියා කර නිපදවන වායුව කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">කාබන් ඩයොක්සයිඩ් (CO₂) — එතිල් මධ්‍යසාරයත් නිපදවෙයි.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🌡️</span><div><b>“තෙතයි උණුසුමයි — එතකොට ක්ෂුද්‍ර ජීවියා සතුටුයි.”</b> ජලය හා හිතකර උෂ්ණත්වය තිබුණොත් ක්ෂුද්‍ර ජීවීන් වැඩිලා ආහාර නරක් කරයි.</div></div>
+    </div>
+  </details>
+
+  <!-- 1.3 effect on humans -->
+  <details class="topic" id="t13" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">1.3</span>
+      <h3>මිනිසාට හා මිනිස ක්‍රියාකාරකම්වලට බලපෑම<span class="en">Effect on humans &amp; activities</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">උදේ කෑමට මොරු/කිරි, මස්ස ඇඹුල… ස්තූතියි ක්ෂුද්‍ර ජීවීනේ!</span> කිරි මිදීම, යෝගට්, විනාකිරි, පාන් — මේ හැම එකක්ම හදන්නේ ක්ෂුද්‍ර ජීවීන්ගේ උදව්වෙන්. නමුත් ඒම ජීවීන්ම ඩෙංගු, ක්ෂයරෝගය වගේ රෝගත් ඇති කරනවා. ඔවුන් අපේ <b>මිතුරෝ සහ සතුරෝ</b> දෙගොල්ලම!</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — හිතකර හා අහිතකර</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>හිතකර බලපෑම් 👍</th><th>අහිතකර බලපෑම් 👎</th></tr>
+        <tr><td>කිරි මිදීම, යෝගට්, චීස් නිෂ්පාදනය</td><td>ආහාර නරක් වීම (රූප 1.8)</td></tr>
+        <tr><td>බේකරි ආහාර (පාන්)</td><td>මිනිසාට බෝවන රෝග (රූප 1.9)</td></tr>
+        <tr><td>ප්‍රතිජීවක ඖෂධ, ප්‍රතිශක්තිකරණ එන්නත්</td><td>සතුන්ට බෝවන රෝග (රූප 1.10)</td></tr>
+        <tr><td>විනාකිරි හා මධ්‍යසාර නිෂ්පාදනය</td><td>ශාකවලට බෝවන රෝග (රූප 1.11)</td></tr>
+        <tr><td>ආහාර ලෙස හතු; කොම්පෝස්ට්; ජෛව වායු; කොහු කර්මාන්තය</td><td>අජීවී පෘෂ්ඨ මත වර්ධනය → ආර්ථික හානි (රූප 1.12)</td></tr>
+        <tr><td>ක්ෂුද්‍ර ජීවී ක්ෂයනය (මැරුණු ශාක/සත්ත්ව වියෝජනය); ජෛව පාලනය</td><td>—</td></tr>
+      </table></div>
+      <p class="tnote"><b>ක්ෂුද්‍ර ජීවී ක්ෂයනය (Microbial degradation):</b> මැරුණු ශාක හා සත්ත්ව කොටස් වියෝජනය කරමින් පරිසරයේ එක්ස්ථානයේ සමතුලිතතාව රකියි. නැත්නම් මැරුණු දේ ගොඩ ගැහෙයි!</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — බෝවන රෝග (රෝග කාරකය අනුව)</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 180" role="img" aria-label="රෝග කාරක හතර සහ ඒවායින් වෙන රෝග">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11.5">
+            <rect x="10" y="14" width="110" height="150" rx="10" fill="#fbe9e4" stroke="#c4533f"/>
+            <text x="65" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#9c3a29">වයිරස</text>
+            <text x="65" y="60" text-anchor="middle" fill="#7a2b1e">සෙම්ප්‍රතිශ්‍යාව</text>
+            <text x="65" y="80" text-anchor="middle" fill="#7a2b1e">ඩෙංගු</text>
+            <text x="65" y="100" text-anchor="middle" fill="#7a2b1e">පෝලියෝ</text>
+            <text x="65" y="120" text-anchor="middle" fill="#7a2b1e">AIDS (ඒඩ්ස්)</text>
+
+            <rect x="128" y="14" width="110" height="150" rx="10" fill="#fbe9e4" stroke="#c4533f"/>
+            <text x="183" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#9c3a29">බැක්ටීරියා</text>
+            <text x="183" y="60" text-anchor="middle" fill="#7a2b1e">ක්ෂයරෝගය</text>
+            <text x="183" y="80" text-anchor="middle" fill="#7a2b1e">ලාදුරු</text>
+            <text x="183" y="100" text-anchor="middle" fill="#7a2b1e">උණසන්නිපාතය</text>
+
+            <rect x="246" y="14" width="110" height="150" rx="10" fill="#fbe9e4" stroke="#c4533f"/>
+            <text x="301" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#9c3a29">ප්‍රොටොසෝවා</text>
+            <text x="301" y="60" text-anchor="middle" fill="#7a2b1e">මැලේරියාව</text>
+            <text x="301" y="80" text-anchor="middle" fill="#7a2b1e">ලීෂ්මානියාව</text>
+            <text x="301" y="100" text-anchor="middle" fill="#7a2b1e">ඇම්බා අතීසාරය</text>
+
+            <rect x="364" y="14" width="96" height="150" rx="10" fill="#fbe9e4" stroke="#c4533f"/>
+            <text x="412" y="34" text-anchor="middle" font-size="13" font-weight="700" fill="#9c3a29">දිලීර</text>
+            <text x="412" y="60" text-anchor="middle" fill="#7a2b1e">අඟහම්</text>
+            <text x="412" y="80" text-anchor="middle" fill="#7a2b1e">දද</text>
+          </g>
+        </svg>
+        <figcaption>මිනිසාට බෝවන රෝග — රෝග කාරකය අනුව. (රූප 1.9)</figcaption>
+      </figure>
+      <p>සතුන්ට: <b>ජලභීතිකාව</b> (බල්ලා), <b>මුඛ හා කුර රෝගය</b> (ගවයා), <b>බුරුලු පදාහය</b> (එළදෙන). &nbsp; ශාකවලට: <b>අංගමාර</b> (අර්තාපල්), <b>පත්‍ර විකෘති</b> (පැපොල්), <b>කොළ හැකිළීම</b> (මිරිස්). &nbsp; අජීවී දේ මත: ඇඳුම් (කුණු පුස්), බිත්ති, දැව මත දිලීර → ආර්ථික හානි.</p>
+
+      <div class="joke">ක්ෂුද්‍ර ජීවියා කිව්වා: “මම පාන් හදනවා, විනාකිරි හදනවා, රෝගත් හදනවා — මම multi-talented!” 🦠</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">වයිරස මගින් බෝවන රෝග දෙකක් ලියන්න.</p>
+        <p style="margin:.2em 0">→ ඩෙංගු, පෝලියෝ (සෙම්ප්‍රතිශ්‍යාව, AIDS ද නිවැරදියි).</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: (a) ක්ෂුද්‍ර ජීවී භාවිතයෙන් සිදුවන කර්මාන්ත තුනක්; (b) බැක්ටීරියා මගින් බෝවන රෝගයක්.</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(a) <span class="a">කිරි මිදීම/යෝගට්, විනාකිරි නිෂ්පාදනය, බේකරි ආහාර</span> (ප්‍රතිජීවක, කොහු, ජෛව වායුද වේ). (b) <span class="a">ක්ෂයරෝගය</span> (ලාදුරු/උණසන්නිපාතය ද).</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>රෝග කාරකය පටලවා ගන්න එපා — <b>මැලේරියාව, ලීෂ්මානියාව = ප්‍රොටොසෝවා</b> (බැක්ටීරියා නෙවෙයි).</li>
+          <li>අඟහම්/දද වැනි සමේ රෝග <b>දිලීර</b> නිසා; ක්ෂයරෝගය/ලාදුරු <b>බැක්ටීරියා</b> නිසා.</li>
+          <li>ක්ෂුද්‍ර ජීවී ක්ෂයනය <b>හිතකර</b> බලපෑමක් — එය හානියක් නෙවෙයි.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="diseaseWidget" style="--cl:var(--A)">
+        <div class="wt">🦠 රෝගය tap කර එහි කාරකය බලන්න</div>
+        <div class="chiprow">
+          <button class="chip" data-k="dengue">ඩෙංගු</button>
+          <button class="chip" data-k="tb">ක්ෂයරෝගය</button>
+          <button class="chip" data-k="malaria">මැලේරියාව</button>
+          <button class="chip" data-k="dadha">දද</button>
+          <button class="chip" data-k="laduru">ලාදුරු</button>
+          <button class="chip" data-k="aids">AIDS</button>
+        </div>
+        <div class="wout" id="diseaseOut">උඩ රෝගයක් tap කරන්න…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. සත්‍ය/අසත්‍ය: ක්ෂයරෝග කාරකය වයිරසයකි.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans"><b>අසත්‍ය ✗</b> — ක්ෂයරෝග කාරකය බැක්ටීරියාවකි.</div></div>
+        <div class="reveal"><span class="q">2. ක්ෂුද්‍ර ජීවී නිසා ආර්ථික හානි වෙන්නේ කොහොමද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ඇඳුම්, ගොඩනැගිලි බිත්ති, දැව භාණ්ඩ වැනි අජීවී දේ මත දිලීර වර්ධනය වී විනාශ වීමෙන්.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">⚖️</span><div><b>“ක්ෂුද්‍ර ජීවියා — මිතුරායි, සතුරායි.”</b> කර්මාන්ත, ඖෂධ, වියෝජනය (හිතකර); රෝග, ආහාර නරක්වීම, ආර්ථික හානි (අහිතකර).</div></div>
+    </div>
+  </details>
+
+  <!-- ##################### UNIT 13 ##################### -->
+  <section class="part" id="unit13" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <span class="src">මූලාශ්‍රය · පොත II · පි.80–95</span>
+    <div class="pn">පාඩම 13</div>
+    <h2>ආහාර පරිරක්ෂණය</h2>
+    <p>ක්ෂුද්‍ර ජීවීන් ආහාර නරක් කරන හැටි දැන් අපි දන්නවා. ඉතින් ඒ නරක් වීම නවත්වා ආහාර කල් තබා ගන්නේ කොහොමද? ඇයි අවශ්‍ය? මොන ක්‍රමද? — මෙහි ඉගෙන ගමු.</p>
+  </section>
+
+  <!-- 13.1 need -->
+  <details class="topic" id="t131" open style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">13.1</span>
+      <h3>ආහාර පරිරක්ෂණයේ අවශ්‍යතාව<span class="en">Need for preservation</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">අවුරුද්දට හදපු කැවිලි මාසෙකින් නරක්!</span> සමහර ආහාර දවස් දෙක තුනකින් නරක් වෙනවා — කිරි කැටි ගැහෙනවා, පාන් පුස් අල්ලනවා, මාළු ගඳ ගහනවා, පොල් තෙල් මුඩු වෙනවා. ඒ වුණාට කරවල, ලුණු දෙහි, වියළි මිරිස් මාස ගණන් තියෙනවා! ඇයි ඒ වෙනස? — <b>පරිරක්ෂණය</b> නිසා. (රූප 13.1)</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — ආහාර නරක් වෙන්නේ ඇයි?</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>හේතුව</th><th>උදාහරණ</th></tr>
+        <tr><td><b>ක්ෂුද්‍ර ජීවී වර්ධනය/ක්‍රියාකාරිත්වය</b> (ප්‍රධානම)</td><td>කිරි කැටි ගැසීම, පාන් පුස්, මාළු/මස් නරක් වීම</td></tr>
+        <tr><td><b>මහා ජීවීන්</b> (ගුල්ලන්, ඉපියන් වැනි කෘමීන්)</td><td>කඩල, මුං, සහල් ආදී ධාන්‍යවලට ගුල්ලන් හානි</td></tr>
+        <tr><td><b>වැරදි හැසිරවීම</b> (අස්වැන්න නෙලීම–ප්‍රවාහන–සැකසීම)</td><td>තැළීම, පොඩි වීම, සීරීම</td></tr>
+        <tr><td><b>ස්වයං විඑයෝජනය</b> (ආහාරයේ රසායනික ප්‍රතික්‍රියා — ඔක්සිකරණය)</td><td>පොල් තෙල් මුඩු වීම, වර්ණය වෙනස් වීම</td></tr>
+      </table></div>
+      <p><b>ආහාර පරිරක්ෂණය යනු:</b> ආහාර නරක් වීමට බලපාන සාධක <b>කෘතිමව පාලනය</b> කර ආහාර කල් තබා ගැනීමේ ක්‍රියාවලියයි. (පි.81)</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — අරමුණු</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 120" role="img" aria-label="ආහාර පරිරක්ෂණයේ අරමුණු හතර">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11.5" fill="#9c3a29">
+            <circle cx="60" cy="40" r="26" fill="#fbe9e4" stroke="#c4533f"/><text x="60" y="36" text-anchor="middle">නරක්වීම</text><text x="60" y="50" text-anchor="middle">අවම</text>
+            <circle cx="180" cy="40" r="26" fill="#fbe9e4" stroke="#c4533f"/><text x="180" y="36" text-anchor="middle">විෂවීම</text><text x="180" y="50" text-anchor="middle">වැළැක්වීම</text>
+            <circle cx="300" cy="40" r="26" fill="#fbe9e4" stroke="#c4533f"/><text x="300" y="36" text-anchor="middle">අපතේ</text><text x="300" y="50" text-anchor="middle">යාම අඩු</text>
+            <circle cx="420" cy="40" r="26" fill="#fbe9e4" stroke="#c4533f"/><text x="420" y="36" text-anchor="middle">අවාරයේ</text><text x="420" y="50" text-anchor="middle">භාවිතය</text>
+            <text x="235" y="98" text-anchor="middle" font-size="12" fill="#7a2b1e">අරමුණු හතර — ආහාර වැඩි කල් ආරක්ෂිතව තබා ගැනීම.</text>
+          </g>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය (ක්‍රියාකාරකම 13.1)</span>
+        <p style="margin:.2em 0">එළකිරි සහ කරවල සතියක් තිබ්බම මොකද වෙන්නේ? ඇයි වෙනස?</p>
+        <p style="margin:.2em 0">→ <b>එළකිරි</b> ඉක්මනින් නරක් වෙයි; <b>කරවල</b> නරක් වෙන්නේ නෑ — එය <b>පරිරක්ෂණය (ලුණු+වියළීම)</b> කර ඇති නිසා.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: ආහාර නරක් වීමට ප්‍රධාන හේතුව කුමක්ද? ස්වයං විඑයෝජනයට උදාහරණයක් දෙන්න.</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">ප්‍රධාන හේතුව <span class="a">ක්ෂුද්‍ර ජීවී වර්ධනය හා ක්‍රියාකාරිත්වයයි.</span> ස්වයං විඑයෝජනය — <b>පොල් තෙල් මුඩු වීම</b> (ඔක්සිකරණය).</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>ආහාර නරක් වෙන්නේ ක්ෂුද්‍ර ජීවී නිසා <b>පමණක්</b> නෙවෙයි — ගුල්ලන්, වැරදි හැසිරවීම, ඔක්සිකරණයත් හේතු.</li>
+          <li>“පරිරක්ෂණය” කියන්නේ සාධක <b>කෘතිමව පාලනය</b> කිරීම — ස්වභාවිකව තබා ගැනීම නෙවෙයි.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ආහාර පරිරක්ෂණයේ අරමුණු දෙකක් ලියන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">නරක් වීම අවම කිරීම; ආහාර විෂ වීම වැළැක්වීම (අපතේ යාම අඩු කිරීම; අවාරයේ භාවිතය ද).</div></div>
+        <div class="reveal"><span class="q">2. ධාන්‍යවලට හානි කරන මහා ජීවීන් මොනවද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ගුල්ලන් හා ඉපියන් (කෘමීන්).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🛡️</span><div><b>“නරක් කරන සාධක පාලනය = පරිරක්ෂණය.”</b> ක්ෂුද්‍ර ජීවී, ගුල්ලන්, වැරදි හැසිරවීම, ඔක්සිකරණය — මේ සාධක පාලනය කළොත් ආහාර කල් තියෙනවා.</div></div>
+    </div>
+  </details>
+
+  <!-- 13.2 methods -->
+  <details class="topic" id="t132" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">13.2</span>
+      <h3>ආහාර පරිරක්ෂණ ක්‍රම<span class="en">Methods of preservation</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">අත්තම්මාගේ පරණ දැනුම + අද විද්‍යාව.</span> පරණ කාලේ ඉඳන්ම අපි මාළු කරවල කරලා, මිරිස් වියළලා, අඹ ලුණු දාලා තියලා කල් තබාගත්තා. අද ෆ්‍රිජ් එක, පිටි කිරි, ජෑම් එනවා. මේ සියලු ක්‍රමවල <b>එකම අරමුණයි</b> — ක්ෂුද්‍ර ජීවී වර්ධනය නැවැත්වීම.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — මූලධර්ම තුන</b></div>
+      <p class="lead">පරිරක්ෂණයේදී කරන්නේ නරක් වීමට බලපාන සාධක පාලනය කිරීමයි:</p>
+      <p>① ආහාරයට <b>ක්ෂුද්‍ර ජීවීන් ඇතුළු වීම</b> වැළැක්වීම · ② <b>ජලය හා උෂ්ණත්වය</b> පාලනය කර ක්‍රියාකාරිත්වය අවම කිරීම · ③ <b>මහා ජීවීන්ගෙන්</b> (කෘමීන්) ආරක්ෂා කිරීම.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — සාම්ප්‍රදායික ක්‍රම (රූප 13.3)</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 210" role="img" aria-label="සාම්ප්‍රදායික පරිරක්ෂණ ක්‍රම පහ">
+          <g font-family="'Noto Sans Sinhala',sans-serif" font-size="11">
+            <circle cx="235" cy="105" r="42" fill="#c4533f"/><text x="235" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">සාම්ප්‍රදායික</text><text x="235" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">ක්‍රම</text>
+            <g fill="#7a2b1e">
+            <rect x="170" y="8" width="130" height="34" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="235" y="22" text-anchor="middle" font-weight="700">ලුණු දැමීම</text><text x="235" y="36" text-anchor="middle">අඹ, දෙහි, මාළු</text>
+            <rect x="8" y="50" width="135" height="34" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="75" y="64" text-anchor="middle" font-weight="700">වියළීම</text><text x="75" y="78" text-anchor="middle">කොස්, දෙල්, වී, මුං, මිරිස්</text>
+            <rect x="327" y="50" width="135" height="34" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="394" y="64" text-anchor="middle" font-weight="700">දුම් ගැසීම</text><text x="394" y="78" text-anchor="middle">මස්, මාළු, ගොරකා</text>
+            <rect x="8" y="128" width="135" height="34" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="75" y="142" text-anchor="middle" font-weight="700">වියළි වැලිවල</text><text x="75" y="156" text-anchor="middle">දෙහි, ඉඟුරු, කොස් ඇට</text>
+            <rect x="327" y="128" width="135" height="34" rx="8" fill="#fbe9e4" stroke="#c4533f"/><text x="394" y="142" text-anchor="middle" font-weight="700">මී පැණිවල</text><text x="394" y="156" text-anchor="middle">වියළි මස් වර්ග</text>
+            </g>
+            <g stroke="#c4533f" stroke-width="1.6" fill="none">
+              <line x1="235" y1="63" x2="235" y2="42"/><line x1="198" y1="80" x2="143" y2="67"/><line x1="272" y1="80" x2="327" y2="67"/>
+              <line x1="200" y1="125" x2="143" y2="140"/><line x1="270" y1="125" x2="327" y2="140"/>
+            </g>
+          </g>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">3·b</span><b>නවීන ක්‍රම (පැවරුම 13.2)</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>නවීන ක්‍රමය</th><th>කෙටි විස්තරය</th><th>ආහාර</th></tr>
+        <tr><td><b>සූර්ය තාප වියළීම</b> (රූප 13.5)</td><td>සූර්ය තාප වියළනයක් — පිරිසුදුව, ඉක්මනින් වියළයි; මැස්සන්/දූවිලි/වැස්සෙන් ආරක්ෂා</td><td>මිරිස්, පලතුරු, එළවළු</td></tr>
+        <tr><td><b>උදුනේ වියළීම</b> (රූප 13.6)</td><td>උෂ්ණත්වය පාලනය කළ හැකි</td><td>මිරිස්, පලතුරු, හතු</td></tr>
+        <tr><td><b>විසිරි වියළීම</b> (රූප 13.7)</td><td>දියර කිරි අධි පීඩනයෙන් විසිර වියළා <b>පිටි කිරි</b> බවට</td><td>පිටි කිරි</td></tr>
+        <tr><td><b>ශීතනය</b> (රූප 13.8)</td><td>ෆ්‍රිජ් එකේ ≈ <b>4°C</b> — උෂ්ණත්වය අඩු කර වර්ධනය මන්දගාමී</td><td>එළවළු, පලතුරු</td></tr>
+        <tr><td><b>අධිශීතනය</b></td><td><b>−18°C</b>ට අඩුවෙන් — වර්ධනය නවතී; වර්ණය/රසය/පෝෂණය ආරක්ෂා</td><td>මස්, මාළු, අයිස්ක්‍රීම්</td></tr>
+        <tr><td><b>සාන්ද්‍රීකරණය</b> (රූප 13.9)</td><td>තම්බා/බෝතල් කර ජලය ඉවත් → සාන්ද්‍රණය වැඩි</td><td>ජෑම්, තෝඩ්‍යල්</td></tr>
+      </table></div>
+      <div class="box hook" style="background:#eef7e9;border-color:#86bd9c"><span class="ttl">🥛 අමතර දැනුම — කිරි රත් කිරීමේ ක්‍රම</span> <b>පැස්ටරීකරණය:</b> 72°C දී තත්පර 15ක් — රෝග කාරක බැක්ටීරියා විනාශ; ශීතකරණයේ සති 2ක්. <b>අධි පැස්ටරීකරණය (ultra pasteurization):</b> 138°C තත්පර 1–2ක් — මාස 2–3ක්. <b>ජීවාණුහරණය:</b> 120°C මිනිත්තු 15–20ක් — සියලු ක්ෂුද්‍ර ජීවීන් විනාශ; විවෘත කරන තුරු ශීතකරණය අවශ්‍ය නෑ.</div>
+
+      <div class="step"><span class="dot">4</span><b>එක් එක් ක්‍රමය වැඩ කරන හැටි (වගුව 13.2) + ඔබේ වාරය</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>ක්‍රමය</th><th>ආහාර කල් තබන හේතුව</th></tr>
+        <tr><td>වියළීම</td><td>ජලය ඉවත් → ක්ෂුද්‍ර ජීවී වර්ධනයක් සිදු නොවේ</td></tr>
+        <tr><td>උෂ්ණත්ව පාලනය (ශීතනය/අධිශීතනය)</td><td>හිතකර උෂ්ණත්වයක් නොලැබීම → වර්ධනය පාලනය</td></tr>
+        <tr><td>සාන්ද්‍රීකරණය / මී පැණි</td><td>ජලය ඉවත් + ක්ෂුද්‍ර ජීවීන් තුළ ජලයද ඉවත් → විනාශ</td></tr>
+        <tr><td>දුම් ගැසීම</td><td>දුමේ රසායන + වියළීම → ක්‍රියාකාරිත්වය අවම</td></tr>
+        <tr><td>පරිරක්ෂක එකතු කිරීම</td><td>ජලය ඉවත් → වර්ධනය පාලනය + ක්ෂුද්‍ර ජීවී විනාශ</td></tr>
+      </table></div>
+      <p class="tnote"><b>පොදු රහස:</b> බොහෝ ක්‍රමවල මූලික උපක්‍රමය = ආහාරයෙන් (හෝ ක්ෂුද්‍ර ජීවියාගෙන්) <b>ජලය ඉවත් කිරීම</b> හෝ <b>උෂ්ණත්වය පාලනය</b>. ජලය නැතුව ක්ෂුද්‍ර ජීවියාට ජීවත් විය නොහැක!</p>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: දියර කිරි පිටි කිරි බවට පත් කරන ක්‍රමය කුමක්ද? ඒ ක්‍රමයෙන් කල් තබන්න පුළුවන් ඇයි?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">විසිරි වියළීම</span> — ජලය ඉවත් වන නිසා (තෙතමනය නැති නිසා) ක්ෂුද්‍ර ජීවී වර්ධනය පාලනය වේ.</div></div>
+
+      <div class="joke">ක්ෂුද්‍ර ජීවියා ෆ්‍රිජ් එකට ගිහින් කිව්වා: “මෙතන හරිම සීතලයි, මට වැඩ කරන්න බෑ!” — ඒකයි ශීතනය වැඩ කරන්නේ. ❄️</div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>ශීතනය (4°C)</b> සහ <b>අධිශීතනය (−18°C)</b> පටලවා ගන්න එපා — මස්/මාළු අධිශීතනය, එළවළු/පලතුරු ශීතනය.</li>
+          <li>ශීතනය ක්ෂුද්‍ර ජීවීන් <b>මරන්නේ නෑ</b> — වර්ධනය මන්දගාමී කරනවා පමණයි. ඒ නිසා ෆ්‍රිජ් එකේ වුණත් ආහාර අනන්තකාලෙක තියෙන්නේ නෑ.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="widget" id="tempWidget" style="--cl:var(--B)">
+        <div class="wt">🌡️ උෂ්ණත්වය slide කර ක්ෂුද්‍ර ජීවී වර්ධනය බලන්න</div>
+        <input class="slider" id="tempSlider" type="range" min="-20" max="40" value="28">
+        <div class="wout" id="tempOut"></div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. වියළීම මගින් ආහාර කල් තබා ගත හැක්කේ ඇයි?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ජලය ඉවත් වන නිසා ක්ෂුද්‍ර ජීවී වර්ධනයට අවශ්‍ය තෙතමනය නැති වී වර්ධනය නවතී.</div></div>
+        <div class="reveal"><span class="q">2. සාම්ප්‍රදායික ක්‍රම තුනක් ලියන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">වියළීම, ලුණු දැමීම, දුම් ගැසීම (මී පැණි/වැලිවල බහා තැබීම ද).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">💧</span><div><b>“ජලය ඉවත් කරපන්, නැතිනම් සීතල කරපන්.”</b> බොහෝ පරිරක්ෂණ ක්‍රමවල රහස මෙයයි — ජලය නැති කිරීම හෝ උෂ්ණත්වය අඩු කිරීම.</div></div>
+    </div>
+  </details>
+
+  <!-- 13.3 preservatives -->
+  <details class="topic" id="t133" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">13.3</span>
+      <h3>ආහාර පරිරක්ෂක<span class="en">Food preservatives &amp; additives</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ජෑම් බෝතලයේ පිටුපස ලේබලය බැලුවද?</span> “Sodium metabisulphite”, “Citric acid”, “Pectin”… වගේ අමුතු වචන තියෙනවා. මේවා ආහාරයට එකතු කරන <b>ආකලන ද්‍රව්‍ය (additives)</b> — සමහර ඒවා ආහාරය කල් තබයි, සමහර ඒවා රස/පාට/උකුකම දෙයි.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — ආකලන ද්‍රව්‍ය වර්ග (රූප 13.10)</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>ආකලන ද්‍රව්‍ය වර්ගය</th><th>කාර්යය</th><th>උදාහරණ</th></tr>
+        <tr><td>ශන/උකු කරන ද්‍රව්‍ය</td><td>උකු/ජෙල් ස්වභාවය</td><td>පෙක්ටින්</td></tr>
+        <tr><td>රසකාරක</td><td>රසය වැඩි කරයි</td><td>ග්ලූකෝස්, සැකරින්</td></tr>
+        <tr><td>ප්‍රතිඔක්සිකාරක</td><td>ඔක්සිකරණය/මුඩු වීම වළක්වයි</td><td>සිට්‍රික් අම්ලය, කැරොටින්</td></tr>
+        <tr><td><b>පරිරක්ෂක ද්‍රව්‍ය</b></td><td>නරක් වීම වළක්වයි</td><td>සෝඩියම් මෙටා බයි සල්ෆයිට්, බෙන්සොයික් අම්ලය</td></tr>
+        <tr><td>ආහාර වර්ණක</td><td>පාට දෙයි</td><td>රයිබොෆ්ලේවින්, කැරොටින්</td></tr>
+      </table></div>
+      <p><b>පරිරක්ෂක (Preservative) යනු:</b> ආහාර නරක් වීමට හේතු වන බාහිර හා අභ්‍යන්තර සාධක වැළැක්වීමට එකතු කරන ආකලන ද්‍රව්‍යයකි.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — E අංකය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 96" role="img" aria-label="E අංක ක්‍රමය">
+          <g font-family="'Noto Sans Sinhala',sans-serif">
+            <rect x="20" y="28" width="150" height="42" rx="10" fill="#fbe9e4" stroke="#c4533f"/>
+            <text x="95" y="46" text-anchor="middle" font-size="12.5" fill="#9c3a29">පරීක්ෂණාත්මකව</text><text x="95" y="62" text-anchor="middle" font-size="12.5" fill="#9c3a29">ආරක්ෂිත ආකලනය</text>
+            <text x="180" y="54" font-size="20" fill="#c4533f">→</text>
+            <rect x="210" y="28" width="110" height="42" rx="10" fill="#c4533f"/>
+            <text x="265" y="54" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="monospace">E අංකය</text>
+            <text x="335" y="54" font-size="20" fill="#c4533f">→</text>
+            <rect x="358" y="28" width="92" height="42" rx="10" fill="#fff" stroke="#c4533f"/>
+            <text x="404" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#9c3a29">E200–E299</text>
+            <text x="30" y="90" font-size="11.5" fill="#7a2b1e">යුරෝපා සංගමය විසින් අනුමත, ආරක්ෂිත ආකලන සඳහා දෙන කේත අංකය. පරිරක්ෂක = E200–E299.</text>
+          </g>
+        </svg>
+      </figure>
+      <p><b>නිර්දේශිත පරිරක්ෂක:</b> සෝඩියම් මෙටා බයි සල්ෆයිට්, සෝඩියම් බයි සල්ෆයිට්, බෙන්සොයික් අම්ලය, සෝඩියම් ක්ලෝරයිඩ් (ලුණු), සෝඩියම් නයිට්‍රයිට් හා නයිට්‍රේට්, ඇසිටික් අම්ලය (විනාකිරි). (පි.88)</p>
+      <div class="box hook" style="background:#eef7e9;border-color:#86bd9c"><span class="ttl">⚠️ අමතර දැනුම — MSG</span> <b>මොනොසෝඩියම් ග්ලූටමේට් (MSG)</b> යනු පරිරක්ෂකයක් <b>නොව</b> රස ප්‍රවර්ධකයකි. නිතර/වැඩිපුර භාවිතය සෞඛ්‍යයට අහිතකරයි. සමහර ආහාර වර්ණකද පිළිකාකාරක විය හැක.</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">පෙක්ටින් ආහාරයට එකතු කරන්නේ ඇයි? එය පරිරක්ෂකයක්ද?</p>
+        <p style="margin:.2em 0">→ පෙක්ටින් <b>උකු/ශන ස්වභාවය</b> ඇති කරයි (ජෑම් උකු කරයි). එය පරිරක්ෂකයක් <b>නොවේ</b>.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: පරිරක්ෂක ද්‍රව්‍ය දෙකක් සහ රසකාරක දෙකක් ලියන්න.</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පරිරක්ෂක: <span class="a">බෙන්සොයික් අම්ලය, සෝඩියම් මෙටා බයි සල්ෆයිට්</span> (ලුණු, ඇසිටික් අම්ලය ද). රසකාරක: <span class="a">ග්ලූකෝස්, සැකරින්</span>.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>සියලු ආකලන ද්‍රව්‍ය <b>පරිරක්ෂක නෙවෙයි</b> — රසකාරක, වර්ණක, ප්‍රතිඔක්සිකාරක වෙන වෙනම කාර්ය.</li>
+          <li>MSG පරිරක්ෂකයක් <b>නොවේ</b> — එය රස ප්‍රවර්ධකයකි.</li>
+          <li>ආකලන <b>නිර්දේශිත ප්‍රමාණවලින්</b> පමණක් එකතු කළ යුතුයි; කුඩා දරුවන්ට සුදුසු නැතිනම් ලේබලයේ සඳහන් කළ යුතුයි.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. පරිරක්ෂක යනු කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ආහාර නරක් වීමට හේතු වන සාධක වැළැක්වීමට එකතු කරන ආකලන ද්‍රව්‍යයකි.</div></div>
+        <div class="reveal"><span class="q">2. ආකලන ද්‍රව්‍යවලට අනුමැතිය දෙන කේත ක්‍රමය කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">E අංකය (පරිරක්ෂක සඳහා E200–E299).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🏷️</span><div><b>“පරිරක්ෂකය නරක්වීම නවත්වයි — ඒත් ‘E200–E299’, නිර්දේශිත ප්‍රමාණෙට විතරයි.”</b> සියලු ආකලන පරිරක්ෂක නෙවෙයි.</div></div>
+    </div>
+  </details>
+
+  <!-- 13.4 pros cons -->
+  <details class="topic" id="t134" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">13.4</span>
+      <h3>ආහාර පරිරක්ෂණයේ වාසි හා අවාසි<span class="en">Pros &amp; cons</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඉන්ස්ටන්ට් නූඩ්ල්ස් — පහසුයි, ඒත්…?</span> පරිරක්ෂිත ආහාර පහසුයි, ආකර්ෂණීයයි, අවුරුද්දම තියෙනවා. ඒත් වැඩිපුර ආකලන දැම්මොත් සෞඛ්‍යයට හානිකරයි. ඉතින් වාසි–අවාසි දෙකම දැනගෙන තෝරගමු.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — පරිරක්ෂිත ආහාර වර්ග</b></div>
+      <p>① <b>කෙළින්ම ගත හැකි:</b> චට්නි, ජෑම්, සොස්, පලතුරු බීම. &nbsp; ② <b>පූර්ව සැකසුම් (pre-cooked):</b> මීට් බෝල්ස්, සොසේජස්, නූඩ්ල්ස්, මැකරෝනි, පිටි කළ පොල් කිරි, කෝඩ්‍යල්. &nbsp; ③ <b>පිසීම අවශ්‍ය:</b> කරවල, ධාන්‍ය වර්ග.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — වාසි vs අවාසි</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>වාසි 👍</th><th>අවාසි 👎</th></tr>
+        <tr><td>ආහාර නරක් වීම වැළැක්වීම → විෂ/රෝග අඩු</td><td>ආකලන ප්‍රමිතියට වඩා → විවිධ රෝග</td></tr>
+        <tr><td>එකම ආහාරය විවිධ ආකාරයෙන් (රුචියට)</td><td>කෘතිම රසකාරක/වර්ණක → පිළිකා, දියවැඩියාව, හෘදයාබාධ අවදානම</td></tr>
+        <tr><td>වඩාත් ආකර්ෂණීය පෙනුම</td><td>සැකසීමේදී විටමින්/පෝෂක හානි</td></tr>
+        <tr><td>පෝෂණ ගුණය ඉහළ නැංවීම (යෝගට්, චීස්)</td><td>ස්වාභාවික රස/සුවඳ/වර්ණය වෙනස් වීමේ අවදානම</td></tr>
+        <tr><td>අතිරික්ත අස්වැන්න ප්‍රයෝජනයට; අවාරයේ භාවිතය; කෘමි/සතුන්ගෙන් හානි අවම</td><td>ක්ෂණික ආහාරවලට හුරුවීම → ස්වාභාවික ආහාර රුචිය අඩු</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">පූර්ව සැකසුම් (pre-cooked) පරිරක්ෂිත ආහාරයකට උදාහරණයක් දෙන්න.</p>
+        <p style="margin:.2em 0">→ පිටි කළ පොල් කිරි / මීට් බෝල්ස් / නූඩ්ල්ස් / මැකරෝනි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: පරිරක්ෂණයේ වාසි දෙකක් සහ අවාසි දෙකක් ලියන්න.</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">වාසි: <span class="a">නරක් වීම වැළැක්වීම; අවාරයේ භාවිතය</span>. අවාසි: <span class="a">කෘතිම ආකලන නිසා රෝග අවදානම; විටමින්/පෝෂක හානි</span>.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>“පෝෂණ ගුණය වැඩිවීම” වාසියක් — ඒත් “සැකසීමේදී පෝෂක හානිවීම” අවාසියක්. දෙක පටලවා ගන්න එපා.</li>
+          <li>පරිරක්ෂණයේ අවාසි ඇත්තේ <b>ආකලන වැඩිපුර/වැරදියට</b> යෙදීමෙන්.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. පිරිසැකසුම් ආහාරයකට නිදසුනක්?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">පිටි කළ පොල් කිරි (නූඩ්ල්ස්, මැකරෝනි, සොසේජස් ද).</div></div>
+        <div class="reveal"><span class="q">2. පරිරක්ෂණයේ අවාසියක් කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ස්වාභාවික ආහාරවලට ඇති රුචිකත්වය අඩු වීම (කෘතිම ආකලන නිසා රෝග අවදානම ද).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">⚖️</span><div><b>“පහසුවයි, කල් තියෙයි — ඒත් ආකලන වැඩිවුණොත් සෞඛ්‍යයට අවදානම්.”</b> හැකි සෑම විටම ස්වාභාවික ආහාර තෝරාගන්න.</div></div>
+    </div>
+  </details>
+
+  <!-- 13.5 label -->
+  <details class="topic" id="t135" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">13.5</span>
+      <h3>ආහාර ඇසුරුම් ලේබලයක අඩංගු තොරතුරු<span class="en">Food label information</span></h3><span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කඩෙන් බිස්කට් පැකට් එකක් ගන්න කලින්…</span> සැරදමක් (smart) පාරිභෝගිකයෙක් වෙන්න — ලේබලය බලන්න! කල් ඉකුත් වෙන දිනය, බර, ප්‍රමිතිය (SLS), නිෂ්පාදකයා — මේ තොරතුරු ඔයාව ආරක්ෂා කරනවා. (ක්‍රියාකාරකම 13.3)</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — ලේබලයක තිබිය යුතු තොරතුරු</b></div>
+      <p>① නිෂ්පාදිත දිනය හා කල් ඉකුත් වන දිනය · ② ශුද්ධ බර/මුළු බර · ③ ප්‍රමිතිය (SLS/ISO) · ④ නිෂ්පාදකයාගේ විස්තර (ලිපිනය/රට) · ⑤ ඇසුරුමෙහි පරිසර/පුද්ගල හිතකාමී බව.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — ආදර්ශ ලේබලයක්</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 380 230" role="img" aria-label="ආදර්ශ ආහාර ලේබලයක කොටස්">
+          <g font-family="'Noto Sans Sinhala',sans-serif">
+            <rect x="40" y="10" width="300" height="210" rx="12" fill="#fff" stroke="#c4533f" stroke-width="2"/>
+            <rect x="40" y="10" width="300" height="36" rx="12" fill="#c4533f"/>
+            <text x="190" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">පලතුරු ජෑම්</text>
+            <text x="56" y="70" font-size="12.5" fill="#1a2235">නිෂ්පාදිත දිනය : 2026.01.10</text>
+            <text x="56" y="94" font-size="12.5" fill="#9c3a29" font-weight="700">කල් ඉකුත් : 2026.07.10</text>
+            <text x="56" y="118" font-size="12.5" fill="#1a2235">ශුද්ධ බර : 500 g</text>
+            <text x="56" y="142" font-size="12.5" fill="#1a2235">ආකලන : පෙක්ටින්, සිට්‍රික් අම්ලය</text>
+            <text x="56" y="166" font-size="12.5" fill="#1a2235">නිෂ්පාදනය : ABC Foods, ශ්‍රී ලංකා</text>
+            <!-- SLS mark -->
+            <circle cx="285" cy="150" r="30" fill="#fff" stroke="#0a5b63" stroke-width="2"/>
+            <text x="285" y="148" text-anchor="middle" font-size="14" font-weight="800" fill="#0a5b63">SLS</text>
+            <text x="285" y="164" text-anchor="middle" font-size="11" fill="#0a5b63">894</text>
+            <text x="56" y="200" font-size="11.5" fill="#2b7a3d">♻ පරිසර හිතකාමී ඇසුරුම (PP-5)</text>
+          </g>
+        </svg>
+        <figcaption>ලේබලයක ප්‍රධාන කොටස්. SLS 894 = ශ්‍රී ලංකා ප්‍රමිති ලාංඡනය. (රූප 13.12)</figcaption>
+      </figure>
+      <div class="scroll"><table class="tbl">
+        <tr><th>තොරතුර</th><th>ඇයි වැදගත්</th></tr>
+        <tr><td>නිෂ්පාදිත/කල් ඉකුත් දිනය</td><td>පෝෂණ ගුණය යහ පවතින සීමිත කාලය; ඉන් පසු නරක් විය හැක</td></tr>
+        <tr><td>ශුද්ධ බර/මුළු බර</td><td>ඇතුළත ආහාර ප්‍රමාණය දැනගැනීමට</td></tr>
+        <tr><td>ප්‍රමිතිය (SLS 894 / ISO 9001)</td><td>ගුණාත්මක බව සහතික — SLS=ලංකා, ISO=ජාත්‍යන්තර</td></tr>
+        <tr><td>නිෂ්පාදකයාගේ විස්තර</td><td>අපේක්ෂිත ප්‍රතිඵල නැතිනම් නීත්‍යානුකූල පියවරට</td></tr>
+        <tr><td>ඇසුරුම හිතකාමී බව</td><td>ආකලන ඇසුරුම සමඟ ප්‍රතික්‍රියා කර හානිකර විය හැක</td></tr>
+      </table></div>
+      <div class="box hook" style="background:#eef7e9;border-color:#86bd9c"><span class="ttl">♻ අමතර දැනුම — සුදුසු ප්ලාස්ටික්</span> ආහාර ඇසුරුමට සුදුසු <b>Super grade plastic</b> පමණක් යොදන්න (උදා: PP-5 Polypropylene). ප්‍රතිචක්‍රීකරණය කළ ප්ලාස්ටික් හෝ වෙනත් දෑ තිබූ ප්ලාස්ටික් ආහාරයට යොදන්න එපා; ප්ලාස්ටික් තුළ ආහාර රත් කරන්න එපා.</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය + ඔබේ වාරය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">ලේබලයක “SLS 894” යනු මොකක්ද?</p>
+        <p style="margin:.2em 0">→ ශ්‍රී ලංකා ප්‍රමිති ආයතනයේ <b>ප්‍රමිති ලාංඡනය</b> හා අදාළ අංකය — ගුණාත්මක බව සහතික කරයි.</p>
+      </div>
+      <div class="reveal"><p class="q">✍️ ඔබේ වාරය: බෝතලයක ලේබලයක තිබිය යුතු තොරතුරු තුනක් ලියන්න.</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">කල් ඉකුත් වන දිනය, ශුද්ධ බර, ප්‍රමිතිය (SLS) — නිෂ්පාදිත දිනය/නිෂ්පාදක විස්තර ද වේ.</div></div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>නිෂ්පාදිත දිනය</b> සහ <b>කල් ඉකුත් වන දිනය</b> දෙකම බලන්න — කල් ඉකුත් වුණ ආහාර ගන්න එපා.</li>
+          <li>ආහාර ඇසුරුමට ඕනෑම ප්ලාස්ටික් සුදුසු නෑ — නිර්දේශිත වර්ග (PP-5 වැනි) පමණයි.</li>
+        </ul>
+      </div>
+      <div class="box safety"><span class="ttl">🛡️ ආරක්ෂක සටහන</span> ආහාර ප්ලාස්ටික් භාජනවල අධික ලෙස රත් කරන්න එපා; තෙල් සහිත/හාස්මික ආහාර නිර්දේශ නොකළ ප්ලාස්ටික්වල ඇසුරුම් කරන්න එපා — හානිකර ද්‍රව්‍ය ආහාරයට මිශ්‍ර විය හැක.</div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. SLS ලාංඡනය මගින් කියවෙන්නේ කුමක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ආහාරය ශ්‍රී ලංකා ප්‍රමිති ආයතනයේ ප්‍රමිතිවලට අනුකූලව සකසා ඇති බව (ගුණාත්මක බව සහතික).</div></div>
+        <div class="reveal"><span class="q">2. හොඳ ඇසුරුමක වාසියක් ලියන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ක්ෂුද්‍ර/මහා ජීවීන් ඇතුළු වීම වැළැක්වීම; බාහිර සාධකවලින් (වාතය, තෙතමනය, ආලෝකය, තාපය) ආරක්ෂාව; පහසු ප්‍රවාහනය/ගබඩාව.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🏷️</span><div><b>“දිනය බලන්න, බර බලන්න, SLS බලන්න — ඊටපස්සේ ගන්න.”</b> ලේබලය කියවන පාරිභෝගිකයා සැරයි.</div></div>
+    </div>
+  </details>
+
+
+  <!-- ===== SYNTHESIS ===== -->
+  <section class="synth" id="synth">
+    <h2>සියල්ල එකට බඳිමු 🧵</h2>
+    <p>මේ පාඩම් දෙක එකම කතාවක දෙකොටසක්. එකින් අනික ස්වභාවිකවම ගලා එනවා:</p>
+    <div class="chain">
+      <span>ක්ෂුද්‍ර ජීවීන් (පාඩම 1)</span><i>→</i>
+      <span>ඔවුන් ආහාර නරක් කරයි</span><i>→</i>
+      <span>ආහාර පරිරක්ෂණය (පාඩම 13)</span>
+    </div>
+    <p style="margin-top:14px"><b>පාඩම 1</b> පෙන්නුවා — ක්ෂුද්‍ර ජීවීන්ට වර්ධනය වෙන්න <b>ජලය (තෙතමනය), හිතකර උෂ්ණත්වය, උපස්තරය, pH</b> ඕනේ කියලා. ඒ ජීවීන් තමයි ආහාර නරක් කරන්නේ.</p>
+    <p><b>පාඩම 13</b> පෙන්නුවා — ආහාර කල් තබන්න නම් ඒ <b>එම සාධකම පාලනය</b> කරන්න ඕනේ කියලා: <b>වියළීම</b> (ජලය ඉවත්), <b>ශීතනය/අධිශීතනය</b> (උෂ්ණත්වය අඩු), <b>ලුණු/සීනි/පරිරක්ෂක</b> (ක්ෂුද්‍ර ජීවියාගෙන් ජලය ඉවත්). එනම්, පරිරක්ෂණය කියන්නේ ක්ෂුද්‍ර ජීවියාට අවශ්‍ය දේ අහිමි කිරීමයි!</p>
+    <p style="margin-top:14px;color:var(--gold);font-weight:700">කෙටියෙන්: ක්ෂුද්‍ර ජීවියාට ජලය හා උණුසුම ඕනේ → ඒ දෙක අහිමි කළොත් (වියළීම/සීතල) ආහාර කල් තියෙනවා. මේ එක් අදහසකින් මුළු පාඩම් දෙකම තේරෙනවා.</p>
+  </section>
+
+  <!-- ===== TEST ===== -->
+  <section class="test" id="test">
+    <h2>අවසන් මිශ්‍ර ස්වයං-පරීක්ෂණය 📝</h2>
+    <p style="color:var(--ink-soft);margin:0 0 6px">පොත වහලා, මේ ප්‍රශ්න 10ම තනියම කරන්න. ඊටපස්සේ පිළිතුරු බලන්න. 8ක් හරිනම් — ඔයා සූදානම්! 🎉</p>
+    <div class="qz">
+
+      <div class="qitem"><div class="qq">ක්ෂුද්‍ර ජීවීන් යනු කුමක්ද? (නිර්වචනය)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">තනි සෛලයකින් හෝ සෛල කිහිපයකින් සැදුණු, ඇසට නොපෙනෙන, අණුවීක්ෂයෙන් පමණක් නිරීක්ෂණය කළ හැකි ජීවීන්.</span></div></div>
+
+      <div class="qitem"><div class="qq">ක්ෂුද්‍ර ජීවීන් මුල්වරට නිරීක්ෂණය කළ විද්‍යාඥයා කවුද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ඇන්ටන් වෑන් ලීවන්හූක්</span> (1674).</div></div>
+
+      <div class="qitem"><div class="qq">ප්‍රෝටීන බහුල ආහාර නරක් වෙන ක්‍රියාවලිය කුමක්ද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ප්‍රතිහීනවනය (putrefaction).</span> (සීනි→පැසීම, මේද→මුඩු වීම.)</div></div>
+
+      <div class="qitem"><div class="qq">මැලේරියාව හා ලීෂ්මානියාව බෝවන්නේ කුමන කාරකයෙන්ද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ප්‍රොටොසෝවා</span> මගින්.</div></div>
+
+      <div class="qitem"><div class="qq">ක්ෂුද්‍ර ජීවී වර්ධනයට අවශ්‍ය තත්ත්ව හතර මොනවද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">උපස්තරය, තෙතමනය (ජලය), හිතකර උෂ්ණත්වය, හිතකර pH.</span></div></div>
+
+      <div class="qitem"><div class="qq">ආහාර නරක් වීමට ප්‍රධාන හේතුව කුමක්ද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ආහාර මත ක්ෂුද්‍ර ජීවීන්ගේ වර්ධනය හා ක්‍රියාකාරිත්වය.</span></div></div>
+
+      <div class="qitem"><div class="qq">වියළීම මගින් ආහාර කල් තබන්නේ කොහොමද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ජලය ඉවත් වන නිසා ක්ෂුද්‍ර ජීවී වර්ධනය සිදු නොවේ.</span></div></div>
+
+      <div class="qitem"><div class="qq">ශීතනය හා අධිශීතනය උෂ්ණත්ව මොනවද? මොන ආහාරද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ශීතනය ≈ 4°C (එළවළු/පලතුරු); අධිශීතනය −18°C (මස්/මාළු/අයිස්ක්‍රීම්).</span></div></div>
+
+      <div class="qitem"><div class="qq">පරිරක්ෂක ද්‍රව්‍ය දෙකක් ලියන්න.</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">බෙන්සොයික් අම්ලය, සෝඩියම් මෙටා බයි සල්ෆයිට්</span> (ලුණු, ඇසිටික් අම්ලය ද).</div></div>
+
+      <div class="qitem"><div class="qq">ලේබලයක SLS 894 යනු කුමක්ද?</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">ශ්‍රී ලංකා ප්‍රමිති ලාංඡනය හා අංකය — ගුණාත්මක බව සහතික කරයි.</span></div></div>
+
+    </div>
+  </section>
+
+  <!-- ===== CHEAT SHEET ===== -->
+  <section class="cheat" id="cheat">
+    <h2>⚡ එක-පිටු කෙටි සටහන</h2>
+    <p style="color:var(--ink-soft);margin:0 0 8px">විභාගෙට කලින් අවසන් මිනිත්තු 5ට මේක විතරක් බලන්න. (Print කරාම පිළිතුරුත් පේනවා.)</p>
+    <div class="cheat-grid">
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>🔬 ක්ෂුද්‍ර ජීවීන්</h4>
+        <ul>
+          <li>ඇසට නෑ, අණුවීක්ෂයට ඔව්; තනි/සෛල කිහිපයකින්.</li>
+          <li>බැක්ටීරියා · යීස්ට්/දිලීර · ඇල්ගී · ප්‍රොටොසෝවා (ඇමීබා/පැරමීසියම්).</li>
+          <li>1674 — ඇන්ටන් වෑන් ලීවන්හූක්.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>🍞 ආහාර මත බලපෑම</h4>
+        <ul>
+          <li>නරක් ලකුණු: වර්ණය·වයනය·ගන්ධය·පෙනුම.</li>
+          <li>සීනි→<b>පැසීම</b> · ප්‍රෝටීන→<b>ප්‍රතිහීනවනය</b> · මේද→<b>මුඩු වීම</b>.</li>
+          <li>වර්ධනයට: උපස්තරය·තෙතමනය·උෂ්ණත්වය·pH.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>⚖️ හිතකර / අහිතකර</h4>
+        <ul>
+          <li>හිතකර: කිරි මිදීම, යෝගට්, පාන්, විනාකිරි, ප්‍රතිජීවක, කොම්පෝස්ට්, වියෝජනය.</li>
+          <li>අහිතකර: නරක්වීම; රෝග; ආර්ථික හානි.</li>
+          <li>රෝග: වයිරස (ඩෙංගු) · බැක්ටීරියා (ක්ෂය) · ප්‍රොටොසෝවා (මැලේරියා) · දිලීර (දද).</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>🛡️ පරිරක්ෂණයේ අවශ්‍යතාව</h4>
+        <ul>
+          <li>නරක්වීමේ හේතු: ක්ෂුද්‍ර ජීවී · ගුල්ලන් · වැරදි හැසිරවීම · ඔක්සිකරණය.</li>
+          <li>අරමුණු: නරක්වීම අවම, විෂවීම/අපතේ යාම වැළැක්වීම, අවාරයේ භාවිතය.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>❄️ පරිරක්ෂණ ක්‍රම</h4>
+        <ul>
+          <li>සාම්ප්‍රදායික: වියළීම · ලුණු · දුම් · මී පැණි · වැලි.</li>
+          <li>නවීන: සූර්ය/උදුන්/විසිරි වියළීම · ශීතනය 4°C · අධිශීතනය −18°C · සාන්ද්‍රීකරණය.</li>
+          <li>රහස: ජලය ඉවත් / උෂ්ණත්වය පාලනය.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>🏷️ පරිරක්ෂක + ලේබල</h4>
+        <ul>
+          <li>ආකලන: ශන · රසකාරක · ප්‍රතිඔක්සිකාරක · <b>පරිරක්ෂක</b> · වර්ණක.</li>
+          <li>පරිරක්ෂක = E200–E299 (බෙන්සොයික් අම්ලය, සෝඩියම් මෙටා බයි සල්ෆයිට්…). MSG = රසකාරක, පරිරක්ෂක නෙවෙයි.</li>
+          <li>ලේබල: දින · බර · SLS 894/ISO · නිෂ්පාදක · හිතකාමී ඇසුරුම (PP-5).</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <span class="logo" style="background:linear-gradient(135deg,#e0a92e,#c8901a);color:#0d1b3e;border-radius:8px;font-weight:800;place-items:center">I</span>
+  Idasara Academy · 8 ශ්‍රේණිය විද්‍යාව — 8 ශ්‍රේණිය විද්‍යා පෙළපොත් (අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුව) ඇසුරෙන්: පාඩම 1 (පොත I, පි.1), පාඩම 13 (පොත II, පි.80). මාධ්‍යය: සිංහල.
+</footer>
+
+<script>
+var prog=document.getElementById('progress');
+function up(){var h=document.documentElement;var s=h.scrollTop||document.body.scrollTop;var mx=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/mx*100)+'%';}
+window.addEventListener('scroll',up,{passive:true});up();
+
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.rbtn');if(!b)return;
+  var box=b.parentElement.querySelector('.ans');if(!box)return;
+  var open=box.classList.toggle('show');
+  if(open){b.textContent='පිළිතුර හංගන්න ▴';}
+  else{b.textContent=(b.getAttribute('data-short')==='1'?'පිළිතුර ▾':'පිළිතුර පෙන්වන්න ▾');}
+});
+document.querySelectorAll('.selfcheck .rbtn').forEach(function(b){b.setAttribute('data-short','1');});
+
+/* microbe widget */
+(function(){
+  var map={
+    'bac':['බැක්ටීරියා','දඬු/වටකුරු හැඩැති; පැසවීම, ක්ෂයරෝගය වැනි දේ.'],
+    'yeast':['දිලීර','පාන් පිපීම/පැසවීම සඳහා යොදා ගනී.'],
+    'chla':['ඇල්ගී','කොළ පැහැති; ක්ලොරෝෆිල් ඇත.'],
+    'mucor':['දිලීර','පාන් මත වැඩෙන පුස් (mould).'],
+    'amoeba':['ප්‍රොටොසෝවා','හැඩය වෙනස් කරයි; ඇම්බා අතීසාරය.'],
+    'para':['ප්‍රොටොසෝවා','සෙරෙප්පු හැඩැති; රෝමිකා ඇත.']
+  };
+  var out=document.getElementById('microOut');var chips=document.querySelectorAll('#microWidget .chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');var d=map[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var(--A-soft);color:var(--A-deep)">'+d[0]+'</span> '+d[1];});});
+})();
+
+/* disease widget */
+(function(){
+  var map={
+    'dengue':['වයිරස','ඩෙංගු — මදුරුවන් මගින් පැතිරෙයි.'],
+    'tb':['බැක්ටීරියා','ක්ෂයරෝගය — පෙනහළුවලට බලපායි.'],
+    'malaria':['ප්‍රොටොසෝවා','මැලේරියාව — මදුරුවන් මගින්.'],
+    'dadha':['දිලීර','දද — සමේ රෝගයකි.'],
+    'laduru':['බැක්ටීරියා','ලාදුරු — සම/ස්නායුවලට.'],
+    'aids':['වයිරස','AIDS — ප්‍රතිශක්තිය දුර්වල කරයි.']
+  };
+  var out=document.getElementById('diseaseOut');var chips=document.querySelectorAll('#diseaseWidget .chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');var d=map[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var(--A-soft);color:var(--A-deep)">'+d[0]+'</span> '+d[1];});});
+})();
+
+/* temperature slider widget */
+(function(){
+  var s=document.getElementById('tempSlider'),out=document.getElementById('tempOut');if(!s)return;
+  function state(t){
+    if(t<=-18)return['#1f8a4c','අධිශීතනය — වර්ධනය නවතී. ආහාර හොඳින් ආරක්ෂිතයි.'];
+    if(t<=4)return['#2b7a3d','ශීතනය — වර්ධනය ඉතා මන්දගාමී. දින කිහිපයක් ආරක්ෂිතයි.'];
+    if(t<20)return['#b3651f','මන්දගාමී වර්ධනය — ටික කලක් තියෙයි.'];
+    if(t<=30)return['#c4533f','හිතකර උෂ්ණත්වය! ක්ෂුද්‍ර ජීවී වේගයෙන් වැඩෙයි — ආහාර ඉක්මනින් නරක්.'];
+    return['#9c3a29','උණුසුම් — තවමත් වේගවත් වර්ධනය.'];
+  }
+  function render(){var t=+s.value;var st=state(t);
+    out.innerHTML='<span class="badge" style="background:var(--B-soft);color:var(--B-deep)">'+t+' °C</span> <span style="color:'+st[0]+';font-weight:700">'+st[1]+'</span>';}
+  s.addEventListener('input',render);render();
+})();
+</script>
+</body>
+</html>

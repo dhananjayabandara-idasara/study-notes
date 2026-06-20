@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O/L Science Revision Map — Idasara Academy</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --bio:#2f8f5b; --chem:#b6562e; --phys:#2b6fb3; --earth:#6b7280;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Tahoma,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.55rem}
+  header p{margin:.4rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:60ch}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:18px 2px 6px;font-size:.82rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.82rem;padding:7px 14px;border-radius:8px;cursor:pointer}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:13px 0 4px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:.97rem;color:var(--navy)}
+  .cluster .why{margin:0 0 10px;font-size:.83rem;color:var(--muted);font-style:italic}
+  .topic{display:flex;align-items:baseline;gap:10px;padding:5px 0 5px 14px;border-left:2px solid var(--line);margin-left:3px}
+  .topic .name{flex:1;font-size:.92rem}
+  .tag{font-size:.68rem;font-weight:700;letter-spacing:.03em;color:#fff;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .g10{background:var(--phys)} .g11{background:var(--gold);color:#3a2a06}
+  .code{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  footer{margin-top:24px;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.6}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.topic{flex-wrap:wrap;gap:5px}.code{order:3;width:100%;padding-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Idasara Academy · Exam Freedom</div>
+    <h1>O/L Science — The Whole Map</h1>
+    <p>Tuition teaches you one lesson at a time. The exam asks for all of them at once. This is the whole subject, grouped the way the paper actually tests it — so you revise connections, not scattered facts. Every topic is tagged to its real syllabus code. Come and see for yourself.</p>
+  </header>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--bio)"></i>Life &amp; Living Processes</span>
+    <span><i class="dot" style="background:var(--chem)"></i>Matter &amp; Its Changes</span>
+    <span><i class="dot" style="background:var(--phys)"></i>Energy &amp; Forces</span>
+    <span><i class="dot" style="background:var(--earth)"></i>Earth &amp; Environment</span>
+    <span><i class="tag g10" style="padding:1px 7px">G10</i>Grade 10</span>
+    <span><i class="tag g11" style="padding:1px 7px">G11</i>Grade 11</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">Expand all</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">Collapse all</button>
+  </div>
+
+  <!-- STRAND 1 -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--bio)"></span>1 · Life &amp; Living Processes <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>The Cell &amp; What Makes Something Alive</h3>
+        <p class="why">Everything in biology builds on the cell. Learn this cluster first — the rest connects back to it.</p>
+        <div class="topic"><span class="name">Chemical basis of life (carbohydrates, proteins, lipids, water)</span><span class="tag g10">G10</span><span class="code">1.1</span></div>
+        <div class="topic"><span class="name">Structure of plant &amp; animal cells, cell division</span><span class="tag g10">G10</span><span class="code">1.2</span></div>
+        <div class="topic"><span class="name">Characteristics of living things</span><span class="tag g10">G10</span><span class="code">1.3</span></div>
+        <div class="topic"><span class="name">Classification of organisms &amp; naming</span><span class="tag g10">G10</span><span class="code">1.4</span></div>
+        <div class="topic"><span class="name">Plant tissues</span><span class="tag g11">G11</span><span class="code">1.1</span></div>
+        <div class="topic"><span class="name">Animal tissues</span><span class="tag g11">G11</span><span class="code">1.2</span></div>
+      </div>
+      <div class="cluster">
+        <h3>How the Body Works (Human Systems)</h3>
+        <p class="why">Digestion, breathing and control all answer one question: how does a body stay running? Revise them together.</p>
+        <div class="topic"><span class="name">Digestion in humans</span><span class="tag g11">G11</span><span class="code">1.4</span></div>
+        <div class="topic"><span class="name">Respiration in humans</span><span class="tag g11">G11</span><span class="code">1.5</span></div>
+        <div class="topic"><span class="name">Co-ordination &amp; homeostasis</span><span class="tag g11">G11</span><span class="code">1.8</span></div>
+        <div class="topic"><span class="name">Photosynthesis</span><span class="tag g11">G11</span><span class="code">1.3</span></div>
+      </div>
+      <div class="cluster">
+        <h3>Continuity of Life (Reproduction &amp; Heredity)</h3>
+        <p class="why">How life passes itself on — and how traits travel with it. One story across two grades.</p>
+        <div class="topic"><span class="name">Reproduction &amp; continuity of organisms</span><span class="tag g10">G10</span><span class="code">1.5</span></div>
+        <div class="topic"><span class="name">Patterns of inheritance &amp; genetic disorders</span><span class="tag g10">G10</span><span class="code">1.6</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRAND 2 -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--chem)"></span>2 · Matter &amp; Its Changes <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>What Matter Is Made Of</h3>
+        <p class="why">Atoms → bonds → formulae → the mole. Each step needs the one before it. Learn strictly in order.</p>
+        <div class="topic"><span class="name">Structure of matter, atoms &amp; the periodic table</span><span class="tag g10">G10</span><span class="code">2.1</span></div>
+        <div class="topic"><span class="name">The mole — quantifying elements &amp; compounds</span><span class="tag g10">G10</span><span class="code">2.2</span></div>
+        <div class="topic"><span class="name">Chemical bonds (ionic &amp; covalent)</span><span class="tag g10">G10</span><span class="code">2.3</span></div>
+        <div class="topic"><span class="name">Mixtures &amp; solubility</span><span class="tag g11">G11</span><span class="code">2.1</span></div>
+        <div class="topic"><span class="name">Composition of mixtures &amp; concentration</span><span class="tag g11">G11</span><span class="code">2.2</span></div>
+        <div class="topic"><span class="name">Separation techniques</span><span class="tag g11">G11</span><span class="code">2.3</span></div>
+      </div>
+      <div class="cluster">
+        <h3>Matter That Changes (Reactions)</h3>
+        <p class="why">Every reaction topic is a variation on one idea: what changes, how fast, and with how much energy.</p>
+        <div class="topic"><span class="name">Chemical reactions &amp; the activity series</span><span class="tag g10">G10</span><span class="code">2.4</span></div>
+        <div class="topic"><span class="name">Rate of reaction</span><span class="tag g10">G10</span><span class="code">2.5</span></div>
+        <div class="topic"><span class="name">Acids, bases &amp; salts</span><span class="tag g11">G11</span><span class="code">2.4</span></div>
+        <div class="topic"><span class="name">Heat changes in reactions (exo/endothermic)</span><span class="tag g11">G11</span><span class="code">2.5</span></div>
+        <div class="topic"><span class="name">Electrolysis &amp; electroplating</span><span class="tag g11">G11</span><span class="code">2.7</span></div>
+        <div class="topic"><span class="name">Corrosion &amp; rusting</span><span class="tag g11">G11</span><span class="code">2.8</span></div>
+        <div class="topic"><span class="name">Polymers</span><span class="tag g11">G11</span><span class="code">2.10</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRAND 3 -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--phys)"></span>3 · Energy &amp; Forces <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>Forces &amp; How They Balance</h3>
+        <p class="why">The most connected cluster in the paper. A single question can mix motion, force and equilibrium — so never revise these apart.</p>
+        <div class="topic"><span class="name">Motion &amp; graphs of motion</span><span class="tag g10">G10</span><span class="code">3.1</span></div>
+        <div class="topic"><span class="name">Newton's laws of motion &amp; momentum</span><span class="tag g10">G10</span><span class="code">3.2</span></div>
+        <div class="topic"><span class="name">Friction</span><span class="tag g10">G10</span><span class="code">3.3</span></div>
+        <div class="topic"><span class="name">Resultant of forces</span><span class="tag g10">G10</span><span class="code">3.4</span></div>
+        <div class="topic"><span class="name">Turning effect of a force (moments)</span><span class="tag g10">G10</span><span class="code">3.5</span></div>
+        <div class="topic"><span class="name">Equilibrium of forces</span><span class="tag g10">G10</span><span class="code">3.6</span></div>
+      </div>
+      <div class="cluster">
+        <h3>Pressure, Work &amp; Energy</h3>
+        <p class="why">Where force meets energy — floating, lifting, and the cost of doing work.</p>
+        <div class="topic"><span class="name">Hydrostatics — pressure, sinking &amp; floating</span><span class="tag g10">G10</span><span class="code">3.7</span></div>
+        <div class="topic"><span class="name">Work, energy &amp; power (mechanical)</span><span class="tag g10">G10</span><span class="code">3.8</span></div>
+      </div>
+      <div class="cluster">
+        <div class="cluster">
+        <h3>Electricity, Waves, Light &amp; Heat</h3>
+        <p class="why">The "energy in everyday life" cluster — home circuits, sound, mirrors, lenses, and heat.</p>
+        <div class="topic"><span class="name">Current electricity &amp; Ohm's law</span><span class="tag g10">G10</span><span class="code">3.9</span></div>
+        <div class="topic"><span class="name">Electrical energy &amp; power</span><span class="tag g11">G11</span><span class="code">3.5</span></div>
+        <div class="topic"><span class="name">Electronics</span><span class="tag g11">G11</span><span class="code">3.6</span></div>
+        <div class="topic"><span class="name">Waves</span><span class="tag g11">G11</span><span class="code">3.1</span></div>
+        <div class="topic"><span class="name">Sound waves</span><span class="tag g11">G11</span><span class="code">3.2</span></div>
+        <div class="topic"><span class="name">Geometrical optics (mirrors &amp; lenses)</span><span class="tag g11">G11</span><span class="code">3.3</span></div>
+        <div class="topic"><span class="name">Thermal effects &amp; heat transfer</span><span class="tag g11">G11</span><span class="code">3.4</span></div>
+        <div class="topic"><span class="name">Electromagnetic force (and induction)</span><span class="tag g11">G11</span><span class="code">3.7</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRAND 4 -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--earth)"></span>4 · Earth &amp; Environment <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>Living Systems &amp; the Environment</h3>
+        <p class="why">The "easy marks" cluster — fact-dense, low calculation. Strong revision here is the cheapest way to lift a grade.</p>
+        <div class="topic"><span class="name">The biosphere &amp; its organisation</span><span class="tag g11">G11</span><span class="code">4.1</span></div>
+        <div class="topic"><span class="name">Energy flow &amp; cycling of matter (nitrogen cycle)</span><span class="tag g11">G11</span><span class="code">4.2</span></div>
+        <div class="topic"><span class="name">Pollutants &amp; their effects</span><span class="tag g11">G11</span><span class="code">4.3</span></div>
+        <div class="topic"><span class="name">Effects of changing lifestyle (incl. CKD)</span><span class="tag g11">G11</span><span class="code">4.4</span></div>
+        <div class="topic"><span class="name">Sustainable development &amp; waste management</span><span class="tag g11">G11</span><span class="code">4.5</span></div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    Aligned to the NIE G.C.E. (O/L) Science syllabus, Grades 10 &amp; 11. Codes shown (e.g. 3.7) are the syllabus competency-level numbers.<br>
+    <span class="brand">Idasara Academy</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

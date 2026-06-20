@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 ශ්‍රේණිය ගණිතය — සම්පූර්ණ සිතියම · ඉඩසර ඇකඩමිය</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --alg:#2b6fb3; --geo:#b6562e; --stat:#2f8f5b; --num:#7a5bb0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Noto Sans Sinhala','Iskoola Pota','Segoe UI',system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.74rem;letter-spacing:.05em;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.5rem}
+  header p{margin:.5rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:64ch}
+  .strategy{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:12px;padding:14px 18px;margin:16px 0 4px;font-size:.92rem;color:#5a4410}
+  .strategy b{color:#3a2a06}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:16px 2px 6px;font-size:.84rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.84rem;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:13px 0 6px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:1rem;color:var(--navy)}
+  .cluster .why{margin:0 0 12px;font-size:.85rem;color:var(--muted)}
+  .chain{position:relative;margin-left:6px}
+  .step{position:relative;display:flex;align-items:baseline;gap:10px;padding:8px 0 8px 26px}
+  .step::before{content:'';position:absolute;left:6px;top:0;bottom:0;border-left:2px dashed #c4ccd6}
+  .step:last-child::before{bottom:50%}
+  .step .num{position:absolute;left:0;top:9px;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--muted)}
+  .step .name{flex:1;font-size:.94rem}
+  .step .ln{display:inline-block;min-width:1.4em;color:var(--muted);font-weight:700;font-size:.82rem}
+  .step .en{display:block;font-size:.76rem;color:var(--muted)}
+  .arrow{font-size:.78rem;color:var(--muted)}
+  .tag{font-size:.7rem;font-weight:700;color:#fff;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .core{background:var(--gold)}
+  footer{margin-top:24px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.7}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.step{flex-wrap:wrap;gap:5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">ඉඩසර ඇකඩමිය · සා/පෙළට යන මග</div>
+    <h1>8 ශ්‍රේණිය ගණිතය — සම්පූර්ණ සිතියම</h1>
+    <p>8 ශ්‍රේණිය යනු සා/පෙළ අත්තිවාරම වැටෙන තැනයි. පෙළපොත පාඩම් 30ක් — I කොටසේ 14ක්, II කොටසේ 16ක් — එහෙත් ඒවා ඉගැන්වීමේ පහසුවට අනුව පෙළ ගස්වා ඇත, සැබවින්ම ඒවා එකිනෙක මත රඳා පවතින අනුපිළිවෙළට නොව. මේ සිතියම පාඩම් ඒවායේ <b>සැබෑ යැපුම් අනුපිළිවෙළට</b> පොකුරු කරයි, එම පොකුරුම සා/පෙළ සිතියමට සෘජුව ගලා යන ආකාරයත් පෙන්වයි. දාමය අනුගමනය කරන්න.</p>
+  </header>
+
+  <div class="strategy">
+    <b>මුලින්ම මෙය කියවන්න.</b> 8 ශ්‍රේණියට පොදු විභාගයක් නැත — එහෙත් මෙහි දැම්ම අත්තිවාරම සෘජුවම සා/පෙළ ලකුණු බවට පත් වේ. ගණිතය පාඩම් ගොඩක් නොවේ; එය දාමයකි. එක පුරුකක් මග හැරියොත් ඉදිරියට එන පුරුක් කඩා වැටේ. පහත <b><span class="tag core" style="padding:1px 6px">මූලික</span></b> ලෙස සලකුණු කළ පාඩම් යනු මුළු විෂයයම (හා සා/පෙළ) රඳා පවතින කොඳු නාරටියයි — කාලය අඩු නම්, මුලින්ම මේවා ස්ථිර කරගන්න. ඉතිරිය වැදගත් වුවත් වඩාත් ස්වයංපෝෂිතයි. <b>පෙළපොතේ අංකය නොව, දාමයේ අනුපිළිවෙළ අනුගමනය කරන්න.</b>
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--num)"></i>සංඛ්‍යා හා මූල්‍ය</span>
+    <span><i class="dot" style="background:var(--alg)"></i>වීජ ගණිතය</span>
+    <span><i class="dot" style="background:var(--geo)"></i>ජ්‍යාමිතිය හා මිනුම්</span>
+    <span><i class="dot" style="background:var(--stat)"></i>සංඛ්‍යානය, කුලක හා සම්භාවිතාව</span>
+    <span><i class="tag core" style="padding:1px 7px">මූලික</i>කොඳු නාරටිය — මුලින්ම</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">සියල්ල විවෘත කරන්න</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">සියල්ල වසන්න</button>
+  </div>
+
+  <!-- NUMBER & FINANCE -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--num)"></span>1 · සංඛ්‍යා හා මූල්‍ය ගණිතය <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>සංඛ්‍යා පදනම</h3>
+        <p class="why">අත්තිවාරම. සෘණ සංඛ්‍යා → සාධක → වර්ගමූල → දර්ශක යන දාමය. එක් එක් පියවර පෙර එක මත ගොඩනැගේ; මුළු වීජ ගණිතයටම හා මිනුම්වලටම පාදක වේ — ඉදිරියට යාමට පෙර මේවා ස්ථිර කරගන්න.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">4.</span>සදිශ සංඛ්‍යා — එකතු, අඩු, ගුණ, බෙදීම<span class="en">Directed numbers (integers)</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">7.</span>සාධක, ගුණාකාර හා කු.පො.ගු. / ම.පො.සා.<span class="en">Factors, multiples, LCM &amp; GCD</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">8.</span>වර්ගමූලය — පූර්ණ වර්ග හා ආසන්න කරණය<span class="en">Square root</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">10.</span>දර්ශක — දර්ශක නියම<span class="en">Indices &amp; laws of indices</span></span><span class="tag core">මූලික</span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>භාග හා දශම (එක් සංඛ්‍යා පද්ධතියක්)</h3>
+        <p class="why">භාග, දශම — එකම අදහස වෙනස් ස්වරූප දෙකකි. භාග පළමුව තහවුරු කරගන්න, එවිට දශම හා (පසුව) ප්‍රතිශත ස්වභාවිකවම ගලා එයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">13.</span>භාග I — සමාන භාග, එකතු හා අඩු<span class="en">Fractions I</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">14.</span>භාග II — ගුණ කිරීම හා බෙදීම<span class="en">Fractions II</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">15.</span>දශම — ක්‍රියා කර්ම හා භාග↔දශම පරිවර්තනය<span class="en">Decimals</span></span><span class="tag core">මූලික</span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>අනුපාතික චින්තනය හා මූල්‍ය</h3>
+        <p class="why">අනුපාතය යටින් ඇති අදහස ප්‍රතිශතයටද පාදක වේ — එදිනෙදා මුදල් ගණිතය. භාග/දශම ස්ථිර වූ පසු මේවා පහසු ලකුණු බවට පත් වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">16.</span>අනුපාත — සරල කිරීම, බෙදීම, සමානුපාත<span class="en">Ratios &amp; proportion</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">18.</span>ප්‍රතිශත — වැඩි/අඩු වීම, ලාභ/අලාභ<span class="en">Percentages</span></span><span class="tag core">මූලික</span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>රටා — වීජ ගණිතයට පාලම</h3>
+        <p class="why">රටාවක් සාමාන්‍යකරණය කිරීම යනු වීජීය ප්‍රකාශයක් ලිවීමේ පළමු පියවරයි. මෙතැනින් සංඛ්‍යාවලින් වීජ ගණිතයට මාරු වෙයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">1.</span>සංඛ්‍යා රටා — රටාවේ නියමය හෙවත් සාමාන්‍ය පදය <span class="arrow">→</span> වීජ ගණිතය<span class="en">Number patterns → algebra</span></span></div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ALGEBRA -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--alg)"></span>2 · වීජ ගණිතය <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>වීජීය දාමය — දැඩි අනුපිළිවෙළින්</h3>
+        <p class="why">රටා සාමාන්‍යකරණයෙන් පැමිණේ. මුලින් ප්‍රකාශන ගොඩනඟා සරල කරන්න, ඉන්පසු එම ප්‍රකාශනවලින්ම සමීකරණ විසඳන්න. මෙය සා/පෙළ වීජ ගණිත දාමයේ මුල් පුරුකයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">5.</span>වීජීය ප්‍රකාශන — සමාන පද, වරහන් හැර ගැනීම<span class="en">Algebraic expressions</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">17.</span>සමීකරණ — රේඛීය සමීකරණ විසඳීම<span class="en">Equations</span></span><span class="tag core">මූලික</span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>ඛණ්ඩාංක තලය</h3>
+        <p class="why">පිහිටීම විස්තර කිරීමේ සිට ඛණ්ඩාංක තලයේ ලක්ෂ්‍ය සටහන් කිරීම දක්වා. මෙය සා/පෙළ සරල රේඛා ප්‍රස්තාර (y = mx + c) වෙත යන පාලමයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">24.</span>ස්ථානයක පිහිටීම — දිශාව හා දුර ඇසුරින්<span class="en">Locating a position</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">25.</span>සංඛ්‍යා රේඛාව හා කාටීසීය තලය — ඛණ්ඩාංක සටහන් කිරීම<span class="en">Number line &amp; Cartesian plane</span></span><span class="tag core">මූලික</span></div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- GEOMETRY & MEASUREMENT -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--geo)"></span>3 · ජ්‍යාමිතිය හා මිනුම් <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>කෝණ, රූප හා සමමිතිය</h3>
+        <p class="why">කෝණ රූප නිර්වචනය කරයි → රූපවල ගුණ සමමිතිය ලබා දෙයි → කෝණ හා සමමිතිය එක්ව ටෙසලාකරණය ක්‍රියාත්මක කරයි. අනුපිළිවෙළ වෙනස් කළ නොහැක.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">3.</span>කෝණ — වර්ග, කෝණ යුගල, සමාන්තර රේඛා<span class="en">Angles</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">12.</span>ත්‍රිකෝණ හා චතුරස්‍ර — කෝණ හා ගුණ<span class="en">Triangles &amp; quadrilaterals</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">11.</span>සමමිතිය — පරාවර්තන හා භ්‍රමණ<span class="en">Symmetry</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">30.</span>ටෙසලාකරණය — තලය රූපවලින් ඇතිරීම<span class="en">Tessellation</span></span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>වෘත්ත හා නිර්මාණ</h3>
+        <p class="why">වෘත්තයේ කොටස් හඳුනාගෙන, ඉන්පසු කවකටුව හා රූලක් යොදා ත්‍රිකෝණ නිර්මාණය කරන්න — සා/පෙළ නිර්මාණ/පථ වෙත යන මුල් පියවර.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">23.</span>වෘත්ත — කේන්ද්‍රය, අරය, විෂ්කම්භය, ජ්‍යා<span class="en">Circles</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">26.</span>ත්‍රිකෝණ නිර්මාණය — කවකටුව හා රූලක් යොදා<span class="en">Construction of triangles</span></span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>මිනුම — දිග → වර්ගඵලය → පරිමාව</h3>
+        <p class="why">පරිමිතිය → වර්ගඵලය → ඝන වස්තු → පරිමාව. එක එක මානය පෙර එක මත ගොඩනැගේ. නිතර එන, ගණනය මත පදනම් වූ විශ්වසනීය ලකුණු; සා/පෙළ මිනුම් කොටසට කෙලින්ම පාදක වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">2.</span>පරිමිතිය — සෘජුකෝණාස්‍ර, ත්‍රිකෝණ, සංයුක්ත රූප<span class="en">Perimeter</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">20.</span>වර්ගඵලය — සෘජුකෝණාස්‍ර, ත්‍රිකෝණ, සමාන්තරාස්‍ර<span class="en">Area</span></span><span class="tag core">මූලික</span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">6.</span>ඝන වස්තු — දාර, ශීර්ෂ, මුහුණත් හා ජාල<span class="en">Solids — edges, vertices, faces &amp; nets</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">22.</span>පරිමාව හා ධාරිතාව — ඝනකාභ හා ප්‍රිස්ම<span class="en">Volume &amp; capacity</span></span><span class="tag core">මූලික</span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>ප්‍රායෝගික මිනුම් හා නිරූපණ</h3>
+        <p class="why">ස්කන්ධය, කාලය හා පරිමාණ රූප — දෛනික ජීවිතයට යෙදෙන මිනුම් කුසලතා. ඒකක පරිවර්තනය මෙහි පොදු යතුරයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">9.</span>ස්කන්ධය — ඒකක හා පරිවර්තනය<span class="en">Mass</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">21.</span>කාලය — 12/24 පැය, කාල පරතර, කාල සටහන්<span class="en">Time</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">28.</span>පරිමාණ රූප — පරිමාණය යොදා සැබෑ දුර<span class="en">Scale drawings</span></span></div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- STATS, SETS, PROBABILITY -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--stat)"></span>4 · සංඛ්‍යානය, කුලක හා සම්භාවිතාව <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>සංඛ්‍යානය (දත්ත හැසිරවීම)</h3>
+        <p class="why">දත්ත සංවිධානය → නිරූපණය → අර්ථකථනය. සා/පෙළ දත්ත හැසිරවීමේ දාමයේ පළමු පියවර — මධ්‍යන්‍යය, මාතය, මධ්‍යස්ථය හා ප්‍රස්තාර කියවීම මෙතැනින් පටන් ගනී.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">27.</span>දත්ත නිරූපණය හා අර්ථකථනය — වගු, දණ්ඩ සටහන්, මධ්‍ය අගය<span class="en">Data representation &amp; interpretation</span></span></div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>කුලක හා සම්භාවිතාව</h3>
+        <p class="why">කුලක භාෂාව දෙයි; සම්භාවිතාව එය භාවිතා කරයි. කුලක මුලින් ඉගෙන ගන්න — සා/පෙළ වෙන් රූප සටහන් හා සම්භාවිතාවට පදනම මෙයයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">19.</span>කුලක — අංකනය, උප කුලක, වෙන් රූප සටහන්<span class="en">Sets &amp; Venn diagrams</span></span></div>
+          <div class="step"><span class="num"></span><span class="name"><span class="ln">29.</span>සම්භාවිතාව — සිදුවීම් හා සරල සම්භාවිතාව<span class="en">Probability</span></span></div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <footer>
+    අ.ම.ප්‍ර. (NIE) 8 ශ්‍රේණිය ගණිත පෙළපොත — I හා II කොටස් (පාඩම් 30) — සඳහා සකස් කරන ලදී. පෙළපොත් අංක පාඩම් අසල දැක්වේ.
+    <span class="tag core" style="padding:1px 6px">මූලික</span> මඟින් මුළු විෂයයම හා සා/පෙළ රඳා පවතින කොඳු නාරටි පාඩම් සලකුණු කරයි.
+    පුනරීක්ෂණ අභ්‍යාස 1–3 අදාළ පොකුරු ස්ථිර කරගැනීමට යොදා ගන්න.<br>
+    <span class="brand">ඉඩසර ඇකඩමිය</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9 ශ්‍රේණිය ගණිතය — සම්පූර්ණ සිතියම · ඉඩසර ඇකඩමිය</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --num:#7a5bb0; --alg:#2b6fb3; --geo:#b6562e; --stat:#2f8f5b;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Noto Sans Sinhala','Iskoola Pota','Segoe UI',system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.74rem;letter-spacing:.05em;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.5rem}
+  header p{margin:.5rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:66ch}
+  .strategy{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:12px;padding:14px 18px;margin:16px 0 4px;font-size:.92rem;color:#5a4410}
+  .strategy b{color:#3a2a06}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:16px 2px 6px;font-size:.84rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.84rem;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:14px 0 6px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:1rem;color:var(--navy)}
+  .cluster .why{margin:0 0 14px;font-size:.85rem;color:var(--muted)}
+  .chain{position:relative;margin-left:4px}
+  .step{position:relative;padding:6px 0 16px 42px}
+  .step::before{content:'';position:absolute;left:14px;top:6px;bottom:0;border-left:2px dashed #c4ccd6}
+  .step:last-child::before{bottom:auto;height:24px}
+  .step .uno{position:absolute;left:0;top:4px;width:30px;height:30px;border-radius:9px;color:#fff;font-weight:700;font-size:.82rem;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+  .step .name{font-size:.97rem;font-weight:700;color:var(--ink)}
+  .step .en{display:inline;font-size:.82rem;color:var(--muted);font-weight:400}
+  .tagpg{display:inline-block;font-size:.66rem;font-weight:700;color:var(--muted);background:#eef1f5;border:1px solid var(--line);border-radius:20px;padding:1px 8px;margin:0 6px;vertical-align:middle;white-space:nowrap}
+  ul.subs{margin:7px 0 0;padding:0;list-style:none}
+  ul.subs li{font-size:.85rem;color:#37424f;padding:2px 0 2px 16px;position:relative}
+  ul.subs li::before{content:'';position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:#b6c0cc}
+  ul.subs li .sn{color:var(--muted);font-weight:600;font-size:.78rem;margin-right:3px}
+  ul.subs li em{color:var(--muted);font-style:normal;font-size:.76rem}
+  footer{margin-top:24px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.7}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.step{padding-left:38px}.tagpg{margin-left:0;display:inline-block;margin-top:2px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">ඉඩසර ඇකඩමිය · ගණිතය · 9 ශ්‍රේණිය</div>
+    <h1>9 ශ්‍රේණිය ගණිතය — සම්පූර්ණ සිතියම</h1>
+    <p>ගණිතය යනු වෙන් වෙන් පාඩම් 28ක් නොවේ — එය විශාල ධාරා 4කි: <b>සංඛ්‍යා හා මූල්‍ය</b>, <b>වීජ ගණිතය</b>, <b>ජ්‍යාමිතිය හා මිනුම්</b>, සහ <b>සංඛ්‍යානය, කුලක හා සම්භාවිතාව</b>. පොත් කොටස් I, II, III හි විසිරී ඇති පරිච්ඡේද 28, මේ ධාරා අනුව නැවත සකස් කර, එකක් අනික මත රඳා පවතින අනුපිළිවෙළින් මෙහි පෙන්වා ඇත. මෙය O/L ගණිතයට කෙළින්ම අත්තිවාරම දමයි.</p>
+  </header>
+
+  <div class="strategy">
+    <b>සිතියම පාවිච්චි කරන හැටි.</b> සෑම පරිච්ඡේදයක් යටම, එහි සියලුම උප මාතෘකා (1.1, 1.2 …) ලැයිස්තුගත කර ඇත — <b>එකක්වත් අත්හැර නැත</b>. <span class="tagpg">පොත I · පි.1</span> වැනි ටැගයෙන් එය පොතේ කොතැනද (I/II/III කොටස + පිටුව) කියා සොයාගන්න. ධාරාවක් තුළ පරිච්ඡේද <b>අනුපිළිවෙළින්</b> ඇත — මුලින් ඉගෙන ගත යුතු දේ මුලින්. උදා: වීජීය ප්‍රකාශන → දර්ශක → සාධක → වීජීය භාග.
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--num)"></i>සංඛ්‍යා හා මූල්‍ය</span>
+    <span><i class="dot" style="background:var(--alg)"></i>වීජ ගණිතය</span>
+    <span><i class="dot" style="background:var(--geo)"></i>ජ්‍යාමිතිය හා මිනුම්</span>
+    <span><i class="dot" style="background:var(--stat)"></i>සංඛ්‍යානය, කුලක හා සම්භාවිතාව</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">සියල්ල විවෘත කරන්න</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">සියල්ල වසන්න</button>
+  </div>
+
+  <!-- ===== NUMBER & FINANCE ===== -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--num)"></span>1 · සංඛ්‍යා හා මූල්‍ය <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>සංඛ්‍යා හා ඒවායේ ස්වරූප</h3>
+        <p class="why">රටා හඳුනාගැනීමේ සිට, විවිධ සංඛ්‍යා ක්‍රම, භාග, විද්‍යාත්මක අංකනය හා ගණකය දක්වා — ගණිතයේ අත්තිවාරම.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--num)">01</span>
+            <div class="name">සංඛ්‍යා රටා <span class="tagpg">පොත I · පි.1</span><span class="en">Number patterns</span></div>
+            <ul class="subs">
+              <li><span class="sn">1.1</span> සංඛ්‍යා රටාවක සාධාරණ පදය <em>· general term</em></li>
+              <li><span class="sn">1.2</span> සාධාරණ පදය (n) සඳහා ප්‍රකාශනයක් ලබා ගැනීම <em>· nth-term expression</em></li>
+              <li><span class="sn">1.3</span> සංඛ්‍යා රටා ඇතුළත් ගැටළු විසඳීම</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--num)">02</span>
+            <div class="name">ද්විමය සංඛ්‍යා <span class="tagpg">පොත I · පි.16</span><span class="en">Binary numbers</span></div>
+            <ul class="subs">
+              <li><span class="sn">2.1</span> ද්විමය සංඛ්‍යා හැඳින්වීම</li>
+              <li><span class="sn">2.2</span> ද්විමය ↔ දශම පරිවර්තනය</li>
+              <li><span class="sn">2.3</span> ද්විමය සංඛ්‍යා එකතු කිරීම</li>
+              <li><span class="sn">2.4</span> ද්විමය සංඛ්‍යා අඩු කිරීම</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--num)">03</span>
+            <div class="name">භාග <span class="tagpg">පොත I · පි.27</span><span class="en">Fractions</span></div>
+            <ul class="subs">
+              <li><span class="sn">3.1</span> ‘න්’ යෙදුම ඇතුළත් භාග සහිත ප්‍රකාශන සුළු කිරීම</li>
+              <li><span class="sn">3.2</span> වරහන් සහිත ප්‍රකාශන BODMAS අනුපිළිවෙළ අනුව සුළු කිරීම</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--num)">13</span>
+            <div class="name">වටයෑම හා විද්‍යාත්මක අංකනය <span class="tagpg">පොත II · පි.31</span><span class="en">Rounding &amp; scientific notation</span></div>
+            <ul class="subs">
+              <li><span class="sn">13.1</span> විද්‍යාත්මක අංකනය <em>· scientific notation</em></li>
+              <li><span class="sn">13.2</span> 0 ත් 1 ත් අතර සංඛ්‍යාවක් විද්‍යාත්මක අංකනයෙන් දැක්වීම</li>
+              <li><span class="sn">13.3</span> විද්‍යාත්මක අංකනයෙන් දැක්වෙන සංඛ්‍යා සාමාන්‍ය ආකාරයට</li>
+              <li><span class="sn">13.4</span> ආසන්න 10ට වටයෑම <em>· rounding</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--num)">11</span>
+            <div class="name">ගණකය <span class="tagpg">පොත II · පි.12</span><span class="en">The calculator</span></div>
+            <ul class="subs">
+              <li><span class="sn">11.1</span> ගණකය භාවිතයෙන් ගණනය කිරීම්</li>
+              <li><span class="sn">11.2</span> විද්‍යාත්මක ගණකයේ % යතුර</li>
+              <li><span class="sn">11.3</span> x² යතුර භාවිතයෙන් ගණනය</li>
+              <li><span class="sn">11.4</span> √ යතුර භාවිතයෙන් ගණනය</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>අනුපාත, ප්‍රතිශත හා මූල්‍යය</h3>
+        <p class="why">අනුපාත චින්තනය මුලින් — එවිට ලාභ/අලාභ, වට්ටම් වැනි එදිනෙදා මූල්‍ය ගණන් පහසු වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--num)">10</span>
+            <div class="name">අනුලෝම සමානුපාත <span class="tagpg">පොත II · පි.1</span><span class="en">Direct proportion</span></div>
+            <ul class="subs">
+              <li><span class="sn">10.1</span> අනුලෝම සමානුපාත හැඳින්වීම</li>
+              <li><span class="sn">10.2</span> ඒකීය ක්‍රමය භාවිතයෙන් ගැටළු විසඳීම</li>
+              <li><span class="sn">10.3</span> අර්ථ දැක්වීම භාවිතයෙන් ගැටළු විසඳීම</li>
+              <li><span class="sn">10.4</span> වීජීය ආකාරයට ලිවීමෙන් ගැටළු විසඳීම</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--num)">04</span>
+            <div class="name">ප්‍රතිශත <span class="tagpg">පොත I · පි.41</span><span class="en">Percentages</span></div>
+            <ul class="subs">
+              <li><span class="sn">4.1</span> ලාභය සහ අලාභය <em>· profit &amp; loss</em></li>
+              <li><span class="sn">4.2</span> ලාභ/අලාභ ප්‍රතිශත</li>
+              <li><span class="sn">4.3</span> වට්ටම් හා කොමිස් <em>· discount &amp; commission</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===== ALGEBRA ===== -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--alg)"></span>2 · වීජ ගණිතය <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>වීජීය පදනම</h3>
+        <p class="why">දැඩි අනුපිළිවෙළ: ප්‍රකාශන → දර්ශක → සාධක → වීජීය භාග. එක් පුරුකක් මඟ හැරියොත් මීළඟ එක අසීරු වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--alg)">05</span>
+            <div class="name">වීජීය ප්‍රකාශන <span class="tagpg">පොත I · පි.58</span><span class="en">Algebraic expressions</span></div>
+            <ul class="subs">
+              <li><span class="sn">5.1</span> ආදේශය <em>· substitution</em></li>
+              <li><span class="sn">5.2</span> ද්විපද ප්‍රකාශන දෙකක ගුණිතය <em>· product of two binomials</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--alg)">12</span>
+            <div class="name">දර්ශක <span class="tagpg">පොත II · පි.20</span><span class="en">Indices</span></div>
+            <ul class="subs">
+              <li><span class="sn">12.1</span> සමාන පාද සහිත බල ගුණ කිරීම</li>
+              <li><span class="sn">12.2</span> සමාන පාද සහිත බල බෙදීම</li>
+              <li><span class="sn">12.3</span> ඍණ දර්ශක <em>· negative indices</em></li>
+              <li><span class="sn">12.4</span> ශූන්‍ය දර්ශකය <em>· zero index</em></li>
+              <li><span class="sn">12.5</span> බලයක බලය <em>· power of a power</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--alg)">06</span>
+            <div class="name">වීජීය ප්‍රකාශනවල සාධක <span class="tagpg">පොත I · පි.67</span><span class="en">Factors of algebraic expressions</span></div>
+            <ul class="subs">
+              <li><span class="sn">6.1</span> පද හතරක් සහිත වීජීය ප්‍රකාශනවල සාධක</li>
+              <li><span class="sn">6.2</span> x² + bx + c ආකාරයේ ත්‍රිපද වර්ගජ ප්‍රකාශනවල සාධක</li>
+              <li><span class="sn">6.3</span> වර්ග දෙකක අන්තරයක් ලෙස ලියූ ප්‍රකාශනවල සාධක</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--alg)">26</span>
+            <div class="name">වීජීය භාග <span class="tagpg">පොත III · පි.65</span><span class="en">Algebraic fractions</span></div>
+            <ul class="subs">
+              <li><span class="sn">26.1</span> නිඛිලමය හර සහිත වීජීය භාග එකතු/අඩු කිරීම</li>
+              <li><span class="sn">26.2</span> අසමාන නිඛිලමය හර සහිත වීජීය භාග එකතු/අඩු කිරීම</li>
+              <li><span class="sn">26.3</span> සමාන වීජීය හර සහිත වීජීය භාග එකතු/අඩු කිරීම</li>
+              <li><span class="sn">26.4</span> හරයේ හා ලවයේ වීජීය ප්‍රකාශන සහිත වීජීය භාග සුළු කිරීම</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>සමීකරණ, සූත්‍ර, අසමානතා හා ප්‍රස්තාර</h3>
+        <p class="why">වීජීය පදනම යොදා සමීකරණ විසඳීම, සූත්‍ර හැසිරවීම, අසමානතා, අවසානයේ ඒවා දෘශ්‍ය වන ප්‍රස්තාර දක්වා.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--alg)">15</span>
+            <div class="name">සමීකරණ <span class="tagpg">පොත II · පි.71</span><span class="en">Equations</span></div>
+            <ul class="subs">
+              <li><span class="sn">15.1</span> සරල සමීකරණ විසඳීම</li>
+              <li><span class="sn">15.2</span> භාග සහිත සරල සමීකරණ විසඳීම</li>
+              <li><span class="sn">15.3</span> සමගාමී සමීකරණ විසඳීම <em>· simultaneous</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--alg)">17</span>
+            <div class="name">සූත්‍ර <span class="tagpg">පොත II · පි.95</span><span class="en">Formulae</span></div>
+            <ul class="subs">
+              <li><span class="sn">17.1</span> සූත්‍රයක පදයක් උක්ත කිරීම <em>· subject of a formula</em></li>
+              <li><span class="sn">17.2</span> ආදේශය <em>· substitution</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--alg)">21</span>
+            <div class="name">අසමානතා <span class="tagpg">පොත III · පි.1</span><span class="en">Inequalities</span></div>
+            <ul class="subs">
+              <li><span class="sn">21.1</span> x + a ≤ b ආකාරයේ අසමානතා</li>
+              <li><span class="sn">21.2</span> ax ≤ b ආකාරයේ අසමානතා</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--alg)">20</span>
+            <div class="name">ප්‍රස්තාර <span class="tagpg">පොත II · පි.123</span><span class="en">Graphs</span></div>
+            <ul class="subs">
+              <li><span class="sn">20.1</span> ශ්‍රිත <em>· functions</em></li>
+              <li><span class="sn">20.2</span> y = mx ආකාරයේ ශ්‍රිත හා ඒවායේ ප්‍රස්තාරයේ අනුක්‍රමණය</li>
+              <li><span class="sn">20.3</span> y = mx + c හා ax + by = c මගින් දැක්වෙන ශ්‍රිතවල ප්‍රස්තාර</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===== GEOMETRY & MEASUREMENT ===== -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--geo)"></span>3 · ජ්‍යාමිතිය හා මිනුම් <span class="chev">▶</span></summary>
+    <div class="body">
+
+      <div class="cluster">
+        <h3>කෝණ — පදනමේ සිට බහු-අස්‍ර දක්වා</h3>
+        <p class="why">ප්‍රත්‍යක්ෂ (axioms) අත්තිවාරම; ඉන්පසු රේඛා → ත්‍රිකෝණ → බහු-අස්‍ර, සෑම එකක්ම පෙර එක මත ගොඩනැගේ.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--geo)">07</span>
+            <div class="name">ප්‍රත්‍යක්ෂ <span class="tagpg">පොත I · පි.79</span><span class="en">Axioms</span></div>
+            <ul class="subs">
+              <li>ගණිතයෙහි මූලික ප්‍රත්‍යක්ෂ 5 හඳුනා ගැනීම</li>
+              <li>ඒවා යොදා ජ්‍යාමිතික සම්බන්ධතා ගොඩනැගීම හා ගණනය</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">08</span>
+            <div class="name">සරල රේඛා හා සමාන්තර රේඛා ආශ්‍රිත කෝණ <span class="tagpg">පොත I · පි.92</span><span class="en">Angles: straight &amp; parallel lines</span></div>
+            <ul class="subs">
+              <li><span class="sn">8.1</span> සරල රේඛා ආශ්‍රිත කෝණ</li>
+              <li><span class="sn">8.2</span> ප්‍රතිමුඛ කෝණ <em>· vertically opposite</em></li>
+              <li><span class="sn">8.3</span> අනුරූප, ඒකාන්තර හා මිත්‍ර කෝණ <em>· corresponding, alternate &amp; co-interior</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">16</span>
+            <div class="name">ත්‍රිකෝණයක කෝණ <span class="tagpg">පොත II · පි.81</span><span class="en">Angles of a triangle</span></div>
+            <ul class="subs">
+              <li><span class="sn">16.1</span> ත්‍රිකෝණයක අභ්‍යන්තර කෝණ</li>
+              <li><span class="sn">16.2</span> ත්‍රිකෝණයක බාහිර කෝණ</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">25</span>
+            <div class="name">බහු-අස්‍රවල කෝණ <span class="tagpg">පොත III · පි.51</span><span class="en">Angles of polygons</span></div>
+            <ul class="subs">
+              <li><span class="sn">25.1</span> බහු-අස්‍රයක අභ්‍යන්තර කෝණවල ඓක්‍යය</li>
+              <li><span class="sn">25.2</span> බහු-අස්‍රයක බාහිර කෝණවල ඓක්‍යය</li>
+              <li><span class="sn">25.3</span> සවිධි බහු-අස්‍ර <em>· regular polygons</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>නිර්මාණ, වෘත්ත හා පයිතගරස්</h3>
+        <p class="why">කවකටු/සමකෝණකය යොදා නිර්මාණ, වෘත්තයක පරිධිය, සහ සෘජුකෝණී ත්‍රිකෝණ විසඳන පයිතගරස් සම්බන්ධය.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--geo)">14</span>
+            <div class="name">පථ හා නිර්මාණ <span class="tagpg">පොත II · පි.47</span><span class="en">Loci &amp; constructions</span></div>
+            <ul class="subs">
+              <li><span class="sn">14.1</span> මූලික පථ <em>· basic loci</em></li>
+              <li><span class="sn">14.2</span> මූලික පථ තවදුරටත්</li>
+              <li><span class="sn">14.3</span> දෙන ලද සරල රේඛාවලට ලම්බ රේඛා නිර්මාණය</li>
+              <li><span class="sn">14.4</span> කෝණ ආශ්‍රිත නිර්මාණ</li>
+              <li><span class="sn">14.5</span> කෝණ නිර්මාණය</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">18</span>
+            <div class="name">වෘත්තයක පරිධිය <span class="tagpg">පොත II · පි.103</span><span class="en">Circumference of a circle</span></div>
+            <ul class="subs">
+              <li><span class="sn">18.1</span> වෘත්තයක පරිධිය සඳහා සූත්‍රයක් ගොඩනැගීම</li>
+              <li><span class="sn">18.2</span> අර්ධ වෘත්තාකාර ආස්තරයක පරිමිතිය</li>
+              <li><span class="sn">18.3</span> වෘත්තයක පරිධිය ආශ්‍රිත ගැටළු</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">19</span>
+            <div class="name">පයිතගරස් සම්බන්ධය <span class="tagpg">පොත II · පි.113</span><span class="en">Pythagoras' relation</span></div>
+            <ul class="subs">
+              <li>සෘජුකෝණී ත්‍රිකෝණයක පාදවල සම්බන්ධය (a² + b² = c²)</li>
+              <li>පයිතගරස් සම්බන්ධය යොදා ගැටළු විසඳීම</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <h3>මිනුම් හා පරිමාණ රූප</h3>
+        <p class="why">ද්‍රව මිනුම් → වර්ගඵලය → පරිමාණ රූප (දිගංශ). ගණනය මත පදනම් වූ විශ්වසනීය ලකුණු.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--geo)">09</span>
+            <div class="name">ද්‍රව මිනුම් <span class="tagpg">පොත I · පි.116</span><span class="en">Liquid measurements</span></div>
+            <ul class="subs">
+              <li><span class="sn">9.1</span> ඝන සෙන්ටිමීටරය හා මිලි ලීටරය අතර සම්බන්ධතාව</li>
+              <li><span class="sn">9.2</span> ලීටරය හා ඝන මීටරය අතර සම්බන්ධතාව</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">23</span>
+            <div class="name">වර්ගඵලය <span class="tagpg">පොත III · පි.28</span><span class="en">Area</span></div>
+            <ul class="subs">
+              <li><span class="sn">23.1</span> සමාන්තරාස්‍රයක ආධාරකය හා උස (වර්ගඵලය)</li>
+              <li><span class="sn">23.2</span> ත්‍රිකෝණයක වර්ගඵලය</li>
+              <li><span class="sn">23.3</span> වෘත්තයක වර්ගඵලය</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--geo)">27</span>
+            <div class="name">පරිමාණ රූප <span class="tagpg">පොත III · පි.78</span><span class="en">Scale drawings</span></div>
+            <ul class="subs">
+              <li><span class="sn">27.1</span> දිගංශය <em>· bearings</em></li>
+              <li><span class="sn">27.2</span> කෝණ මනුව</li>
+              <li><span class="sn">27.3</span> තිරස් තලයේ පරිමාණ රූප</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- ===== STATS, SETS & PROBABILITY ===== -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--stat)"></span>4 · සංඛ්‍යානය, කුලක හා සම්භාවිතාව <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>දත්ත, කුලක හා සම්භාවිතාව</h3>
+        <p class="why">කුලක භාෂාව දෙයි; දත්ත නිරූපණය එය සංවිධානය කරයි; සම්භාවිතාව ඒ දැනුම යොදා ‘ඉඩ’ ගණනය කරයි.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--stat)">22</span>
+            <div class="name">කුලක <span class="tagpg">පොත III · පි.9</span><span class="en">Sets</span></div>
+            <ul class="subs">
+              <li><span class="sn">22.1</span> පරිමිත, අපරිමිත, සම හා තුල්‍ය කුලක</li>
+              <li><span class="sn">22.2</span> උපකුලක හා සර්වත්‍ර කුලකය</li>
+              <li><span class="sn">22.3</span> වෙන් රූපසටහන් <em>· Venn diagrams</em></li>
+              <li><span class="sn">22.4</span> කුලක ඡේදනය, මේලය හා වියුක්ත කුලක</li>
+              <li><span class="sn">22.5</span> කුලකයක අනුපූරකය <em>· complement</em></li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--stat)">28</span>
+            <div class="name">දත්ත නිරූපණය හා අර්ථකථනය <span class="tagpg">පොත III · පි.92</span><span class="en">Data representation &amp; interpretation</span></div>
+            <ul class="subs">
+              <li><span class="sn">28.1</span> අසමූහිත සංඛ්‍යාත ව්‍යාප්ති <em>· ungrouped frequency</em></li>
+              <li><span class="sn">28.2</span> සමූහිත සංඛ්‍යාත ව්‍යාප්ති <em>· grouped frequency</em></li>
+              <li><span class="sn">28.3</span> සමූහිත ව්‍යාප්තියක මාතය පන්තිය හා මධ්‍යස්ථ පන්තිය</li>
+            </ul>
+          </div>
+          <div class="step"><span class="uno" style="background:var(--stat)">24</span>
+            <div class="name">සම්භාවිතාව <span class="tagpg">පොත III · පි.42</span><span class="en">Probability</span></div>
+            <ul class="subs">
+              <li><span class="sn">24.1</span> සසම්භාවී පරීක්ෂණ <em>· random experiments</em></li>
+              <li><span class="sn">24.2</span> නියැදි අවකාශය <em>· sample space</em></li>
+              <li><span class="sn">24.3</span> සම සේ භව්‍ය ප්‍රතිඵල <em>· equally likely outcomes</em></li>
+              <li><span class="sn">24.4</span> සම සේ භව්‍ය ප්‍රතිඵලයක සම්භාවිතාව</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුවේ 9 ශ්‍රේණිය ගණිත පෙළපොත (I, II, III කොටස්) මත පදනම්ව සකස් කරන ලදී. පරිච්ඡේද 28 · උප මාතෘකා සියල්ල ඇතුළත් · O/L ගණිතයට අත්තිවාරම.<br>
+    <span class="brand">ඉඩසර ඇකඩමිය</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

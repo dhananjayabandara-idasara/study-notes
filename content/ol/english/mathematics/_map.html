@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O/L Maths Revision Map — Idasara Academy</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --alg:#2b6fb3; --geo:#b6562e; --stat:#2f8f5b; --num:#7a5bb0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,Tahoma,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.55rem}
+  header p{margin:.4rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:62ch}
+  .strategy{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:12px;padding:14px 18px;margin:16px 0 4px;font-size:.9rem;color:#5a4410}
+  .strategy b{color:#3a2a06}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:16px 2px 6px;font-size:.82rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.82rem;padding:7px 14px;border-radius:8px;cursor:pointer}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:13px 0 6px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:.97rem;color:var(--navy)}
+  .cluster .why{margin:0 0 12px;font-size:.83rem;color:var(--muted);font-style:italic}
+  /* chain = ordered prerequisite steps */
+  .chain{position:relative;margin-left:6px}
+  .step{position:relative;display:flex;align-items:baseline;gap:10px;padding:7px 0 7px 26px}
+  .step::before{content:'';position:absolute;left:6px;top:0;bottom:0;border-left:2px dashed #c4ccd6}
+  .step:last-child::before{bottom:50%}
+  .step .num{position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--muted)}
+  .step .name{flex:1;font-size:.92rem}
+  .step .en{display:block;font-size:.75rem;color:var(--muted)}
+  .arrow{font-size:.74rem;color:var(--muted);margin-left:2px}
+  .tag{font-size:.66rem;font-weight:700;color:#fff;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .p1{background:var(--stat)} .p2{background:var(--muted)}
+  footer{margin-top:24px;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.6}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.step{flex-wrap:wrap;gap:5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Idasara Academy · Exam Freedom</div>
+    <h1>O/L Maths — The Whole Map</h1>
+    <p>Maths isn't a pile of topics. It's a chain — each step stands on the one before it. Tuition teaches the steps out of order, one a week. This map shows the order they actually depend on, grouped the way the exam tests them. Follow the chain. Come and see for yourself.</p>
+  </header>
+
+  <div class="strategy">
+    <b>Read this first — the exam maths nobody tells you.</b> The paper is split in two, each worth half. <b>Paper 1</b> is short questions on the Essential Learning Concepts (marked below as <span class="tag p1" style="padding:1px 6px">P1</span>). <b>Paper 2</b> is longer essay questions — Part A is Algebra, Part B is Geometry. Here's the part that changes everything: <b>score 70% on Paper 1 alone and you pass Maths — even with zero on Paper 2.</b> So if you're fighting for a pass, the green <span class="tag p1" style="padding:1px 6px">P1</span> topics are where every hour pays back first.
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--num)"></i>Number &amp; Finance</span>
+    <span><i class="dot" style="background:var(--alg)"></i>Algebra (Paper 2, Part A)</span>
+    <span><i class="dot" style="background:var(--geo)"></i>Geometry &amp; Measurement (Paper 2, Part B)</span>
+    <span><i class="dot" style="background:var(--stat)"></i>Statistics, Sets &amp; Probability</span>
+    <span><i class="tag p1" style="padding:1px 7px">P1</i>Paper 1 essential</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">Expand all</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">Collapse all</button>
+  </div>
+
+  <!-- NUMBER -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--num)"></span>1 · Number &amp; Finance <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>Number Foundations</h3>
+        <p class="why">The bedrock. Square roots and ratio thinking feed into almost everything else — get these solid before moving on.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Real numbers &amp; square roots (approximation)<span class="en">Recognising irrationals, first approximation</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Problems with fractions (BODMAS)<span class="en">Everyday problems, order of operations</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Indices &amp; logarithms<span class="en">Converting index ↔ log form</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>Money Maths (Finance)</h3>
+        <p class="why">All one family: percentages applied to real life. Learn ratio/proportion first, then these become easy marks.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Ratio &amp; inverse proportion (work and time)<span class="en">Relationship between quantities</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Taxes — rates, duty, income tax, VAT<span class="en">Whole-number percentages</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Simple interest <span class="arrow">→</span> Compound interest<span class="en">Up to two terms</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Shares &amp; limited companies<span class="en">Market price, dividend income</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>Sequences (Progressions)</h3>
+        <p class="why">Two patterns, one idea — a rule that generates the next term. Arithmetic first, then geometric mirrors it.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Arithmetic progressions <span class="arrow">→</span> Geometric progressions<span class="en">nth term formulae</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ALGEBRA -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--alg)"></span>2 · Algebra <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· Paper 2, Part A</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>The Algebra Chain — strictly in order</h3>
+        <p class="why">The most order-dependent path in the whole subject. Skip a link and the next one collapses. This is exactly where tuition's "one lesson a week" hurts most.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Factors of ax² + bx + c<span class="en">Factorising quadratics</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">LCM of algebraic expressions<span class="en">Needed for fractions next</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Algebraic fractions — add, subtract, multiply, divide<span class="en">Related denominators</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Linear equations with algebraic fractions<span class="en">Uses the fraction skills above</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Simultaneous equations<span class="en">Two variables</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Quadratic equations (using factors)<span class="en">Needs factorising, step 1</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Inequalities &amp; the number line<span class="en">ax + b ≷ c</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>Graphs &amp; Matrices</h3>
+        <p class="why">Where algebra becomes visual. The straight-line graph connects directly to gradient and to speed–time in the Number strand.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Straight line y = mx + c — gradient &amp; intercept<span class="en">From coordinates</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Matrices — add, subtract, scalar &amp; matrix multiply<span class="en">Up to 3×3 / 2×2 multiply</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- GEOMETRY -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--geo)"></span>3 · Geometry &amp; Measurement <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· Paper 2, Part B</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>Measurement (Mensuration)</h3>
+        <p class="why">Perimeter → area → surface area → volume. Each builds on the last. High-frequency, calculation-based, reliable marks.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Perimeter &amp; area of sectors / compound figures<span class="en">Sectors, combined shapes</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Surface area &amp; volume — cylinder, triangular prism<span class="en">r as a multiple of 7</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>Trigonometry &amp; Pythagoras</h3>
+        <p class="why">The order is non-negotiable: Pythagoras before trig ratios, always. Both unlock the elevation/depression problems.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Pythagoras' theorem<span class="en">Right-angled triangles</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Trigonometric ratios — sine, cosine, tangent<span class="en">Opposite / adjacent / hypotenuse</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Angles of elevation &amp; depression<span class="en">Locating objects</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Distance, time &amp; speed graphs<span class="en">Gradient = speed</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>Theorems &amp; Proofs (Plane Geometry)</h3>
+        <p class="why">The big Part B cluster. Triangles → parallelograms → circles, each theorem leaning on earlier ones. The exam tests <i>calculation using</i> the theorem, not proving it.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Angles of a triangle (interior &amp; exterior)<span class="en">Sum = 180°</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Congruency &amp; isosceles triangles<span class="en">SAS, AAS, SSS, Hyp.S</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Parallelograms &amp; the mid-point theorem<span class="en">Properties &amp; converse</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Circle theorems — centre/circumference, chords<span class="en">Angle at centre, perpendicular chord</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Angles in same segment, semicircle, cyclic quadrilaterals<span class="en">Supplementary opposite angles</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Loci &amp; constructions<span class="en">Straight edge &amp; compasses</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STATS -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--stat)"></span>4 · Statistics, Sets &amp; Probability <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>Statistics (Data Handling)</h3>
+        <p class="why">One long chain: organise data → picture it → summarise it → read quartiles off the curve. The cumulative frequency curve is the payoff — learn the earlier steps for it.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Types of data &amp; grouped frequency, mid-values<span class="en">Continuous vs discrete</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Pie charts &amp; the mean of grouped data<span class="en">Mid-value &amp; assumed-mean methods</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Histograms &amp; frequency polygons<span class="en">Equal &amp; unequal class intervals</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Cumulative frequency curve, quartiles &amp; IQR<span class="en">Q1, Q2, Q3</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>Sets &amp; Probability</h3>
+        <p class="why">Sets give the language; probability uses it. Venn diagrams here are the same tool that solves the probability grid.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">Set notation &amp; Venn diagrams (2 sets)<span class="en">n(A∪B) formula</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">Probability — events, grids &amp; tree diagrams<span class="en">Up to two stages</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    Aligned to the NIE G.C.E. (O/L) Mathematics syllabus, Grades 10 &amp; 11, and the Essential Learning Concepts document. <span class="tag p1" style="padding:1px 6px">P1</span> marks topics in the Paper 1 essential set.<br>
+    <span class="brand">Idasara Academy</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

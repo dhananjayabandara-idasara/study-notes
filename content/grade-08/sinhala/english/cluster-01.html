@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara · Grade 8 English · Cluster 1 — Plan, Achieve, Learn Beyond</title>
+<style>
+  /* ====== IDASARA DESIGN TOKENS ====== */
+  :root{
+    --navy:#0d1b3e;        /* brand structural */
+    --navy-2:#16264f;
+    --navy-3:#22376b;
+    --gold:#e0a92e;        /* brand accent */
+    --gold-2:#c8901a;
+    --gold-soft:#f6e4b8;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --ink:#1a2235;
+    --ink-soft:#4a5468;
+    --line:#e2e7f0;
+    /* part accents (colour-coded units) */
+    --A:#0e7c86;  --A-soft:#e2f3f4;  --A-deep:#0a5b63;   /* Unit 1  */
+    --B:#c4533f;  --B-soft:#fbe9e4;  --B-deep:#9c3a29;   /* Unit 9  */
+    --C:#5b4b9c;  --C-soft:#ece9f8;  --C-deep:#42357a;   /* Unit 10 */
+    --ok:#1f8a4c; --warn:#b3651f; --warn-soft:#fdf0e1;
+    --shadow:0 4px 18px rgba(13,27,62,.08);
+    --shadow-lg:0 10px 40px rgba(13,27,62,.14);
+    --radius:16px;
+    --fs:'Segoe UI',Roboto,'Helvetica Neue',system-ui,-apple-system,'Noto Sans','Noto Sans Sinhala','Nirmala UI',Arial,sans-serif;
+    --mono:'Iosevka','Fira Code',ui-monospace,'Cascadia Code',Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--fs);font-size:17px;line-height:1.72;
+    -webkit-text-size-adjust:100%;
+  }
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:120;
+    background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .1s linear}
+
+  /* ---- header ---- */
+  header.site{position:sticky;top:0;z-index:100;
+    background:linear-gradient(135deg,var(--navy),var(--navy-3));
+    color:#fff;border-bottom:3px solid var(--gold);box-shadow:var(--shadow)}
+  .bar{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff}
+  .logo{width:38px;height:38px;border-radius:10px;flex:none;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    display:grid;place-items:center;font-weight:800;color:var(--navy);font-size:21px;
+    box-shadow:0 2px 8px rgba(224,169,46,.4)}
+  .brand b{font-size:18px;letter-spacing:.5px;line-height:1}
+  .brand small{display:block;font-size:11px;opacity:.75;letter-spacing:2px;text-transform:uppercase}
+  .crumbs{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;font-size:12.5px}
+  .crumbs span{background:rgba(255,255,255,.12);padding:3px 11px;border-radius:20px;white-space:nowrap}
+  .crumbs span.acc{background:var(--gold);color:var(--navy);font-weight:700}
+
+  /* ---- layout ---- */
+  main{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---- hero ---- */
+  .hero{margin:30px 0 14px;padding:34px 28px;border-radius:24px;color:#fff;position:relative;overflow:hidden;
+    background:radial-gradient(120% 140% at 85% 10%,var(--navy-3),var(--navy) 60%)}
+  .hero::after{content:"Aa  \201C \201D  \00B6  \270E";position:absolute;right:-6px;bottom:-18px;font-size:84px;font-weight:800;
+    color:rgba(224,169,46,.12);letter-spacing:10px;white-space:nowrap;pointer-events:none}
+  .hero .eyebrow{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;
+    font-size:12.5px;letter-spacing:1.5px;padding:5px 13px;border-radius:20px;text-transform:uppercase}
+  .hero h1{margin:.5em 0 .25em;font-size:clamp(26px,6vw,44px);line-height:1.18;font-weight:800}
+  .hero h1 .g{color:var(--gold)}
+  .hero p{margin:.4em 0 0;font-size:16.5px;max-width:52ch;opacity:.92}
+  .hero .pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:30px;font-size:14px}
+
+  /* ---- why ---- */
+  .why{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin:18px 0;
+    box-shadow:var(--shadow);border-left:6px solid var(--gold)}
+  .why h2{margin:.1em 0 .4em;font-size:21px;color:var(--navy)}
+  .why p{margin:.4em 0;color:var(--ink-soft);font-size:16px}
+
+  /* ---- roadmap ---- */
+  .roadmap{margin:22px 0}
+  .roadmap h2{font-size:20px;color:var(--navy);margin:0 0 4px}
+  .roadmap .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .map-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+  .map-card{display:block;text-decoration:none;color:inherit;background:var(--card);
+    border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-top:5px solid var(--cl);
+    transition:transform .15s,box-shadow .15s}
+  .map-card:hover,.map-card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-lg);outline:none}
+  .map-card .tag{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--cl);text-transform:uppercase}
+  .map-card h3{margin:6px 0 6px;font-size:18px;color:var(--navy)}
+  .map-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .map-card .cnt{display:inline-block;margin-top:10px;font-size:12px;background:var(--clsoft);
+    color:var(--cl);font-weight:700;padding:3px 10px;border-radius:20px}
+
+  /* ---- part divider ---- */
+  .part{scroll-margin-top:76px;margin:46px 0 8px;padding:20px 22px;border-radius:20px;color:#fff;
+    background:linear-gradient(135deg,var(--cl),var(--cldeep));box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .part .pn{font-size:13px;font-weight:800;letter-spacing:2px;opacity:.85;text-transform:uppercase}
+  .part h2{margin:3px 0 4px;font-size:clamp(22px,5vw,30px);font-weight:800}
+  .part p{margin:0;opacity:.92;font-size:15px;max-width:60ch}
+  .part .src{position:absolute;right:16px;top:16px;font-size:11.5px;background:rgba(255,255,255,.16);
+    padding:4px 11px;border-radius:14px}
+
+  /* ---- topic block ---- */
+  .topic{scroll-margin-top:72px;background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);margin:16px 0;overflow:hidden;border:1px solid var(--line)}
+  .topic > .head{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none;
+    padding:17px 20px;background:linear-gradient(0deg,#fff,var(--clsoft));border-bottom:1px solid var(--line)}
+  .topic > .head::-webkit-details-marker{display:none}
+  .topic .num{flex:none;width:36px;height:36px;border-radius:11px;background:var(--cl);color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:16px}
+  .topic .head h3{margin:0;font-size:18.5px;color:var(--navy);flex:1}
+  .topic .head .en{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+  .topic .chev{flex:none;color:var(--cl);font-size:22px;transition:transform .25s}
+  details[open] > .head .chev{transform:rotate(180deg)}
+  .topic .body{padding:6px 20px 22px}
+
+  /* ---- 7-step chips ---- */
+  .step{margin:22px 0 8px;display:flex;align-items:center;gap:9px}
+  .step .dot{flex:none;width:25px;height:25px;border-radius:50%;background:var(--clsoft);color:var(--cldeep);
+    font-weight:800;font-size:13px;display:grid;place-items:center}
+  .step b{font-size:15.5px;color:var(--cldeep);letter-spacing:.3px}
+  p.lead{font-size:16.5px}
+  .topic p{color:var(--ink)}
+
+  /* ---- callouts ---- */
+  .box{border-radius:13px;padding:14px 16px;margin:14px 0;font-size:15.5px}
+  .hook{background:var(--clsoft);border-left:5px solid var(--cl)}
+  .hook .ttl{font-weight:800;color:var(--cldeep)}
+  .watch{background:var(--warn-soft);border-left:5px solid var(--warn)}
+  .watch .ttl{font-weight:800;color:var(--warn);display:block;margin-bottom:3px}
+  .watch ul{margin:.3em 0;padding-left:1.15em}
+  .watch li{margin:.3em 0}
+  .memo{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:13px;
+    padding:14px 17px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+  .memo .ic{font-size:22px;flex:none}
+  .memo b{color:var(--gold)}
+  .joke{font-style:italic;color:var(--ink-soft);font-size:14.5px;background:#fcfcfe;border:1px dashed var(--line);
+    border-radius:11px;padding:9px 14px;margin:12px 0}
+  .joke::before{content:"😄 ";font-style:normal}
+
+  /* ---- worked example ---- */
+  .work{background:#fbfcfe;border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:13px 0}
+  .work .lbl{display:inline-block;background:var(--cl);color:#fff;font-size:12.5px;font-weight:700;
+    padding:3px 11px;border-radius:8px;margin-bottom:8px}
+  .calc{font-family:var(--mono);font-size:15px;line-height:1.95;overflow-x:auto;padding:2px 0}
+  .calc .c{color:var(--ink-soft)}
+  .calc .hi{color:var(--cldeep);font-weight:700}
+  .sent{font-size:15.5px;margin:7px 0;line-height:1.8}
+  .sent .u{ text-decoration:underline;text-decoration-color:var(--cl);text-decoration-thickness:2px;font-weight:700}
+  .cross{color:var(--B-deep);text-decoration:line-through}
+  .tick-good{color:var(--ok);font-weight:700}
+  sup{font-size:.72em}
+
+  /* ---- reveal ---- */
+  .reveal{margin:11px 0}
+  .reveal .q{font-weight:600}
+  .rbtn{margin-top:8px;background:var(--cl);color:#fff;border:none;cursor:pointer;
+    font-family:var(--fs);font-size:14px;font-weight:700;padding:8px 16px;border-radius:24px;
+    display:inline-flex;align-items:center;gap:7px;transition:filter .15s}
+  .rbtn:hover{filter:brightness(1.08)}
+  .rbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .ans{display:none;margin-top:10px;background:#f0fbf4;border:1px solid #bfe6cd;border-left:5px solid var(--ok);
+    border-radius:11px;padding:11px 15px;font-size:15px}
+  .ans.show{display:block;animation:pop .25s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .ans .a{font-weight:800;color:var(--ok)}
+
+  .selfcheck{background:var(--clsoft);border-radius:13px;padding:13px 16px;margin:15px 0}
+  .selfcheck .ttl{font-weight:800;color:var(--cldeep);margin-bottom:4px}
+
+  /* ---- widgets ---- */
+  .widget{background:#fff;border:2px solid var(--clsoft);border-radius:14px;padding:16px;margin:15px 0}
+  .widget .wt{font-weight:800;color:var(--cldeep);font-size:14.5px;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{cursor:pointer;border:1.6px solid var(--cl);background:#fff;color:var(--cldeep);
+    font-size:15px;font-weight:700;padding:7px 13px;border-radius:11px;transition:.15s;font-family:inherit}
+  .chip:hover{background:var(--clsoft)}
+  .chip.active{background:var(--cl);color:#fff}
+  .wout{margin-top:11px;font-size:15px;min-height:1.4em}
+  .wout .badge{display:inline-block;font-weight:800;padding:2px 9px;border-radius:8px;font-size:13px;margin-right:6px}
+  .slider{width:100%;accent-color:var(--B)}
+
+  /* ---- svg ---- */
+  .svgwrap{margin:14px 0;text-align:center}
+  svg{max-width:100%;height:auto}
+  figcaption{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+  /* ---- tables ---- */
+  .tbl{width:100%;border-collapse:collapse;margin:13px 0;font-size:14.5px;overflow:hidden;border-radius:11px;box-shadow:var(--shadow)}
+  .tbl th{background:var(--cl);color:#fff;padding:9px 11px;text-align:left;font-weight:700}
+  .tbl td{padding:8px 11px;border-bottom:1px solid var(--line);background:#fff;vertical-align:top}
+  .tbl tr:nth-child(even) td{background:#fafbfe}
+  .scroll{overflow-x:auto}
+
+  /* ---- synthesis / test / cheat ---- */
+  .synth{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:22px;
+    padding:30px 26px;margin:48px 0 24px;box-shadow:var(--shadow-lg)}
+  .synth h2{color:var(--gold);margin:0 0 8px;font-size:26px}
+  .synth p{opacity:.92}
+  .synth .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0;font-weight:700}
+  .synth .chain span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    padding:7px 14px;border-radius:12px}
+  .synth .chain i{color:var(--gold);font-style:normal;font-size:20px}
+
+  .test{background:var(--card);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .test h2{color:var(--navy);margin:0 0 4px;font-size:24px}
+  .test .qz{counter-reset:q;}
+  .qitem{border-top:1px solid var(--line);padding:14px 0}
+  .qitem:first-of-type{border-top:none}
+  .qitem .qq{font-weight:600}
+  .qitem .qq::before{counter-increment:q;content:"Q" counter(q) ". ";color:var(--navy);font-weight:800}
+
+  .cheat{background:#fffdf6;border:2px solid var(--gold-soft);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow)}
+  .cheat h2{color:var(--gold-2);margin:0 0 6px;font-size:24px}
+  .cheat-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .cheat-card{background:#fff;border-radius:13px;padding:14px 16px;border-top:4px solid var(--cl);box-shadow:var(--shadow)}
+  .cheat-card h4{margin:0 0 6px;color:var(--navy);font-size:15.5px}
+  .cheat-card ul{margin:.3em 0;padding-left:1.1em;font-size:14px}
+  .cheat-card li{margin:.3em 0}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 18px 10px}
+  footer .logo{display:inline-grid;width:30px;height:30px;font-size:16px;vertical-align:middle;margin-right:7px}
+  .tnote{font-size:12.5px;color:var(--ink-soft);background:#fafbfe;border:1px solid var(--line);
+    border-radius:9px;padding:7px 12px;margin:10px 0}
+
+  /* ---- responsive ---- */
+  @media(max-width:760px){
+    body{font-size:16px}
+    .map-grid{grid-template-columns:1fr}
+    .cheat-grid{grid-template-columns:1fr}
+    .crumbs{display:none}
+    .hero{padding:26px 20px}
+    .topic .body{padding:4px 15px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+  }
+  @media print{
+    header.site,#progress,.rbtn,.chev{display:none!important}
+    .ans{display:block!important}
+    details{display:block}
+    details:not([open])>:not(summary){display:block!important}
+    .topic,.work,.box,.widget{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top">
+      <span class="logo">I</span>
+      <span><b>IDASARA</b><small>Academy</small></span>
+    </a>
+    <div class="crumbs">
+      <span>Grade 8</span><span>English</span><span class="acc">Cluster 1 · Plan · Achieve · Learn Beyond</span>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <span class="eyebrow">Self-Building · Grade 8</span>
+    <h1>Plan it, <span class="g">achieve</span> it,<br>learn <span class="g">beyond</span> the classroom.</h1>
+    <p>You already speak English every day. Now let's learn the <b>rules behind the words</b> — slowly, with lots of examples — so you feel confident and score real marks. We start from zero and build up with small wins.</p>
+    <span class="pill">⏱ Read slowly · 🧩 Try every box · ✅ Answers are hidden — peek only after you try</span>
+  </section>
+
+  <!-- ===================== WHY ===================== -->
+  <section class="why">
+    <h2>Why this cluster matters</h2>
+    <p>These three units from your <b>Grade 8 English Pupil's Book &amp; Workbook</b> are really one story — the story of <b>building yourself</b>. Unit 1 teaches you to <b>organise</b> your work, Unit 9 to <b>reach your goals</b>, and Unit 10 to keep <b>learning everywhere</b>, not just in class.</p>
+    <p>Along the way you collect <b>four grammar tools</b> (reflexive pronouns, countable nouns, adverbs of frequency, the past perfect tense), one <b>punctuation tool</b> (inverted commas), one <b>pronunciation skill</b> (the /pl/ and /pr/ sounds) and the <b>writing skills</b> the exam tests. Take one box at a time — no rush.</p>
+  </section>
+
+  <!-- ===================== ROADMAP ===================== -->
+  <section class="roadmap">
+    <h2>Your map for this cluster</h2>
+    <p class="sub">Three units. Tap any card to jump there — but reading in order works best.</p>
+    <div class="map-grid">
+      <a class="map-card" href="#unit1" style="--cl:var(--A);--clsoft:var(--A-soft)">
+        <span class="tag">Unit 1 · p.1</span>
+        <h3>Plan the Work, Work the Plan</h3>
+        <p>Reflexive pronouns, countable nouns, the /pl/ &amp; /pr/ sounds, and writing a pen-friend letter.</p>
+        <span class="cnt">4 sub-topics</span>
+      </a>
+      <a class="map-card" href="#unit9" style="--cl:var(--B);--clsoft:var(--B-soft)">
+        <span class="tag">Unit 9 · p.97</span>
+        <h3>On Top of the World</h3>
+        <p>Adverbs of frequency (always → never) and describing an achiever.</p>
+        <span class="cnt">2 sub-topics</span>
+      </a>
+      <a class="map-card" href="#unit10" style="--cl:var(--C);--clsoft:var(--C-soft)">
+        <span class="tag">Unit 10 · p.104</span>
+        <h3>Beyond the Classroom</h3>
+        <p>The past perfect tense, past simple vs past perfect, inverted commas, and story writing.</p>
+        <span class="cnt">4 sub-topics</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ##################################################################### -->
+  <!-- ============================ UNIT 1 ================================= -->
+  <!-- ##################################################################### -->
+  <section class="part" id="unit1" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <span class="src">Source · Pupil's Book p.1–11 · Workbook p.1–7</span>
+    <div class="pn">Unit 1</div>
+    <h2>Plan the Work, Work the Plan</h2>
+    <p>This unit is about organising yourself and managing time. The grammar you learn here: reflexive pronouns and countable nouns. You also practise two English sounds and write a letter to a pen friend.</p>
+  </section>
+
+  <!-- A1 reflexive pronouns -->
+  <details class="topic" id="a1" open style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">1</span>
+      <h3>Reflexive pronouns<span class="en">myself · yourself · himself · herself · itself · ourselves · yourselves · themselves</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">A small word that means "no help!"</span> You're at the <em>kade</em> and a friend asks, "Who fixed your bicycle?" You grin and say, "I fixed it <b>myself</b>!" That little word — <b>myself</b> — proudly says you did it with <b>nobody's help</b>. It bounces the action straight back to <b>you</b>. Words like this are called <b>reflexive pronouns</b>, and Unit 1 is full of them (in the very first dialogue: "make <b>yourselves</b> comfortable").</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">A <b>reflexive pronoun</b> is the word you use when the <b>same person</b> both <b>does</b> the action and <b>receives</b> it. It always ends in:</p>
+      <p>• <b>-self</b> when it is <b>one</b> person/thing (myself, yourself, himself…)<br>
+         • <b>-selves</b> when it is <b>more than one</b> (ourselves, yourselves, themselves)</p>
+      <p>Every subject pronoun has its own matching reflexive. Learn them as pairs (Pupil's Book, p.3):</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>Subject (singular)</th><th>Reflexive</th><th>Subject (plural)</th><th>Reflexive</th></tr>
+        <tr><td>I</td><td><b>myself</b></td><td>we</td><td><b>ourselves</b></td></tr>
+        <tr><td>you</td><td><b>yourself</b></td><td>you (all)</td><td><b>yourselves</b></td></tr>
+        <tr><td>he</td><td><b>himself</b></td><td rowspan="3">they</td><td rowspan="3"><b>themselves</b></td></tr>
+        <tr><td>she</td><td><b>herself</b></td></tr>
+        <tr><td>it</td><td><b>itself</b></td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>See it</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 150" role="img" aria-label="The action leaves the subject She, reaches the verb, and bounces back to herself">
+          <rect x="14" y="56" width="96" height="40" rx="10" fill="#0e7c86"/>
+          <text x="62" y="81" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="sans-serif">She</text>
+          <rect x="180" y="56" width="110" height="40" rx="10" fill="#e2f3f4" stroke="#0e7c86" stroke-width="2"/>
+          <text x="235" y="81" text-anchor="middle" font-size="16" font-weight="700" fill="#0a5b63" font-family="sans-serif">blamed</text>
+          <rect x="350" y="56" width="100" height="40" rx="10" fill="#0e7c86"/>
+          <text x="400" y="81" text-anchor="middle" font-size="15" font-weight="800" fill="#fff" font-family="sans-serif">herself</text>
+          <path d="M110 76 H176" stroke="#0a5b63" stroke-width="2.5" fill="none" marker-end="url(#ar)"/>
+          <path d="M290 60 C 330 20, 360 20, 400 52" stroke="#c4533f" stroke-width="2.5" fill="none" marker-end="url(#arR)"/>
+          <text x="345" y="22" text-anchor="middle" font-size="12.5" fill="#9c3a29" font-family="sans-serif">the action bounces back</text>
+          <defs>
+            <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0a5b63"/></marker>
+            <marker id="arR" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c4533f"/></marker>
+          </defs>
+          <text x="235" y="128" text-anchor="middle" font-size="12.5" fill="#7a8699" font-family="sans-serif">Same person does it AND receives it → use a reflexive pronoun.</text>
+        </svg>
+        <figcaption>"She blamed herself." The doer (She) and the receiver (herself) are the same person.</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>Worked examples + your turn</b></div>
+      <p>The Pupil's Book (Learning Point, p.4) gives reflexive pronouns <b>two jobs</b>:</p>
+      <div class="work"><span class="lbl">Job 1 — as the object (right after a verb or a preposition)</span>
+        <p class="sent">The kitten cleaned <span class="u">itself</span>. &nbsp;<span class="calc c">(verb "cleaned" + reflexive)</span></p>
+        <p class="sent">We can be proud of <span class="u">ourselves</span>. &nbsp;<span class="calc c">(preposition "of" + reflexive)</span></p>
+      </div>
+      <div class="work"><span class="lbl">Job 2 — for emphasis (to stress who did it)</span>
+        <p class="sent">Our art teacher <span class="u">himself</span> designed the invitation. &nbsp;<span class="calc c">(= nobody else — the teacher personally)</span></p>
+        <p class="sent">Our English teacher said that she <span class="u">herself</span> would prepare them.</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn (Activity 1.3 style): add the correct reflexive pronoun.</p>
+        <p class="sent">1) I bought ______ a dictionary. &nbsp; 2) He made ______ a cup of tea. &nbsp; 3) They arranged ______ in a circle. &nbsp; 4) My father grows these vegetables ______ .</p>
+        <button class="rbtn" type="button">Show answers ▾</button>
+        <div class="ans">1) <span class="a">myself</span> &nbsp; 2) <span class="a">himself</span> &nbsp; 3) <span class="a">themselves</span> &nbsp; 4) <span class="a">himself</span> (emphasis).<br>
+        Trick: match the doer — <i>I</i>→myself, <i>He</i>→himself, <i>They</i>→themselves.</div>
+      </div>
+
+      <div class="joke">The selfish pencil only ever talked about it<b>self</b>. The twins next to it? They only talked about them<b>selves</b>!</div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li><b>"hisself" and "theirselves" are NOT real words.</b> The correct forms are <b>himself</b> and <b>themselves</b>.</li>
+          <li>Don't use a reflexive when there is <b>no bounce-back</b>. <span class="cross">Myself went home.</span> → <span class="tick-good">I went home.</span></li>
+          <li>One person → <b>-self</b>; two or more → <b>-selves</b>. "You and your sister, behave <b>yourselves</b>!"</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="widget" id="reflexWidget" style="--cl:var(--A)">
+        <div class="wt">🪞 Try it — tap a subject to see its reflexive pronoun</div>
+        <div class="chiprow">
+          <button class="chip" data-k="I">I</button>
+          <button class="chip" data-k="you1">you (one)</button>
+          <button class="chip" data-k="he">he</button>
+          <button class="chip" data-k="she">she</button>
+          <button class="chip" data-k="it">it</button>
+          <button class="chip" data-k="we">we</button>
+          <button class="chip" data-k="they">they</button>
+        </div>
+        <div class="wout" id="reflexOut">Tap a subject above…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="ttl">Now think, then reveal:</div>
+        <div class="reveal"><span class="q">1. "The children behaved ______ at the temple."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">More than one child → <b>themselves</b>. ("theirselves" is not a real word.)</div></div>
+        <div class="reveal"><span class="q">2. Correct or wrong? "Myself made the poster."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>Wrong.</b> Say "I made the poster myself." A reflexive can't be the subject.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">🪃</span><div><b>"-self for one, -selves for more — the action bounces back to the door it came from."</b> If the doer and the receiver are the same, reach for a reflexive pronoun.</div></div>
+    </div>
+  </details>
+
+  <!-- A2 countable nouns -->
+  <details class="topic" id="a2" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2</span>
+      <h3>Countable (count) nouns<span class="en">singular &amp; plural forms · spelling rules</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">At the pola (market)…</span> You can say "give me <b>three mangoes</b>" — you can count them one by one. But you can't say "three rices" or "two waters." Some nouns you <b>can</b> count, and those are the stars of this box.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">A <b>countable noun</b> (count noun) is a thing that has a <b>singular</b> form (one) and a <b>plural</b> form (many). In the singular it usually needs a small word in front — a <b>determiner</b> such as <i>a, an, the, one, this</i>.</p>
+      <p>Pupil's Book (p.8): <i>"A count noun is a noun which has a singular and a plural form. It is usually used after a determiner in the singular form."</i> Examples: <b>a</b> book → books, <b>a</b> bus → buses, <b>a</b> mango → mangoes.</p>
+      <p>To make the plural, follow these spelling rules:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>If the word ends in…</th><th>Do this</th><th>Examples (Activity 1.7)</th></tr>
+        <tr><td>most words</td><td>add <b>-s</b></td><td>cup → cup<b>s</b> · boot → boot<b>s</b> · uniform → uniform<b>s</b> · cloth → cloth<b>s</b></td></tr>
+        <tr><td>-s, -ss, -sh, -ch, -x (a hissing sound)</td><td>add <b>-es</b></td><td>bus → bus<b>es</b> · box → box<b>es</b> · compass → compass<b>es</b> · torch → torch<b>es</b> · toothbrush → toothbrush<b>es</b></td></tr>
+        <tr><td>consonant + o</td><td>add <b>-es</b></td><td>tomato → tomato<b>es</b> · mango → mango<b>es</b></td></tr>
+        <tr><td>consonant + y</td><td>change y → <b>-ies</b></td><td>baby → bab<b>ies</b> · city → cit<b>ies</b></td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>See it</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 440 120" role="img" aria-label="The word box ends in x so its plural adds es to become boxes">
+          <rect x="20" y="42" width="120" height="40" rx="9" fill="#e2f3f4" stroke="#0e7c86" stroke-width="2"/>
+          <text x="80" y="68" text-anchor="middle" font-size="17" font-weight="700" fill="#0a5b63" font-family="sans-serif">a box</text>
+          <text x="150" y="68" font-size="22" fill="#7a8699">→</text>
+          <rect x="185" y="42" width="70" height="40" rx="9" fill="#fff" stroke="#0e7c86" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="220" y="68" text-anchor="middle" font-size="14" fill="#0a5b63" font-family="sans-serif">ends in -x</text>
+          <text x="263" y="68" font-size="22" fill="#7a8699">→</text>
+          <rect x="298" y="42" width="120" height="40" rx="9" fill="#0e7c86"/>
+          <text x="358" y="68" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="sans-serif">box<tspan fill="#ffe39a">es</tspan></text>
+          <text x="220" y="106" text-anchor="middle" font-size="12.5" fill="#7a8699" font-family="sans-serif">A hissing ending (s/ss/sh/ch/x) needs -es, not just -s.</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>Worked example + your turn</b></div>
+      <div class="work"><span class="lbl">Worked</span>
+        <p class="sent">"a torch" → why <b>torches</b>? Because it ends in <b>-ch</b> (a hiss), so we add <b>-es</b>.</p>
+        <p class="sent">"a tomato" → ends in <b>consonant + o</b>, so add <b>-es</b> → <b>tomatoes</b>.</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn (Activity 1.7): write the plural of — 1) a vase &nbsp; 2) a compass &nbsp; 3) a uniform &nbsp; 4) a mango</p>
+        <button class="rbtn" type="button">Show answers ▾</button>
+        <div class="ans">1) vase<b>s</b> (just -s) &nbsp; 2) compass<b>es</b> (ends in -ss) &nbsp; 3) uniform<b>s</b> (just -s) &nbsp; 4) mango<b>es</b> (consonant + o).</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>A singular count noun can't stand alone — say <b>a</b> book, not just "book." (<span class="cross">I bought book.</span>)</li>
+          <li><b>-o</b> words are tricky: <i>tomato, mango, potato</i> take <b>-es</b>, but <i>photo, piano</i> take only <b>-s</b>. Learn the common ones.</li>
+          <li>Spelling traps: <i>bus → buses</i> (not "buss"); <i>box → boxes</i> (not "boxs").</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Plural of "a bus", "a mango", "a city"?</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">bus<b>es</b> (hiss → -es) · mango<b>es</b> (consonant+o → -es) · cit<b>ies</b> (consonant+y → -ies).</div></div>
+        <div class="reveal"><span class="q">2. Fix it: "She packed two box and three cloth."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">"She packed two <b>boxes</b> and three <b>cloths</b>." (box → boxes; cloth → cloths)</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">🐍</span><div><b>"Hiss &amp; -o, add -es to go."</b> Words ending in a hissing sound (s/ss/sh/ch/x) or in consonant+o take <b>-es</b>. Most other words just take <b>-s</b>.</div></div>
+    </div>
+  </details>
+
+  <!-- A3 pronunciation -->
+  <details class="topic" id="a3" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">3</span>
+      <h3>Pronunciation: the /pl/ and /pr/ sounds<span class="en">consonant blends · Workbook Activity 04</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">"play" or "pray"?</span> Say <b>play</b>, then say <b>pray</b>. Feel your tongue move? Mixing up /pl/ and /pr/ can turn "I want to <b>play</b>" into "I want to <b>pray</b>" — two very different things! These two blends appear all over Unit 1 (plan, prepare, prize…), so let's get them crisp.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">Both blends start with a quick <b>/p/</b> and then glide <b>straight</b> into the next sound — with <b>no vowel squeezed in between</b>.</p>
+      <p>• <b>/pl/</b> — after the /p/, your tongue touches just behind your top teeth (the "l" position). Smile a little: <b>pl</b>an.<br>
+         • <b>/pr/</b> — after the /p/, your tongue curls slightly back (the "r" position): <b>pr</b>ince.</p>
+
+      <div class="step"><span class="dot">3</span><b>See it — sort the words</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>/pl/ &nbsp;(tongue flat, behind teeth)</th><th>/pr/ &nbsp;(tongue curled back)</th></tr>
+        <tr><td>plan · play · plant · plug · plane · platform · plastic · plural · pleasure · place · plumber*</td>
+            <td>prince · prepare · protect · proud · price · present · promise · pray · printer · principal · prize</td></tr>
+      </table></div>
+      <p class="tnote">*In <b>plumber</b> the <i>b</i> is silent — say "PLUM-er." (Workbook Activity 04, p.4.)</p>
+
+      <div class="step"><span class="dot">4</span><b>Worked example + your turn</b></div>
+      <div class="work"><span class="lbl">Worked</span>
+        <p class="sent"><b>platform</b> → /pl/ (tongue flat). &nbsp; <b>promise</b> → /pr/ (tongue curled).</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn: /pl/ or /pr/ ? — 1) please &nbsp; 2) prize &nbsp; 3) platoon &nbsp; 4) priest &nbsp; 5) plug</p>
+        <button class="rbtn" type="button">Show answers ▾</button>
+        <div class="ans">1) <b>/pl/</b> please &nbsp; 2) <b>/pr/</b> prize &nbsp; 3) <b>/pl/</b> platoon &nbsp; 4) <b>/pr/</b> priest &nbsp; 5) <b>/pl/</b> plug.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Don't add an extra vowel: it's <b>"plate"</b>, not "pu-late," and <b>"pray"</b>, not "pu-ray." Keep /p/ and the next sound glued together.</li>
+          <li>Listen for the tiny difference — <b>play / pray</b>, <b>plum / prom</b>. If a listener is confused, slow down and feel your tongue.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Sort: protect · plastic · proud · plan</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>/pl/:</b> plastic, plan &nbsp; · &nbsp; <b>/pr/:</b> protect, proud.</div></div>
+        <div class="reveal"><span class="q">2. Which word has /pr/ — "plough" or "proud"?</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>proud</b> (/pr/). "plough" is /pl/.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">👅</span><div><b>"PL = pLay, tongue flat. PR = pRoud, tongue curled."</b> Smile for /pl/, growl a little for /pr/ — and never slip a vowel in between.</div></div>
+    </div>
+  </details>
+
+  <!-- A4 writing -->
+  <details class="topic" id="a4" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">4</span>
+      <h3>Writing: a letter to a pen friend (&amp; a list)<span class="en">informal letter format · Activity 1.9</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">A friend across the world is waiting to hear from you.</span> In Unit 1, Amitha writes to her pen friend Svetlana in Russia. An <b>informal letter</b> like this is easy marks in the exam — if you keep the simple format. Let's learn the shape, then fill it with your own news.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">An informal letter has <b>five parts</b>, always in this order:</p>
+      <p>1) <b>Your address + date</b> (top right)<br>
+         2) <b>Greeting</b> — "Dear ___,"<br>
+         3) <b>Opening line</b> — a friendly thank-you or hope<br>
+         4) <b>Body</b> — your news, and a <b>question back</b> to your friend<br>
+         5) <b>Closing</b> — "Love," / "Your friend," + your name</p>
+
+      <div class="step"><span class="dot">3</span><b>See it — the skeleton</b></div>
+      <div class="work">
+        <div class="sent" style="text-align:right;color:var(--A-deep)"><b>5, Vijay Road,<br>Puttalam, Sri Lanka.<br>20th February 20..</b></div>
+        <p class="sent"><b>Dear Svetlana,</b></p>
+        <p class="sent"><span class="calc c">(opening)</span> Thank you very much for your letter and the lovely photographs. Hope everything is going well at your end.</p>
+        <p class="sent"><span class="calc c">(body — your news)</span> I was a little busy last week, so I prepared a plan to finish all my school work on time. This month our Nature Club organised a beach clean-up.</p>
+        <p class="sent"><span class="calc c">(question back)</span> By the way, what are your plans for this year?</p>
+        <p class="sent"><span class="calc c">(closing)</span> Hope to hear from you soon.<br><b>Love,<br>Amitha</b></p>
+      </div>
+
+      <div class="step"><span class="dot">4</span><b>Worked + your turn</b></div>
+      <p>Unit 1 also asks for a <b>list of items</b> (the bag-packing task, p.6). A list is short, one item per line, no full sentences: <i>uniforms, toothbrush, soap, torch, water bottle…</i></p>
+      <div class="reveal">
+        <p class="q">✍️ Your turn: write 6–8 sentences to a pen friend asking about <b>their plans for the year</b>. Sneak in one <b>reflexive pronoun</b> and one <b>plural count noun</b> from this unit.</p>
+        <button class="rbtn" type="button">Show a sample answer ▾</button>
+        <div class="ans">"Dear Nimal, thank you for your letter. Last month our class organised a book sale — we planned it <span class="u">ourselves</span>! We sold many <span class="u">books</span> and two <span class="u">boxes</span> of old magazines. What are your plans for this year? Hope to hear from you soon. Your friend, Kasun."</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Don't forget the <b>comma</b> after the greeting: "Dear Svetlana<b>,</b>" and after the closing: "Love<b>,</b>".</li>
+          <li>An informal letter is <b>friendly</b> — use short, warm sentences, not stiff formal English.</li>
+          <li>Always <b>ask a question back</b> — it shows you care and gives your friend something to reply to.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Where do the address and date go?</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">At the <b>top right</b> of the letter.</div></div>
+        <div class="reveal"><span class="q">2. Name two good closings for an informal letter.</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>Love,</b> &nbsp;/&nbsp; <b>Your friend,</b> (then your name). Avoid "Yours faithfully" — that's for formal letters.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">✉️</span><div><b>"Address, Dear, News, Question, Love."</b> Five parts, top to bottom — and always ask your friend something back.</div></div>
+    </div>
+  </details>
+
+  <!-- ##################################################################### -->
+  <!-- ============================ UNIT 9 ================================= -->
+  <!-- ##################################################################### -->
+  <section class="part" id="unit9" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <span class="src">Source · Pupil's Book p.97–103 · Workbook p.72–73</span>
+    <div class="pn">Unit 9</div>
+    <h2>On Top of the World</h2>
+    <p>This unit celebrates achievers — like Pasindu, who got 3 A passes, and Jayanthi Kuru-Utumpala, the first Sri Lankan to climb Everest. The grammar tool you master here: <b>adverbs of frequency</b>. You also learn to describe an achiever.</p>
+  </section>
+
+  <!-- B1 adverbs of frequency -->
+  <details class="topic" id="b1" open style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">1</span>
+      <h3>Adverbs of frequency<span class="en">always · usually · often · sometimes · rarely · never</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">How often do YOU do it?</span> The star student Pasindu in your textbook gets up at 5 a.m. <b>every single day</b>. Do you? Always? Sometimes? Never? The little words that answer <b>"how often?"</b> are called <b>adverbs of frequency</b>, and they make your English sound natural and exact.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">An <b>adverb of frequency</b> tells <b>how often</b> something happens. The Pupil's Book (p.99) gives six, from the most often to the least often:</p>
+      <p><b>always → usually (normally) → often → sometimes → rarely → never</b>.</p>
+      <p>The big question students get wrong is <b>where to put them</b>. Two simple rules:</p>
+      <p>• Put the adverb <b>before</b> a normal (main) verb. → "She <b>always</b> walks to school."<br>
+         • Put it <b>after</b> the verb <i>be</i> (am / is / are / was / were). → "She <b>is always</b> early."<br>
+         • Phrases like <i>once</i> and <i>twice</i> go at the <b>end</b>. → "The truck comes <b>once a week</b>."</p>
+
+      <div class="step"><span class="dot">3</span><b>See it — the frequency ladder</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 420 220" role="img" aria-label="A ladder of frequency from always at 100 percent down to never at 0 percent">
+          <text x="10" y="20" font-size="12" fill="#9c3a29" font-family="sans-serif">100% (every time)</text>
+          <rect x="10" y="26" width="400" height="26" rx="6" fill="#c4533f"/><text x="20" y="44" fill="#fff" font-size="15" font-weight="700" font-family="sans-serif">always</text>
+          <rect x="10" y="56" width="340" height="26" rx="6" fill="#cf6451"/><text x="20" y="74" fill="#fff" font-size="15" font-weight="700" font-family="sans-serif">usually / normally</text>
+          <rect x="10" y="86" width="270" height="26" rx="6" fill="#d97765"/><text x="20" y="104" fill="#fff" font-size="15" font-weight="700" font-family="sans-serif">often</text>
+          <rect x="10" y="116" width="200" height="26" rx="6" fill="#e08c7c"/><text x="20" y="134" fill="#fff" font-size="15" font-weight="700" font-family="sans-serif">sometimes</text>
+          <rect x="10" y="146" width="120" height="26" rx="6" fill="#eaa898"/><text x="20" y="164" fill="#7a2b1e" font-size="15" font-weight="700" font-family="sans-serif">rarely</text>
+          <rect x="10" y="176" width="60" height="26" rx="6" fill="#f1c9bf"/><text x="20" y="194" fill="#7a2b1e" font-size="15" font-weight="700" font-family="sans-serif">never</text>
+          <text x="10" y="216" font-size="12" fill="#9c3a29" font-family="sans-serif">0% (not at any time)</text>
+        </svg>
+        <figcaption>From "every time" down to "not at any time." (Pupil's Book p.99.)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>Worked examples + your turn</b></div>
+      <div class="work"><span class="lbl">From Pasindu (Activity 9.2)</span>
+        <p class="sent">He <span class="u">always</span> comes to school early. &nbsp;<span class="calc c">(before the main verb "comes")</span></p>
+        <p class="sent">He <span class="u">rarely</span> gets absent. He <span class="u">never</span> stays in bed later than 6.30.</p>
+      </div>
+      <div class="work"><span class="lbl">Match the meaning (Workbook Act. 01)</span>
+        <div class="calc">always = at all times · usually = generally · often = many times</div>
+        <div class="calc">sometimes = now and then · rarely = not often · never = not at any time</div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn (Workbook Act. 02): put the words in order — <i>often / sleeps / under / his / dog / bed / Suren's</i></p>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans">"Suren's dog <span class="u">often</span> sleeps under his bed." — the adverb goes <b>before</b> the verb "sleeps."</div>
+      </div>
+
+      <div class="joke">I <b>always</b> tell the truth about how <b>often</b> I tell lies. 🤔</div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>With <b>am/is/are/was/were</b>, the adverb goes <b>after</b>: <span class="tick-good">She is always happy.</span> (not <span class="cross">She always is happy.</span>)</li>
+          <li>With other verbs, it goes <b>before</b>: <span class="tick-good">I never lie.</span> (not <span class="cross">I lie never.</span>)</li>
+          <li><b>rarely</b> and <b>never</b> are already negative — don't add another "not": <span class="cross">I don't never…</span></li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="widget" id="freqWidget" style="--cl:var(--B)">
+        <div class="wt">⏱️ Slide to see which adverb fits how often you do something</div>
+        <input class="slider" id="freqSlider" type="range" min="0" max="100" value="70">
+        <div class="wout" id="freqOut"></div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Correct the sentence: "Chathura gets up always before 5.30."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">"Chathura <b>always gets up</b> before 5.30." (adverb before the main verb).</div></div>
+        <div class="reveal"><span class="q">2. Which word means "now and then"?</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>sometimes</b> (about half the time).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">📍</span><div><b>"Before the verb, but after 'be'."</b> That single line places every frequency adverb correctly.</div></div>
+    </div>
+  </details>
+
+  <!-- B2 writing achiever -->
+  <details class="topic" id="b2" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">2</span>
+      <h3>Writing: describe an achiever (&amp; a paragraph about you)<span class="en">Activities 9.5 &amp; 9.7</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">From a village school to the top of the world.</span> Jayanthi Kuru-Utumpala became the <b>first Sri Lankan</b> to reach the summit of Mount Everest (21 May 2016). Your textbook tells her story so you can learn to <b>describe an achiever</b> — and write about your own daily habits too.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">A good description of a person follows a natural order. Turn fact-bullets into smooth sentences in this sequence:</p>
+      <p><b>born → education → dream → training → big achievement → awards / message</b>.</p>
+
+      <div class="step"><span class="dot">3</span><b>See it — the achiever timeline</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 90" role="img" aria-label="Timeline from born to education to dream to training to achievement">
+          <line x1="20" y1="55" x2="440" y2="55" stroke="#9c3a29" stroke-width="3"/>
+          <polygon points="440,55 430,50 430,60" fill="#9c3a29"/>
+          <g font-family="sans-serif" font-size="11.5" fill="#9c3a29" text-anchor="middle">
+            <circle cx="50" cy="55" r="6" fill="#c4533f"/><text x="50" y="40">born</text>
+            <circle cx="145" cy="55" r="6" fill="#c4533f"/><text x="145" y="40">education</text>
+            <circle cx="235" cy="55" r="6" fill="#c4533f"/><text x="235" y="40">dream</text>
+            <circle cx="325" cy="55" r="6" fill="#c4533f"/><text x="325" y="40">training</text>
+            <circle cx="410" cy="55" r="7" fill="#e0a92e"/><text x="408" y="40" font-weight="700">summit!</text>
+          </g>
+          <text x="230" y="80" text-anchor="middle" font-size="12" fill="#7a8699" font-family="sans-serif">Tell the story in time order — it reads smoothly and earns marks.</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>Worked example + your turn</b></div>
+      <div class="work"><span class="lbl">Model — describing Jayanthi</span>
+        <p class="sent">Jayanthi Kuru-Utumpala was <b>born</b> in 1979 in Colombo. She <b>studied</b> at Bishop's College and later earned a degree in English Literature. She had <b>always dreamed</b> of climbing Everest. After tough <b>training</b> — rock-climbing, ice-climbing and survival skills — she became the <b>first Sri Lankan to reach the summit</b> of Everest on 21st May 2016.</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn (Activity 9.5): write 5 sentences about <b>yourself</b>, using <b>always, usually, often, sometimes, rarely, never</b> at least once each.</p>
+        <button class="rbtn" type="button">Show a sample ▾</button>
+        <div class="ans">"I <span class="u">always</span> get up at 5.30. I <span class="u">usually</span> revise after school. I <span class="u">often</span> play cricket in the evening. I <span class="u">sometimes</span> help my mother cook, but I <span class="u">rarely</span> skip breakfast and I <span class="u">never</span> go to bed without reading."</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Keep the <b>time order</b> — don't jump from "she won an award" back to "she was born."</li>
+          <li>Use the <b>past tense</b> for a finished life-story (was, studied, became), and place frequency adverbs correctly in your own paragraph.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Put in order: <i>award · born · training · dream</i></span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>born → dream → training → award</b> (time order).</div></div>
+        <div class="reveal"><span class="q">2. Improve: "She is a climber. She climbed Everest. She was born in 1979."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">Re-order into time sequence: "She was born in 1979… she trained hard… and she climbed Everest." Smooth and logical.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">🏔️</span><div><b>"Born, learned, dreamed, trained, achieved."</b> Tell any achiever's story in time order and it almost writes itself.</div></div>
+    </div>
+  </details>
+
+  <!-- ##################################################################### -->
+  <!-- ============================ UNIT 10 ================================ -->
+  <!-- ##################################################################### -->
+  <section class="part" id="unit10" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <span class="src">Source · Pupil's Book p.104–109 · Workbook p.74–78</span>
+    <div class="pn">Unit 10</div>
+    <h2>Beyond the Classroom</h2>
+    <p>Learning happens everywhere — at an English Day, on a boat with Nasrudin, in everyday life. The grammar tool here is the <b>past perfect tense</b>, plus how to use <b>inverted commas</b> and write a story with dialogue.</p>
+  </section>
+
+  <!-- C1 past perfect -->
+  <details class="topic" id="c1" open style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">1</span>
+      <h3>The Past Perfect Tense<span class="en">had + past participle (V3)</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">"It had already started when we got there."</span> You arrive at the English Day a little late, and your friend says exactly that. Two things happened in the past — the show <b>starting</b> and you <b>arriving</b> — but one happened <b>first</b>. The tense for "the one that happened first" is the <b>past perfect</b>.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">Form (Pupil's Book p.106): <b>had + past participle (V3)</b>. Use it for a past action that happened <b>before</b> another past action.</p>
+      <p>The <b>past participle (V3)</b> is the third form of a verb: work → worked → <b>worked</b>; go → went → <b>gone</b>; write → wrote → <b>written</b>; leave → left → <b>left</b>.</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>Form</th><th>Pattern</th><th>Example</th></tr>
+        <tr><td>Affirmative</td><td>subject + <b>had</b> + V3</td><td>He <b>had worked</b>.</td></tr>
+        <tr><td>Question</td><td><b>Had</b> + subject + V3?</td><td><b>Had</b> he <b>worked</b>?</td></tr>
+        <tr><td>Negative</td><td>subject + <b>had not (hadn't)</b> + V3</td><td>He <b>had not worked</b>.</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>See it — the timeline</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 440 110" role="img" aria-label="The train had left before he reached the station, then now">
+          <line x1="20" y1="65" x2="420" y2="65" stroke="#5b4b9c" stroke-width="3"/>
+          <polygon points="420,65 410,60 410,70" fill="#5b4b9c"/>
+          <circle cx="110" cy="65" r="8" fill="#5b4b9c"/>
+          <circle cx="280" cy="65" r="8" fill="#e0a92e"/>
+          <text x="110" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#42357a" font-family="sans-serif">train HAD LEFT</text>
+          <text x="110" y="90" text-anchor="middle" font-size="11" fill="#7a8699" font-family="sans-serif">past perfect (1st)</text>
+          <text x="280" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#9a7415" font-family="sans-serif">he REACHED</text>
+          <text x="280" y="90" text-anchor="middle" font-size="11" fill="#7a8699" font-family="sans-serif">past simple (2nd)</text>
+          <text x="416" y="55" text-anchor="end" font-size="11" fill="#7a8699" font-family="sans-serif">now →</text>
+        </svg>
+        <figcaption>"By the time he reached the station, his train had already left." The earlier action wears "had."</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>Worked example + your turn</b></div>
+      <div class="work"><span class="lbl">Worked</span>
+        <p class="sent">"She was happy because she <b>had won</b> a prize." → winning came <b>first</b>, so it is past perfect (had won); being happy came after.</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn (Activity 10.3): fill in the past perfect — 1) "Mr. Perera went back to the office. He ______ (leave) his spectacles behind." 2) "I enjoyed the play. I ______ (not / see) a stage play before."</p>
+        <button class="rbtn" type="button">Show answers ▾</button>
+        <div class="ans">1) <span class="a">had left</span> &nbsp; 2) <span class="a">had not seen</span> (hadn't seen). Both name something that happened <b>before</b> the main past event.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Use the <b>past participle (V3)</b>, not the past simple: <span class="tick-good">had gone</span> (not <span class="cross">had went</span>), <span class="tick-good">had written</span> (not <span class="cross">had wrote</span>).</li>
+          <li>Use it only when there are <b>two</b> past times and you want to show which was earlier. For one simple past event, use the past simple.</li>
+          <li>The negative is <b>had not / hadn't</b> — never "didn't had."</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="widget" id="v3Widget" style="--cl:var(--C)">
+        <div class="wt">⏪ Tap a verb to build its past perfect (had + V3)</div>
+        <div class="chiprow">
+          <button class="chip" data-k="go">go</button>
+          <button class="chip" data-k="write">write</button>
+          <button class="chip" data-k="eat">eat</button>
+          <button class="chip" data-k="see">see</button>
+          <button class="chip" data-k="leave">leave</button>
+          <button class="chip" data-k="win">win</button>
+          <button class="chip" data-k="do">do</button>
+        </div>
+        <div class="wout" id="v3Out">Tap a verb above…</div>
+      </div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. "By the time we arrived, the film ______ (start)."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>had started</b> — it started before we arrived.</div></div>
+        <div class="reveal"><span class="q">2. Spot the error: "He had wrote the script."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans">"He <b>had written</b> the script." (use the past participle, not "wrote").</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">⏪</span><div><b>"Two past actions? The earlier one wears 'HAD'."</b> had + V3 = the action that came first.</div></div>
+    </div>
+  </details>
+
+  <!-- C2 past simple vs perfect -->
+  <details class="topic" id="c2" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">2</span>
+      <h3>Past simple vs past perfect — which came first?<span class="en">Workbook Activity 03</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">Two actions, one sentence.</span> Real stories often pack two past actions into one sentence: "The visitor <b>had lost</b> his passport, so he <b>had</b> trouble at the airport." How do you know which tense goes where? Easy — by asking <b>"which happened first?"</b></div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">When a sentence has <b>two</b> past actions:</p>
+      <p>• the <b>earlier</b> action → <b>past perfect</b> (had + V3)<br>
+         • the <b>later</b> action → <b>past simple</b> (the normal past).</p>
+
+      <div class="step"><span class="dot">3</span><b>See it</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 440 96" role="img" aria-label="had lost happened first, then had trouble">
+          <rect x="20" y="34" width="170" height="40" rx="10" fill="#ece9f8" stroke="#5b4b9c" stroke-width="2"/>
+          <text x="105" y="52" text-anchor="middle" font-size="14" font-weight="700" fill="#42357a" font-family="sans-serif">had lost (passport)</text>
+          <text x="105" y="68" text-anchor="middle" font-size="11" fill="#7a8699" font-family="sans-serif">1st · past perfect</text>
+          <text x="205" y="58" font-size="20" fill="#5b4b9c">→</text>
+          <rect x="240" y="34" width="180" height="40" rx="10" fill="#fef6e0" stroke="#e0a92e" stroke-width="2"/>
+          <text x="330" y="52" text-anchor="middle" font-size="14" font-weight="700" fill="#9a7415" font-family="sans-serif">had trouble (airport)</text>
+          <text x="330" y="68" text-anchor="middle" font-size="11" fill="#7a8699" font-family="sans-serif">2nd · past simple</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>Worked example + your turn</b></div>
+      <div class="work"><span class="lbl">Worked (Workbook Act. 03)</span>
+        <p class="sent">"You <b>enjoyed</b> the movie because you <b>had read</b> the book." → reading the book happened first (past perfect); enjoying came later (past simple).</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn: choose past simple or past perfect — 1) "After he ______ (eat) all the sandwiches, he ______ (drink) some juice." 2) "Sumudu found the test easy because he ______ (do) a similar test before."</p>
+        <button class="rbtn" type="button">Show answers ▾</button>
+        <div class="ans">1) "After he <span class="a">had eaten</span> all the sandwiches, he <span class="a">drank</span> some juice." &nbsp; 2) "…because he <span class="a">had done</span> a similar test before."</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Don't put <b>both</b> actions in the past perfect — only the <b>earlier</b> one gets "had."</li>
+          <li>Signal words like <b>before, after, by the time, because</b> often point to the earlier action.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. "When I reached home, my mother ______ (cook) dinner already."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>had cooked</b> — cooking finished before I reached.</div></div>
+        <div class="reveal"><span class="q">2. Which action is earlier? "She cried because she had failed."</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>had failed</b> (past perfect) is earlier; crying came after.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">⚖️</span><div><b>"First then second: HAD then did."</b> The first event gets <i>had</i>; the second stays in the simple past.</div></div>
+    </div>
+  </details>
+
+  <!-- C3 inverted commas -->
+  <details class="topic" id="c3" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">3</span>
+      <h3>Inverted commas (quotation marks)<span class="en">&#8220; &#8221; · Pupil's Book p.109</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">"You've made a silly mistake."</span> In the funny Nasrudin story, the proud traveller laughs and says exactly that. Those little marks — <b>&#8220; &#8221;</b> — wrapped around his words are <b>inverted commas</b>. They tell the reader: <b>these are the exact words someone spoke.</b></div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">Pupil's Book (p.109): use <b>inverted commas (quotation marks)</b> when you quote the <b>exact words</b> of a speaker or writer.</p>
+      <p>Three small rules:<br>
+        • Put the spoken words <b>inside</b> the marks.<br>
+        • Start them with a <b>capital letter</b>.<br>
+        • The full stop / comma / question mark / exclamation mark goes <b>inside</b> the closing mark.</p>
+
+      <div class="step"><span class="dot">3</span><b>See it</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 440 110" role="img" aria-label="Quotation marks hug the spoken words and the punctuation sits inside">
+          <text x="40" y="60" font-size="46" font-weight="800" fill="#e0a92e" font-family="serif">&#8220;</text>
+          <rect x="78" y="35" width="250" height="42" rx="10" fill="#ece9f8" stroke="#5b4b9c" stroke-width="2"/>
+          <text x="203" y="62" text-anchor="middle" font-size="16" font-weight="700" fill="#42357a" font-family="sans-serif">What are you doing?</text>
+          <text x="335" y="60" font-size="46" font-weight="800" fill="#e0a92e" font-family="serif">&#8221;</text>
+          <text x="220" y="98" text-anchor="middle" font-size="12.5" fill="#7a8699" font-family="sans-serif">Capital "W" to start · the question mark stays INSIDE the marks.</text>
+        </svg>
+      </figure>
+      <p>Full sentence: Malith asked, <b>&#8220;</b>What are you doing?<b>&#8221;</b> &nbsp;<span class="calc c">(comma after "asked", capital W, "?" inside)</span></p>
+
+      <div class="step"><span class="dot">4</span><b>Worked example + your turn</b></div>
+      <div class="work"><span class="lbl">Worked</span>
+        <p class="sent">Surani lamented, <b>&#8220;</b>I think I made a lot of mistakes.<b>&#8221;</b></p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ Your turn (Workbook Act. 02): add inverted commas — <i>Come on! cheered Malith.</i></p>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><b>&#8220;</b>Come on!<b>&#8221;</b> cheered Malith. — the spoken words sit inside the marks, and the exclamation mark stays inside.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Only the <b>exact spoken words</b> go inside — not "he said" or "she asked."</li>
+          <li>Begin the speech with a <b>capital letter</b>, even in the middle of a sentence.</li>
+          <li>Tuck the punctuation <b>inside</b> the closing mark, not outside.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Add the marks: <i>Why are you worrying? asked Malith.</i></span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>&#8220;</b>Why are you worrying?<b>&#8221;</b> asked Malith.</div></div>
+        <div class="reveal"><span class="q">2. True or false: the comma after "said" goes inside the quotation marks.</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>False.</b> "He said," — that comma is outside; only the speaker's own punctuation goes inside the marks.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">❝</span><div><b>"Hug the spoken words with &#8220; &#8221;, and tuck the punctuation inside."</b></div></div>
+    </div>
+  </details>
+
+  <!-- C4 story writing -->
+  <details class="topic" id="c4" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">4</span>
+      <h3>Writing: tell a story with dialogue<span class="en">Activity 10.6 · the English Day report</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>Let's get into it</b></div>
+      <div class="box hook"><span class="ttl">Now put it all together in a story.</span> Unit 10 asks you to <b>write a story</b> with conversation (Activity 10.6) and to describe an event like the <b>English Day report</b> (p.107). This is your chance to use the past perfect <b>and</b> inverted commas in one piece.</div>
+
+      <div class="step"><span class="dot">2</span><b>In plain words</b></div>
+      <p class="lead">A good short story with dialogue needs three things:</p>
+      <p>• <b>Past perfect</b> for whatever happened earlier (had started, had practised).<br>
+         • <b>Inverted commas</b> around each spoken line.<br>
+         • A <b>new line</b> for each new speaker, so the reader follows who is talking.</p>
+
+      <div class="step"><span class="dot">3</span><b>See it — the model</b></div>
+      <div class="work"><span class="lbl">Model story</span>
+        <p class="sent">When we reached the hall, the English Day <b>had already started</b>. A grade 8 student <b>had written</b> the drama, and the cast <b>had practised</b> well.</p>
+        <p class="sent"><b>&#8220;</b>Shall we also do a drama next year?<b>&#8221;</b> asked Supun.</p>
+        <p class="sent"><b>&#8220;</b>Good idea,<b>&#8221;</b> replied Rahal. <b>&#8220;</b>Let's tell our English teacher.<b>&#8221;</b></p>
+      </div>
+
+      <div class="step"><span class="dot">4</span><b>Worked + your turn</b></div>
+      <p>The English Day <b>report</b> (p.107) answers: event, organised by, place, date, chief guest, items presented. A report is factual; a story is lively. Both can use the past perfect for things that happened first.</p>
+      <div class="reveal">
+        <p class="q">✍️ Your turn: write a 6-sentence story about an event you attended. Use <b>two</b> past-perfect verbs and <b>two</b> lines of dialogue with inverted commas.</p>
+        <button class="rbtn" type="button">Show a sample opening ▾</button>
+        <div class="ans">"By the time I reached the ground, the match <span class="u">had begun</span>. Our team <span class="u">had lost</span> two early wickets. <b>&#8220;</b>Don't worry, we can still win!<b>&#8221;</b> shouted my friend. <b>&#8220;</b>Let's cheer louder,<b>&#8221;</b> I replied."</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>Watch out!</b></div>
+      <div class="box watch"><span class="ttl">Common mistakes</span>
+        <ul>
+          <li>Don't run all the speech together — give each speaker a <b>new line</b>.</li>
+          <li>Keep tenses consistent: simple past for the main story, past perfect only for earlier actions.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>Quick self-check</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. Fix the dialogue: <i>shall we go and play asked Pubudu</i></span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>&#8220;</b>Shall we go and play?<b>&#8221;</b> asked Pubudu. (capital S, "?" inside, marks around the speech)</div></div>
+        <div class="reveal"><span class="q">2. Which verb is past perfect: "had practised" or "practised"?</span>
+          <button class="rbtn" type="button">Answer ▾</button>
+          <div class="ans"><b>had practised</b> (had + V3). "practised" alone is past simple.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>Remember this</b></div>
+      <div class="memo"><span class="ic">📖</span><div><b>"Earlier action → had + V3. New speaker → new line, in &#8220; &#8221;."</b> That's a story examiners love.</div></div>
+    </div>
+  </details>
+
+
+  <!-- ===== PUTTING IT ALL TOGETHER ===== -->
+  <section class="synth" id="synth">
+    <h2>Putting it all together 🧵</h2>
+    <p>These three units aren't separate — they're one journey of <b>building yourself</b>. Each tool you collected fits into real writing:</p>
+    <div class="chain">
+      <span>Unit 1 · Organise</span><i>→</i>
+      <span>Unit 9 · Achieve</span><i>→</i>
+      <span>Unit 10 · Learn beyond</span>
+    </div>
+    <p style="margin-top:14px">Look how one short diary entry uses <b>every</b> tool from this cluster:</p>
+    <div class="work" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)">
+      <p class="sent" style="color:#fff">"Our committee organised the English camp <b>ourselves</b> <span style="opacity:.7">(reflexive pronoun)</span>. We packed three <b>boxes</b> of props <span style="opacity:.7">(plural count noun)</span>. I <b>always</b> plan my day <span style="opacity:.7">(adverb of frequency)</span>, so by the time the guests arrived, we <b>had finished</b> everything <span style="opacity:.7">(past perfect)</span>. The principal smiled and said, <b>&#8220;</b>You have made us proud!<b>&#8221;</b> <span style="opacity:.7">(inverted commas)</span>"</p>
+    </div>
+    <p style="margin-top:14px;color:var(--gold);font-weight:700">In short: organise your work (Unit 1) → reach your goal (Unit 9) → keep learning everywhere (Unit 10). Master these four grammar tools and your writing — and your marks — jump.</p>
+  </section>
+
+  <!-- ===== FINAL MIXED SELF-TEST ===== -->
+  <section class="test" id="test">
+    <h2>Final mixed self-test 📝</h2>
+    <p style="color:var(--ink-soft);margin:0 0 6px">Close the page above and try all 10 on your own. Then reveal. 8 or more correct — you're exam-ready! 🎉</p>
+    <div class="qz">
+
+      <div class="qitem"><div class="qq">The cat washed ______ in the sun. <i>(reflexive)</i></div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><span class="a">itself</span></div></div>
+
+      <div class="qitem"><div class="qq">We finished the whole project all by ______. <i>(reflexive)</i></div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><span class="a">ourselves</span></div></div>
+
+      <div class="qitem"><div class="qq">Write the plurals: tomato, box, city. <i>(count nouns)</i></div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><span class="a">tomatoes, boxes, cities</span> (consonant+o → -es; -x → -es; consonant+y → -ies).</div></div>
+
+      <div class="qitem"><div class="qq">/pl/ or /pr/ ? — protect, plastic, prize, plug</div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans">protect = <span class="a">/pr/</span>, plastic = <span class="a">/pl/</span>, prize = <span class="a">/pr/</span>, plug = <span class="a">/pl/</span>.</div></div>
+
+      <div class="qitem"><div class="qq">Put in order: <i>never / Lahiru / bored / feels / in / company</i>.</div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans">"Lahiru <span class="a">never feels</span> bored in company." (adverb before the verb)</div></div>
+
+      <div class="qitem"><div class="qq">Correct it: "She always is late."</div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans">"She <span class="a">is always</span> late." (adverb goes after the verb <i>be</i>)</div></div>
+
+      <div class="qitem"><div class="qq">Past perfect: "By the time I arrived, the bus ______ (leave)."</div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><span class="a">had left</span></div></div>
+
+      <div class="qitem"><div class="qq">Simple or perfect? "Sumudu found the test easy because he ______ (do) a similar test before."</div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><span class="a">had done</span> (earlier action → past perfect).</div></div>
+
+      <div class="qitem"><div class="qq">Spot the error: "He had wrote the script."</div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans">"He <span class="a">had written</span> the script." (past participle, not past simple)</div></div>
+
+      <div class="qitem"><div class="qq">Add inverted commas: <i>Why are you worrying? asked Malith.</i></div>
+        <button class="rbtn" type="button">Show answer ▾</button>
+        <div class="ans"><span class="a">&#8220;Why are you worrying?&#8221;</span> asked Malith.</div></div>
+
+    </div>
+  </section>
+
+  <!-- ===== CHEAT SHEET ===== -->
+  <section class="cheat" id="cheat">
+    <h2>⚡ One-page Cheat Sheet</h2>
+    <p style="color:var(--ink-soft);margin:0 0 8px">Read just this in the last 5 minutes before an exam. (You can print it — printing also reveals all hidden answers.)</p>
+    <div class="cheat-grid">
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>🪞 Reflexive pronouns</h4>
+        <ul>
+          <li>myself · yourself · himself · herself · itself</li>
+          <li>ourselves · yourselves · themselves</li>
+          <li><b>-self</b> = one, <b>-selves</b> = many. Bounces back, or adds emphasis.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>🔢 Plural count nouns</h4>
+        <ul>
+          <li>Most: add <b>-s</b> (cup → cups).</li>
+          <li>Hiss (s/ss/sh/ch/x) or consonant+o → <b>-es</b> (bus → buses, mango → mangoes).</li>
+          <li>consonant+y → <b>-ies</b> (city → cities). Singular needs <i>a/an/the</i>.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>👅 /pl/ vs /pr/</h4>
+        <ul>
+          <li>/pl/ tongue flat: plan, play, plug.</li>
+          <li>/pr/ tongue curled: prince, proud, prize.</li>
+          <li>No vowel in between — never "pu-lan."</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>✉️ Informal letter</h4>
+        <ul>
+          <li>Address + date (top right) → "Dear ___," → opening → news → <b>question back</b> → "Love, name".</li>
+          <li>Commas after the greeting and the closing.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>⏱️ Adverbs of frequency</h4>
+        <ul>
+          <li>always → usually → often → sometimes → rarely → never.</li>
+          <li><b>Before</b> the main verb, <b>after</b> the verb "be".</li>
+          <li>once / twice → at the end of the sentence.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>🏔️ Describe an achiever</h4>
+        <ul>
+          <li>Order: born → education → dream → training → achievement → award.</li>
+          <li>Use the past tense; keep the time order.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--C)">
+        <h4>⏪ Past perfect</h4>
+        <ul>
+          <li><b>had + V3</b>: the earlier of two past actions.</li>
+          <li>Q: <i>Had he…?</i> &nbsp; Neg: <i>hadn't…</i></li>
+          <li>V3 not V2: had <b>gone/written</b>, not "had went/wrote".</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--C)">
+        <h4>❝ ❞ Inverted commas &amp; stories</h4>
+        <ul>
+          <li>Wrap the <b>exact</b> spoken words; capital first letter; punctuation <b>inside</b>.</li>
+          <li>New speaker → new line. Earlier action → had + V3.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <span class="logo" style="background:linear-gradient(135deg,#e0a92e,#c8901a);color:#0d1b3e;border-radius:8px;font-weight:800;place-items:center">I</span>
+  Idasara Academy · Grade 8 English · Cluster 1 — built faithfully from the Grade 8 English Pupil's Book &amp; Workbook (EPD). Units 1 (p.1), 9 (p.97), 10 (p.104). Medium: English.
+</footer>
+
+<script>
+/* progress bar */
+var prog=document.getElementById('progress');
+function up(){var h=document.documentElement;var s=h.scrollTop||document.body.scrollTop;
+  var mx=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/mx*100)+'%';}
+window.addEventListener('scroll',up,{passive:true});up();
+
+/* reveal buttons */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.rbtn');if(!b)return;
+  var box=b.parentElement.querySelector('.ans');if(!box)return;
+  var open=box.classList.toggle('show');
+  if(open){b.textContent='Hide answer ▴';}
+  else{b.textContent=(b.getAttribute('data-short')==='1'?'Answer ▾':'Show answer ▾');}
+});
+/* mark short-label buttons (those inside selfcheck/test that originally said "Answer") */
+document.querySelectorAll('.selfcheck .rbtn').forEach(function(b){b.setAttribute('data-short','1');});
+
+/* reflexive matcher widget */
+(function(){
+  var map={
+    'I':['myself','I made it <b>myself</b>.'],
+    'you1':['yourself','Did you do it <b>yourself</b>?'],
+    'he':['himself','He blamed <b>himself</b>.'],
+    'she':['herself','She <b>herself</b> designed it.'],
+    'it':['itself','The kitten cleaned <b>itself</b>.'],
+    'we':['ourselves','We are proud of <b>ourselves</b>.'],
+    'they':['themselves','They arranged <b>themselves</b> in a circle.']
+  };
+  var out=document.getElementById('reflexOut');
+  var chips=document.querySelectorAll('#reflexWidget .chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');
+    var d=map[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var(--A-soft);color:var(--A-deep)">'+d[0]+'</span> '+d[1];
+  });});
+})();
+
+/* frequency slider widget */
+(function(){
+  var s=document.getElementById('freqSlider'),out=document.getElementById('freqOut');
+  if(!s)return;
+  function word(v){
+    if(v>=95)return['always','You do it every single time.'];
+    if(v>=75)return['usually / normally','You do it most of the time.'];
+    if(v>=55)return['often','You do it many times.'];
+    if(v>=35)return['sometimes','You do it now and then.'];
+    if(v>=10)return['rarely','You do it not often.'];
+    return['never','You do not do it at any time.'];
+  }
+  function render(){var v=+s.value;var w=word(v);
+    out.innerHTML='<span class="badge" style="background:var(--B-soft);color:var(--B-deep)">'+v+'%</span> → <b>'+w[0]+'</b> — '+w[1];}
+  s.addEventListener('input',render);render();
+})();
+
+/* past participle (V3) widget */
+(function(){
+  var map={
+    'go':['had gone','By 6 p.m. they <b>had gone</b> home.'],
+    'write':['had written','She <b>had written</b> the script.'],
+    'eat':['had eaten','He <b>had eaten</b> before we arrived.'],
+    'see':['had seen','I <b>had seen</b> the film before.'],
+    'leave':['had left','The train <b>had left</b> already.'],
+    'win':['had won','She was happy because she <b>had won</b>.'],
+    'do':['had done','He <b>had done</b> a similar test before.']
+  };
+  var out=document.getElementById('v3Out');
+  var chips=document.querySelectorAll('#v3Widget .chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');
+    var d=map[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var(--C-soft);color:var(--C-deep)">'+d[0]+'</span> '+d[1];
+  });});
+})();
+</script>
+</body>
+</html>

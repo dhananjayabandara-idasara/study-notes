@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>මානව රුධිර සංසරණ පද්ධතිය (Blood Circulation) | 9 ශ්‍රේණිය විද්‍යාව · Idasara</title>
+<style>
+  :root{--bg:#fbf7f0;--surface:#fff;--ink:#2a2520;--ink-soft:#6b6155;--line:#e7ded1;
+    --teal:#0f766e;--teal-soft:#d7efec;--teal-deep:#0b5752;--amber:#c2680a;--amber-soft:#fdf0dc;
+    --violet:#6d28d9;--violet-soft:#efe8fd;--rose:#c0344b;--rose-soft:#fdecef;--rose-deep:#8f1d33;
+    --indigo:#2b54c6;--indigo-soft:#e9eefc;--leaf:#2f8f3e;--leaf-soft:#e3f5e6;--sky:#1f7fc2;--sky-soft:#e1f1fb;
+    --shadow:0 1px 2px rgba(42,37,32,.06),0 8px 24px rgba(42,37,32,.06);--radius:16px;
+    font-family:'Noto Sans Sinhala','Yaldevi','Iskoola Pota','Nirmala UI',system-ui,sans-serif;}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(900px 500px at 100% -10%,#fdecef 0,transparent 60%),radial-gradient(700px 500px at -10% 0,#e8f4f2 0,transparent 55%),var(--bg);color:var(--ink);line-height:1.75;font-size:17px}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px 80px}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:.82rem}
+  .nav a{color:var(--rose-deep);text-decoration:none;font-weight:600}.nav a:hover{text-decoration:underline}
+  .brand{font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-deep)}
+  .hero{margin-top:14px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;border-radius:22px;padding:30px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hero::after{content:"❤️";position:absolute;right:28px;bottom:2px;font-size:92px;opacity:.2}
+  .hero .k{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;font-size:.74rem;font-weight:600;margin-bottom:12px}
+  .hero h1{margin:0;font-size:1.7rem}.hero .en{margin:6px 0 0;opacity:.9}
+  section{margin-top:28px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow)}
+  h2{font-size:1.26rem;margin:0 0 12px;display:flex;align-items:center;gap:12px;line-height:1.4}
+  h2 .n{flex:none;width:34px;height:34px;border-radius:10px;background:var(--rose-soft);color:var(--rose);display:grid;place-items:center;font-weight:700}
+  h3{font-size:1.05rem;margin:22px 0 6px;color:var(--rose-deep)}
+  p{margin:11px 0}strong{color:var(--ink)}
+  .box{border-radius:14px;padding:15px 18px;margin:16px 0;border:1px solid transparent}
+  .box .tag{display:inline-flex;gap:7px;font-weight:700;font-size:.82rem;margin-bottom:5px}.box p{margin:5px 0 0}
+  .joke{background:var(--amber-soft);border-color:#f3dcb8}.joke .tag{color:var(--amber)}
+  .teacher{background:var(--indigo-soft);border-color:#cdd9f7}.teacher .tag{color:var(--indigo)}
+  .warn{background:var(--rose-soft);border-color:#f6cdd4}.warn .tag{color:var(--rose)}
+  .tip{background:var(--teal-soft);border-color:#bfe4df}.tip .tag{color:var(--teal-deep)}
+  /* heart schematic */
+  .heart{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin:14px 0}
+  .heart svg{width:100%;max-width:420px;height:auto;flex:1 1 320px}
+  .hkey{flex:1 1 230px;font-size:.88rem;margin:0;padding:0;list-style:none}
+  .hkey li{padding:5px 0;border-bottom:1px dashed var(--line)}
+  .hkey .bl{color:var(--sky);font-weight:700}.hkey .rd{color:var(--rose);font-weight:700}
+  .tbl{overflow-x:auto;margin:14px 0}
+  table{border-collapse:collapse;width:100%;min-width:460px;font-size:.93rem}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--rose-soft);color:var(--rose-deep);font-size:.85rem}
+  td .w{font-weight:700;color:var(--rose-deep)}
+  .yes{color:var(--leaf);font-weight:800}.no{color:var(--rose);font-weight:800}
+  table.grp td,table.grp th{text-align:center}
+  /* blood tree */
+  .tree{display:flex;flex-direction:column;align-items:center;gap:8px;margin:14px 0}
+  .tnode{border:2px solid var(--rose);border-radius:10px;padding:6px 14px;font-weight:700;color:var(--rose-deep);background:var(--rose-soft)}
+  .trow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tbox{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fdfcf9;text-align:center;font-size:.88rem;min-width:120px}
+  .tbox b{display:block;color:var(--ink)}.tbox .chips{font-size:.8rem;color:var(--ink-soft);margin-top:3px}
+  .flow{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center;margin:12px 0;font-size:.9rem}
+  .flow .n{background:var(--rose-soft);border:1px solid #f1c6cf;border-radius:999px;padding:4px 12px;font-weight:600;color:var(--rose-deep)}
+  .flow .ar{color:var(--amber);font-weight:700}
+  details{border:1px solid var(--line);border-radius:12px;margin:9px 0;background:var(--surface)}
+  summary{list-style:none;cursor:pointer;padding:12px 16px;font-weight:600;font-size:.93rem;color:var(--ink);display:flex;gap:9px}
+  summary::-webkit-details-marker{display:none}summary::before{content:"❓";flex:none}
+  details[open] summary{border-bottom:1px dashed var(--line)}summary:hover{background:#fdf4f6}
+  .answer{padding:11px 16px 14px;font-size:.94rem}
+  .answer .a{background:var(--rose-soft);border-radius:8px;padding:8px 12px;font-weight:600;color:var(--rose-deep);margin:0}
+  .closing{margin-top:28px;background:linear-gradient(135deg,#fff,#fdeef1);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow)}
+  .cheer{font-weight:700;color:var(--rose);font-size:1.08rem}
+  footer{text-align:center;margin-top:30px;color:var(--ink-soft);font-size:.85rem;line-height:1.9}
+  footer .t{color:var(--rose-deep);font-weight:700}
+  @media(max-width:560px){body{font-size:16px}.card,.closing{padding:20px 18px}.hero h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nav"><span class="brand">Idasara · විද්‍යාව 9</span><a href="index.html">← පොකුර 1 මෙනුව</a></div>
+  <div class="hero">
+    <span class="k">පරිච්ඡේදය 06 · පොත I · පි.72</span>
+    <h1>මානව රුධිර සංසරණ පද්ධතිය</h1>
+    <p class="en">Human Blood Circulatory System</p>
+  </div>
+
+  <section><div class="card">
+    <h2><span class="n">1</span> ඇයි මේක ඉගෙන ගන්නේ?</h2>
+    <p>අපේ සිරුරේ සෑම සෛලයකටම ඔක්සිජන් හා පෝෂක ඕනේ; ඒවායේ අපද්‍රව්‍ය ඉවත් කරන්නත් ඕනේ. මේ ප්‍රවාහන වැඩේ කරන්නේ <strong>රුධිරය</strong>, ඒක මුළු සිරුරටම පොම්ප කරන්නේ <strong>හෘදය</strong>. නාල පද්ධතියක් (ධමනි, ශිරා, කේශනාලිකා) හරහා මේ රුධිරය ගමන් කරයි.</p>
+    <div class="box joke"><div class="tag">😄 විහිළුවක්</div>
+      <p>ඔයාගේ හදවත දවසකට වාර <strong>එක්ලක්ෂයකට</strong> (~100,000) වැඩියෙන් ගැහෙනවා — නිවාඩුවක්වත් නැතුව! හරියට <strong>අවුරුදු කැවිලි හදන අම්මා</strong> වගේ — එක තත්පරයක්වත් නවතින්නේ නැහැ! 😅 ඒ නිසා හදවත රැකගන්න (ව්‍යායාම + හොඳ ආහාර).</p></div>
+  </div></section>
+
+  <!-- 6.1 HEART STRUCTURE -->
+  <section><div class="card">
+    <h2><span class="n">2</span> මිනිස් හෘදයේ ව්‍යුහය <span style="font-size:.8rem;color:var(--ink-soft);font-weight:400">· 6.1</span></h2>
+    <p>හෘදයේ <strong>කුටීර හතරකි</strong>. උඩින් <strong>කර්ණිකා (atria) දෙකක්</strong>, පහළින් <strong>කෝෂිකා (ventricles) දෙකක්</strong>. (රූපයේ නිල් පැත්ත = ඔක්සිජන් අඩු රුධිරය; රතු පැත්ත = ඔක්සිජන් සහිත රුධිරය.)</p>
+
+    <div class="heart">
+      <svg viewBox="0 0 380 320" role="img" aria-label="මිනිස් හෘදයේ කුටීර හතර">
+        <!-- vessels top -->
+        <rect x="60" y="6" width="20" height="56" rx="6" fill="#9cc6e8" stroke="#1f7fc2" stroke-width="2"/>
+        <rect x="110" y="6" width="20" height="46" rx="6" fill="#9cc6e8" stroke="#1f7fc2" stroke-width="2"/>
+        <rect x="250" y="6" width="20" height="46" rx="6" fill="#f3a9b6" stroke="#c0344b" stroke-width="2"/>
+        <rect x="300" y="6" width="20" height="56" rx="6" fill="#f3a9b6" stroke="#c0344b" stroke-width="2"/>
+        <!-- chambers -->
+        <rect x="40" y="70" width="140" height="80" rx="14" fill="#dbecf9" stroke="#1f7fc2" stroke-width="2.5"/>
+        <rect x="200" y="70" width="140" height="80" rx="14" fill="#fbdfe5" stroke="#c0344b" stroke-width="2.5"/>
+        <rect x="40" y="166" width="140" height="118" rx="16" fill="#cfe5f6" stroke="#1f7fc2" stroke-width="2.5"/>
+        <rect x="200" y="166" width="140" height="118" rx="16" fill="#f8cfd8" stroke="#c0344b" stroke-width="2.5"/>
+        <!-- valves -->
+        <path d="M70 150 l20 14 l20 -14" fill="none" stroke="#a85a08" stroke-width="3"/>
+        <path d="M230 150 l20 14 l20 -14" fill="none" stroke="#a85a08" stroke-width="3"/>
+        <g font-family="'Noto Sans Sinhala',sans-serif" font-size="13" fill="#1c2530" text-anchor="middle">
+          <text x="110" y="106" font-weight="700">දකුණු</text><text x="110" y="124">කර්ණිකාව</text>
+          <text x="270" y="106" font-weight="700">වම්</text><text x="270" y="124">කර්ණිකාව</text>
+          <text x="110" y="222" font-weight="700">දකුණු</text><text x="110" y="240">කෝෂිකාව</text>
+          <text x="270" y="222" font-weight="700">වම්</text><text x="270" y="240">කෝෂිකාව</text>
+        </g>
+        <g font-family="'Noto Sans Sinhala',sans-serif" font-size="10.5" fill="#5c6b7a" text-anchor="middle">
+          <text x="70" y="300">මහා ශිරා →</text>
+          <text x="120" y="300">පුප්.ධමනි ←</text>
+          <text x="260" y="300">පුප්.ශිරා →</text>
+          <text x="312" y="300">← මහා ධමනි</text>
+          <text x="100" y="160" fill="#a85a08">ත්‍රිතුණ්ඩ</text>
+          <text x="262" y="160" fill="#a85a08">ද්විතුණ්ඩ</text>
+        </g>
+      </svg>
+      <ul class="hkey">
+        <li><span class="rd">වම් පැත්ත</span> — ඔක්සිජන් සහිත රුධිරය මුළු සිරුරටම පොම්ප කරයි (බිත්ති ඝනයි).</li>
+        <li><span class="bl">දකුණු පැත්ත</span> — ඔක්සිජන් අඩු රුධිරය පෙනහළු වෙත යවයි.</li>
+        <li><b>ද්විතුණ්ඩ කපාටය</b> — වම් කර්ණිකාව ↔ වම් කෝෂිකාව (පෙති 2).</li>
+        <li><b>ත්‍රිතුණ්ඩ කපාටය</b> — දකුණු කර්ණිකාව ↔ දකුණු කෝෂිකාව (පෙති 3).</li>
+        <li><b>අඩසඳ කපාට</b> — මහා ධමනි ආරම්භයේ (රුධිරය ආපසු නොඑන්න).</li>
+      </ul>
+    </div>
+    <div class="box tip"><div class="tag">🔑 මතක තබාගන්න ඉඟි</div>
+      <p>• <b>කර්ණිකා උඩින්, කෝෂිකා පහළින්.</b><br>
+      • වම=<b>ද්විතුණ්ඩ (2 පෙති)</b>, දකුණ=<b>ත්‍රිතුණ්ඩ (3 පෙති)</b>. (ත්‍රි=3=දකුණ; ද්වි=2=වම.)<br>
+      • <b>කෝෂිකාවලින් ධමනි පිටවෙයි</b> (වම්→සංස්ථානික මහා ධමනිය/aorta, දකුණු→පුප්ඵුසීය මහා ධමනිය). <b>කර්ණිකාවලට ශිරා විවෘතයි</b> (උත්තර/අධර මහා ශිරා→දකුණු කර්ණිකාව, පුප්ඵුසීය ශිරා→වම් කර්ණිකාව).</p></div>
+  </div></section>
+
+  <!-- 6.2 VESSELS -->
+  <section><div class="card">
+    <h2><span class="n">3</span> ධමනි, ශිරා හා කේශනාලිකා <span style="font-size:.8rem;color:var(--ink-soft);font-weight:400">· 6.2</span></h2>
+    <div class="tbl"><table>
+      <thead><tr><th>ලක්ෂණය</th><th>ධමනි (Arteries)</th><th>ශිරා (Veins)</th><th>කේශනාලිකා (Capillaries)</th></tr></thead>
+      <tbody>
+        <tr><td class="w">දිශාව</td><td>හෘදයෙන් <b>ඉවතට</b></td><td>හෘදය <b>දෙසට</b></td><td>ධමනි ↔ ශිරා සම්බන්ධ කරයි</td></tr>
+        <tr><td class="w">බිත්ති</td><td>ඝනයි, ප්‍රත්‍යාස්ථයි</td><td>තුනීයි</td><td>තනි සෛල ස්තරයක් පමණි</td></tr>
+        <tr><td class="w">රුධිර පීඩනය</td><td>වැඩියි</td><td>අඩුයි</td><td>—</td></tr>
+        <tr><td class="w">කපාට</td><td>නැත</td><td><b>ඇත</b> (ආපසු ගලනය වැළැක්වීමට)</td><td>නැත</td></tr>
+        <tr><td class="w">විශේෂත්වය</td><td>අධික පීඩනයට ඔරොත්තු දෙයි</td><td>—</td><td>වායු/පෝෂක <b>විසරණය</b> සිදුවන තැන</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flow">
+      <span class="n">ධමනි</span><span class="ar">→</span><span class="n">ධමනිකා</span><span class="ar">→</span><span class="n">කේශනාලිකා</span><span class="ar">→</span><span class="n">අනු ශිරා</span><span class="ar">→</span><span class="n">ශිරා</span>
+    </div>
+    <div class="box teacher"><div class="tag">🧠 ගුරු සිතිවිල්ල</div><p>“<b>ධමනි = Away (ඉවතට)</b> — දෙකම ‘A’! ශිරා හෘදය දෙසට එනවා, ඒ නිසා පීඩනය අඩුයි → ආපසු නොගලන්න කපාට ඕනේ. ඇත්ත වැඩේ (විසරණය) සිදුවෙන්නේ පුංචිම නාලය — කේශනාලිකාවේ.”</p></div>
+  </div></section>
+
+  <!-- 6.3 BLOOD COMPONENTS -->
+  <section><div class="card">
+    <h2><span class="n">4</span> රුධිරයේ සංඝටක හා කෘත්‍ය <span style="font-size:.8rem;color:var(--ink-soft);font-weight:400">· 6.3</span></h2>
+    <div class="tree">
+      <div class="tnode">රුධිරය</div>
+      <div class="trow">
+        <div class="tbox"><b>දේහාණු (≈45%)</b><span class="chips">රතු · සුදු · පට්ටිකා</span></div>
+        <div class="tbox"><b>ප්ලාස්මය (≈55%)</b><span class="chips">ජලය + ද්‍රාව්‍ය/අද්‍රාව්‍ය ද්‍රව්‍ය</span></div>
+      </div>
+    </div>
+    <h3>දේහාණු වර්ග හා කෘත්‍ය</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>සංඝටකය</th><th>කෘත්‍යය</th></tr></thead>
+      <tbody>
+        <tr><td class="w">රතු රුධිරාණු<br>(රක්තාණු)</td><td>රතු පැහැ <b>හිමොග්ලෝබින්</b> වර්ණකය මගින් ඔක්සිජන් පෙනහළුවලින් සිට සෛල දක්වා <b>පරිවහනය</b>.</td></tr>
+        <tr><td class="w">සුදු රුධිරාණු<br>(ශ්වේතාණු)</td><td>ඇතුළු වන <b>ව්‍යාධිජනක විනාශ</b> කිරීම හා <b>ප්‍රතිදේහ</b> නිපදවීම — සිරුර ආරක්ෂා කරයි.</td></tr>
+        <tr><td class="w">රුධිර පට්ටිකා</td><td>තුවාලයකදී රුධිරය <b>කැටි ගස්වා</b> රුධිර වහනය වැළැක්වීම.</td></tr>
+        <tr><td class="w">රුධිර ප්ලාස්මය</td><td>ආහාර ජීර්ණ ඵල, ලවණ, විටමින්, හෝර්මෝන, බහිස්ස්‍රාවී ද්‍රව්‍ය, වායු — සියල්ල <b>ද්‍රව්‍ය පරිවහනය</b>.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box warn"><div class="tag">🚨 දැනගන්න — ඩෙංගු හා රුධිර පට්ටිකා</div>
+      <p>සමහර වෛරස් ආසාදනවලදී (උදා: <b>ඩෙංගු රෝගය, මී උණ</b>) රුධිර පට්ටිකා සංඛ්‍යාව <b>ගිලිහී පහළ බසී</b> → රුධිර වහනය වැළැක්වීම දුර්වල වෙයි. ඒකයි ඩෙංගු රෝගියාගේ ‘platelet count’ එක දිගටම බලන්නේ!</p></div>
+  </div></section>
+
+  <!-- 6.4 TRANSFUSION -->
+  <section><div class="card">
+    <h2><span class="n">5</span> රුධිර පාරවිලයනය <span style="font-size:.8rem;color:var(--ink-soft);font-weight:400">· 6.4</span></h2>
+    <p>එක් පුද්ගලයෙකුගේ රුධිරය තවත් අයෙකුට ශරීරගත කිරීම <strong>රුධිර පාරවිලයනය (blood transfusion)</strong>. ප්‍රදානය කරන්නා <strong>දායකයා (donor)</strong>, ලබන්නා <strong>ප්‍රතිග්‍රාහකයා (recipient)</strong>. <strong>ඕනෑම කෙනෙකුගේ රුධිරය ඕනෑම කෙනෙකුට දිය නොහැක</strong> — රුධිර ගණ (A, B, AB, O) හා රීසස් (Rhesus) සාධකය ගැළපිය යුතුයි.</p>
+    <h3>රුධිර ගණ ගැළපීම</h3>
+    <div class="tbl"><table class="grp">
+      <thead><tr><th>දායක ↓ / ප්‍රතිග්‍රාහක →</th><th>A</th><th>B</th><th>AB</th><th>O</th></tr></thead>
+      <tbody>
+        <tr><td class="w">A</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td class="w">B</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td class="w">AB</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="no">✗</td></tr>
+        <tr><td class="w">O</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      </tbody>
+    </table></div>
+    <p>වගුව අනුව: <strong>AB ගණය = සර්ව ප්‍රතිග්‍රාහකයා</strong> (හැමෝගෙන්ම ලබාගත හැක). <strong>O ගණය = සර්ව දායකයා</strong> (හැමෝටම දිය හැක).</p>
+    <div class="box joke"><div class="tag">😄 විහිළුව + හොඳ පුරුද්දක්</div>
+      <p>ඇයි <strong>O</strong> රුධිර ගණය ලෝකෙම ජනප්‍රිය? මොකද එයා හැමෝටම ලේ දෙනවා — සැබෑ <strong>‘සර්ව දායකයෙක්’</strong>! 🩸 ශ්‍රී ලංකාවේ පන්සල්වල, රෝහල්වල පවත්වන <strong>ලේ දන්දීමේ කඳවුරු</strong> — වයස 18 සම්පූර්ණ වුණාම, ඔයාටත් ජීවිතයක් බේරගන්න පුළුවන්!</p></div>
+  </div></section>
+
+  <!-- SELF CHECK -->
+  <section><div class="card">
+    <h2><span class="n">✦</span> ස්වයං-පරීක්ෂණය</h2>
+    <p style="color:var(--ink-soft);font-size:.95rem">මනසින්ම උත්තර දීලා ඊට පස්සේ විවෘත කරන්න.</p>
+    <details><summary>හෘදයේ කුටීර කීයද? ඒවා මොනවද?</summary><div class="answer"><p class="a">හතරයි — කර්ණිකා 2 (උඩ), කෝෂිකා 2 (පහළ): වම්/දකුණු කර්ණිකා, වම්/දකුණු කෝෂිකා.</p></div></details>
+    <details><summary>වම් කර්ණිකාව හා වම් කෝෂිකාව අතර කපාටය?</summary><div class="answer"><p class="a">ද්විතුණ්ඩ කපාටය (පෙති 2).</p></div></details>
+    <details><summary>හෘදයෙන් ඉවතට රුධිරය ගෙන යන, ඝන බිත්ති සහිත නාල?</summary><div class="answer"><p class="a">ධමනි (arteries). ශිරාවල කපාට ඇත; කේශනාලිකාවල තනි සෛල බිත්තියි.</p></div></details>
+    <details><summary>ඔක්සිජන් පරිවහනය කරන රුධිර සංඝටකය හා වර්ණකය?</summary><div class="answer"><p class="a">රතු රුධිරාණු — හිමොග්ලෝබින් වර්ණකය මගින්.</p></div></details>
+    <details><summary>තුවාලයකදී රුධිරය කැටි ගස්වන්නේ?</summary><div class="answer"><p class="a">රුධිර පට්ටිකා. (ඩෙංගුවේදී මේවා අඩු වෙයි.)</p></div></details>
+    <details><summary>‘සර්ව දායකයා’ සහ ‘සර්ව ප්‍රතිග්‍රාහකයා’ රුධිර ගණ?</summary><div class="answer"><p class="a">සර්ව දායකයා = O · සර්ව ප්‍රතිග්‍රාහකයා = AB.</p></div></details>
+  </div></section>
+
+  <div class="closing">
+    <p class="cheer">පුතේ, දැන් ඔයාගේම හදවතේ වැඩේ ඔයාට පැහැදිලියි! ❤️🌟</p>
+    <p>මතක තබාගන්න: <strong>කර්ණිකා උඩ/කෝෂිකා පහළ · ධමනි=ඉවතට · O දෙන්නා/AB ගන්නා</strong>.</p>
+    <p style="margin-top:10px"><a href="index.html" style="color:var(--rose-deep);font-weight:700">← පොකුර 1 මෙනුවට ආපසු</a> &nbsp;·&nbsp; මේ පොකුරේ පාඩම් දෙකම ඉවරයි! 🎉</p>
+  </div>
+  <footer><div class="t">Idasara Academy</div>අපි බලගන්වමු · අපි නිදහස් කරමු · අපි ශක්තිමත් කරමු<br>9 ශ්‍රේණිය විද්‍යාව · මානව රුධිර සංසරණ පද්ධතිය</footer>
+</div>
+</body>
+</html>

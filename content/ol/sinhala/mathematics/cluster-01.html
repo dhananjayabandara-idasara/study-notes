@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara · O/L ගණිතය · පාඩම 1 — සංඛ්‍යා පදනම</title>
+<style>
+  /* ====== IDASARA DESIGN TOKENS ====== */
+  :root{
+    --navy:#0d1b3e;        /* brand structural */
+    --navy-2:#16264f;
+    --navy-3:#22376b;
+    --gold:#e0a92e;        /* brand accent */
+    --gold-2:#c8901a;
+    --gold-soft:#f6e4b8;
+    --bg:#f5f7fb;          /* cool off-white, not generic cream */
+    --card:#ffffff;
+    --ink:#1a2235;
+    --ink-soft:#4a5468;
+    --line:#e2e7f0;
+    /* part accents (colour-coded sections) */
+    --A:#0e7c86;  --A-soft:#e2f3f4;  --A-deep:#0a5b63;
+    --B:#c4533f;  --B-soft:#fbe9e4;  --B-deep:#9c3a29;
+    --C:#5b4b9c;  --C-soft:#ece9f8;  --C-deep:#42357a;
+    --ok:#1f8a4c; --warn:#b3651f; --warn-soft:#fdf0e1;
+    --shadow:0 4px 18px rgba(13,27,62,.08);
+    --shadow-lg:0 10px 40px rgba(13,27,62,.14);
+    --radius:16px;
+    --fs:'Noto Sans Sinhala','Iskoola Pota','Nirmala UI','Yu Gothic',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'Iosevka','Fira Code',ui-monospace,'Cascadia Code',Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--fs);font-size:17px;line-height:1.72;
+    -webkit-text-size-adjust:100%;
+  }
+  /* ---- top scroll progress ---- */
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:120;
+    background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .1s linear}
+
+  /* ---- header ---- */
+  header.site{position:sticky;top:0;z-index:100;
+    background:linear-gradient(135deg,var(--navy),var(--navy-3));
+    color:#fff;border-bottom:3px solid var(--gold);box-shadow:var(--shadow)}
+  .bar{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff}
+  .logo{width:38px;height:38px;border-radius:10px;flex:none;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    display:grid;place-items:center;font-weight:800;color:var(--navy);font-size:21px;
+    box-shadow:0 2px 8px rgba(224,169,46,.4)}
+  .brand b{font-size:18px;letter-spacing:.5px;line-height:1}
+  .brand small{display:block;font-size:11px;opacity:.75;letter-spacing:2px;text-transform:uppercase}
+  .crumbs{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;font-size:12.5px}
+  .crumbs span{background:rgba(255,255,255,.12);padding:3px 11px;border-radius:20px;white-space:nowrap}
+  .crumbs span.acc{background:var(--gold);color:var(--navy);font-weight:700}
+  #menuBtn{display:none}
+
+  /* ---- layout ---- */
+  main{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---- hero ---- */
+  .hero{margin:30px 0 14px;padding:34px 28px;border-radius:24px;color:#fff;position:relative;overflow:hidden;
+    background:radial-gradient(120% 140% at 85% 10%,var(--navy-3),var(--navy) 60%)}
+  .hero::after{content:"√ ⅔ x² log";position:absolute;right:-6px;bottom:-22px;font-size:84px;font-weight:800;
+    color:rgba(224,169,46,.12);letter-spacing:6px;white-space:nowrap;pointer-events:none}
+  .hero .eyebrow{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;
+    font-size:12.5px;letter-spacing:1.5px;padding:5px 13px;border-radius:20px;text-transform:uppercase}
+  .hero h1{margin:.5em 0 .25em;font-size:clamp(27px,6.4vw,46px);line-height:1.18;font-weight:800}
+  .hero h1 .g{color:var(--gold)}
+  .hero p{margin:.4em 0 0;font-size:16.5px;max-width:46ch;opacity:.92}
+  .hero .pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.22);padding:7px 15px;border-radius:30px;font-size:14px}
+
+  /* ---- "why this matters" ---- */
+  .why{background:var(--card);border-radius:var(--radius);padding:22px 24px;margin:18px 0;
+    box-shadow:var(--shadow);border-left:6px solid var(--gold)}
+  .why h2{margin:.1em 0 .4em;font-size:21px;color:var(--navy)}
+  .why p{margin:.4em 0;color:var(--ink-soft);font-size:16px}
+
+  /* ---- roadmap ---- */
+  .roadmap{margin:22px 0}
+  .roadmap h2{font-size:20px;color:var(--navy);margin:0 0 4px}
+  .roadmap .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .map-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+  .map-card{display:block;text-decoration:none;color:inherit;background:var(--card);
+    border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-top:5px solid var(--cl);
+    transition:transform .15s,box-shadow .15s}
+  .map-card:hover,.map-card:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow-lg);outline:none}
+  .map-card .tag{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--cl);text-transform:uppercase}
+  .map-card h3{margin:6px 0 6px;font-size:18px;color:var(--navy)}
+  .map-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .map-card .cnt{display:inline-block;margin-top:10px;font-size:12px;background:var(--clsoft);
+    color:var(--cl);font-weight:700;padding:3px 10px;border-radius:20px}
+
+  /* ---- part divider ---- */
+  .part{scroll-margin-top:76px;margin:46px 0 8px;padding:20px 22px;border-radius:20px;color:#fff;
+    background:linear-gradient(135deg,var(--cl),var(--cldeep));box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .part .pn{font-size:13px;font-weight:800;letter-spacing:2px;opacity:.85;text-transform:uppercase}
+  .part h2{margin:3px 0 4px;font-size:clamp(22px,5vw,30px);font-weight:800}
+  .part p{margin:0;opacity:.92;font-size:15px;max-width:54ch}
+  .part .src{position:absolute;right:16px;top:16px;font-size:11.5px;background:rgba(255,255,255,.16);
+    padding:4px 11px;border-radius:14px}
+
+  /* ---- sub-topic block ---- */
+  .topic{scroll-margin-top:72px;background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);margin:16px 0;overflow:hidden;border:1px solid var(--line)}
+  .topic > .head{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none;
+    padding:17px 20px;background:linear-gradient(0deg,#fff,var(--clsoft));border-bottom:1px solid var(--line)}
+  .topic > .head::-webkit-details-marker{display:none}
+  .topic .num{flex:none;width:36px;height:36px;border-radius:11px;background:var(--cl);color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:16px}
+  .topic .head h3{margin:0;font-size:18.5px;color:var(--navy);flex:1}
+  .topic .head .en{display:block;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+  .topic .chev{flex:none;color:var(--cl);font-size:22px;transition:transform .25s}
+  details[open] > .head .chev{transform:rotate(180deg)}
+  .topic .body{padding:6px 20px 22px}
+
+  /* ---- 7-step rhythm chips ---- */
+  .step{margin:20px 0 8px;display:flex;align-items:center;gap:9px}
+  .step .dot{flex:none;width:25px;height:25px;border-radius:50%;background:var(--clsoft);color:var(--cldeep);
+    font-weight:800;font-size:13px;display:grid;place-items:center}
+  .step b{font-size:15.5px;color:var(--cldeep);letter-spacing:.3px}
+  p.lead{font-size:16.5px}
+  .topic p{color:var(--ink)}
+
+  /* ---- callout boxes ---- */
+  .box{border-radius:13px;padding:14px 16px;margin:14px 0;font-size:15.5px}
+  .hook{background:var(--clsoft);border-left:5px solid var(--cl)}
+  .hook .ttl{font-weight:800;color:var(--cldeep)}
+  .watch{background:var(--warn-soft);border-left:5px solid var(--warn)}
+  .watch .ttl{font-weight:800;color:var(--warn);display:block;margin-bottom:3px}
+  .watch ul{margin:.3em 0;padding-left:1.15em}
+  .watch li{margin:.3em 0}
+  .memo{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:13px;
+    padding:14px 17px;margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+  .memo .ic{font-size:22px;flex:none}
+  .memo b{color:var(--gold)}
+  .joke{font-style:italic;color:var(--ink-soft);font-size:14.5px;background:#fcfcfe;border:1px dashed var(--line);
+    border-radius:11px;padding:9px 14px;margin:12px 0}
+  .joke::before{content:"😄 ";font-style:normal}
+
+  /* ---- worked example ---- */
+  .work{background:#fbfcfe;border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:13px 0}
+  .work .lbl{display:inline-block;background:var(--cl);color:#fff;font-size:12.5px;font-weight:700;
+    padding:3px 11px;border-radius:8px;margin-bottom:8px}
+  .calc{font-family:var(--mono);font-size:15.5px;line-height:2;overflow-x:auto;white-space:nowrap;padding:2px 0}
+  .calc .c{color:var(--ink-soft)}
+  .calc .hi{color:var(--cldeep);font-weight:700}
+  .frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 2px}
+  .frac .t{border-bottom:1.6px solid currentColor;padding:0 4px;line-height:1.25}
+  .frac .b{padding:0 4px;line-height:1.25}
+  sup{font-size:.72em}
+
+  /* ---- reveal (your turn / self-check) ---- */
+  .reveal{margin:11px 0}
+  .reveal .q{font-weight:600}
+  .rbtn{margin-top:8px;background:var(--cl);color:#fff;border:none;cursor:pointer;
+    font-family:var(--fs);font-size:14px;font-weight:700;padding:8px 16px;border-radius:24px;
+    display:inline-flex;align-items:center;gap:7px;transition:filter .15s}
+  .rbtn:hover{filter:brightness(1.08)}
+  .rbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .ans{display:none;margin-top:10px;background:#f0fbf4;border:1px solid #bfe6cd;border-left:5px solid var(--ok);
+    border-radius:11px;padding:11px 15px;font-size:15px}
+  .ans.show{display:block;animation:pop .25s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  .ans .a{font-weight:800;color:var(--ok)}
+
+  .selfcheck{background:var(--clsoft);border-radius:13px;padding:13px 16px;margin:15px 0}
+  .selfcheck .ttl{font-weight:800;color:var(--cldeep);margin-bottom:4px}
+  .selfcheck ol{margin:.3em 0;padding-left:1.3em}
+  .selfcheck li{margin:.55em 0}
+
+  /* ---- interactive widgets ---- */
+  .widget{background:#fff;border:2px solid var(--clsoft);border-radius:14px;padding:16px;margin:15px 0}
+  .widget .wt{font-weight:800;color:var(--cldeep);font-size:14.5px;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{cursor:pointer;border:1.6px solid var(--cl);background:#fff;color:var(--cldeep);font-family:var(--mono);
+    font-size:15px;font-weight:700;padding:7px 13px;border-radius:11px;transition:.15s}
+  .chip:hover{background:var(--clsoft)}
+  .chip.active{background:var(--cl);color:#fff}
+  .wout{margin-top:11px;font-size:15px;min-height:1.4em}
+  .wout .badge{display:inline-block;font-weight:800;padding:2px 9px;border-radius:8px;font-size:13px;margin-right:6px}
+  .ninput{font-family:var(--mono);font-size:16px;width:120px;padding:7px 10px;border:1.6px solid var(--cl);
+    border-radius:10px;text-align:center}
+  .gobtn{background:var(--cl);color:#fff;border:none;font-family:var(--fs);font-weight:700;font-size:14px;
+    padding:8px 15px;border-radius:10px;cursor:pointer;margin-left:6px}
+  .slider{width:100%;accent-color:var(--cl)}
+
+  /* ---- number line / svg ---- */
+  .svgwrap{margin:14px 0;text-align:center}
+  svg{max-width:100%;height:auto}
+  figcaption{font-size:13px;color:var(--ink-soft);margin-top:5px}
+
+  /* ---- tables ---- */
+  .tbl{width:100%;border-collapse:collapse;margin:13px 0;font-size:14.5px;overflow:hidden;border-radius:11px;box-shadow:var(--shadow)}
+  .tbl th{background:var(--cl);color:#fff;padding:9px 11px;text-align:left;font-weight:700}
+  .tbl td{padding:8px 11px;border-bottom:1px solid var(--line);background:#fff}
+  .tbl tr:nth-child(even) td{background:#fafbfe}
+  .scroll{overflow-x:auto}
+
+  /* ---- synthesis & test & cheat ---- */
+  .synth{background:linear-gradient(135deg,var(--navy),var(--navy-3));color:#fff;border-radius:22px;
+    padding:30px 26px;margin:48px 0 24px;box-shadow:var(--shadow-lg)}
+  .synth h2{color:var(--gold);margin:0 0 8px;font-size:26px}
+  .synth p{opacity:.92}
+  .synth .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0;font-weight:700}
+  .synth .chain span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    padding:7px 14px;border-radius:12px}
+  .synth .chain i{color:var(--gold);font-style:normal;font-size:20px}
+
+  .test{background:var(--card);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .test h2{color:var(--navy);margin:0 0 4px;font-size:24px}
+  .test .qz{counter-reset:q;}
+  .qitem{border-top:1px solid var(--line);padding:14px 0}
+  .qitem:first-of-type{border-top:none}
+  .qitem .qq{font-weight:600}
+  .qitem .qq::before{counter-increment:q;content:"ප්‍රශ්නය " counter(q) ". ";color:var(--navy);font-weight:800}
+
+  .cheat{background:#fffdf6;border:2px solid var(--gold-soft);border-radius:22px;padding:26px;margin:24px 0;box-shadow:var(--shadow)}
+  .cheat h2{color:var(--gold-2);margin:0 0 6px;font-size:24px}
+  .cheat-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  .cheat-card{background:#fff;border-radius:13px;padding:14px 16px;border-top:4px solid var(--cl);box-shadow:var(--shadow)}
+  .cheat-card h4{margin:0 0 6px;color:var(--navy);font-size:15.5px}
+  .cheat-card ul{margin:.3em 0;padding-left:1.1em;font-size:14px}
+  .cheat-card li{margin:.3em 0}
+  .cheat-card .calc{font-size:14px}
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding:30px 18px 10px}
+  footer .logo{display:inline-grid;width:30px;height:30px;font-size:16px;vertical-align:middle;margin-right:7px}
+
+  .tnote{font-size:12.5px;color:var(--ink-soft);background:#fafbfe;border:1px solid var(--line);
+    border-radius:9px;padding:7px 12px;margin:10px 0}
+
+  /* ---- responsive ---- */
+  @media(max-width:760px){
+    body{font-size:16px}
+    .map-grid{grid-template-columns:1fr}
+    .cheat-grid{grid-template-columns:1fr}
+    .crumbs{display:none}
+    .hero{padding:26px 20px}
+    .topic .body{padding:4px 15px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+  }
+  @media print{
+    header.site,#progress,.rbtn,.chev{display:none!important}
+    .ans{display:block!important}
+    details{display:block}
+    details:not([open])>:not(summary){display:block!important}
+    .chev{display:none!important}
+    .topic,.work,.box,.widget{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="site">
+  <div class="bar">
+    <a class="brand" href="#top">
+      <span class="logo">I</span>
+      <span><b>IDASARA</b><small>Academy</small></span>
+    </a>
+    <div class="crumbs">
+      <span>O/L</span><span>ගණිතය</span><span class="acc">පාඩම 1 · සංඛ්‍යා පදනම</span>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <span class="eyebrow">අත්තිවාරම · Foundation</span>
+    <h1>සංඛ්‍යා, <span class="g">වර්ගමූල</span> හා භාග —<br>හැම ගණිතයකම <span class="g">අත්තිවාරම</span>.</h1>
+    <p>මේ පාඩම ඔයාට අමාරුයි කියලා හිතෙනවා නම් කමක් නෑ. අපි පටන් ගන්නේ බිංදුවෙන්. පොඩි පොඩි ජයග්‍රහණවලින් ගොඩනගමු — අන්තිමේදී ඔයාට මේවා විභාගෙට පුළුවන්.</p>
+    <span class="pill">⏱ සෙමින් කියවන්න · 🧩 හැම කොටසක්ම අත්හදා බලන්න · ✅ පිළිතුරු හංගලා තියෙනවා</span>
+  </section>
+
+  <!-- ===================== WHY ===================== -->
+  <section class="why">
+    <h2>ඇයි මේක මෙච්චර වැදගත්?</h2>
+    <p>වර්ගමූල (√), භාග (⅔) සහ දර්ශක–ලඝුගණක යනු ගණිතයේ <b>අකුරු</b> වගේ. මේවා හරියට තේරුම් ගත්තොත් ඉස්සරහට එන ත්‍රිකෝණමිතිය, වීජ ගණිතය, ඝන වස්තූන් — හැම එකක්ම පහසු වෙනවා. මේවා නොදැන ඉස්සරහට යනවා කියන්නේ අත්තිවාරම නැතුව ගෙයක් හදනවා වගේ.</p>
+    <p>ඒ නිසා මේ පාඩම ඔයාගේ අත්තිවාරම තහවුරු කරගන්න තැන. හදිස්සි වෙන්න එපා — හරියට තේරුම් ගෙන ඉස්සරහට යමු.</p>
+  </section>
+
+  <!-- ===================== ROADMAP ===================== -->
+  <section class="roadmap">
+    <h2>මේ පාඩමේ සිතියම</h2>
+    <p class="sub">කොටස් තුනයි. ඕනෑම එකකට යන්න ටැප් කරන්න — හැබැයි පිළිවෙළට කියෙව්වොත් හොඳම.</p>
+    <div class="map-grid">
+      <a class="map-card" href="#partA" style="--cl:var(--A);--clsoft:var(--A-soft)">
+        <span class="tag">A කොටස</span>
+        <h3>තාත්වික සංඛ්‍යා හා වර්ගමූල</h3>
+        <p>සංඛ්‍යා පවුල්, දශම, කරණි (√), වර්ගමූල ආසන්න කිරීම සහ බෙදීමේ ක්‍රමය.</p>
+        <span class="cnt">උප-මාතෘකා 7</span>
+      </a>
+      <a class="map-card" href="#partB" style="--cl:var(--B);--clsoft:var(--B-soft)">
+        <span class="tag">B කොටස</span>
+        <h3>භාග හා BODMAS</h3>
+        <p>භාගවල කර්ම, තුල්‍ය භාග, මිශ්‍ර සංඛ්‍යා, ගණිත කර්ම පිළිවෙළ (BODMAS).</p>
+        <span class="cnt">උප-මාතෘකා 4</span>
+      </a>
+      <a class="map-card" href="#partC" style="--cl:var(--C);--clsoft:var(--C-soft)">
+        <span class="tag">C කොටස</span>
+        <h3>දර්ශක හා ලඝුගණක</h3>
+        <p>බල නීති, භාගික දර්ශක, දර්ශක සමීකරණ, ලඝුගණක නීති, වගු හා ගණක යන්ත්‍රය.</p>
+        <span class="cnt">උප-මාතෘකා 6</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ##################################################################### -->
+  <!-- ============================ PART A ================================= -->
+  <!-- ##################################################################### -->
+  <section class="part" id="partA" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <span class="src">මූලාශ්‍රය · 11 ශ්‍රේණිය I — පරිච්ඡේදය 1; 10 ශ්‍රේණිය I — පරිච්ඡේදය 2</span>
+    <div class="pn">A කොටස</div>
+    <h2>තාත්වික සංඛ්‍යා හා වර්ගමූල</h2>
+    <p>සංඛ්‍යා මොනවද, ඒවා කොහොමද පවුල්වලට බෙදෙන්නේ, කරණි (√) කියන්නේ මොකක්ද, සහ වර්ගමූල සොයන විදිහ.</p>
+  </section>
+
+  <!-- A1 number families -->
+  <details class="topic" id="a1" open style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">1</span>
+      <h3>සංඛ්‍යා පවුල් — N, Z, Q, Q′, R<span class="en">Number sets / Classification of numbers</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">පොඩි කාලෙ මතකද?</span> ඔයා ගණන් කරන්න ඉගෙන ගත්තේ 1, 2, 3… කියලා. ඊට පස්සේ බිංදුව, ඊට පස්සේ සෘණ සංඛ්‍යා, භාග… සංඛ්‍යා ටික ටික වැඩි වුණා. ඇත්තටම සංඛ්‍යා <b>පවුල් කිහිපයකට</b> බෙදෙනවා — හරියට පවුලක ලොකු අයයි පොඩි අයයි වගේ. අපි ඒ පවුල් අඳුරගමු.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p class="lead">හැම සංඛ්‍යා පවුලක්ම තවත් ලොකු පවුලක් ඇතුළේ. පොඩිම පවුලෙන් පටන් ගමු:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>සංකේතය</th><th>පවුලේ නම</th><th>ඇතුළත් වෙන්නේ</th><th>උදාහරණ</th></tr>
+        <tr><td><b>ℕ</b></td><td>ප්‍රකෘති සංඛ්‍යා<br><small>Natural</small></td><td>ගණන් කරන සංඛ්‍යා</td><td>1, 2, 3, 4 …</td></tr>
+        <tr><td><b>ℤ</b></td><td>නිබිල<br><small>Integers</small></td><td>ධන, බිංදුව, සෘණ සියල්ල</td><td>…−2, −1, 0, 1, 2…</td></tr>
+        <tr><td><b>ℚ</b></td><td>පරිමේය<br><small>Rational</small></td><td><span class="frac"><span class="t">a</span><span class="b">b</span></span> විදිහට ලියන්න පුළුවන් (b≠0)</td><td>½, −⅖, 4, 0.75</td></tr>
+        <tr><td><b>ℚ′</b></td><td>අපරිමේය<br><small>Irrational</small></td><td>භාගයක් විදිහට ලියන්න <b>බෑ</b></td><td>√2, √3, π</td></tr>
+        <tr><td><b>ℝ</b></td><td>තාත්වික<br><small>Real</small></td><td>ඉහත හැම එකක්ම — සංඛ්‍යා රේඛාවේ හැම ලක්ෂ්‍යයක්ම</td><td>ඔක්කොම</td></tr>
+      </table></div>
+      <p>ℤ පවුල තවදුරටත් බෙදෙනවා: <b>ධන නිබිල</b> ℤ⁺ = {1, 2, 3 …} සහ <b>සෘණ නිබිල</b> ℤ⁻ = {−1, −2, −3 …}. (පොතේ 11 ශ්‍රේණිය, පිටු 2–5)</p>
+      <p>පරිමේය සංඛ්‍යා (ℚ) අර්ථ දැක්වෙන්නේ මෙහෙමයි:</p>
+      <div class="work"><div class="calc">ℚ = { <span class="frac"><span class="t">a</span><span class="b">b</span></span> : a, b ∈ ℤ <span class="c">සහ</span> b ≠ 0 }</div></div>
+      <p>එනම් <b>හරයේ බිංදුව තහනම්</b> (බිංදුවෙන් බෙදන්න බෑ නේ!). 2 = <span class="frac"><span class="t">2</span><span class="b">1</span></span> නිසා නිබිල පවා පරිමේයයි.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 360" role="img" aria-label="සංඛ්‍යා පවුල් එකිනෙක ඇතුළේ පිහිටි වෙන් රූප සටහන: R ඇතුළේ Q සහ Qprime, Q ඇතුළේ Z, Z ඇතුළේ N">
+          <rect x="6" y="6" width="448" height="348" rx="14" fill="#fff" stroke="#0e7c86" stroke-width="2.5"/>
+          <text x="20" y="30" font-size="17" font-weight="800" fill="#0a5b63" font-family="sans-serif">ℝ — තාත්වික</text>
+          <text x="330" y="60" font-size="15" fill="#0e7c86" font-family="sans-serif">√2  ·  √3</text>
+          <text x="360" y="335" font-size="15" fill="#0e7c86" font-family="sans-serif">π</text>
+          <text x="40" y="115" font-size="14" fill="#0e7c86" font-family="sans-serif">(ℚ′ අපරිමේය — මෙතන)</text>
+          <ellipse cx="210" cy="205" rx="175" ry="130" fill="#e2f3f4" stroke="#0e7c86" stroke-width="2"/>
+          <text x="70" y="170" font-size="16" font-weight="700" fill="#0a5b63" font-family="sans-serif">ℚ — පරිමේය</text>
+          <text x="305" y="200" font-size="14" fill="#0a5b63" font-family="sans-serif">½ · −13⁄5</text>
+          <ellipse cx="200" cy="225" rx="120" ry="92" fill="#c9e7ea" stroke="#0e7c86" stroke-width="2"/>
+          <text x="120" y="180" font-size="15" font-weight="700" fill="#0a5b63" font-family="sans-serif">ℤ — නිබිල</text>
+          <text x="250" y="250" font-size="14" fill="#0a5b63" font-family="sans-serif">−1 · 0 · −2</text>
+          <ellipse cx="185" cy="245" rx="62" ry="48" fill="#0e7c86" stroke="#0a5b63" stroke-width="2"/>
+          <text x="150" y="240" font-size="14" font-weight="800" fill="#fff" font-family="sans-serif">ℕ</text>
+          <text x="150" y="262" font-size="14" fill="#fff" font-family="sans-serif">1 · 2 · 3</text>
+        </svg>
+        <figcaption>පවුල් එකක් ඇතුළේ තව එකක්: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ. ℚ′ (අපරිමේය) තියෙන්නේ ℚ එකෙන් එළියේ, නමුත් ℝ එක ඇතුළේ. (පොත, පිටුව 7)</figcaption>
+      </figure>
+
+      <div class="widget" id="setSorter">
+        <div class="wt">🧮 අත්හදා බලන්න — සංඛ්‍යාව අයිති පවුල මොනවද?</div>
+        <div class="chiprow">
+          <button class="chip" data-k="7">7</button>
+          <button class="chip" data-k="-3">−3</button>
+          <button class="chip" data-k="0.5">½</button>
+          <button class="chip" data-k="0">0</button>
+          <button class="chip" data-k="root2">√2</button>
+          <button class="chip" data-k="pi">π</button>
+          <button class="chip" data-k="-2.5">−2.5</button>
+        </div>
+        <div class="wout" id="setOut">උඩ සංඛ්‍යාවක් ටැප් කරන්න…</div>
+      </div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">මේ සංඛ්‍යා පරිමේයද අපරිමේයද? √25, √6</p>
+        <div class="calc">√25 = 5  <span class="c">→ 5 කියන්නේ නිබිලයක් →</span> <span class="hi">පරිමේය ✓</span></div>
+        <div class="calc">√6 = 2.449…  <span class="c">→ පූර්ණ වර්ගයක් නෙවෙයි →</span> <span class="hi">අපරිමේය ✓</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: √49 සහ √7 — මේ දෙක අයිති පවුල් මොනවද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">√49 = 7</span> → පරිමේය (නිබිලයක්). <span class="a">√7 = 2.645…</span> → අපරිමේය (පූර්ණ වර්ගයක් නොවන නිසා).</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>√ එකක් තිබුණ ගමන් <b>අපරිමේය</b> කියලා හිතන එක වැරදියි. √25, √49 වගේ <b>පූර්ණ වර්ග</b>වල මූල පරිමේයයි.</li>
+          <li>π ≈ <span class="frac"><span class="t">22</span><span class="b">7</span></span> කියන්නේ <b>ආසන්න අගයක්</b> (approximation) පමණයි. π අපරිමේයයි — හරියටම භාගයක් විදිහට ලියන්න බෑ.</li>
+          <li>0 කියන්නේ නිබිලයක් සහ පරිමේයයක්, නමුත් එය ℕ පවුලට අයිති <b>නෑ</b> (පොතේ සඳහන් පරිදි).</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="ttl">මේවාට උත්තර හිතන්න, ඊට පස්සේ බලන්න:</div>
+        <div class="reveal"><span class="q">1. −8 අයිති පවුල් ලියන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ℤ (නිබිල), ℚ (පරිමේය), ℝ (තාත්වික). <b>ℕ එකට අයිති නෑ</b> (සෘණ නිසා).</div></div>
+        <div class="reveal"><span class="q">2. සත්‍ය/අසත්‍ය: හැම නිබිලයක්ම පරිමේයයි.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans"><b>සත්‍ය ✓</b> — හැම නිබිල n එකක්ම <span class="frac"><span class="t">n</span><span class="b">1</span></span> විදිහට ලියන්න පුළුවන් නිසා.</div></div>
+        <div class="reveal"><span class="q">3. √3 අයිති පවුල මොකක්ද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">ℚ′ (අපරිමේය) සහ ℝ (තාත්වික). 3 පූර්ණ වර්ගයක් නොවන නිසා.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🪆</span><div>සංඛ්‍යා පවුල් = <b>රුසියානු බෝනික්කන්</b> (matryoshka). ℕ පොඩිම එක, ℤ ඇතුළේ, ඊට වඩා ලොකු ℚ, ඔක්කොම ලොකු ℝ ඇතුළේ. භාගයක් කරගන්න බැරි නම් — එතකොට ඒක ℚ′ (අපරිමේය).</div></div>
+    </div>
+  </details>
+
+  <!-- A2 decimals -->
+  <details class="topic" id="a2" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">2</span>
+      <h3>දශම නිරූපණ — අන්ත, සමාවර්ත, අනන්ත<span class="en">Decimal representations</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කඩෙන් බඩු කිරන්න ගියාම…</span> ඔයා දැකලා ඇති සමහර දශම නවතිනවා (0.5), සමහර ඒවා කැල්කියුලේටරයේ දිගටම යනවා (0.3333…). ඇයි ඒ වෙනස? ඒක තීරණය වෙන්නේ භාගයේ <b>හරය</b> අනුවයි!</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>පරිමේය සංඛ්‍යාවක් සැම විටම දශම ආකාරෙන් ලියන්න පුළුවන්. ඒ දශම <b>වර්ග තුනක්</b>:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>වර්ගය</th><th>අර්ථය</th><th>උදාහරණ</th></tr>
+        <tr><td><b>අන්ත දශම</b><br><small>Terminating</small></td><td>දශම නවතිනවා</td><td>½ = 0.5 &nbsp; ⅛ = 0.125</td></tr>
+        <tr><td><b>සමාවර්ත දශම</b><br><small>Recurring</small></td><td>අංක (හෝ අංක කට්ටියක්) නැවත නැවත එනවා</td><td>⅓ = 0.3̇ &nbsp; 211⁄99 = 2.1̇3̇</td></tr>
+        <tr><td><b>අනන්ත දශම</b><br><small>Non-recurring infinite</small></td><td>දිගටම යනවා, නමුත් රටාවක් <b>නෑ</b> → අපරිමේය!</td><td>√2 = 1.41421356…</td></tr>
+      </table></div>
+      <p>නැවත එන අංක උඩ තිතක් තියනවා: 12.444… = 12.4̇ &nbsp;·&nbsp; 5.1133̇ &nbsp;·&nbsp; 5.2̇85714̇. (පොත, පිටුව 6)</p>
+
+      <div class="box hook"><span class="ttl">🔑 රන් රීතිය — හරය බලන්න</span> පරිමේය භාගයක් <b>අන්ත දශමයක්</b> වෙන්නේ, සරල කළාට පස්සේ එහි <b>හරයේ සාධක 2 සහ 5 පමණක්</b> නම් විතරයි. වෙන කිසි ප්‍රථමක සංඛ්‍යාවක් (3, 7, 11…) හරයේ තිබුණොත් → <b>සමාවර්ත දශම</b>.</div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 470 150" role="img" aria-label="දශම වර්ග තීරණය කරන රටා සටහන">
+          <rect x="10" y="55" width="120" height="44" rx="9" fill="#e2f3f4" stroke="#0e7c86" stroke-width="2"/>
+          <text x="70" y="75" text-anchor="middle" font-size="13" fill="#0a5b63" font-family="sans-serif">භාගය සරල කරන්න</text>
+          <text x="70" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#0a5b63" font-family="sans-serif">හරය බලන්න</text>
+          <path d="M130 77 L165 47" stroke="#0e7c86" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+          <path d="M130 77 L165 107" stroke="#c4533f" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
+          <defs>
+            <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0e7c86"/></marker>
+            <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c4533f"/></marker>
+          </defs>
+          <rect x="170" y="25" width="290" height="46" rx="9" fill="#fff" stroke="#0e7c86" stroke-width="2"/>
+          <text x="182" y="44" font-size="12.5" fill="#0a5b63" font-family="sans-serif">සාධක 2 හෝ 5 පමණයි →</text>
+          <text x="182" y="62" font-size="13" font-weight="800" fill="#0e7c86" font-family="sans-serif">අන්ත දශම (නවතිනවා)</text>
+          <rect x="170" y="83" width="290" height="46" rx="9" fill="#fff" stroke="#c4533f" stroke-width="2"/>
+          <text x="182" y="102" font-size="12.5" fill="#9c3a29" font-family="sans-serif">වෙන සාධකයක් (3,7,11…) →</text>
+          <text x="182" y="120" font-size="13" font-weight="800" fill="#c4533f" font-family="sans-serif">සමාවර්ත දශම (නැවත එනවා)</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">⅗ අන්තද සමාවර්තද?</p>
+        <div class="calc">හරය = 5 <span class="c">→ සාධකය 5 පමණයි →</span> <span class="hi">අන්ත දශම</span></div>
+        <div class="calc"><span class="frac"><span class="t">3</span><span class="b">5</span></span> = 0.6 ✓</div>
+        <p style="margin:.6em 0 .2em">⅙ අන්තද සමාවර්තද?</p>
+        <div class="calc">හරය = 6 = 2×3 <span class="c">→ 3 තියෙනවා →</span> <span class="hi">සමාවර්ත දශම</span></div>
+        <div class="calc"><span class="frac"><span class="t">1</span><span class="b">6</span></span> = 0.1666… = 0.16̇</div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: ⁷⁄₃₂ සහ ⁵⁄₉ — මේ දෙකෙන් මොකක්ද අන්ත දශම වෙන්නේ?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">⁷⁄₃₂:</span> 32 = 2⁵ (සාධක 2 පමණයි) → <b>අන්ත දශම</b> (= 0.21875). <span class="a">⁵⁄₉:</span> 9 = 3² → <b>සමාවර්ත දශම</b> (= 0.5̇).</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>හරය බලන්න කලින් <b>භාගය සරල කරන්න</b>. උදා: ⁶⁄₁₅ = ⅖ → හරය 5 → අන්ත දශම (15 දැක්කම 3 නිසා වැරදියට සමාවර්ත කියන්න එපා).</li>
+          <li>0.333… සහ 0.1234567… දෙකම අනන්ත වුණත් <b>එක වගේ නෙවෙයි</b>. 0.333…ට රටාවක් (පුනරාවර්තනය) තියනවා → පරිමේය. රටාවක් නැති නම් → අපරිමේය.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 13⁄50 අන්තද සමාවර්තද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">50 = 2 × 5² → සාධක 2,5 පමණයි → <b>අන්ත දශම</b> (= 0.26).</div></div>
+        <div class="reveal"><span class="q">2. 0.0101101110… (රටාවක් නැත) පරිමේයද?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans"><b>නෑ — අපරිමේයයි.</b> දිගටම යනවා, නමුත් නැවත එන රටාවක් නැති නිසා.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🎯</span><div><b>“දෙකයි පහයි නම් — නවතිනවා.”</b> සරල කළ භාගයක හරයේ 2 සහ 5 විතරක් නම්, දශම නවතිනවා (අන්ත). වෙන කවර හෝ ප්‍රථමකයක් තිබුණොත් — දශම දිගටම පුනරාවර්තනය වෙනවා.</div></div>
+    </div>
+  </details>
+
+  <!-- A3 surds -->
+  <details class="topic" id="a3" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">3</span>
+      <h3>කරණි — √ සහිත සංඛ්‍යා සුළු කිරීම<span class="en">Surds</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">√2 කියන්නේ අමුතු සංඛ්‍යාවක්…</span> එහි අගය 1.41421356… කියලා දිගටම යනවා, නවතින්නේ නෑ. ඒ වගේ, අගය පරිමේය නොවන √ ප්‍රකාශනවලට <b>කරණි (surds)</b> කියනවා. මේවා සමඟ වැඩ කරන්න ලේසි ක්‍රම තියනවා — දශම පාවිච්චි කරන්නේ නැතුව.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — වචන තුනක්</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>වචනය</th><th>අර්ථය</th><th>උදාහරණ</th></tr>
+        <tr><td><b>අබිල කරණිය</b><br><small>Pure surd</small></td><td>මුළු සංඛ්‍යාවම √ ලකුණ ඇතුළේ</td><td>√20, √15</td></tr>
+        <tr><td><b>සරල ම ආකාරය</b><br><small>Simplest form a√b</small></td><td>√ ඇතුළේ පූර්ණ වර්ග සාධක නෑ</td><td>2√5, 6√15</td></tr>
+        <tr><td><b>හරය පරිමේය කිරීම</b><br><small>Rationalising</small></td><td>හරයේ √ ඉවත් කරනවා</td><td><span class="frac"><span class="t">3</span><span class="b">√2</span></span> → <span class="frac"><span class="t">3√2</span><span class="b">2</span></span></td></tr>
+      </table></div>
+      <p>මූලික නීති දෙකක්: &nbsp;<b>√a × √b = √(ab)</b> &nbsp;සහ&nbsp; <b>√a ÷ √b = √(a/b)</b>. තවද √ එක <b>අඥාතයක් වගේ</b> සලකලා එකතු/අඩු කරන්න පුළුවන් (3√5 + 6√5 = 9√5, හරියට 3x + 6x = 9x වගේ). (පොත, පිටු 8–13)</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — √20 සරල කරමු</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 120" role="img" aria-label="root20 සරල කිරීමේ පියවර">
+          <g font-family="monospace" font-size="17">
+            <rect x="8" y="40" width="86" height="40" rx="8" fill="#e2f3f4" stroke="#0e7c86" stroke-width="2"/>
+            <text x="51" y="65" text-anchor="middle" fill="#0a5b63">√20</text>
+            <text x="100" y="62" fill="#7a8699">→</text>
+            <rect x="118" y="40" width="104" height="40" rx="8" fill="#fff" stroke="#0e7c86" stroke-width="2"/>
+            <text x="170" y="65" text-anchor="middle" fill="#0a5b63">√(4×5)</text>
+            <text x="228" y="62" fill="#7a8699">→</text>
+            <rect x="246" y="40" width="112" height="40" rx="8" fill="#fff" stroke="#0e7c86" stroke-width="2"/>
+            <text x="302" y="65" text-anchor="middle" fill="#0a5b63">√4 × √5</text>
+            <text x="364" y="62" fill="#7a8699">→</text>
+            <rect x="382" y="40" width="70" height="40" rx="8" fill="#0e7c86"/>
+            <text x="417" y="65" text-anchor="middle" fill="#fff" font-weight="700">2√5</text>
+          </g>
+          <text x="170" y="105" text-anchor="middle" font-size="12" fill="#7a8699" font-family="sans-serif">20 ඇතුළේ පූර්ණ වර්ගය 4 එළියට ගන්නවා (√4 = 2)</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණ</b></div>
+      <div class="work"><span class="lbl">උදා 1 — සරල කිරීම</span>
+        <div class="calc">4√63 − 5√7 − 8√28</div>
+        <div class="calc"><span class="c">4√63 = 4√(9×7) =</span> 12√7 &nbsp;;&nbsp; <span class="c">8√28 = 8√(4×7) =</span> 16√7</div>
+        <div class="calc">= 12√7 − 5√7 − 16√7 = <span class="hi">−9√7</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 2 — හරය පරිමේය කිරීම</span>
+        <div class="calc"><span class="frac"><span class="t">3</span><span class="b">√2</span></span> = <span class="frac"><span class="t">3</span><span class="b">√2</span></span> × <span class="frac"><span class="t">√2</span><span class="b">√2</span></span> = <span class="frac"><span class="t">3√2</span><span class="b">2</span></span> <span class="c">(√2 ×√2 = 2)</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 3 — ගුණ කිරීම</span>
+        <div class="calc">5√3 × 4√2 = (5×4)(√3×√2) = 20√6</div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: √48 සරල ම ආකාරෙන් ලියන්න.</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">√48 = √(16×3) = √16 × √3 = 4√3</span></div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>√3 + √2 ≠ √5! එකතු කරන්න පුළුවන් <b>එක වගේ කරණි</b> විතරයි (√5 + √5 = 2√5, හැබැයි √3 + √2 ඒ විදිහටම තියෙනවා).</li>
+          <li>සරල කරනකොට <b>පූර්ණ වර්ග සාධකය</b> හොයන්න. √12 = 2√3 (12 = 4×3); 5√12 සරල ම නෙවෙයි — 4 එළියට එනවා.</li>
+          <li>(√2)² = 2 මිස √4 නෙවෙයි දශම පාඩුවක්. √a × √a = a.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. √72 සරල ම ආකාරෙන්?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">√72 = √(36×2) = <b>6√2</b>.</div></div>
+        <div class="reveal"><span class="q">2. √2 + 5√2 − 2√2 = ?</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans">(1 + 5 − 2)√2 = <b>4√2</b>.</div></div>
+        <div class="reveal"><span class="q">3. <span class="frac"><span class="t">2</span><span class="b">√5</span></span> හරය පරිමේය කරන්න.</span>
+          <button class="rbtn" type="button">පිළිතුර ▾</button>
+          <div class="ans"><span class="frac"><span class="t">2</span><span class="b">√5</span></span> × <span class="frac"><span class="t">√5</span><span class="b">√5</span></span> = <b><span class="frac"><span class="t">2√5</span><span class="b">5</span></span></b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔓</span><div><b>“හරයේ √ එකක් — √ එකෙන්ම ගුණ කරලා එළියට ගන්න.”</b> හරයේ √b තියනවා නම්, උඩත් යටත් √b වලින් ගුණ කරන්න. √b × √b = b වෙලා හරය පිරිසිදු වෙනවා.</div></div>
+    </div>
+  </details>
+
+  <!-- A4 square & sqrt basics -->
+  <details class="topic" id="a4" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">4</span>
+      <h3>වර්ගය හා වර්ගමූලය — මූලික අදහස<span class="en">Squares & square roots</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කැරම් බෝඩ් එක හිතන්න</span> සමචතුරස්‍රයක එක පැත්තක දිග 5 නම්, ඇතුළේ පෙට්ටි 5×5 = 25ක් තියනවා. ඒ 25 කියන්නේ 5 ගේ <b>වර්ගය</b>. ආපහු හැරෙව්වොත් — 25ක පෙට්ටිවලින් සමචතුරස්‍රයක් හැදුවොත් පැත්තේ දිග 5යි. ඒ තමයි <b>වර්ගමූලය</b>.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>සංඛ්‍යාවක් <b>දෙවරක් ගුණ</b> කළාම ලැබෙන්නේ එහි <b>වර්ගය</b>: 3 × 3 = 3² = 9. ආපහු හැරෙන කර්මය <b>වර්ගමූලය (√)</b>: 3² = 9 නිසා √9 = 3.</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>සංඛ්‍යාව</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+        <tr><td>වර්ගය (n²)</td><td>1</td><td>4</td><td>9</td><td>16</td><td>25</td><td>36</td></tr>
+        <tr><td>√ (මූලය)</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+      </table></div>
+      <p>1, 4, 9, 16, 25, 36 … වැනි ඒවාට <b>පූර්ණ වර්ග (perfect squares)</b> කියනවා. මේවායේ මූල හරියටම නිබිලයි. (පොත, 10 ශ්‍රේණිය, පිටුව 14)</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 300 130" role="img" aria-label="5 by 5 ජාලකය = 25 වර්ගය">
+          <g fill="#e2f3f4" stroke="#0e7c86" stroke-width="1.4">
+            <!-- 5x5 grid -->
+            <g id="row"></g>
+          </g>
+          <g>
+            <!-- draw via static rects -->
+            <g fill="#c9e7ea" stroke="#0e7c86" stroke-width="1.4">
+            </g>
+          </g>
+          <!-- static grid -->
+          <g stroke="#0e7c86" stroke-width="1.4" fill="#e2f3f4">
+            <rect x="20" y="15" width="100" height="100"/>
+            <line x1="40" y1="15" x2="40" y2="115"/><line x1="60" y1="15" x2="60" y2="115"/>
+            <line x1="80" y1="15" x2="80" y2="115"/><line x1="100" y1="15" x2="100" y2="115"/>
+            <line x1="20" y1="35" x2="120" y2="35"/><line x1="20" y1="55" x2="120" y2="55"/>
+            <line x1="20" y1="75" x2="120" y2="75"/><line x1="20" y1="95" x2="120" y2="95"/>
+          </g>
+          <text x="70" y="128" text-anchor="middle" font-size="12" fill="#0a5b63" font-family="sans-serif">පැත්ත 5 → ⌗ 25</text>
+          <text x="160" y="55" font-size="15" fill="#0a5b63" font-family="monospace">5² = 25</text>
+          <text x="160" y="85" font-size="15" font-weight="700" fill="#0e7c86" font-family="monospace">√25 = 5</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදාහරණය</span>
+        <p style="margin:.2em 0">සමචතුරස්‍රාකාර කාඩ්බෝඩ් කෑල්ලක වර්ගඵලය 441 cm². පැත්තක දිග?</p>
+        <div class="calc">(පැත්ත)² = වර්ගඵලය → පැත්ත = √441 = <span class="hi">21 cm</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: වර්ගඵලය 144 cm² සමචතුරස්‍රයක පැත්ත?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">√144 = 12 cm</span></div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>3² කියන්නේ 3×2 = 6 <b>නෙවෙයි</b>! ඒ 3×3 = 9. (දර්ශකය කියන්නේ කී වරක් ගුණ කරනවද කියලයි.)</li>
+          <li>√16 = 4, නමුත් √16 ≠ 8. 8 කියන්නේ 16 ÷ 2.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 7² = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">7 × 7 = <b>49</b>.</div></div>
+        <div class="reveal"><span class="q">2. √81 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">9² = 81 නිසා <b>9</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔁</span><div>වර්ගය සහ වර්ගමූලය <b>ආපසු කර්ම</b> (opposite). එකක් ඉස්සරහට ගියොත් අනික ආපහු එනවා: 6 → (වර්ග) → 36 → (මූල) → 6.</div></div>
+    </div>
+  </details>
+
+  <!-- A5 approximation -->
+  <details class="topic" id="a5" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">5</span>
+      <h3>වර්ගමූල ආසන්න කිරීම — පළමු සන්නිකර්ෂණය<span class="en">First approximation of √</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">√17 කොච්චරද?</span> 17 පූර්ණ වර්ගයක් නෙවෙයි, ඒ නිසා √17ට හරියටම නිබිලයක් නෑ. හැබැයි ඒක <b>4 සහ 5 අතර</b> කොතැනකද කියලා අපිට ලේසියෙන් හොයන්න පුළුවන් — කැල්කියුලේටරයක් නැතුවත්!</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — පියවර 3ක්</b></div>
+      <p>1️⃣ සංඛ්‍යාව අතර වෙන <b>පූර්ණ වර්ග දෙක</b> හොයන්න. <br>
+         2️⃣ ඒ දෙකේ මූල අතර √ එක තියෙනවා. <br>
+         3️⃣ කිට්ටුම පූර්ණ වර්ගය බලලා, පළමු දශම ස්ථානයට ආසන්න අගය ගණනය කරන්න.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — √17</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 440 110" role="img" aria-label="සංඛ්‍යා රේඛාවේ root17 පිහිටීම">
+          <line x1="30" y1="60" x2="410" y2="60" stroke="#0a5b63" stroke-width="2"/>
+          <g font-family="monospace" font-size="14" fill="#0a5b63">
+            <line x1="60" y1="52" x2="60" y2="68" stroke="#0a5b63" stroke-width="2"/><text x="50" y="86">4</text><text x="40" y="44">16</text>
+            <line x1="380" y1="52" x2="380" y2="68" stroke="#0a5b63" stroke-width="2"/><text x="372" y="86">5</text><text x="362" y="44">25</text>
+          </g>
+          <line x1="116" y1="48" x2="116" y2="72" stroke="#c4533f" stroke-width="3"/>
+          <text x="92" y="40" font-size="14" font-weight="700" fill="#c4533f" font-family="monospace">√17</text>
+          <text x="116" y="100" text-anchor="middle" font-size="11.5" fill="#7a8699" font-family="sans-serif">17, 16ට කිට්ටුයි → 4ට ආසන්නයි</text>
+        </svg>
+      </figure>
+      <div class="work"><span class="lbl">√17 — පියවරෙන් පියවර</span>
+        <div class="calc">16 &lt; 17 &lt; 25 → √16 &lt; √17 &lt; √25 → 4 &lt; √17 &lt; 5</div>
+        <div class="calc"><span class="c">17 කිට්ටුම:</span> 16 (වෙනස 1) vs 25 (වෙනස 8) → <span class="hi">16ට කිට්ටුයි → 4ට ආසන්නයි</span></div>
+        <div class="calc">4.1² = 16.81 &nbsp; 4.2² = 17.64 <span class="c">(17 ඉක්මවයි)</span></div>
+        <div class="calc">16.81, 17ට කිට්ටුම → <span class="hi">√17 ≈ 4.1</span></div>
+      </div>
+
+      <div class="step"><span class="dot">4</span><b>තවත් උදාහරණයක්</b></div>
+      <div class="work"><span class="lbl">උදා — √245</span>
+        <div class="calc">15² = 225, 16² = 256 → 225 &lt; 245 &lt; 256 → 15 &lt; √245 &lt; 16</div>
+        <div class="calc">245, 256ට කිට්ටුයි → 15.5…15.9 අතර බලමු</div>
+        <div class="calc">15.7² = 246.49 <span class="c">(245ට කිට්ටුම)</span> → <span class="hi">√245 ≈ 15.7</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: √20 ගේ පළමු සන්නිකර්ෂණය? (ඉඟිය: 16 &lt; 20 &lt; 25)</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">4 &lt; √20 &lt; 5; 20, 16ට කිට්ටුයි. 4.4² = 19.36, 4.5² = 20.25 → 20ට කිට්ටුම 20.25 → <span class="a">√20 ≈ 4.5</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li><b>වෙනස</b> හරියට බලන්න — සංඛ්‍යාව කිට්ටු පූර්ණ වර්ගයට, ඒ පැත්තටයි මූලයත් ආසන්න.</li>
+        <li>දශම අගයන් වර්ග කරනකොට පරෙස්සමින් ගුණ කරන්න (4.2² = 17.64, 4.2×2 = 8.4 නෙවෙයි).</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. √5 කුමන නිබිල දෙක අතරද?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">4 &lt; 5 &lt; 9 → <b>2 සහ 3 අතර</b> (√5 ≈ 2.2).</div></div>
+        <div class="reveal"><span class="q">2. √67 ගේ පළමු සන්නිකර්ෂණය ආසන්න වශයෙන්?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">64 &lt; 67 &lt; 81 → 8 &lt; √67 &lt; 9; 8.1² = 65.61, 8.2² = 67.24 → <b>√67 ≈ 8.2</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🥪</span><div><b>“සැන්ඩ්විච් එක.”</b> ඕනෑ √ එකක් පූර්ණ වර්ග දෙකක් අතර හිර වෙනවා. ඒ දෙක හොයන් — මූලය ඒ දෙක අතර තමයි!</div></div>
+    </div>
+  </details>
+
+  <!-- A6 long division -->
+  <details class="topic" id="a6" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">6</span>
+      <h3>බෙදීමේ ක්‍රමය — නියම වර්ගමූලය<span class="en">Square root by division method</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">හරියටම අගය ඕනේ නම්?</span> සන්නිකර්ෂණයෙන් ආසන්න අගයක් ලැබුණා. නමුත් √1764 = 42 වගේ <b>හරි අගයක්</b> ඕනේ නම්, “බෙදීමේ ක්‍රමය” (long division) පාවිච්චි කරනවා. ටිකක් පියවර තියනවා, හැබැයි එක පාරක් පුරුදු වුණාම ඉතාම ලේසියි.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට — පියවර</b></div>
+      <p>① ඒකස්ථානයේ ඉඳන් <b>ඉලක්කම් දෙක දෙක</b> බැගින් කණ්ඩායම් කරන්න. <br>
+         ② වමේ කණ්ඩායමට ≤ වෙන ලොකුම පූර්ණ වර්ගය ගන්න; එහි මූලය උඩත් වමත් ලියන්න. <br>
+         ③ ගුණ කරලා අඩු කරන්න; ඊළඟ කණ්ඩායම පහළට ගේන්න. <br>
+         ④ උඩ ඉලක්කම <b>දෙගුණ</b> කරලා වමේ ලියන්න; හිස්තැනක් තියන්න. <br>
+         ⑤ හිස්තැනට + උඩට එකම ඉලක්කමක් දාලා, (□_ × _) ≤ ඉතුරුව වන විදිහට හොයන්න.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — √1764 = 42</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 320 200" role="img" aria-label="root1764 බෙදීමේ ක්‍රමයේ වැඩ පිළිවෙළ">
+          <g font-family="monospace" font-size="17" fill="#0a5b63">
+            <text x="120" y="30" font-weight="700">4&nbsp;&nbsp;2</text>
+            <line x1="110" y1="38" x2="240" y2="38" stroke="#0a5b63" stroke-width="1.6"/>
+            <line x1="108" y1="20" x2="108" y2="140" stroke="#0a5b63" stroke-width="1.6"/>
+            <text x="80" y="58">4</text>
+            <text x="120" y="58">17&nbsp;64</text>
+            <text x="120" y="84">16</text>
+            <line x1="118" y1="92" x2="150" y2="92" stroke="#0a5b63" stroke-width="1.4"/>
+            <text x="125" y="112">&nbsp;1&nbsp;64</text>
+            <text x="62" y="112">82</text>
+            <text x="125" y="138">&nbsp;1&nbsp;64</text>
+            <line x1="118" y1="146" x2="180" y2="146" stroke="#0a5b63" stroke-width="1.4"/>
+            <text x="138" y="164">&nbsp;&nbsp;&nbsp;&nbsp;0</text>
+          </g>
+          <text x="160" y="190" text-anchor="middle" font-size="12" fill="#7a8699" font-family="sans-serif">4×4=16; දෙගුණ 8; 82×2 = 164 → √1764 = 42</text>
+        </svg>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>දශම සංඛ්‍යා</b></div>
+      <div class="work"><span class="lbl">උදා — √3.61 = 1.9</span>
+        <p style="margin:.2em 0">දශම තිතේ සිට <b>දෙපැත්තටම</b> දෙක දෙක කණ්ඩායම් කරන්න: 3. 61</p>
+        <div class="calc"><span class="c">1² = 1 ≤ 3; ඉතුරුව 2;</span> දෙගුණ 2 → 29 × 9 = 261 → <span class="hi">√3.61 = 1.9</span></div>
+        <p class="tnote">දශම ස්ථාන 2කට ඕනේ නම්, දශම තිතෙන් පස්සේ <b>බින්දු යුගල 3ක්</b> දාලා, ස්ථාන 3ක් හොයලා, 2කට වට කරන්න. උදා: √2737 ≈ 52.32, √3.421 ≈ 1.85.</p>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: √2209 සොයන්න. (ඉඟිය: 22 09 කණ්ඩායම්; 4² = 16 ≤ 22)</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">උඩ 4; ඉතුරුව 6; 09 ගේන → 609; දෙගුණ 8 → 8□×□: 87×7 = 609 ✓ → <span class="a">√2209 = 47</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>කණ්ඩායම් කරන්නේ <b>ඒකස්ථානයේ සිට වමට</b> (පූර්ණ සංඛ්‍යා), දශමයෙන් පස්සේ <b>දකුණට</b>.</li>
+        <li>දෙගුණ කරපු සංඛ්‍යාවට දාන ඉලක්කමම තමයි උඩත් ලියන්නේ — එකම ඉලක්කම දෙතැනම.</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. √676 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">6 76; 2²=4≤6, ඉතුරු 2 → 276; දෙගුණ 4 → 46×6=276 → <b>26</b>.</div></div>
+        <div class="reveal"><span class="q">2. √1024 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">10 24; 3²=9≤10, ඉතුරු 1 → 124; දෙගුණ 6 → 62×2=124 → <b>32</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">👬</span><div><b>“දෙක දෙක · දෙගුණ · දෙතැන.”</b> ඉලක්කම් දෙක දෙක කරන්න → උඩ ඉලක්කම දෙගුණ කරන්න → එකම ඉලක්කම දෙතැනක (උඩ + වම) දාන්න.</div></div>
+    </div>
+  </details>
+
+  <!-- A7 word problems -->
+  <details class="topic" id="a7" style="--cl:var(--A);--cldeep:var(--A-deep);--clsoft:var(--A-soft)">
+    <summary class="head"><span class="num">7</span>
+      <h3>වර්ගමූලය යොදා ගැටලු විසඳීම<span class="en">Word problems with √</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ඇත්ත ජීවිතේ √</span> බිම් කොටසක පැත්ත, ටයිල් ගණන, ඉණිමඟක දිග — මේවා හොයන්න බොහෝ විට √ ඕනේ වෙනවා. විශේෂයෙන් <b>පයිතගරස් ප්‍රමේයය</b> සමඟ.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>වර්ගඵලය දැනගෙන <b>පැත්ත</b> ඕනේ නම් → √(වර්ගඵලය). ලම්බක පැති දෙකක් දැනගෙන <b>කර්ණය</b> ඕනේ නම් → √(a² + b²).</p>
+
+      <div class="step"><span class="dot">3·4</span><b>විසඳුම් සහිත උදාහරණ</b></div>
+      <div class="work"><span class="lbl">උදා 1 — ටයිල් සවි කරන බිම</span>
+        <p style="margin:.2em 0">සමචතුරස්‍ර බිමක් සම්පූර්ණයෙන් වැසෙන්න, එක ටයිලයක වර්ගඵලය 900 cm² වන ටයිල් 324ක් ඇල්ලුවා. බිමේ පැත්තක දිග?</p>
+        <div class="calc"><span class="c">පේළියක ටයිල්:</span> √324 = 18 &nbsp;;&nbsp; <span class="c">ටයිලයක පැත්ත:</span> √900 = 30 cm</div>
+        <div class="calc">බිම් පැත්ත = 18 × 30 = 540 cm = <span class="hi">5.4 m</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 2 — පයිතගරස් (කර්ණය)</span>
+        <p style="margin:.2em 0">බිම් කොටසක් 25 m × 12 m. විරුද්ධ කොනට කර්ණ දුර (ආසන්න මීටරයට)?</p>
+        <div class="calc">√(25² + 12²) = √(625 + 144) = √769 ≈ <span class="hi">28 m</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: ඝනකයක (cube) පෘෂ්ඨ වර්ගඵලය 1350 cm². දාරයක දිග? (ඉඟිය: පෘෂ්ඨ = 6 × පැත්ත²)</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පැත්ත² = 1350 ÷ 6 = 225 → පැත්ත = √225 = <span class="a">15 cm</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>ඒකක (cm, m) පටලවා ගන්න එපා. 540 cm = 5.4 m. <b>අන්තිමට ඒකකය ලියන්න</b>.</li>
+        <li>පයිතගරස්වලදී කර්ණය හොයනකොට <b>එකතු</b> කරනවා (a²+b²); පැතිවලින් එකක් හොයනකොට <b>අඩු</b> කරනවා (c²−a²).</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. වර්ගඵලය 196 m² සමචතුරස්‍ර බිමක පරිමිතිය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">පැත්ත = √196 = 14 m; පරිමිතිය = 4 × 14 = <b>56 m</b>.</div></div>
+        <div class="reveal"><span class="q">2. ලම්බක පැති 6 cm, 8 cm; කර්ණය?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">√(36 + 64) = √100 = <b>10 cm</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">📐</span><div><b>“පැත්ත ඕනේ — √ ගහන්න. කර්ණය ඕනේ — වර්ග එකතු කරලා √ ගහන්න.”</b></div></div>
+    </div>
+  </details>
+
+  <!-- ##################################################################### -->
+  <!-- ============================ PART B ================================= -->
+  <!-- ##################################################################### -->
+  <section class="part" id="partB" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <span class="src">මූලාශ්‍රය · 10 ශ්‍රේණිය I — පරිච්ඡේදය 3 (භාග)</span>
+    <div class="pn">B කොටස</div>
+    <h2>භාග හා BODMAS</h2>
+    <p>භාගවල කර්ම (+ − × ÷), තුල්‍ය භාග, මිශ්‍ර සංඛ්‍යා, සහ ගණිත කර්ම කරන <b>නියම පිළිවෙළ</b> — BODMAS.</p>
+  </section>
+
+  <!-- B1 fractions basics -->
+  <details class="topic" id="b1" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">1</span>
+      <h3>භාග මූලික — මුළු ඒකකය, වර්ග, තුල්‍යය, සැසඳීම<span class="en">Fractions: whole, types, equivalent, comparing</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">චොකලට් එක බෙදමු!</span> චොකලට් කෑල්ලක් සමාන කොටස් 10කට බෙදුවොත්, එක කෑල්ලක් = <span class="frac"><span class="t">1</span><span class="b">10</span></span>. භාගයක් කියන්නේ <b>මුළු එකක කොටසක්</b>. හැමවිටම “මුළු එක මොකක්ද?” කියලා හිතන්න ඕනේ.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>භාගයක <b>ලවය</b> (උඩ) = ගත් කොටස් ගණන; <b>හරය</b> (යට) = මුළු සමාන කොටස් ගණන. භාග වර්ග කිහිපයක්:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>වර්ගය</th><th>අර්ථය</th><th>උදාහරණ</th></tr>
+        <tr><td><b>ඒකක භාග</b></td><td>ලවය 1</td><td>½, ⅓, ⅕</td></tr>
+        <tr><td><b>නියම/තත්‍ය භාග</b></td><td>ලවය &lt; හරය</td><td>⅔, ⅗</td></tr>
+        <tr><td><b>විෂම භාග</b></td><td>ලවය &gt; හරය</td><td>11⁄4, 7⁄2</td></tr>
+        <tr><td><b>මිශ්‍ර සංඛ්‍යා</b></td><td>නිබිලයක් + භාගයක්</td><td>2¾ = 11⁄4</td></tr>
+      </table></div>
+      <p><b>තුල්‍ය භාග (equivalent):</b> ලවයත් හරයත් <b>එකම සංඛ්‍යාවෙන්</b> ගුණ (හෝ බෙදුවොත්) අගය වෙනස් වෙන්නේ නෑ:</p>
+      <div class="work"><div class="calc"><span class="frac"><span class="t">1</span><span class="b">2</span></span> = <span class="frac"><span class="t">1×2</span><span class="b">2×2</span></span> = <span class="frac"><span class="t">2</span><span class="b">4</span></span> = <span class="frac"><span class="t">3</span><span class="b">6</span></span> &nbsp;&nbsp;<span class="c">(ඔක්කොම එක අගයමයි!)</span></div></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — 2¾ = 11⁄4</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 90" role="img" aria-label="2 සහ තුන් කාලක් = කාල්වලින් එකොළහක්">
+          <g stroke="#c4533f" stroke-width="2" fill="none">
+            <circle cx="45" cy="45" r="34" fill="#c4533f"/><circle cx="135" cy="45" r="34" fill="#c4533f"/>
+            <circle cx="225" cy="45" r="34" fill="#fbe9e4"/>
+            <line x1="45" y1="11" x2="45" y2="79"/><line x1="11" y1="45" x2="79" y2="45"/>
+            <line x1="135" y1="11" x2="135" y2="79"/><line x1="101" y1="45" x2="169" y2="45"/>
+            <line x1="225" y1="11" x2="225" y2="79"/><line x1="191" y1="45" x2="259" y2="45"/>
+            <path d="M225 45 L225 11 A34 34 0 0 1 259 45 Z" fill="#c4533f"/>
+            <path d="M225 45 L259 45 A34 34 0 0 1 225 79 Z" fill="#c4533f"/>
+            <path d="M225 45 L225 79 A34 34 0 0 1 191 45 Z" fill="#c4533f"/>
+          </g>
+          <text x="300" y="50" font-size="17" font-weight="700" fill="#9c3a29" font-family="monospace">= 11⁄4</text>
+        </svg>
+        <figcaption>පූර්ණ 2ක් = කාල් 8ක්, + තවත් කාල් 3ක් = කාල් 11ක් = 11⁄4. (පොත, පිටුව 27)</figcaption>
+      </figure>
+
+      <div class="widget" id="cmpFrac">
+        <div class="wt">⚖️ සැසඳීම අත්හදා බලන්න — ⅔ vs ¾</div>
+        <p style="margin:.2em 0 .5em;font-size:14.5px">පොදු හරයක් (12) ගමු: ⅔ = 8⁄12, ¾ = 9⁄12.</p>
+        <button class="rbtn" type="button" onclick="var a=document.getElementById('cmpOut');a.style.display=a.style.display=='block'?'none':'block'">පිළිතුර පෙන්වන්න ▾</button>
+        <div id="cmpOut" style="display:none;margin-top:8px" class="ans show">9⁄12 &gt; 8⁄12 නිසා <span class="a">¾ &gt; ⅔</span>. (පොදු හරයක් හදාගෙනයි සංසන්දනය කරන්නේ.)</div>
+      </div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා — ආරෝහණ පිළිවෙළට</span>
+        <p style="margin:.2em 0">⅓, ⅒, ½, ⅐ කුඩාම සිට ලොකුම දක්වා.</p>
+        <div class="calc"><span class="c">ලවය එකයි → හරය ලොකු වෙනකොට අගය කුඩායි</span></div>
+        <div class="calc"><span class="hi">⅒ &lt; ⅐ &lt; ⅓ &lt; ½</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: ⅗ = ?⁄20 (තුල්‍ය භාගය)</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">⅗ = <span class="frac"><span class="t">3×4</span><span class="b">5×4</span></span> = <span class="a">12⁄20</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li>හරය ලොකු වුණා කියලා භාගය ලොකු <b>නෙවෙයි</b>! ½ &gt; ⅒ — හරය කුඩා වෙනකොට (ලවය එකයි නම්) අගය ලොකුයි.</li>
+          <li>සැසඳීමේදී <b>පොදු හරයක්</b> හදන්නේ නැතුව ලවය/හරය විතරක් බලන්න එපා.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 16⁄24 සරල කරන්න.</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">16 සහ 24 දෙකම 8න් බෙදන්න → <b>⅔</b>.</div></div>
+        <div class="reveal"><span class="q">2. 17⁄5 මිශ්‍ර සංඛ්‍යාවක් කරන්න.</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">17 ÷ 5 = 3 ඉතුරු 2 → <b>3⅖</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🍕</span><div><b>“පීසා එක ලොකු කෑලිවලට බෙදුවොත්, එක කෑල්ල පොඩියි.”</b> හරය ලොකු → කෑලි වැඩි → එක කෑල්ල කුඩා. තුල්‍ය භාග හදන්න — උඩත් යටත් එකම සංඛ්‍යාවෙන් ගුණ කරන්න.</div></div>
+    </div>
+  </details>
+
+  <!-- B2 operations -->
+  <details class="topic" id="b2" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">2</span>
+      <h3>භාගවල ගණිත කර්ම — + − × ÷<span class="en">Four operations on fractions</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">හතරම එකක් වගේ නෙවෙයි!</span> එකතු/අඩු කරනකොට <b>පොදු හරයක්</b> ඕනේ. ගුණ කරනකොට ඍජුවම ගුණ කරනවා. බෙදනකොට <b>පෙරළලා ගුණ කරනවා</b>. නීති ටික වෙන වෙනම මතක තියාගමු.</div>
+
+      <div class="step"><span class="dot">2·3</span><b>සරල විදිහට + ඇසට පේන්න</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>කර්මය</th><th>නීතිය</th><th>උදාහරණ</th></tr>
+        <tr><td><b>එකතු/අඩු</b></td><td>පොදු හරයක් හදන්න, ඊට පස්සේ ලව එකතු/අඩු</td><td><span class="frac"><span class="t">2</span><span class="b">3</span></span>+<span class="frac"><span class="t">1</span><span class="b">4</span></span> = <span class="frac"><span class="t">8</span><span class="b">12</span></span>+<span class="frac"><span class="t">3</span><span class="b">12</span></span> = <span class="frac"><span class="t">11</span><span class="b">12</span></span></td></tr>
+        <tr><td><b>ගුණ</b></td><td>ලව × ලව, හර × හර</td><td><span class="frac"><span class="t">3</span><span class="b">4</span></span>×<span class="frac"><span class="t">1</span><span class="b">2</span></span> = <span class="frac"><span class="t">3</span><span class="b">8</span></span></td></tr>
+        <tr><td><b>බෙදීම</b></td><td>දෙවැන්න <b>පෙරළලා</b> (පරස්පරය) ගුණ කරන්න</td><td><span class="frac"><span class="t">1</span><span class="b">3</span></span>÷<span class="frac"><span class="t">1</span><span class="b">6</span></span> = <span class="frac"><span class="t">1</span><span class="b">3</span></span>×<span class="frac"><span class="t">6</span><span class="b">1</span></span> = 2</td></tr>
+      </table></div>
+      <div class="box hook"><span class="ttl">💡 “න්” = ගුණ කිරීම</span> “⅔<b>න්</b> ½” (½ of ⅔) කියන්නේ <b>ගුණ කිරීම</b>: ⅔ × ½. ඉංග්‍රීසියෙන් “of” = ×. <b>පරස්පරය (reciprocal):</b> <span class="frac"><span class="t">a</span><span class="b">b</span></span> ගේ පෙරළිය = <span class="frac"><span class="t">b</span><span class="b">a</span></span>. (පොත, පිටු 28–29)</div>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණ</b></div>
+      <div class="work"><span class="lbl">උදා 1 — එකතු කිරීම</span>
+        <div class="calc"><span class="frac"><span class="t">2</span><span class="b">3</span></span>+<span class="frac"><span class="t">1</span><span class="b">4</span></span> = <span class="frac"><span class="t">2×4</span><span class="b">3×4</span></span>+<span class="frac"><span class="t">1×3</span><span class="b">4×3</span></span> = <span class="frac"><span class="t">8+3</span><span class="b">12</span></span> = <span class="hi"><span class="frac"><span class="t">11</span><span class="b">12</span></span></span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 2 — බෙදීම</span>
+        <div class="calc"><span class="frac"><span class="t">3</span><span class="b">5</span></span> ÷ 2 = <span class="frac"><span class="t">3</span><span class="b">5</span></span> × <span class="frac"><span class="t">1</span><span class="b">2</span></span> = <span class="hi"><span class="frac"><span class="t">3</span><span class="b">10</span></span></span> &nbsp;<span class="c">(2 = 2⁄1; පෙරළිය ½)</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: ⅗ × 50 = ? (කුරක්කන් පිටි උදාහරණය වගේ)</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="frac"><span class="t">3</span><span class="b">5</span></span> × 50 = <span class="frac"><span class="t">3 × 50</span><span class="b">5</span></span> = <span class="frac"><span class="t">150</span><span class="b">5</span></span> = <span class="a">30</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>එකතු කරනකොට හර එකතු කරන්න එපා!</b> ½ + ⅓ ≠ 2⁄5. පොදු හරයක් හදන්න: ½ + ⅓ = 3⁄6 + 2⁄6 = 5⁄6.</li>
+          <li><b>ගුණ කරනකොට</b> පොදු හරයක් ඕනේ <b>නෑ</b> — ඍජුවම ගුණ කරන්න.</li>
+          <li>බෙදනකොට <b>දෙවැන්න</b> විතරයි පෙරළන්නේ, මුල් එක නෙවෙයි.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ⅗ − ⅓ = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">9⁄15 − 5⁄15 = <b>4⁄15</b>.</div></div>
+        <div class="reveal"><span class="q">2. ⅖ ÷ ¾ = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">⅖ × 4⁄3 = 8⁄15.</div></div>
+        <div class="reveal"><span class="q">3. ⅖ × 5⁄6 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">10⁄30 = <b>⅓</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔄</span><div><b>“බෙදන්න — පෙරළලා ගුණ කරපන්.”</b> (÷ වෙනුවට × කරලා දෙවැන්න උඩුකුරු කරන්න.) <b>එකතු/අඩු — හරය එක කරපන්.</b> (පොදු හරයක් හදන්න.)</div></div>
+    </div>
+  </details>
+
+  <!-- B3 BODMAS -->
+  <details class="topic" id="b3" open style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">3</span>
+      <h3>BODMAS — ගණිත කර්ම කරන නියම පිළිවෙළ<span class="en">Order of operations</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">2 + 3 × 4 = ?</span> සමහරු කියනවා 20 (වමේ සිට). හරි උත්තරේ <b>14</b>! ඇයි? මොකද <b>ගුණ කිරීම ඉස්සෙල්ලා</b> කරන්න ඕනේ: 3 × 4 = 12, ඊට පස්සේ + 2 = 14. මේ පිළිවෙළට කියන්නේ <b>BODMAS</b>.</div>
+
+      <div class="step"><span class="dot">2·3</span><b>සරල විදිහට — BODMAS</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 460 210" role="img" aria-label="BODMAS පිළිවෙළ">
+          <g font-family="sans-serif">
+            <g><rect x="20" y="10" width="420" height="30" rx="8" fill="#c4533f"/><text x="30" y="31" fill="#fff" font-size="15" font-weight="700">B — වරහන් (Brackets) &nbsp;( ) ඇතුළ පළමුව</text></g>
+            <g><rect x="40" y="44" width="400" height="30" rx="8" fill="#cf6451"/><text x="50" y="65" fill="#fff" font-size="15" font-weight="700">O — “න්” / of &nbsp;(of = ගුණ කිරීම)</text></g>
+            <g><rect x="60" y="78" width="380" height="30" rx="8" fill="#d97765"/><text x="70" y="99" fill="#fff" font-size="14.5" font-weight="700">D &amp; M — බෙදීම, ගුණ කිරීම &nbsp;(වමේ සිට දකුණට)</text></g>
+            <g><rect x="80" y="112" width="360" height="30" rx="8" fill="#e08c7c"/><text x="90" y="133" fill="#fff" font-size="14.5" font-weight="700">A &amp; S — එකතු, අඩු කිරීම &nbsp;(වමේ සිට දකුණට)</text></g>
+            <text x="30" y="170" font-size="13" fill="#9c3a29">⬇ උඩ සිට පහළට — ඒ පිළිවෙළට කරන්න</text>
+            <text x="30" y="195" font-size="13.5" font-weight="700" fill="#9c3a29">B · O · D · M · A · S</text>
+          </g>
+        </svg>
+        <figcaption>පොතේ දක්වා ඇති අනුපිළිවෙළ: වරහන් → “න්”(of) → බෙදීම/ගුණ → එකතු/අඩු. (පොත, පිටුව 30)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය — හැම කර්මයක්ම</b></div>
+      <div class="work"><span class="lbl">පොතේ විශාල උදාහරණය</span>
+        <div class="calc">(2⅔ − 1½ + 5⁄6) ÷ (1⅔ <span class="c">න්</span> 4⁄5)</div>
+        <div class="calc"><span class="c">B — වරහන් ඇතුළ:</span></div>
+        <div class="calc">= (<span class="frac"><span class="t">8</span><span class="b">3</span></span> − <span class="frac"><span class="t">3</span><span class="b">2</span></span> + <span class="frac"><span class="t">5</span><span class="b">6</span></span>) ÷ (<span class="frac"><span class="t">5</span><span class="b">3</span></span> × <span class="frac"><span class="t">4</span><span class="b">5</span></span>) <span class="c">← “න්” = ×</span></div>
+        <div class="calc">= <span class="frac"><span class="t">16−9+5</span><span class="b">6</span></span> ÷ <span class="frac"><span class="t">4</span><span class="b">3</span></span> = <span class="frac"><span class="t">12</span><span class="b">6</span></span> ÷ <span class="frac"><span class="t">4</span><span class="b">3</span></span></div>
+        <div class="calc">= 2 ÷ <span class="frac"><span class="t">4</span><span class="b">3</span></span> = 2 × <span class="frac"><span class="t">3</span><span class="b">4</span></span> = <span class="frac"><span class="t">3</span><span class="b">2</span></span> = <span class="hi">1½</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: 2 + 6 ÷ 2 × 3 − 1 = ? (BODMAS පාවිච්චි කරන්න)</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">D/M වමේ සිට: 6÷2 = 3; 3×3 = 9. දැන් 2 + 9 − 1 = <span class="a">10</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul>
+          <li><b>වමේ සිට පිළිවෙළට කරන්න එපා!</b> ගුණ/බෙදීම, එකතු/අඩුවට කලින්.</li>
+          <li>D සහ M එක තරාතිරමයි — <b>වමේ සිට දකුණට</b> හමුවන පිළිවෙළට. (A සහ S එක වගේමයි.)</li>
+          <li>“න්” (of) කොටස ඉස්සෙල්ලා කරන්න — ඒ ගුණ කිරීමක්.</li>
+        </ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 10 − 2 × 3 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">2×3 = 6 කලින් → 10 − 6 = <b>4</b>.</div></div>
+        <div class="reveal"><span class="q">2. (4 + 2) × 5 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">වරහන් කලින්: 6 × 5 = <b>30</b>.</div></div>
+        <div class="reveal"><span class="q">3. ½ + ⅓ × 6 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">⅓ × 6 = 2 කලින් → ½ + 2 = <b>2½</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">📜</span><div><b>B·O·D·M·A·S</b> — <b>B</b>රහන්, <b>O</b>f(න්), <b>D</b>බෙදීම, <b>M</b>ගුණ, <b>A</b>එකතු, <b>S</b>අඩු. උඩ සිට පහළට — ඒ අනුපිළිවෙළට.</div></div>
+      <div class="joke">වරහන් කෝපි බොන්න ඉස්සෙල්ලා කරන්නෑ — මොකද ඒ අයට හැමදාම “priority” තියෙනවා! 😉</div>
+    </div>
+  </details>
+
+  <!-- B4 word problems -->
+  <details class="topic" id="b4" style="--cl:var(--B);--cldeep:var(--B-deep);--clsoft:var(--B-soft)">
+    <summary class="head"><span class="num">4</span>
+      <h3>භාග ඇසුරින් ගැටලු විසඳීම<span class="en">Word problems with fractions</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">හැම තැනම භාග!</span> පඩියෙන් කොච්චර වියදම් කළාද, ටැංකියක් පිරෙන්න කොච්චර වෙලාද, ගමනක කොච්චර දුරක් යනවාද — මේ හැම ගැටලුවකම භාග තියනවා. “මුළු එක මොකක්ද” කියලා හොයාගත්තොත් වැඩේ ලේසියි.</div>
+
+      <div class="step"><span class="dot">2·3·4</span><b>සරල විදිහට + විසඳුම් සහිත උදාහරණ</b></div>
+      <div class="work"><span class="lbl">උදා 1 — කොටසක් සොයන්න</span>
+        <p style="margin:.2em 0">උපුල් රු. 24,000ක් සම්පාදනය කළා; ඉන් ⅜ක් ගමන් වියදම්වලට. ගමන් වියදම?</p>
+        <div class="calc"><span class="frac"><span class="t">3</span><span class="b">8</span></span> න් 24000 = 24000 × <span class="frac"><span class="t">3</span><span class="b">8</span></span> = <span class="hi">රු. 9,000</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 2 — මුළු එක සොයන්න</span>
+        <p style="margin:.2em 0">ටැංකියක ⅓ක් පිරෙන්න මිනිත්තු 12. මුළු ටැංකියම පිරෙන්න?</p>
+        <div class="calc"><span class="c">⅓ → 12 මිනි. නම් මුළුම (3⁄3) →</span> 12 × 3 = <span class="hi">මිනිත්තු 48</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 3 — ඉතුරුව සොයන්න</span>
+        <p style="margin:.2em 0">සතිෂ් ගමනේ ¼ක් බයිසිකලෙන්, ⅔ක් බසයෙන්, ඉතුරුව ත්‍රිරෝදයෙන්. ත්‍රිරෝදයෙන් කොච්චරද?</p>
+        <div class="calc">1 − (<span class="frac"><span class="t">1</span><span class="b">4</span></span> + <span class="frac"><span class="t">2</span><span class="b">3</span></span>) = 1 − <span class="frac"><span class="t">3+8</span><span class="b">12</span></span> = 1 − <span class="frac"><span class="t">11</span><span class="b">12</span></span> = <span class="hi"><span class="frac"><span class="t">1</span><span class="b">12</span></span></span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: ටැංකියක ¾ක් පාවිච්චි කළාට පස්සේ ලීටර් 200ක් ඉතුරු. ටැංකියේ ධාරිතාව?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">ඉතුරුව = 1 − ¾ = ¼; ¼ → 200 ලීටර් නම් මුළුම → 200 × 4 = <span class="a">ලීටර් 800</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>“මුළු එක” (whole) හරියට හඳුනගන්න — ඒ රු. 24,000ද, ලීටර් 50ද, භූමියේ වර්ගඵලයද?</li>
+        <li>“කොටසක්” (×) සහ “මුළුම සොයන්න” (÷) පටලවා ගන්න එපා.</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. රු. 5,000 න් ½ක්?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">5000 × ½ = <b>රු. 2,500</b>.</div></div>
+        <div class="reveal"><span class="q">2. තේරීමක ⁷⁄₁₂ක් ලබාගත් අයෙක් 120කින් දිනුවා. මුළු ඡන්ද?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">දිනූ අය ⁷⁄₁₂, පැරදුණු අය ⁵⁄₁₂; වෙනස = ²⁄₁₂ = ⅙. ⅙ → 120 නම් මුළුම → 120 × 6 = <b>720</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🧩</span><div><b>“කොටසක් ඕනේ — ගුණ කරපන්. මුළුම ඕනේ — බෙදපන්.”</b> සහ හැමදාම “මුළු එක මොකක්ද?” කියලා ඉස්සෙල්ලා හිතන්න.</div></div>
+    </div>
+  </details>
+
+  <section class="part" id="partC" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <span class="src">මූලාශ්‍රය · 11 ශ්‍රේණිය I — පරිච්ඡේද 2 සහ 3 (දර්ශක හා ලඝුගණක)</span>
+    <div class="pn">C කොටස</div>
+    <h2>දර්ශක හා ලඝුගණක</h2>
+    <p>එකම සංඛ්‍යාව නැවත නැවත ගුණ වෙනකොට ලියන කෙටි ක්‍රමය <b>දර්ශක</b> (indices). ඒකේ අනික් පැත්ත — “මේ පිළිතුර ලබන්න දර්ශකය කීයද?” කියන ප්‍රශ්නයට උත්තරේ <b>ලඝුගණකය</b> (logarithm). දෙකම එකම කාසියේ දෙපැත්තයි.</p>
+  </section>
+
+  <!-- C1 index laws recap -->
+  <details class="topic" id="c1" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">1</span>
+      <h3>දර්ශක නියම — මතක් කරගමු<span class="en">Recap: the laws of indices</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">පණිවිඩයක් පැතිරෙනවා!</span> ඔයා message එකක් යාළුවො 2කට යවනවා. ඒ 2 දෙනා තව 2 බැගින් යවනවා… පියවර 1: 2, පියවර 2: 4, පියවර 3: 8 = 2³. දර්ශක කියන්නේ <b>එකම සංඛ්‍යාව කී වරක් ගුණ වෙනවද</b> කියන කෙටි සටහනයි: 2×2×2 = 2³.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>aⁿ එකේ <b>a</b> = පාදම (base), <b>n</b> = දර්ශකය (index/power). දර්ශක එක්ක ගණන් හදන්න මූලික නියම 7ක් තියෙනවා — මේවා කටපාඩම් කරගත්තොත් C කොටස මුළුල්ලම පහසුයි:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>නියමය</th><th>සූත්‍රය</th><th>උදාහරණ</th></tr>
+        <tr><td>ගුණ කිරීම</td><td>aᵐ × aⁿ = a<sup>m+n</sup></td><td>2³ × 2² = 2⁵ = 32</td></tr>
+        <tr><td>බෙදීම</td><td>aᵐ ÷ aⁿ = a<sup>m−n</sup></td><td>5⁵ ÷ 5³ = 5² = 25</td></tr>
+        <tr><td>දර්ශකයක දර්ශකය</td><td>(aᵐ)ⁿ = a<sup>mn</sup></td><td>(3²)³ = 3⁶</td></tr>
+        <tr><td>ගුණිතයක දර්ශකය</td><td>(ab)ⁿ = aⁿbⁿ</td><td>(2×5)² = 4×25 = 100</td></tr>
+        <tr><td>භාගයක දර්ශකය</td><td>(a⁄b)ⁿ = aⁿ⁄bⁿ</td><td>(⅔)² = 4⁄9</td></tr>
+        <tr><td>ශුන්‍ය දර්ශකය</td><td>a⁰ = 1</td><td>7⁰ = 1, 100⁰ = 1</td></tr>
+        <tr><td>සෘණ දර්ශකය</td><td>a<sup>−n</sup> = 1⁄aⁿ</td><td>2⁻³ = 1⁄8</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — 2³ කියන්නේ?</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 92" role="img" aria-label="දෙකේ තුන්වන බලය විදහා දැක්වීම">
+          <text x="14" y="52" font-size="26" font-weight="800" fill="#5b4b9c" font-family="monospace">2³</text>
+          <text x="58" y="52" font-size="22" fill="#42357a" font-family="monospace">=</text>
+          <g font-family="monospace" font-size="22" font-weight="700" fill="#42357a">
+            <rect x="86" y="30" width="34" height="34" rx="7" fill="#ece9f8" stroke="#5b4b9c"/>
+            <text x="96" y="54">2</text>
+            <text x="126" y="52">×</text>
+            <rect x="150" y="30" width="34" height="34" rx="7" fill="#ece9f8" stroke="#5b4b9c"/>
+            <text x="160" y="54">2</text>
+            <text x="190" y="52">×</text>
+            <rect x="214" y="30" width="34" height="34" rx="7" fill="#ece9f8" stroke="#5b4b9c"/>
+            <text x="224" y="54">2</text>
+          </g>
+          <text x="262" y="52" font-size="22" fill="#42357a" font-family="monospace">= 8</text>
+          <text x="86" y="84" font-size="12.5" fill="#7a7a90">දර්ශකය 3 = පාදම 2 කොපමණ වර තියෙනවද</text>
+        </svg>
+        <figcaption>දර්ශකය = පාදම කී වරක් ගුණ වෙනවද කියන ගණන. (පොත, 11 ශ්‍රේණිය I)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා — සරල කරන්න</span>
+        <div class="calc">a⁵ × a³ ÷ a² = a<sup>5+3−2</sup> = <span class="hi">a⁶</span></div>
+        <div class="calc"><span class="c">(පළමුව ගුණ → 5+3=8, ඊටපස්සේ බෙදුම → 8−2=6)</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: (x³)² × x⁻⁴ = ?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">(x³)² = x⁶; x⁶ × x⁻⁴ = x<sup>6−4</sup> = <span class="a">x²</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>a⁰ = <b>1</b>, <b>0 නෙවෙයි!</b> (5⁰ = 1).</li>
+        <li>සෘණ දර්ශකය “පිළිතුර සෘණ” කියන එක නෙවෙයි — එය <b>පරස්පරය</b> (reciprocal): 2⁻³ = 1⁄8, −8 නෙවෙයි.</li>
+        <li>ගුණ කරනකොට දර්ශක <b>එකතු</b> කරනවා, ගුණ කරන්නේ නෑ: a² × a³ = a⁵, a⁶ නෙවෙයි.</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 3⁴ × 3⁻¹ = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">3<sup>4−1</sup> = 3³ = <b>27</b>.</div></div>
+        <div class="reveal"><span class="q">2. (2x)³ = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">2³x³ = <b>8x³</b>.</div></div>
+        <div class="reveal"><span class="q">3. 10⁰ + 5⁻¹ = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">1 + ⅕ = <b>1⅕ (= 1.2)</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🧮</span><div><b>“ගුණ නම් එකතු, බෙදුම් නම් අඩු, බලයක බලය නම් ගුණ.”</b> සෘණ දර්ශකය දැක්කොත් — “පෙරළන්න!” (පරස්පරය).</div></div>
+    </div>
+  </details>
+
+  <!-- C2 fractional indices -->
+  <details class="topic" id="c2" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">2</span>
+      <h3>භාගික දර්ශක — මූල සහ දර්ශක එකතු වෙයි<span class="en">Fractional indices: ⁿ√a = a^(1/n)</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">මූලය = “පෙරළුණු දර්ශකය”</span> වර්ගමූලය (√) ඔයා A කොටසේ ඉගෙනගත්තා. දැන් පුදුම දෙයක්: <b>√a සහ a<sup>½</sup> එකම දෙයයි!</b> මූල ලකුණ (√) කියන්නේ <b>භාගික දර්ශකයක්</b> විතරයි. ඒ නිසා දර්ශක නියම ඔක්කොම මූලවලටත් වැඩ කරනවා.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>n වන මූලය = <b>1⁄n</b> දර්ශකය:</p>
+      <div class="work">
+        <div class="calc"><span class="hi">ⁿ√a = a<sup>1/n</sup></span> &nbsp;&nbsp;<span class="c">(නිදසුන් √a = a<sup>½</sup>, ∛a = a<sup>⅓</sup>)</span></div>
+        <div class="calc">ⁿ√(aᵐ) = a<sup>m/n</sup> &nbsp;&nbsp;<span class="c">(දර්ශකය උඩ, මූලය යට)</span></div>
+      </div>
+      <p>දැන් භාගික දර්ශකයක් (උදා: <sup>2</sup>⁄₃) කියන්නේ — <b>“යට ඉන්න සංඛ්‍යාවෙන් මූලය ගන්න, උඩ ඉන්න සංඛ්‍යාවෙන් බලයට නගින්න.”</b></p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 96" role="img" aria-label="භාගික දර්ශකයක අර්ථය">
+          <text x="40" y="56" font-size="30" font-weight="800" fill="#5b4b9c" font-family="monospace">a<tspan font-size="18" dy="-14">2/3</tspan></text>
+          <text x="120" y="56" font-size="22" fill="#42357a" font-family="monospace">=</text>
+          <text x="150" y="56" font-size="26" font-weight="800" fill="#42357a" font-family="monospace">∛(a²)</text>
+          <g font-size="12.5" fill="#7a7a90" font-family="sans-serif">
+            <text x="44" y="86">උඩ (2) = බලය</text>
+            <text x="170" y="86">යට (3) = මූලය</text>
+          </g>
+          <line x1="60" y1="62" x2="60" y2="74" stroke="#c4533f" stroke-width="2"/>
+          <line x1="200" y1="40" x2="200" y2="28" stroke="#0e7c86" stroke-width="2"/>
+        </svg>
+        <figcaption>භාගික දර්ශකයක උඩ = බලය, යට = මූලය. (පොත, 11 ශ්‍රේණිය I, පිටුව 17)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා 1</span>
+        <div class="calc">∛27 = 27<sup>1/3</sup> = (3³)<sup>1/3</sup> = 3<sup>1</sup> = <span class="hi">3</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 2 — සෘණ භාගික දර්ශකය</span>
+        <div class="calc">(16⁄81)<sup>−3/4</sup> = (81⁄16)<sup>3/4</sup> <span class="c">(පෙරළුවා)</span></div>
+        <div class="calc">= ((3⁄2)⁴)<sup>3/4</sup> = (3⁄2)³ = <span class="hi">27⁄8</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: (27⁄64)<sup>2/3</sup> = ?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">27⁄64 = (3⁄4)³; (… )<sup>2/3</sup> → (3⁄4)² = <span class="a">9⁄16</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li><b>යට ඉන්න සංඛ්‍යාව = මූලය</b> (root), උඩ ඉන්න සංඛ්‍යාව = බලය. පටලවා ගන්න එපා!</li>
+        <li>සෘණ <b>භාගික</b> දර්ශකයක් = පළමුව පෙරළන්න (reciprocal), ඊටපස්සේ මූලය/බලය ගන්න.</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 25<sup>1/2</sup> = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">√25 = <b>5</b>.</div></div>
+        <div class="reveal"><span class="q">2. (√25)⁻² = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">5⁻² = 1⁄25 = <b>1⁄25</b>.</div></div>
+        <div class="reveal"><span class="q">3. 8<sup>2/3</sup> = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">∛8 = 2; 2² = <b>4</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🌱</span><div><b>“යට මූලය, උඩ බලය.”</b> මූලයක් දැක්කොත් — එය හැංගුණු භාගික දර්ශකයක් කියලා හිතන්න, එතකොට හැම දර්ශක නියමයක්ම පාවිච්චි කරන්න පුළුවන්.</div></div>
+    </div>
+  </details>
+
+  <!-- C3 index equations -->
+  <details class="topic" id="c3" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">3</span>
+      <h3>දර්ශක සමීකරණ — නොදන්නා දර්ශකය හොයමු<span class="en">Index equations</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">“කී වතාවක් ගුණ කළාද?”</span> 2 යමක් කීයක් වතාවක් හරි ගුණ කරලා 64 ආවොත් — කී වතාවද? 2ˣ = 64 → x හොයන්න ඕනේ. මේ වගේ <b>දර්ශකය නොදන්නා</b> සමීකරණ විසඳන්නේ එක උපක්‍රමයකින්: <b>දෙපැත්තම එකම පාදමට ගේන එක.</b></div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <div class="box hook" style="background:#f6f4fd"><span class="ttl">මූලධර්ම 3ක්</span>
+        <div class="calc" style="margin-top:6px">පාදම සමානනම්: xᵐ = xⁿ ⟹ <span class="hi">m = n</span></div>
+        <div class="calc">දර්ශකය සමානනම්: xᵐ = yᵐ ⟹ <span class="hi">x = y</span></div>
+        <div class="calc">1 ඕනෑම බලයක් = 1: 1ᵐ = 1</div>
+      </div>
+      <p>ක්‍රමය: දෙපැත්තම <b>එකම පාදමට</b> (හෝ එකම දර්ශකයට) ගේන්න → ඊටපස්සේ දර්ශක (හෝ පාදම) සමාන කරන්න.</p>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — දෙපැත්ත එක පාදමට</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 80" role="img" aria-label="හතරේ බලයක් = හැට හතර">
+          <text x="20" y="40" font-size="20" font-weight="700" fill="#42357a" font-family="monospace">4ˣ = 64</text>
+          <text x="150" y="40" font-size="20" fill="#5b4b9c">→</text>
+          <text x="180" y="40" font-size="20" font-weight="700" fill="#42357a" font-family="monospace">4ˣ = 4³</text>
+          <text x="300" y="40" font-size="20" fill="#5b4b9c">→</text>
+          <text x="328" y="40" font-size="20" font-weight="800" fill="#0e7c86" font-family="monospace">x=3</text>
+          <text x="20" y="66" font-size="12.5" fill="#7a7a90" font-family="sans-serif">64 = 4×4×4 = 4³ — දෙපැත්තම පාදම 4, ඉතින් දර්ශක සමානයි.</text>
+        </svg>
+        <figcaption>දෙපැත්තම එකම පාදමට ගෙනාම දර්ශක සමාන කරන්න පුළුවන්. (පොත, 11 ශ්‍රේණිය I, පිටුව 21)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා — අමාරු එක</span>
+        <div class="calc">3 × 9<sup>2x−1</sup> = 27<sup>−x</sup></div>
+        <div class="calc">3¹ × (3²)<sup>2x−1</sup> = (3³)<sup>−x</sup> <span class="c">(හැම එකම පාදම 3)</span></div>
+        <div class="calc">3<sup>1+(4x−2)</sup> = 3<sup>−3x</sup> ⟹ 4x − 1 = −3x</div>
+        <div class="calc">7x = 1 ⟹ <span class="hi">x = 1⁄7</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: x³ = 343 නම් x = ?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">x³ = 7³ ⟹ දර්ශක සමානයි ⟹ <span class="a">x = 7</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>දර්ශක සමාන කරන්න කලින් <b>දෙපැත්තම පාදම සමානද</b> කියලා බලන්න — නැත්නම් මුලින්ම 8, 27, 64 වැනි ඒවා 2³, 3³, 4³ ලෙස ලියන්න.</li>
+        <li>ගුණිතයක් (3 × 9ˣ) කෙලින්ම පාදමට දාන්න බෑ — මුලින්ම 3 එකත් පාදම 3ට ගේන්න (3 = 3¹).</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. 3ˣ = 9 නම් x = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">9 = 3² ⟹ <b>x = 2</b>.</div></div>
+        <div class="reveal"><span class="q">2. 4ˣ = 1⁄64 නම් x = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">1⁄64 = 4⁻³ ⟹ <b>x = −3</b>.</div></div>
+        <div class="reveal"><span class="q">3. 2ˣ × 8ˣ = 256 නම් x = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">2ˣ × 2<sup>3x</sup> = 2⁸ ⟹ 4x = 8 ⟹ <b>x = 2</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🎯</span><div><b>“දෙපැත්ත එක පාදමට ගේනවා — ඊටපස්සේ දර්ශක දෙක සමානයි.”</b> පාදම සමාන වුණාම නොදන්නා දර්ශකය හසුවෙයි.</div></div>
+    </div>
+  </details>
+
+  <!-- C4 logarithm definition + laws -->
+  <details class="topic" id="c4" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">4</span>
+      <h3>ලඝුගණකය යනු කුමක්ද? + ලඝු නියම<span class="en">What is a logarithm + the log laws</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">ප්‍රශ්නේ පෙරළමු!</span> දර්ශකය අහන්නේ: “2 යමක් 3 වතාවක් ගුණ කළොත් මොකද්ද?” (උත්තරේ 8). ලඝුගණකය අහන්නේ අනිත් පැත්ත: “2 යමක් <b>කී වතාවක්</b> ගුණ කළොත් 8 ලැබෙනවද?” (උත්තරේ 3). ඒකයි log₂8 = 3 කියන්නේ. <b>ලඝුගණකය = හැංගුණු දර්ශකය.</b></div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <div class="work">
+        <div class="calc"><span class="hi">aˣ = N &nbsp;⟺&nbsp; log<sub>a</sub> N = x</span></div>
+        <div class="calc"><span class="c">a = පාදම, N = සංඛ්‍යාව, x = දර්ශකය (= ලඝුගණකය)</span></div>
+      </div>
+      <p>පාදම 10 නම් <b>lg</b> කියලා කෙටියෙන් ලියනවා: lg N = log₁₀ N. දැන් ලඝු <b>නියම</b>:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>නියමය</th><th>සූත්‍රය</th></tr>
+        <tr><td>ගුණිතය → එකතුව</td><td>log<sub>a</sub>(mn) = log<sub>a</sub>m + log<sub>a</sub>n</td></tr>
+        <tr><td>භාගය → අඩුව</td><td>log<sub>a</sub>(m⁄n) = log<sub>a</sub>m − log<sub>a</sub>n</td></tr>
+        <tr><td><b>බල නියමය</b> (අලුත්)</td><td>log<sub>a</sub>(mʳ) = r · log<sub>a</sub>m</td></tr>
+        <tr><td>පාදමම</td><td>log<sub>a</sub>a = 1</td></tr>
+        <tr><td>එක</td><td>log<sub>a</sub>1 = 0</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — දර්ශකය ⟷ ලඝුව</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 96" role="img" aria-label="දර්ශකය සහ ලඝුගණකය එකම සම්බන්ධය">
+          <rect x="30" y="26" width="120" height="44" rx="11" fill="#ece9f8" stroke="#5b4b9c"/>
+          <text x="52" y="54" font-size="19" font-weight="700" fill="#42357a" font-family="monospace">2³ = 8</text>
+          <rect x="210" y="26" width="130" height="44" rx="11" fill="#fef6e0" stroke="#e0a92e"/>
+          <text x="222" y="54" font-size="16" font-weight="700" fill="#9a7415" font-family="monospace">log₂8 = 3</text>
+          <path d="M155 40 H205" stroke="#5b4b9c" stroke-width="2" marker-end="url(#ah)"/>
+          <path d="M205 58 H155" stroke="#e0a92e" stroke-width="2" marker-end="url(#ah2)"/>
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5b4b9c"/></marker>
+            <marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#e0a92e"/></marker>
+          </defs>
+          <text x="40" y="90" font-size="12.5" fill="#7a7a90" font-family="sans-serif">එකම කරුණ — දෙ ආකාරයකට ලියලා. දර්ශකය (3) තමයි ලඝුව.</text>
+        </svg>
+        <figcaption>aˣ = N සහ logₐN = x — එකම සම්බන්ධයේ දෙ පැත්ත. (පොත, 11 ශ්‍රේණිය I, පිටුව 23)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා 1 — සරල කරන්න</span>
+        <div class="calc">2log₂2 + 3log₂4 − 2log₂8</div>
+        <div class="calc">= 2(1) + 3(2) − 2(3) <span class="c">(log₂2=1, log₂4=2, log₂8=3)</span></div>
+        <div class="calc">= 2 + 6 − 6 = <span class="hi">2</span></div>
+      </div>
+      <div class="work"><span class="lbl">උදා 2 — x හොයන්න</span>
+        <div class="calc">2 lg8 + 2 lg5 = lg(4³) + lg x</div>
+        <div class="calc">lg(8²) + lg(5²) = lg64 + lg x <span class="c">(බල නියමය)</span></div>
+        <div class="calc">lg(64 × 25) = lg(64 × x) ⟹ <span class="hi">x = 25</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: log₄(∛64) = ?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">∛64 = 4; log₄4 = <span class="a">1</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>log(m + n) <b>≠</b> log m + log n! එකතුව බවට හැරෙන්නේ <b>ගුණිතය</b> විතරයි: log(mn) = log m + log n.</li>
+        <li>එකම <b>පාදම</b> ඇති ලඝු විතරයි එකතු/අඩු කරන්න පුළුවන්.</li>
+        <li>බල නියමයේ දර්ශකය ඉස්සරහට පනිනවා: log(mʳ) = r log m.</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. lg1000 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">10³ = 1000 ⟹ <b>3</b>.</div></div>
+        <div class="reveal"><span class="q">2. log₃81 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">3⁴ = 81 ⟹ <b>4</b>.</div></div>
+        <div class="reveal"><span class="q">3. log₅75 − log₅3 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">log₅(75⁄3) = log₅25 = <b>2</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🔑</span><div><b>“ලඝුව කියන්නේ හැංගුණු දර්ශකයයි.”</b> ගුණිතය → එකතුව, භාගය → අඩුව, බලය → ඉස්සරහට. log<sub>a</sub>a = 1, log<sub>a</sub>1 = 0.</div></div>
+    </div>
+  </details>
+
+  <!-- C5 log tables / characteristic-mantissa / bar -->
+  <details class="topic" id="c5" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">5</span>
+      <h3>ලඝුගණක වගු — පූර්ණාංශය, දශමාංශය, බාර් අංකනය<span class="en">Log tables: characteristic, mantissa, bar notation</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">කැල්කියුලේටරයක් නැති කාලෙ?</span> පරණ කාලෙ ලොකු ගුණ කිරීම් (උදා: 0.0034 × 0.8752) කරන්න <b>ලඝුගණක වගු</b> පාවිච්චි කළා — ගුණ කිරීම <b>එකතු කිරීමක්</b> බවට හරවලා! අදත් මේක තේරුම් ගත්තොත් ලඝුවල හරිම පදනම තේරෙනවා.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <p>ඕනෑම ලඝු අගයක කොටස් 2ක්:</p>
+      <div class="scroll"><table class="tbl">
+        <tr><th>කොටස</th><th>අර්ථය</th><th>උදා (lg 27.5 = 1.4393)</th></tr>
+        <tr><td><b>පූර්ණාංශය</b> (characteristic)</td><td>දශම ලක්ෂ්‍යයට වම් පස — ඉලක්කම් ගණනින් සොයයි</td><td>1</td></tr>
+        <tr><td><b>දශමාංශය</b> (mantissa)</td><td>දශම කොටස — වගුවෙන් සොයයි, <b>හැමවිටම ධන</b></td><td>.4393</td></tr>
+      </table></div>
+      <p>0 සහ 1 අතර සංඛ්‍යාවලට (උදා: 0.004302) පූර්ණාංශය <b>සෘණ</b> වෙනවා — එය ඉලක්කම මත <b>බාර්</b> (¯) තියලා ලියනවා, නමුත් දශමාංශය ධනවම තියෙනවා:</p>
+      <div class="work">
+        <div class="calc">lg 0.004302 = <span class="hi">3̄.6337</span> &nbsp;<span class="c">(0.004302 = 10⁻³ × 10<sup>0.6337</sup>)</span></div>
+      </div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — එක අගයේ කොටස් 2</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 92" role="img" aria-label="පූර්ණාංශය සහ දශමාංශය">
+          <rect x="70" y="30" width="50" height="42" rx="9" fill="#ece9f8" stroke="#5b4b9c"/>
+          <text x="86" y="58" font-size="22" font-weight="800" fill="#42357a" font-family="monospace">1</text>
+          <text x="124" y="58" font-size="22" font-weight="800" fill="#5b4b9c" font-family="monospace">.</text>
+          <rect x="136" y="30" width="110" height="42" rx="9" fill="#fef6e0" stroke="#e0a92e"/>
+          <text x="150" y="58" font-size="22" font-weight="800" fill="#9a7415" font-family="monospace">4393</text>
+          <text x="62" y="22" font-size="12" fill="#5b4b9c" font-family="sans-serif">පූර්ණාංශය</text>
+          <text x="150" y="22" font-size="12" fill="#9a7415" font-family="sans-serif">දශමාංශය (වගුවෙන්)</text>
+          <text x="70" y="86" font-size="12.5" fill="#7a7a90" font-family="sans-serif">පූර්ණාංශය = ඉලක්කම් ගණන − 1; දශමාංශය හැමවිටම ධන.</text>
+        </svg>
+        <figcaption>ලඝු අගයක කොටස් 2: පූර්ණාංශය (වම්) + දශමාංශය (දකුණ). (පොත, 11 ශ්‍රේණිය I, පිටුව 41)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා — ලඝු ඔස්සේ ගුණ කිරීම</span>
+        <p style="margin:.2em 0">0.0034 × 0.8752 = ?</p>
+        <div class="calc">lg(0.0034) = 3̄.5315</div>
+        <div class="calc">lg(0.8752) = 1̄.9421</div>
+        <div class="calc">එකතුව = 3̄.4736 <span class="c">(ලඝු ගුණ = එකතු)</span></div>
+        <div class="calc">antilog(3̄.4736) ≈ <span class="hi">0.002975</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: antilog 2.7421 කියන්නේ දළ වශයෙන් කොතරම් (ඉලක්කම් ගණන) අගයක්ද?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පූර්ණාංශය 2 ⟹ දශම ලක්ෂ්‍යයට කලින් ඉලක්කම් 3ක්; antilog 2.7421 = <span class="a">552.2</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>දශමාංශය (mantissa) <b>කවදාවත් සෘණ නෑ</b> — සෘණ වෙන්නේ පූර්ණාංශය විතරයි (බාර්).</li>
+        <li>3̄.6337 කියන්නේ −3 + 0.6337, <b>−3.6337 නෙවෙයි!</b></li>
+        <li>ලඝු <b>ගුණ</b> කරනවා කියන්නේ අගයන් <b>එකතු</b> කරන එක; ලඝු <b>බෙදනවා</b> = අඩු කරන එක.</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. lg 552.2 ≈ ? (පූර්ණාංශය)</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">ඉලක්කම් 3ක් ⟹ පූර්ණාංශය <b>2</b> (lg ≈ 2.7421).</div></div>
+        <div class="reveal"><span class="q">2. 0.0875 ÷ 18.75 (ලඝු ඔස්සේ) ≈ ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">lg අඩු කර antilog ⟹ <b>0.004666</b> පමණ.</div></div>
+        <div class="reveal"><span class="q">3. antilog 2̄.7421 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">පූර්ණාංශය −2 ⟹ <b>0.05522</b>.</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">📖</span><div><b>“පූර්ණාංශය ඉලක්කම් ගණනින්, දශමාංශය වගුවෙන් — දශමාංශය හැමදාම ධනයි.”</b> ලඝු එකතු = ගුණ, ලඝු අඩු = බෙදුම.</div></div>
+    </div>
+  </details>
+
+  <!-- C6 scientific calculator -->
+  <details class="topic" id="c6" style="--cl:var(--C);--cldeep:var(--C-deep);--clsoft:var(--C-soft)">
+    <summary class="head"><span class="num">6</span>
+      <h3>විද්‍යාත්මක කැල්කියුලේටරය — බල සහ මූල යතුරු<span class="en">Scientific calculator: power & root keys</span></h3>
+      <span class="chev">▾</span></summary>
+    <div class="body">
+
+      <div class="step"><span class="dot">1</span><b>හසුකර ගමු</b></div>
+      <div class="box hook"><span class="ttl">විභාගෙට අවසර තියෙනවා!</span> O/L විභාගෙට විද්‍යාත්මක කැල්කියුලේටරයක් ගෙනියන්න පුළුවන්. නමුත් <b>හරි යතුරු</b> දැනගත්තොත් විතරයි එයින් වැඩක්! බල (powers) සහ මූල (roots) යතුරු දෙක ඉගෙනගමු.</div>
+
+      <div class="step"><span class="dot">2</span><b>සරල විදිහට</b></div>
+      <div class="scroll"><table class="tbl">
+        <tr><th>අවශ්‍යතාව</th><th>යතුර</th><th>ඔබනවා</th></tr>
+        <tr><td>බලය (උදා 275³)</td><td><b>[xⁿ]</b> හෝ <b>[^]</b></td><td>275 [xⁿ] 3 [=]</td></tr>
+        <tr><td>වර්ගමූලය</td><td><b>[√]</b></td><td>[√] සංඛ්‍යාව [=]</td></tr>
+        <tr><td>n වන මූලය (උදා ∜)</td><td><b>[ⁿ√x]</b> හෝ <b>[shift][xⁿ]</b></td><td>4 [ⁿ√x] 2313441 [=]</td></tr>
+      </table></div>
+
+      <div class="step"><span class="dot">3</span><b>ඇසට පේන්න — යතුරු පැනලය</b></div>
+      <figure class="svgwrap">
+        <svg viewBox="0 0 360 96" role="img" aria-label="කැල්කියුලේටර යතුරු">
+          <g font-family="monospace" font-weight="700">
+            <rect x="40" y="30" width="64" height="44" rx="9" fill="#ece9f8" stroke="#5b4b9c"/>
+            <text x="60" y="58" font-size="18" fill="#42357a">xⁿ</text>
+            <rect x="150" y="30" width="64" height="44" rx="9" fill="#ece9f8" stroke="#5b4b9c"/>
+            <text x="172" y="58" font-size="20" fill="#42357a">√</text>
+            <rect x="260" y="30" width="64" height="44" rx="9" fill="#fef6e0" stroke="#e0a92e"/>
+            <text x="276" y="58" font-size="18" fill="#9a7415">ⁿ√x</text>
+          </g>
+          <text x="40" y="90" font-size="12" fill="#7a7a90" font-family="sans-serif">බලය</text>
+          <text x="156" y="90" font-size="12" fill="#7a7a90" font-family="sans-serif">වර්ගමූලය</text>
+          <text x="260" y="90" font-size="12" fill="#9a7415" font-family="sans-serif">n වන මූලය</text>
+        </svg>
+        <figcaption>බල සහ මූල සඳහා ප්‍රධාන යතුරු 3ක්. (පොත, 11 ශ්‍රේණිය I, පිටුව 45)</figcaption>
+      </figure>
+
+      <div class="step"><span class="dot">4</span><b>විසඳුම් සහිත උදාහරණය</b></div>
+      <div class="work"><span class="lbl">උදා — මිශ්‍ර ගණනයක්</span>
+        <div class="calc">(5.21³ × ∛4.3) ÷ 3275</div>
+        <div class="calc"><span class="c">පියවර: 5.21 [xⁿ] 3 [×] 3 [ⁿ√x] 4.3 [÷] 3275 [=]</span></div>
+        <div class="calc">= <span class="hi">0.070219546</span></div>
+      </div>
+      <div class="reveal">
+        <p class="q">✍️ ඔබේ වාරය: 275³ = ?</p>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">275 [xⁿ] 3 [=] = <span class="a">20,796,875</span>.</div>
+      </div>
+
+      <div class="step"><span class="dot">5</span><b>පරිස්සම් වෙන්න!</b></div>
+      <div class="box watch"><span class="ttl">බහුලව වෙන වැරදි</span>
+        <ul><li>මිශ්‍ර ගණනවලදී <b>වරහන් ([ ]) පාවිච්චි කරන්න</b> — නැත්නම් කැල්කියුලේටරය BODMAS වැරදියට කරන්න පුළුවන්.</li>
+        <li>n වන මූලයට මුලින් <b>n</b> ඔබනවද සංඛ්‍යාව ඔබනවද කියන පිළිවෙළ ඔයාගේ කැල්කියුලේටරයෙන් බලාගන්න (model අනුව වෙනස් වෙයි).</li></ul>
+      </div>
+
+      <div class="step"><span class="dot">6</span><b>ඉක්මන් පරීක්ෂාව</b></div>
+      <div class="selfcheck">
+        <div class="reveal"><span class="q">1. ∜2313441 = ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">4 [ⁿ√x] 2313441 [=] = <b>39</b>.</div></div>
+        <div class="reveal"><span class="q">2. p(1+r⁄100)ⁿ; p=675, r=3.5, n=3 → ?</span><button class="rbtn" type="button">පිළිතුර ▾</button><div class="ans">675 × (1.035)³ ≈ <b>රු. 748.41</b> (සංයුක්ත පොලී — compound interest).</div></div>
+      </div>
+
+      <div class="step"><span class="dot">7</span><b>මතක තබාගන්න</b></div>
+      <div class="memo"><span class="ic">🧷</span><div><b>“[xⁿ] බලයට, [ⁿ√x] මූලයට — මිශ්‍ර ගණනවලදී වරහන් අමතක කරන්න එපා.”</b> කැල්කියුලේටරය මෙවලමක් විතරයි; පිළිතුර තේරුම් ගන්නේ ඔයා.</div></div>
+    </div>
+  </details>
+
+
+  <!-- ===== PUTTING IT ALL TOGETHER ===== -->
+  <section class="synth" id="synth">
+    <h2>සියල්ල එකට බඳිමු 🧵</h2>
+    <p>මේ පාඩම් 3 වෙන වෙනම නෙවෙයි — එකම <b>“සංඛ්‍යා පදනම”</b> හදන කොටස් තුනක්. එක එකකින් අනික ශක්තිමත් වෙනවා:</p>
+    <div class="chain">
+      <span>A · තාත්වික සංඛ්‍යා හා මූල</span><i>→</i>
+      <span>B · භාග හා BODMAS</span><i>→</i>
+      <span>C · දර්ශක හා ලඝු</span>
+    </div>
+    <p style="margin-top:14px"><b>A කොටසේ</b> ඉගෙනගත්තා සංඛ්‍යා වර්ග (N, Z, Q, Q′, R) සහ වර්ගමූලය. ඒ වර්ගමූලය ඇත්තටම <b>C කොටසේ</b> භාගික දර්ශකයක් (√a = a<sup>½</sup>) — ඉතින් A කෙළින්ම C එක්ක බැඳෙනවා.</p>
+    <p><b>B කොටසේ</b> භාග හා BODMAS පිළිවෙළ — ඒවා නැතුව C කොටසේ (27⁄64)<sup>2/3</sup> වැනි භාගික දර්ශක හෝ ලඝු සමීකරණ විසඳන්න බෑ. භාග හරියට කරගන්න බැරිනම් දර්ශක/ලඝු ගණනවලත් වැරදෙනවා.</p>
+    <p><b>C කොටසේ</b> දර්ශක සහ ලඝු — ලොකු සංඛ්‍යා, මූල, සංයුක්ත පොලී වගේ ඇත්ත ලෝකයේ ගණන් කෙටියෙන් කරන්න. මේක තමයි A සහ B උඩ හැදෙන ඉහළම තට්ටුව.</p>
+    <p style="margin-top:14px;color:var(--gold);font-weight:700">කෙටියෙන්: සංඛ්‍යා හඳුනගන්න (A) → ඒවා එක්ක නිවැරදිව ගණන් කරන්න (B) → ලොකු/සංකීර්ණ බල හා මූල හසුරුවන්න (C). මේ පදනම තහවුරු වුණොත් O/L ගණිතයේ ඉතුරු හැම පාඩමක්ම පහසුයි.</p>
+  </section>
+
+  <!-- ===== FINAL MIXED SELF-TEST ===== -->
+  <section class="test" id="test">
+    <h2>අවසන් මිශ්‍ර ස්වයං-පරීක්ෂණය 📝</h2>
+    <p style="color:var(--ink-soft);margin:0 0 6px">පොත වහලා, මේ ප්‍රශ්න 12ම තනියම කරන්න. ඊටපස්සේ පිළිතුරු බලන්න. 9ක් හරිනම් — ඔයා සූදානම්! 🎉</p>
+    <div class="qz">
+
+      <div class="qitem"><div class="qq">√2, ⅗, −7, 0.25, π අතරින් <b>අපරිමේය</b> සංඛ්‍යා මොනවද? (A)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans"><span class="a">√2 සහ π</span> — මේවා භාගයක් (a⁄b) කරන්න බෑ, දශම ස්ථාන අනන්තවට යනවා රටාවක් නැතුව. (⅗, −7, 0.25 පරිමේය.)</div></div>
+
+      <div class="qitem"><div class="qq">√20 සරලම ස්වරූපයට ගේන්න. (A)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">√20 = √(4×5) = √4 × √5 = <span class="a">2√5</span>.</div></div>
+
+      <div class="qitem"><div class="qq">දිගහැරුම් වර්ග ක්‍රමයෙන් √1764 = ? (A)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">42 (මක්නිසාද 42² = 1764). <span class="a">√1764 = 42</span>.</div></div>
+
+      <div class="qitem"><div class="qq">වර්ග මීටර් 441ක් වර්ග හැඩැති ඉඩමක පැත්තක දිග කීයද? (A)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පැත්ත = √441 = <span class="a">21 m</span>.</div></div>
+
+      <div class="qitem"><div class="qq">⅔ + ¼ = ? (B)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පොදු හරය 12: 8⁄12 + 3⁄12 = <span class="a">11⁄12</span>.</div></div>
+
+      <div class="qitem"><div class="qq">¾ ÷ ½ = ? (B)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">¾ × 2⁄1 = 6⁄4 = <span class="a">1½</span> (පරස්පරයෙන් ගුණ).</div></div>
+
+      <div class="qitem"><div class="qq">2 + 3 × 4 − (6 ÷ 2) = ? (BODMAS) (B)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">වරහන: 6÷2=3. ගුණ: 3×4=12. ⟹ 2 + 12 − 3 = <span class="a">11</span>.</div></div>
+
+      <div class="qitem"><div class="qq">රු. 24,000 න් ⅜ක් කීයද? (B)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">24000 × ⅜ = <span class="a">රු. 9,000</span>.</div></div>
+
+      <div class="qitem"><div class="qq">a⁵ × a⁻² ÷ a = ? (C)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">a<sup>5−2−1</sup> = <span class="a">a²</span>.</div></div>
+
+      <div class="qitem"><div class="qq">(16⁄81)<sup>−3/4</sup> = ? (C)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">පෙරළන්න: (81⁄16)<sup>3/4</sup> = ((3⁄2)⁴)<sup>3/4</sup> = (3⁄2)³ = <span class="a">27⁄8</span>.</div></div>
+
+      <div class="qitem"><div class="qq">2ˣ × 8ˣ = 256 නම් x = ? (C)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">2ˣ × 2<sup>3x</sup> = 2⁸ ⟹ 4x = 8 ⟹ <span class="a">x = 2</span>.</div></div>
+
+      <div class="qitem"><div class="qq">log₅75 − log₅3 = ? (C)</div>
+        <button class="rbtn" type="button">පිළිතුර පෙන්වන්න ▾</button>
+        <div class="ans">log₅(75⁄3) = log₅25 = <span class="a">2</span>.</div></div>
+
+    </div>
+  </section>
+
+  <!-- ===== CHEAT SHEET ===== -->
+  <section class="cheat" id="cheat">
+    <h2>⚡ එක-පිටු කෙටි සටහන (Cheat Sheet)</h2>
+    <p style="color:var(--ink-soft);margin:0 0 8px">විභාගෙට කලින් අවසන් මිනිත්තු 5ට මේක විතරක් බලන්න. (මුද්‍රණය කරගන්නත් පුළුවන් — Print කරාම පිළිතුරුත් පේනවා.)</p>
+    <div class="cheat-grid">
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>සංඛ්‍යා වර්ග</h4>
+        <ul>
+          <li><b>N</b> = 1,2,3… &nbsp;<b>Z</b> = …−1,0,1…</li>
+          <li><b>Q</b> = a⁄b (b≠0) &nbsp;<b>Q′</b> = √2, π…</li>
+          <li><b>R</b> = ඔක්කොම. (0 ∉ N)</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>දශම හා මූල</h4>
+        <ul>
+          <li>හරයේ සාධක 2 හෝ 5 විතරයි → <b>අවසන් වන දශම</b>; නැත්නම් <b>පුනරාවර්ත</b>.</li>
+          <li>√(ab) = √a × √b; සරලම: a√b.</li>
+          <li>හරය තාර්කික කරන්න: 3⁄√2 = 3√2⁄2.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--A)">
+        <h4>වර්ගමූල ක්‍රම</h4>
+        <ul>
+          <li><b>පළමු ආසන්නය:</b> පූර්ණ වර්ග 2ක් අතර තියලා ළඟම එක තෝරන්න.</li>
+          <li><b>දිගහැරුම් ක්‍රමය:</b> ඒකක ස්ථානයේ සිට ඉලක්කම් යුගල කරන්න.</li>
+          <li>Pythagoras: c = √(a²+b²).</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>භාග කර්ම</h4>
+        <ul>
+          <li>+ , − → පොදු හරය ඕනේ.</li>
+          <li>× → කෙළින්ම (ලව×ලව, හර×හර).</li>
+          <li>÷ → පරස්පරයෙන් ගුණ. “න්”/of = ×.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--B)">
+        <h4>BODMAS පිළිවෙළ</h4>
+        <ul>
+          <li><b>B</b>rackets → <b>O</b>f → <b>D</b>ivision → <b>M</b>ultiplication → <b>A</b>ddition → <b>S</b>ubtraction.</li>
+          <li>D&M සහ A&S → වමේ සිට දකුණට.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--C)">
+        <h4>දර්ශක නියම</h4>
+        <ul>
+          <li>aᵐ×aⁿ=a<sup>m+n</sup>; aᵐ÷aⁿ=a<sup>m−n</sup></li>
+          <li>(aᵐ)ⁿ=a<sup>mn</sup>; a⁰=1; a⁻ⁿ=1⁄aⁿ</li>
+          <li><b>ⁿ√a = a<sup>1/n</sup></b> (යට මූලය, උඩ බලය)</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--C)">
+        <h4>දර්ශක සමීකරණ</h4>
+        <ul>
+          <li>දෙපැත්තම එක පාදමට ගේන්න.</li>
+          <li>xᵐ=xⁿ ⟹ m=n; &nbsp; xᵐ=yᵐ ⟹ x=y.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--C)">
+        <h4>ලඝු නියම</h4>
+        <ul>
+          <li>aˣ=N ⟺ log<sub>a</sub>N=x &nbsp;(lg = log₁₀)</li>
+          <li>log(mn)=log m+log n; log(m⁄n)=log m−log n</li>
+          <li>log(mʳ)=r·log m; log<sub>a</sub>a=1; log<sub>a</sub>1=0</li>
+        </ul>
+      </div>
+
+      <div class="cheat-card" style="--cl:var(--C)">
+        <h4>ලඝු වගු හා කැල්කියුලේටරය</h4>
+        <ul>
+          <li>පූර්ණාංශය (ඉලක්කම් ගණන) + දශමාංශය (වගුවෙන්, <b>හැමදාම ධන</b>).</li>
+          <li>0&lt;x&lt;1 → බාර්: 3̄.6337 = −3+0.6337.</li>
+          <li>බලය: <b>[xⁿ]</b>; මූලය: <b>[ⁿ√x]</b>; වරහන් පාවිච්චි කරන්න.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+
+</main>
+<footer>
+  <span class="logo" style="background:linear-gradient(135deg,#e0a92e,#c8901a);color:#0d1b3e;border-radius:8px;font-weight:800;place-items:center">I</span>
+  Idasara Academy · O/L ගණිතය · පාඩම 1
+</footer>
+
+<script>
+/* progress bar */
+var prog=document.getElementById('progress');
+function up(){var h=document.documentElement;var s=h.scrollTop||document.body.scrollTop;
+  var mx=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(s/mx*100)+'%';}
+window.addEventListener('scroll',up,{passive:true});up();
+
+/* reveal buttons */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.rbtn');if(!b)return;
+  var box=b.parentElement.querySelector('.ans');if(!box)return;
+  var open=box.classList.toggle('show');
+  b.textContent=open?'පිළිතුර හංගන්න ▴':(b.textContent.indexOf('පෙන්වන්න')>-1?'පිළිතුර පෙන්වන්න ▾':'පිළිතුර ▾');
+});
+
+/* number set sorter */
+(function(){
+  var info={
+    '7':['N · Z · Q · R','ප්‍රකෘති · නිබිල · පරිමේය · තාත්වික — හැම පවුලකම!'],
+    '-3':['Z · Q · R','නිබිල · පරිමේය · තාත්වික (සෘණ නිසා N නෑ)'],
+    '0.5':['Q · R','පරිමේය · තාත්වික (½ භාගයක්; N,Z නෑ)'],
+    '0':['Z · Q · R','නිබිල · පරිමේය · තාත්වික (N එකට අයිති නෑ)'],
+    'root2':["Q′ · R","අපරිමේය · තාත්වික (√2 භාගයක් කරන්න බෑ)"],
+    'pi':["Q′ · R","අපරිමේය · තාත්වික (π = 3.14159…, රටාවක් නෑ)"],
+    '-2.5':['Q · R','පරිමේය · තාත්වික (−5⁄2 භාගයක්)']
+  };
+  var out=document.getElementById('setOut');
+  var chips=document.querySelectorAll('#setSorter .chip');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.classList.remove('active')});c.classList.add('active');
+    var d=info[c.dataset.k];
+    out.innerHTML='<span class="badge" style="background:var(--A-soft);color:var(--A-deep)">'+d[0]+'</span> '+d[1];
+  });});
+})();
+</script>
+</body>
+</html>

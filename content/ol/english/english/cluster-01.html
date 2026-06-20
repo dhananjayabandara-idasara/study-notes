@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara Academy — O/L English | Paper I: Short Answers &amp; Gap-Filling</title>
+<style>
+  :root{
+    --navy:#0B2545; --navy-2:#13315C; --navy-3:#1B3F73;
+    --gold:#C9A227; --gold-2:#E0C766; --gold-soft:#F3E9C4;
+    --paper:#FAF7F0; --card:#FFFFFF; --ink:#16202E; --muted:#5C6B7C; --line:#E6E0D2;
+    --s1:#0E7C86; --s1-soft:#E2F3F4;   /* picture matching - teal */
+    --s2:#6D4AA0; --s2-soft:#EEE8F7;   /* dialogue - violet */
+    --s3:#C75B39; --s3-soft:#FBE9E2;   /* grammar - coral */
+    --s4:#2E7D52; --s4-soft:#E4F2E9;   /* reading - green */
+    --s5:#2B6CB0; --s5-soft:#E4EEF8;   /* info transfer - blue */
+    --pos:#1B7F4B; --neg:#C0392B;
+    --ui:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,"Noto Sans Sinhala",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:var(--ui); color:var(--ink); background:var(--paper); line-height:1.7; font-size:17px; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 16px;}
+
+  #progress{position:fixed; top:0; left:0; height:4px; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-2)); z-index:60; transition:width .15s;}
+  nav.chips{position:sticky; top:0; z-index:50; background:rgba(11,37,69,.97); backdrop-filter:blur(6px); box-shadow:0 2px 12px rgba(0,0,0,.18);}
+  nav.chips .row{display:flex; gap:8px; overflow-x:auto; padding:10px 14px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  nav.chips .row::-webkit-scrollbar{display:none;}
+  nav.chips a{flex:0 0 auto; color:#EAF0F7; text-decoration:none; font-size:14px; font-weight:600; padding:7px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.18); white-space:nowrap; transition:.2s;}
+  nav.chips a:hover,nav.chips a:focus{background:var(--gold); color:var(--navy); border-color:var(--gold); outline:none;}
+
+  header.hero{background:radial-gradient(1200px 400px at 80% -10%,rgba(201,162,39,.22),transparent 60%),linear-gradient(160deg,var(--navy),var(--navy-2) 70%,var(--navy-3)); color:#fff; padding:46px 0 40px; position:relative; overflow:hidden;}
+  header.hero .wrap{position:relative; z-index:2;}
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:26px;}
+  .brand .mark{width:42px; height:42px; border-radius:11px; background:linear-gradient(145deg,var(--gold),var(--gold-2)); display:grid; place-items:center; color:var(--navy); font-weight:800; font-size:22px; box-shadow:0 6px 18px rgba(201,162,39,.4);}
+  .brand .name{font-weight:800; letter-spacing:.14em; font-size:15px;}
+  .brand .tag{font-size:11.5px; color:var(--gold-2); letter-spacing:.22em; text-transform:uppercase;}
+  .eyebrow{display:inline-flex; gap:8px; align-items:center; font-size:13px; color:var(--gold-2); border:1px solid rgba(224,199,102,.4); padding:5px 12px; border-radius:999px;}
+  header.hero h1{font-size:clamp(26px,6.2vw,42px); line-height:1.2; margin:16px 0 6px; font-weight:800;}
+  header.hero .sub{color:#D6E0EC; max-width:640px; font-size:16.5px;}
+  header.hero .meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  header.hero .meta span{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); padding:6px 13px; border-radius:10px; font-size:13.5px; font-weight:600;}
+  .floaters{position:absolute; inset:0; z-index:1; opacity:.13; pointer-events:none; font-weight:800;}
+  .floaters span{position:absolute; color:var(--gold-2); font-size:26px;}
+
+  section.lesson{padding:34px 0 8px;}
+  .why{background:linear-gradient(180deg,#fff,#FBF7EC); border:1px solid var(--line); border-radius:18px; padding:24px 22px; margin:26px 0; box-shadow:0 8px 28px rgba(11,37,69,.06);}
+  .why h2{margin:.1em 0 .4em; font-size:22px;}
+  .markbox{background:#fff8e6; border:1px solid var(--gold-2); border-radius:12px; padding:12px 15px; margin:12px 0; font-size:15px;}
+  .markbox b{color:#7a5e0a;}
+  .roadmap{display:grid; grid-template-columns:repeat(auto-fit,minmax(165px,1fr)); gap:12px; margin-top:18px;}
+  .road-card{display:block; text-decoration:none; color:var(--ink); border-radius:14px; padding:16px; border:1px solid var(--line); background:#fff; transition:.2s; position:relative; overflow:hidden;}
+  .road-card:hover,.road-card:focus{transform:translateY(-3px); box-shadow:0 12px 26px rgba(0,0,0,.1); outline:none;}
+  .road-card b{display:block; font-size:15.5px; margin-bottom:2px;}
+  .road-card small{color:var(--muted); font-size:12.5px;}
+  .road-card .num{position:absolute; right:10px; top:6px; font-size:38px; font-weight:800; opacity:.12;}
+  .tagm{display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; margin-top:6px;}
+  .tagm.easy{background:#E1F4E9; color:var(--pos);} .tagm.mid{background:var(--gold-soft); color:#7a5e0a;}
+
+  .lesson-head{border-radius:18px 18px 0 0; padding:22px 22px 18px; color:#fff; position:relative;}
+  .lesson-head .kicker{font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; opacity:.9;}
+  .lesson-head h2{margin:6px 0 4px; font-size:clamp(21px,5vw,28px); font-weight:800;}
+  .lesson-head p{margin:0; font-size:15px; opacity:.95;}
+  .lesson-head .badge{position:absolute; right:18px; top:18px; min-width:48px; height:48px; padding:0 6px; border-radius:24px; background:rgba(255,255,255,.16); display:grid; place-items:center; font-weight:800; font-size:20px; border:2px solid rgba(255,255,255,.5);}
+  .objectives{background:#fff; border:1px solid var(--line); border-top:none; padding:16px 22px; border-radius:0 0 18px 18px; margin-bottom:18px;}
+  .objectives b{font-size:13.5px;}
+  .objectives ul{margin:8px 0 0; padding-left:1.1em;} .objectives li{margin:4px 0; font-size:15.5px;}
+
+  details.sub{background:var(--card); border:1px solid var(--line); border-radius:16px; margin:14px 0; overflow:hidden; box-shadow:0 4px 16px rgba(11,37,69,.05);}
+  details.sub>summary{list-style:none; cursor:pointer; padding:16px 20px; display:flex; align-items:center; gap:12px; font-weight:700; font-size:17px;}
+  details.sub>summary::-webkit-details-marker{display:none;}
+  details.sub>summary .dot{min-width:30px; height:30px; padding:0 6px; border-radius:9px; flex:0 0 auto; color:#fff; display:grid; place-items:center; font-size:13px; font-weight:800;}
+  details.sub>summary .chev{margin-left:auto; transition:.25s; color:var(--muted); font-size:18px;}
+  details.sub[open]>summary .chev{transform:rotate(90deg);}
+  details.sub>summary:focus-visible{outline:3px solid var(--gold-2); outline-offset:-3px;}
+  .sub-body{padding:4px 20px 22px;}
+
+  .step{margin:18px 0 6px; display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .step .n{width:22px; height:22px; border-radius:50%; background:var(--gold-soft); color:#7a5e0a; display:grid; place-items:center; font-size:12px; flex:0 0 auto;}
+
+  .hook{background:var(--gold-soft); border-radius:13px; padding:14px 16px; font-size:16px;}
+  .hook b{color:#7a5e0a;}
+  .plain p{margin:.5em 0;}
+  .term{background:#fff3cf; border-bottom:2px solid var(--gold); padding:0 3px; border-radius:3px; font-weight:600;}
+
+  .box{border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .rule{background:#fff8e6; border:1px solid var(--gold-2);} .rule b{color:#7a5e0a;}
+  .watch{background:#FDECEA; border:1px solid #F1B0A6;}
+  .watch .h{font-weight:800; color:var(--neg); display:flex; gap:8px; align-items:center; margin-bottom:6px;}
+  .mem{background:linear-gradient(135deg,#0B2545,#1B3F73); color:#fff; border-radius:13px; padding:14px 16px; margin:16px 0; display:flex; gap:12px; align-items:flex-start;}
+  .mem .k{font-size:22px;} .mem b{color:var(--gold-2);}
+
+  .eg{border-left:4px solid var(--s3); background:#F8FAFD; border-radius:0 12px 12px 0; padding:12px 16px; margin:12px 0;}
+  .eg .x{font-size:16.5px;} .eg .note{font-size:14px; color:var(--muted); margin-top:4px;}
+  .hl{background:#fff3cf; color:#7a5e0a; font-weight:700; border-radius:4px; padding:0 4px;}
+  .corr{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0;}
+  .corr .c{flex:1 1 220px; border-radius:11px; padding:10px 13px; font-size:15.5px;}
+  .corr .bad{background:#FDECEA; border:1px solid #F1B0A6;} .corr .bad::before{content:"✗ "; color:var(--neg); font-weight:800;}
+  .corr .good{background:#F0FBF4; border:1px solid #BFE6CC;} .corr .good::before{content:"✓ "; color:var(--pos); font-weight:800;}
+
+  .work{background:#F6F8FB; border:1px solid #DEE6F0; border-radius:12px; padding:14px 16px; margin:12px 0;}
+  .work .lbl{font-weight:700; font-size:13.5px; color:var(--navy-2); margin-bottom:6px;}
+  .turn{border:1.5px dashed var(--gold); border-radius:12px; padding:12px 16px; margin:12px 0; background:#fffdf5;}
+  .turn .q{font-weight:700;}
+  details.reveal{margin-top:8px;}
+  details.reveal>summary{cursor:pointer; list-style:none; display:inline-flex; gap:7px; align-items:center; font-weight:700; font-size:14px; color:var(--navy); background:#fff; border:1px solid var(--line); padding:6px 13px; border-radius:999px;}
+  details.reveal>summary::-webkit-details-marker{display:none;}
+  details.reveal>summary:focus-visible{outline:3px solid var(--gold-2);}
+  details.reveal[open]>summary{background:var(--gold-soft); border-color:var(--gold);}
+  details.reveal .ans{margin-top:8px; padding:10px 13px; background:#F0FBF4; border:1px solid #BFE6CC; border-radius:10px; font-size:15.5px;}
+
+  .selfcheck{background:#fff; border:1px solid var(--line); border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .selfcheck .h{font-weight:800; display:flex; gap:8px; align-items:center; margin-bottom:8px; font-size:15.5px;}
+  .selfcheck ol{margin:0; padding-left:1.2em;} .selfcheck li{margin:9px 0;}
+
+  table.tbl{width:100%; border-collapse:collapse; margin:12px 0; font-size:15px; background:#fff; border-radius:10px; overflow:hidden; border:1px solid var(--line);}
+  table.tbl th,table.tbl td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  table.tbl th{background:var(--navy); color:#fff; font-weight:700; font-size:14px;}
+  table.tbl tr:nth-child(even) td{background:#FAFBFD;}
+  .scroller{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .chips2{display:flex; flex-wrap:wrap; gap:7px; margin:8px 0;}
+  .chips2 span{background:#fff; border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:14px; font-weight:600; color:var(--navy);}
+
+  .widget{border:1px solid var(--line); border-radius:14px; padding:16px; margin:16px 0; background:linear-gradient(180deg,#fff,#FAFBFD);}
+  .widget .wh{font-weight:800; font-size:15px; display:flex; gap:8px; align-items:center; margin-bottom:10px;}
+  .widget .qtext{font-size:16.5px; margin-bottom:10px;}
+  .widget .opts{display:flex; flex-wrap:wrap; gap:8px;}
+  .widget .opts button{font-family:var(--ui); font-weight:600; font-size:15px; padding:9px 15px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); cursor:pointer; transition:.15s;}
+  .widget .opts button:hover{border-color:var(--navy);}
+  .widget .opts button.right{background:#E1F4E9; border-color:var(--pos); color:var(--pos);}
+  .widget .opts button.wrong{background:#FDECEA; border-color:var(--neg); color:var(--neg);}
+  .widget .opts button:focus-visible{outline:3px solid var(--gold-2);}
+  .widget .fb{margin-top:10px; font-size:15px; min-height:18px;}
+  .widget .nextbtn{margin-top:10px; font-weight:700; font-size:14px; padding:8px 14px; border:none; border-radius:10px; background:var(--navy); color:#fff; cursor:pointer;}
+
+  .synth{background:linear-gradient(160deg,var(--navy),var(--navy-2)); color:#fff; border-radius:18px; padding:26px 22px; margin:30px 0;}
+  .synth h2{margin-top:0; color:var(--gold-2);}
+  .synth .order{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:14px 0; font-weight:700;}
+  .synth .order span{background:rgba(255,255,255,.1); padding:7px 13px; border-radius:10px; border:1px solid rgba(255,255,255,.2);}
+  .synth .order .ar{color:var(--gold-2);}
+
+  .cheat{background:#fff; border:2px solid var(--navy); border-radius:18px; padding:24px 22px; margin:26px 0;}
+  .cheat h2{margin-top:0;}
+  .cheat .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .cheat .cc{border:1px solid var(--line); border-radius:12px; padding:14px; background:#FAFBFD;}
+  .cheat .cc h4{margin:0 0 6px; font-size:15px;}
+  .cheat .cc.s1{border-top:4px solid var(--s1);} .cheat .cc.s2{border-top:4px solid var(--s2);}
+  .cheat .cc.s3{border-top:4px solid var(--s3);} .cheat .cc.s4{border-top:4px solid var(--s4);} .cheat .cc.s5{border-top:4px solid var(--s5);}
+
+  footer{background:var(--navy); color:#C9D4E2; padding:30px 0 40px; margin-top:30px; text-align:center; font-size:14px;}
+  footer .brand{justify-content:center;}
+  .ref{font-size:12.5px; color:#8FA2B8; font-style:italic; margin-top:6px;}
+  .top-link{position:fixed; right:16px; bottom:16px; z-index:40; background:var(--gold); color:var(--navy); width:46px; height:46px; border-radius:50%; display:grid; place-items:center; font-size:20px; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(0,0,0,.25);}
+
+  @media (max-width:560px){ body{font-size:16px;} .sub-body{padding:4px 14px 18px;} details.sub>summary{padding:14px 14px; font-size:16px;} }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important; transition:none!important;}}
+  @media print{ nav.chips,#progress,.top-link,.widget .opts button,.widget .nextbtn{display:none!important;} details.sub,details.reveal{open:true;} body{background:#fff;} }
+</style>
+</head>
+<body>
+<div id="progress" role="progressbar" aria-label="Reading progress"></div>
+
+<nav class="chips" aria-label="Section navigation">
+  <div class="row">
+    <a href="#top">Top</a>
+    <a href="#q1">1 · Picture &amp; Word</a>
+    <a href="#q2">2 · Dialogue</a>
+    <a href="#q3">3 · Grammar</a>
+    <a href="#q4">4 · Reading</a>
+    <a href="#q5">5 · Info Transfer</a>
+    <a href="#synth">Strategy</a>
+    <a href="#test">Self-Test</a>
+    <a href="#cheat">Cheat Sheet</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="floaters" aria-hidden="true">
+    <span style="left:6%;top:30%;">a / an / the</span><span style="left:80%;top:22%;">So do I</span>
+    <span style="left:22%;top:74%;">had + V3</span><span style="left:68%;top:70%;">un- / -ness</span>
+    <span style="left:46%;top:15%;">match it!</span><span style="left:34%;top:50%;">slice · dice</span>
+  </div>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">i</div>
+      <div><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div>
+    </div>
+    <span class="eyebrow">📘 G.C.E. O/L · English · English medium</span>
+    <h1>Paper I — Short Answers &amp; Gap-Filling</h1>
+    <p class="sub">This is where the easiest marks live! Picture matching, dialogues, grammar, reading and information transfer — every question type, made crystal clear.</p>
+    <div class="meta"><span>📝 5 question types</span><span>⚡ easy marks first</span><span>✍️ practice in every section</span><span>📖 Pupil's Book + Units 1–14</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="why" id="intro">
+    <h2>Why does this paper matter? 🎯</h2>
+    <p>Here's a secret: <b>Paper I = the easiest marks!</b> It's a "do you know it or not" test. <b>There is no negative marking</b> — so never, ever leave a blank! Even a smart guess can earn you a mark.</p>
+    <div class="markbox"><b>💡 The key strategy:</b> Do the easy question types (picture matching, dialogues) <b>first and fast</b> to bank marks. Then spend your remaining time on grammar and reading.</div>
+    <p>Tap any card below to jump straight to a question type 👇</p>
+    <div class="roadmap">
+      <a class="road-card" href="#q1" style="border-top:4px solid var(--s1)"><span class="num">1</span><b>Picture &amp; Word Matching</b><small>Match images to words</small><br><span class="tagm easy">easy marks</span></a>
+      <a class="road-card" href="#q2" style="border-top:4px solid var(--s2)"><span class="num">2</span><b>Dialogue Gap-Fill</b><small>Complete the conversation</small><br><span class="tagm easy">easy marks</span></a>
+      <a class="road-card" href="#q3" style="border-top:4px solid var(--s3)"><span class="num">3</span><b>Grammar in Context</b><small>Correct errors / choose word</small><br><span class="tagm easy">most learnable</span></a>
+      <a class="road-card" href="#q4" style="border-top:4px solid var(--s4)"><span class="num">4</span><b>Reading Comprehension</b><small>Read &amp; answer</small><br><span class="tagm mid">medium</span></a>
+      <a class="road-card" href="#q5" style="border-top:4px solid var(--s5)"><span class="num">5</span><b>Information Transfer</b><small>Notice → form, table → text</small></a>
+    </div>
+  </section>
+
+  <!-- ===================== Q1: PICTURE & WORD MATCHING ===================== -->
+  <section class="lesson" id="q1">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--s1),#0a5b63)">
+      <div class="badge">1</div><div class="kicker">Question type 1 · easy marks</div>
+      <h2>Picture &amp; Word Matching</h2>
+      <p>Look at a picture and choose the matching description or word. The first easy marks for everyone!</p>
+    </div>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>recognise words that describe appearance (face, hair, features)</li><li>match prepositions of place (next to, behind…) to pictures</li><li>match action / cooking verbs to pictures</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--s1)">1a</span> Describing appearance <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Imagine a friend has gone missing and you must describe them to the police — you'd need words like "<b>round face, curly hair, a beard</b>", right? Know these appearance words and this question is done in a minute!</div>
+
+        <div class="step"><span class="n">2</span> The words (Pupil's Book — Unit 1 People / Unit 10 Personality)</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Category</th><th>English words</th></tr>
+          <tr><td>Face shape</td><td>round, oval, square face</td></tr>
+          <tr><td>Hair</td><td>straight / wavy / curly / fair / black hair · bald</td></tr>
+          <tr><td>Other features</td><td>beard, moustache, pointed nose, sharp eyes, fair / dark complexion</td></tr>
+        </table></div>
+        <div class="eg"><div class="x">She <span class="hl">has</span> an <span class="hl">oval face</span> with <span class="hl">long wavy</span> hair and <span class="hl">sharp eyes</span>.</div>
+          <div class="note">Use <b>has / has got</b> when describing appearance.</div></div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Common mistake</div>Don't mix up "a beard" (on the chin) and "a moustache" (above the lip). And <b>hair</b> is uncountable — never write "hairs".</div>
+
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>Word for facial hair on the chin? <details class="reveal"><summary>Answer</summary><div class="ans">beard</div></details></li>
+          <li>A person with no hair on the head? <details class="reveal"><summary>Answer</summary><div class="ans">bald</div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Face (shape) → Hair → Features.</b> Describe with <b>has / has got</b>.</div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s1)">1b</span> Prepositions of place <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">When you tell someone where the kade (shop) is — "<b>next to</b> the bank, <b>opposite</b> the temple" — you're using prepositions of place. Match these to map pictures.</div>
+
+        <div class="step"><span class="n">3</span> See it — the cat and the box 🐱</div>
+        <svg viewBox="0 0 560 160" role="img" aria-label="Prepositions of place diagram — on, in, under, next to, in front of, behind" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px">
+          <g font-size="12.5" text-anchor="middle" fill="#16202E">
+            <rect x="20" y="44" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="43" cy="36" r="8" fill="var(--s1)"/><text x="43" y="94" font-weight="700">on</text>
+            <rect x="120" y="44" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="143" cy="59" r="8" fill="var(--s1)"/><text x="143" y="94" font-weight="700">in</text>
+            <rect x="220" y="40" width="46" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="243" cy="82" r="8" fill="var(--s1)"/><text x="243" y="104" font-weight="700">under</text>
+            <rect x="320" y="44" width="40" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="376" cy="59" r="8" fill="var(--s1)"/><text x="348" y="94" font-weight="700">next to</text>
+            <rect x="430" y="40" width="44" height="30" rx="4" fill="none" stroke="var(--s1)" stroke-width="2"/><circle cx="452" cy="80" r="8" fill="var(--s1)"/><text x="452" y="104" font-weight="700">in front of</text>
+            <rect x="515" y="46" width="40" height="30" rx="4" fill="#fff" stroke="var(--s1)" stroke-width="2"/><circle cx="535" cy="40" r="8" fill="var(--s1)" opacity=".55"/><text x="535" y="94" font-weight="700">behind</text>
+          </g>
+        </svg>
+        <div class="chips2"><span>between</span><span>opposite</span><span>near</span><span>at the corner of</span><span>along</span></div>
+        <div class="eg"><div class="x">The post office is <span class="hl">opposite</span> the school and <span class="hl">next to</span> the bank.</div></div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Often confused</div><b>opposite</b> (facing, across from) ≠ <b>next to</b> (beside). <b>behind</b> (at the back) ≠ <b>in front of</b>.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>in/on/at/under = one object; next to/opposite/between = relative to another object.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s1)">1c</span> Action &amp; cooking verbs <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">When amma cooks — "<b>slice</b> the onions, <b>fry</b> the fish, <b>knead</b> the dough". Match these verbs to recipe pictures! (Pupil's Book — Unit 8 Healthy Food)</div>
+
+        <div class="step"><span class="n">2</span> Cooking verbs</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Verb</th><th>Meaning</th></tr>
+          <tr><td>sift</td><td>pass flour through a sieve</td></tr>
+          <tr><td>dice</td><td>cut into small cubes</td></tr>
+          <tr><td>slice</td><td>cut into thin flat pieces</td></tr>
+          <tr><td>grate</td><td>shred (e.g. coconut) on a grater</td></tr>
+          <tr><td>knead</td><td>press and fold dough</td></tr>
+          <tr><td>fry / boil / peel</td><td>cook in oil / cook in water / remove the skin</td></tr>
+        </table></div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Look at the picture carefully</div>Focus only on the <b>main action or object</b> — you don't have to read every detail. Don't confuse <b>slice</b> (thin pieces) with <b>dice</b> (cubes).</div>
+
+        <!-- WIDGET 1 -->
+        <div class="widget" id="w1">
+          <div class="wh">🎮 Match the word — choose the right verb for the meaning</div>
+          <div class="qtext" id="w1q"></div>
+          <div class="opts" id="w1o"></div>
+          <div class="fb" id="w1f" aria-live="polite"></div>
+          <button class="nextbtn" id="w1n">Next question →</button>
+        </div>
+
+        <div class="mem"><span class="k">🔑</span><div><b>Spot the action in the picture → pick the verb for that action.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== Q2: DIALOGUE ===================== -->
+  <section class="lesson" id="q2">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--s2),#4a2f78)">
+      <div class="badge">2</div><div class="kicker">Question type 2 · easy marks</div>
+      <h2>Dialogue Gap-Fill</h2>
+      <p>Complete the missing lines of a conversation. This tests everyday spoken English.</p>
+    </div>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>choose polite/appropriate phrases to fit the context</li><li>use short-answer agreements (So do I / Neither have I) correctly</li><li>use the line after the blank as a clue</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--s2)">2a</span> Agreement short answers — "So do I / Neither do I" <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Friend: "I love cricket." You: "<b>So do I!</b>" These little replies appear in the exam every year — and many students get them wrong. Learn the trick = instant marks!</div>
+
+        <div class="step"><span class="n">2</span> The secret: keep the auxiliary from the first sentence</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>First sentence</th><th>If you agree</th></tr>
+          <tr><td>I <b>like</b> tea. (positive)</td><td>So do I.</td></tr>
+          <tr><td>I <b>don't</b> like tea. (negative)</td><td>Neither do I.</td></tr>
+          <tr><td>I <b>have</b> finished.</td><td>So have I.</td></tr>
+          <tr><td>I <b>haven't</b> finished.</td><td>Neither have I.</td></tr>
+          <tr><td>I <b>can</b> swim.</td><td>So can I.</td></tr>
+        </table></div>
+        <div class="box rule"><b>📏 The rule:</b> For a <b>positive</b> sentence → <b>So + (auxiliary) + I.</b> For a <b>negative</b> sentence → <b>Neither + (auxiliary) + I.</b> Take the auxiliary (do/have/can/am…) <b>straight from the first sentence!</b></div>
+
+        <div class="turn"><div class="q">✏️ Your turn: A: "I don't eat meat." → B?</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">Neither do I. (negative sentence → Neither + do + I)</div></details></div>
+
+        <!-- WIDGET 2 -->
+        <div class="widget" id="w2">
+          <div class="wh">🎮 Choose the short answer</div>
+          <div class="qtext" id="w2q"></div>
+          <div class="opts" id="w2o"></div>
+          <div class="fb" id="w2f" aria-live="polite"></div>
+          <button class="nextbtn" id="w2n">Next question →</button>
+        </div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Don't change the auxiliary</div>For simple-past statements like "I went…" → <b>So did I</b> (do→did). "I am happy." → <b>So am I</b>. Keep the same tense/auxiliary as the first sentence.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Positive → So; Negative → Neither. Auxiliary from the first sentence + I.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s2)">2b</span> Register &amp; context <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> Match the language to the setting (Pupil's Book — Unit 4 Let's talk / Unit 11 The right career)</div>
+        <div class="plain"><p>The words change with the place: a <b>hotel</b>, an <b>interview</b>, a <b>shop</b>, or <b>between friends</b>.</p></div>
+        <div class="corr">
+          <div class="c good">(Interview) "Certainly, sir. I worked as a trainee for two years."</div>
+          <div class="c bad">(Interview) "Yeah, whatever, two years or so."</div>
+        </div>
+        <div class="eg"><div class="x">(Hotel) Receptionist: "Good morning. <span class="hl">How may I help you?</span>" &nbsp; Guest: "I'd like to check in, please."</div>
+          <div class="note">Polite phrases: Could you…?, May I…?, I'd like…, Certainly, Thank you.</div></div>
+
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>What should you do before filling a blank? <details class="reveal"><summary>Answer</summary><div class="ans">Read the whole dialogue — especially the line <b>after</b> the blank; it usually hints what fits.</div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Read the line after the blank. Match the politeness level (a teacher ≠ a friend).</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== Q3: GRAMMAR ===================== -->
+  <section class="lesson" id="q3">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--s3),#9c3f24)">
+      <div class="badge">3</div><div class="kicker">Question type 3 · the most learnable!</div>
+      <h2>Grammar in Context</h2>
+      <p>Correct the errors, or fill blanks with the right form — tense, articles, prepositions, agreement.</p>
+    </div>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>use the four past tenses correctly (Pupil's Book p.11)</li><li>handle articles, prepositions and subject–verb agreement</li><li>form words using prefixes and suffixes</li></ul>
+    </div>
+    <div class="markbox"><b>⭐ Most important tip:</b> This is the <b>most learnable</b> part of the whole paper. Tense and subject–verb agreement come up <b>every single year</b> — practise past papers here!</div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--s3)">3a</span> Tenses — Pupil's Book Revision point, p.11 <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">A tense is like a time machine ⏰ — the verb changes to show when something happened. To write about the past, English has four past tenses.</div>
+
+        <div class="step"><span class="n">2</span> The four past tenses (with the book's own examples)</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Tense</th><th>Use</th><th>Example (PB p.11)</th></tr>
+          <tr><td><b>Simple Past</b></td><td>a single action at a point in the past</td><td>On my last birthday, I <b>donated</b> some books.</td></tr>
+          <tr><td><b>Past Continuous</b></td><td>an action going on at a point in the past</td><td>I <b>was waiting</b> for a letter when the postman delivered it.</td></tr>
+          <tr><td><b>Past Perfect</b></td><td>an action completed <b>before</b> another past action</td><td>My father <b>had visited</b> the library before he organized this.</td></tr>
+          <tr><td><b>Past Perfect Continuous</b></td><td>an action that began in the past and went on</td><td>He <b>had been waiting</b> for a long time to get those books.</td></tr>
+        </table></div>
+        <div class="corr">
+          <div class="c bad">By the time we arrived, the train <b>left</b>.</div>
+          <div class="c good">By the time we arrived, the train <b>had left</b>.</div>
+        </div>
+        <div class="turn"><div class="q">✏️ Your turn: "While I ___ (cook), the phone rang."</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">was cooking (an action going on → Past Continuous)</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>The earlier past action → had + V3 (Past Perfect).</b> An ongoing action → was/were + V-ing.</div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s3)">3b</span> Articles (a / an / the) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> Simple rules</div>
+        <div class="box rule"><b>a</b> — before a consonant <i>sound</i> (a boy, a university). <b>an</b> — before a vowel <i>sound</i> (an apple, an hour). <b>the</b> — for something specific or already mentioned (the sun, the book I bought).</div>
+        <div class="corr">
+          <div class="c bad">She is <b>a</b> honest girl. · I saw <b>a</b> elephant.</div>
+          <div class="c good">She is <b>an</b> honest girl. · I saw <b>an</b> elephant.</div>
+        </div>
+        <div class="box watch"><div class="h">⚠ Listen to the sound, not the letter!</div><b>an</b> hour (the "h" is silent → vowel sound); <b>a</b> university (the "yu" → consonant sound). Sound, not spelling!</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Vowel sound → an; consonant sound → a; specific thing → the.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s3)">3c</span> Prepositions (in / on / at …) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> For time — AT / ON / IN</div>
+        <div class="box rule"><b>at</b> + a clock time (at 5 o'clock). <b>on</b> + a day/date (on Monday, on April 14th). <b>in</b> + a month/year (in May, in 2026).</div>
+        <div class="eg"><div class="x">We celebrate Avurudu <span class="hl">in</span> April, <span class="hl">on</span> the 14th, <span class="hl">at</span> the auspicious time.</div></div>
+        <div class="box watch"><div class="h">⚠ since vs for</div><b>since</b> = from a point in time (since 2015); <b>for</b> = a length of time (for three years).</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Smallest → AT (time); medium → ON (day); largest → IN (month/year).</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s3)">3d</span> Subject–Verb Agreement <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> The rule</div>
+        <div class="plain"><p>A singular subject takes a singular verb (He <b>plays</b>); a plural subject takes a plural verb (They <b>play</b>).</p></div>
+        <div class="corr">
+          <div class="c bad">She <b>have</b> finished. · The students <b>was</b> happy.</div>
+          <div class="c good">She <b>has</b> finished. · The students <b>were</b> happy.</div>
+        </div>
+        <div class="box watch"><div class="h">⚠ Irregular plurals</div>criterion→criteria, medium→media, syllabus→syllabi — these are <b>plural</b>! "The criteria <b>are</b> strict." (not "is").</div>
+        <div class="mem"><span class="k">🔑</span><div><b>First decide if the subject is singular or plural → match the verb.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s3)">3e</span> Word formation — Prefixes &amp; Suffixes (PB Revision point) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> The two kinds of affix</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th></th><th>Prefix (at the start)</th><th>Suffix (at the end)</th></tr>
+          <tr><td>Effect</td><td>changes the <b>meaning</b> (usually <b>not</b> the word-class)</td><td>often changes the <b>word-class</b></td></tr>
+          <tr><td>e.g.</td><td>in-, un-, im-, ir-, dis-, mis-, re-</td><td>-ize, -ful, -less, -ness, -ly, -tion, -ment, -ous</td></tr>
+          <tr><td>sample</td><td>significant → <b>in</b>significant</td><td>vandal (n) → vandal<b>ize</b> (v)</td></tr>
+        </table></div>
+        <div class="eg"><div class="x">forget (verb) → forget<span class="hl">ful</span> (adj) · happy (adj) → happi<span class="hl">ness</span> (noun) · quick (adj) → quick<span class="hl">ly</span> (adverb)</div>
+          <div class="note">A suffix changes the word's "job" (word-class).</div></div>
+        <div class="turn"><div class="q">✏️ Your turn: "She answered with great ___ (confident)."</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">confidence (a noun is needed here → confident → confidence)</div></details></div>
+
+        <!-- WIDGET 3 -->
+        <div class="widget" id="w3">
+          <div class="wh">🎮 Choose the correct form (Grammar)</div>
+          <div class="qtext" id="w3q"></div>
+          <div class="opts" id="w3o"></div>
+          <div class="fb" id="w3f" aria-live="polite"></div>
+          <button class="nextbtn" id="w3n">Next question →</button>
+        </div>
+
+        <div class="step"><span class="n">7</span> Memory hook</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Prefix = changes meaning (un-/dis- = "not"); Suffix = changes word-class (-ly→adverb, -ness→noun).</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--s3)">3f</span> Modals · Reported speech · Conjunctions (PB) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> Quick summary</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Point</th><th>Rule / example</th></tr>
+          <tr><td><b>Modals</b> (advice/obligation)</td><td>should, must, mustn't, ought to · "You <b>should</b> revise daily."</td></tr>
+          <tr><td><b>Reported speech</b></td><td>tense shifts back one step · "I am tired" → He said he <b>was</b> tired.</td></tr>
+          <tr><td><b>Conjunctions</b></td><td>although, because, while, so, but · "<b>Although</b> it rained, we played."</td></tr>
+        </table></div>
+        <div class="box watch"><div class="h">⚠ Reported-speech backshift</div>say + that; tell + (someone) + that. Shift the tense back: am→was, like→liked, will→would, today→that day.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Reported: tense back + change pronouns + today→that day.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== Q4: READING ===================== -->
+  <section class="lesson" id="q4">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--s4),#1f5a3a)">
+      <div class="badge">4</div><div class="kicker">Question type 4 · medium</div>
+      <h2>Reading Comprehension</h2>
+      <p>Read a passage and answer questions. Some answers are direct; some need your own words.</p>
+    </div>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>use the question's keyword to find the answer in the passage</li><li>identify pronoun reference (it/they/this)</li><li>answer "in your own words" without copying</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--s4)">4a</span> Text types &amp; finding answers <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Under a newspaper headline there's small text with the details, right? Notices, newspaper articles, and autobiographies all work like that — practise reading them and pulling out the key facts.</div>
+        <div class="step"><span class="n">2</span> The golden method (3 steps)</div>
+        <div class="box rule"><b>① Underline the keyword in the question.</b> ② Find that word (or its meaning) in the passage. ③ Write your answer based on that sentence.</div>
+        <div class="eg"><div class="x">Nimal bought a new phone. <span class="hl">It</span> was very expensive.</div>
+          <div class="note">Here <b>It</b> = the new phone. (A pronoun — look back to the noun before it!)</div></div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ "In your own words" — don't copy!</div>If the question says "in your own words" and you copy the passage exactly, you <b>lose the mark</b>. Rewrite the meaning (paraphrase) — use synonyms (big→large, happy→glad).</div>
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>"The students cheered. <b>They</b> were happy." — They = ? <details class="reveal"><summary>Answer</summary><div class="ans">the students.</div></details></li>
+          <li>What do you do for an "own words" question? <details class="reveal"><summary>Answer</summary><div class="ans">Paraphrase the meaning — don't copy.</div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Keyword → find it in the passage. "Own words" = paraphrase, never copy.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== Q5: INFO TRANSFER ===================== -->
+  <section class="lesson" id="q5">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--s5),#1f4e80)">
+      <div class="badge">5</div><div class="kicker">Question type 5</div>
+      <h2>Information Transfer</h2>
+      <p>Move information from one form to another — notice → form, table → sentences, chart → description.</p>
+    </div>
+    <div class="objectives"><b>By the end of this section you will be able to 🎯</b>
+      <ul><li>read a notice/passage and fill in forms and tables</li><li>turn chart data into sentences</li><li>copy names, dates and numbers accurately</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--s5)">5a</span> Filling forms/tables &amp; describing charts <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Ever filled an application form to open a bank account? This is the same — take information from a notice and put it into a form. (Pupil's Book — Unit 6 Information)</div>
+
+        <div class="step"><span class="n">2</span> Words to describe charts (bar / pie)</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Word</th><th>Meaning / use</th></tr>
+          <tr><td>the most / most of</td><td>the largest — "Most students chose cricket."</td></tr>
+          <tr><td>the least</td><td>the smallest — "Hockey was the least popular."</td></tr>
+          <tr><td>many / some / a few</td><td>amounts — "A few preferred tennis."</td></tr>
+        </table></div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Save your last 3 marks</div>① Answer <b>only what is asked</b> — extra invented details lose marks. ② Copy names, dates and numbers <b>exactly as given</b>. ③ Mind your <b>spelling</b> — an easy place to drop marks!</div>
+        <div class="step"><span class="n">6</span> Quick self-check</div>
+        <div class="selfcheck"><div class="h">✅ Quick self-check</div><ol>
+          <li>Word for "the largest amount"? <details class="reveal"><summary>Answer</summary><div class="ans">the most</div></details></li>
+          <li>When copying a name onto a form, what matters most? <details class="reveal"><summary>Answer</summary><div class="ans">Correct spelling — exactly as given.</div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Answer only what's asked; copy names/dates/numbers exactly; watch your spelling.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== SYNTHESIS ===================== -->
+  <section class="synth" id="synth">
+    <h2>Putting it all together — exam strategy 🏆</h2>
+    <p>The smart <b>order</b> to attempt Paper I:</p>
+    <div class="order"><span>1 Picture matching</span><span class="ar">→</span><span>2 Dialogue</span><span class="ar">→</span><span>3 Grammar</span><span class="ar">→</span><span>5 Info transfer</span><span class="ar">→</span><span>4 Reading</span></div>
+    <p style="opacity:.95">
+      • <b>Easy marks first</b> (picture, dialogue) — build confidence and bank marks.<br>
+      • <b>Grammar</b> — most marks for your practice; tense + agreement come every year.<br>
+      • <b>Reading last</b> — it takes the most time, so protect your other marks first.<br>
+      • <b>The golden rule:</b> never leave a blank — there's no negative marking!</p>
+  </section>
+
+  <!-- ===================== MIXED TEST ===================== -->
+  <section id="test">
+    <h2 style="text-align:center;margin-top:30px">🏁 Final Self-Test</h2>
+    <p style="text-align:center;color:var(--muted)">Try each one yourself first — then reveal the answer.</p>
+    <div class="selfcheck"><div class="h">1–2 · Picture / Dialogue</div><ol>
+      <li>Verb for "cut into thin flat pieces"? <details class="reveal"><summary>Answer</summary><div class="ans">slice</div></details></li>
+      <li>A: "I haven't seen that film." → B (agreeing)? <details class="reveal"><summary>Answer</summary><div class="ans">Neither have I.</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">3 · Grammar</div><ol>
+      <li>Correct it: "She have eaten before I came." <details class="reveal"><summary>Answer</summary><div class="ans">She <b>had eaten</b> before I came. (Past Perfect + has→had)</div></details></li>
+      <li>"He is ___ honest man." (a/an) <details class="reveal"><summary>Answer</summary><div class="ans">an (silent "h" → vowel sound)</div></details></li>
+      <li>"We have lived here ___ 2015." (since/for) <details class="reveal"><summary>Answer</summary><div class="ans">since (a point in time)</div></details></li>
+      <li>"care" → adjective form? <details class="reveal"><summary>Answer</summary><div class="ans">careful (suffix -ful)</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">4–5 · Reading / Info Transfer</div><ol>
+      <li>"Kamala won a prize. <b>It</b> made her proud." — It = ? <details class="reveal"><summary>Answer</summary><div class="ans">a prize / winning the prize.</div></details></li>
+      <li>Word for "the smallest" on a chart? <details class="reveal"><summary>Answer</summary><div class="ans">the least</div></details></li>
+    </ol></div>
+  </section>
+
+  <!-- ===================== CHEAT SHEET ===================== -->
+  <section class="cheat" id="cheat">
+    <h2>📋 Cheat Sheet</h2>
+    <p style="color:var(--muted);margin-top:0">Skim just this page right before the exam.</p>
+    <div class="grid">
+      <div class="cc s1"><h4>1 · Picture matching</h4>Appearance: round/oval face, wavy/curly hair, beard.<br>Place: next to, opposite, behind, between.<br>Cooking: sift, dice, slice, grate, knead, fry.</div>
+      <div class="cc s2"><h4>2 · Dialogue</h4>Positive → <b>So + aux + I</b>; negative → <b>Neither + aux + I</b>.<br>Read the line after the blank.<br>Match the politeness level.</div>
+      <div class="cc s3"><h4>3 · Grammar</h4>Past: had+V3 (perfect), was+V-ing (continuous).<br>an=vowel sound; AT time/ON day/IN month.<br>Subject ↔ verb; prefix=meaning, suffix=word-class.</div>
+      <div class="cc s4"><h4>4 · Reading</h4>Keyword → find it in the passage.<br>Pronouns: it/they = the noun before.<br>"Own words" = paraphrase (don't copy).</div>
+      <div class="cc s5"><h4>5 · Info Transfer</h4>most/least/many/a few.<br>Answer only what's asked; copy names/dates exactly.<br>Watch your spelling!</div>
+    </div>
+  </section>
+
+</main>
+
+<a class="top-link" href="#top" aria-label="Back to top">↑</a>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="justify-content:center"><div class="mark">i</div>
+      <div style="text-align:left"><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div></div>
+    <p style="margin:14px 0 4px">G.C.E. O/L English · Paper I — easy marks in your hands.</p>
+    <p class="ref">Source: Grade 11 English Pupil's Book (Educational Publications Department) · Units 1–14 (Revision points: Tenses p.11, Prefixes &amp; Suffixes, Reported Speech, Modals). Cross-check page/figure numbers against your own copy.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var bar=document.getElementById('progress');
+  function prog(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;bar.style.width=(sc/mx*100)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+
+  document.querySelectorAll('section.lesson').forEach(function(sec){
+    var subs=sec.querySelectorAll('details.sub');
+    subs.forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ subs.forEach(function(o){ if(o!==d)o.open=false; }); } }); });
+  });
+
+  function quiz(id,data){
+    var i=0, qEl=document.getElementById(id+'q'), oEl=document.getElementById(id+'o'),
+        fEl=document.getElementById(id+'f'), nEl=document.getElementById(id+'n');
+    function render(){
+      var q=data[i]; qEl.innerHTML=q.q; fEl.textContent=''; oEl.innerHTML='';
+      q.opts.forEach(function(opt){
+        var b=document.createElement('button'); b.textContent=opt;
+        b.addEventListener('click',function(){
+          Array.prototype.forEach.call(oEl.children,function(x){x.disabled=true;});
+          if(opt===q.a){ b.className='right'; fEl.innerHTML='<span style="color:#1B7F4B;font-weight:700">✓ Correct!</span> '+(q.why||''); }
+          else { b.className='wrong'; Array.prototype.forEach.call(oEl.children,function(x){ if(x.textContent===q.a)x.className='right'; });
+            fEl.innerHTML='<span style="color:#C0392B;font-weight:700">✗ </span>Correct answer: <b>'+q.a+'</b>. '+(q.why||''); }
+        });
+        oEl.appendChild(b);
+      });
+    }
+    nEl.addEventListener('click',function(){ i=(i+1)%data.length; render(); });
+    render();
+  }
+
+  quiz('w1',[
+    {q:'cut into thin flat pieces:',opts:['dice','slice','knead'],a:'slice',why:'slice = thin pieces; dice = cubes.'},
+    {q:'press and fold dough:',opts:['knead','grate','sift'],a:'knead'},
+    {q:'shred coconut on a grater:',opts:['peel','grate','boil'],a:'grate'},
+    {q:'hair above the lip:',opts:['beard','moustache','bald'],a:'moustache',why:'beard = on the chin; moustache = above the lip.'}
+  ]);
+  quiz('w2',[
+    {q:'A: "I like rice & curry." → B (agree):',opts:['So do I.','Neither do I.','So am I.'],a:'So do I.',why:'positive + like(do) → So do I.'},
+    {q:'A: "I can\'t swim." → B (agree):',opts:['So can I.','Neither can I.','Neither do I.'],a:'Neither can I.',why:'negative + can → Neither can I.'},
+    {q:'A: "I have finished." → B:',opts:['So have I.','So do I.','Neither have I.'],a:'So have I.'},
+    {q:'A: "I didn\'t go." → B:',opts:['So did I.','Neither did I.','Neither do I.'],a:'Neither did I.',why:'negative past → Neither did I.'}
+  ]);
+  quiz('w3',[
+    {q:'By the time we reached, the bus ___.',opts:['leaves','had left','was leaving'],a:'had left',why:'the earlier past action → Past Perfect (had + V3).'},
+    {q:'She is ___ university student.',opts:['a','an','the'],a:'a',why:'"university" starts with a "yu" consonant sound → a.'},
+    {q:'The media ___ reported it.',opts:['has','have','is'],a:'have',why:'media is plural → have.'},
+    {q:'happy → noun form:',opts:['happily','happiness','happier'],a:'happiness',why:'-ness → noun.'},
+    {q:'We have known them ___ 2010.',opts:['for','since','at'],a:'since',why:'a point in time → since.'}
+  ]);
+})();
+</script>
+</body>
+</html>

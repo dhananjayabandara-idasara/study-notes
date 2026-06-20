@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>සා/පෙළ විද්‍යාව — සම්පූර්ණ සිතියම · ඉඩසර ඇකඩමිය</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --bio:#2f8f5b; --chem:#b6562e; --phys:#2b6fb3; --earth:#6b7280;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Noto Sans Sinhala','Iskoola Pota','Segoe UI',system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  
+  header {
+    background:linear-gradient(135deg,var(--navy),var(--navy2));
+    color:#fff;
+    border-radius:14px;
+    padding:26px 26px 22px;
+    box-shadow:0 10px 30px rgba(15,39,71,.18);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-content {
+    flex: 1;
+    max-width: calc(100% - 130px);
+  }
+  header .kicker{font-size:.74rem;letter-spacing:.05em;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.5rem}
+  header p{margin:.5rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:62ch}
+  
+  .header-brand-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .header-logo-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    border: 3px solid var(--gold-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 6px;
+  }
+  .header-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .logo-text-si {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gold-soft);
+    margin: 2px 0 0;
+  }
+  .logo-text-en {
+    font-size: 0.65rem;
+    color: #d6e0ee;
+    margin: 0;
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:18px 2px 6px;font-size:.84rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.84rem;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04);page-break-inside:avoid;break-inside:avoid;}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:13px 0 4px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:1rem;color:var(--navy)}
+  .cluster .why{margin:0 0 10px;font-size:.85rem;color:var(--muted)}
+  .topic{display:flex;align-items:baseline;gap:10px;padding:6px 0 6px 14px;border-left:2px solid var(--line);margin-left:3px}
+  .topic .name{flex:1;font-size:.94rem}
+  .topic .en{display:block;font-size:.76rem;color:var(--muted)}
+  .tag{font-size:.7rem;font-weight:700;color:#fff;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .g10{background:var(--phys)} .g11{background:var(--gold);color:#3a2a06}
+  .code{font-size:.74rem;color:var(--muted);white-space:nowrap}
+  
+  /* Footer styles optimized to prevent splitting */
+  footer{margin-top:24px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.7;page-break-inside:avoid;break-inside:avoid;}
+  .brand{color:var(--gold);font-weight:700}
+  .copyright{margin-top:12px;font-size:.75rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+  
+  @media(max-width:520px){
+    header { flex-direction: column-reverse; text-align: center; padding: 22px 16px; }
+    .header-content { max-width: 100%; }
+    header p { margin: .8rem auto 0; }
+    .header-brand-box { margin-bottom: 12px; }
+    .header-logo-container { width: 80px; height: 80px; }
+    .topic{flex-wrap:wrap;gap:5px}.code{order:3;width:100%;padding-left:0}
+  }
+
+  /* PRINT & PDF OPTIMIZATION */
+  @media print {
+    body { background: #fff; color: #000; font-size: 13px; line-height: 1.4; }
+    .wrap { padding: 10px 0; max-width: 100%; }
+    header { background: #0f2747 !important; color: #fff !important; padding: 18px; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header p { color: #e2e8f0 !important; font-size: 0.85rem; }
+    .header-logo-container { border-color: #c8962a !important; background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .logo-text-si { color: #f3e6c8 !important; }
+    .logo-text-en { color: #e2e8f0 !important; }
+    .controls { display: none !important; } /* Hides open/close buttons in print */
+    .legend { margin: 10px 0; font-size: 0.75rem; }
+    .dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tag { -webkit-print-color-adjust: exact; print-color-adjust: exact; border: 1px solid #ddd; }
+    .strand { border: 1px solid #ccc; margin-bottom: 12px; box-shadow: none; page-break-inside: avoid; break-inside: avoid; }
+    .strand>summary { padding: 10px 12px; font-size: 0.95rem; }
+    .strand .body { padding: 0 12px 10px; }
+    .cluster { padding: 8px 0 2px; }
+    .cluster .why { margin: 0 0 6px; font-size: 0.78rem; }
+    .topic { padding: 4px 0 4px 10px; }
+    footer { margin-top: 15px; font-size: 0.75rem; page-break-inside: avoid; break-inside: avoid; }
+    .copyright { margin-top: 6px; padding-top: 6px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <!-- Left Section: Title and Content -->
+    <div class="header-content">
+      <div class="kicker">ඉඩසර ඇකඩමිය · විභාග නිදහස</div>
+      <h1>සා/පෙළ විද්‍යාව — සම්පූර්ණ සිතියම</h1>
+      <p>ටියුෂන් එක පාඩමක් බැගින් උගන්වයි. විභාගය ඉල්ලන්නේ ඒ සියල්ල එකවර. මේ සම්පූර්ණ විෂය නිර්දේශය, ප්‍රශ්න පත්‍රය විභාග කරන ආකාරයටම කාණ්ඩ කර ඇත — එවිට ඔබ විසිර ගිය කරුණු නොව, සම්බන්ධතා පුනරීක්ෂණය කරයි. සෑම පාඩමක්ම එහි නියම විෂය නිර්දේශ අංකයට අනුව සලකුණු කර ඇත. ඇවිත් බලන්න.</p>
+    </div>
+    
+    <!-- Right Section: Circle Logo & Text Below -->
+    <div class="header-brand-box">
+      <div class="header-logo-container">
+        <img src="/home/dhananjaya/Desktop/idasara-logo.jpeg" alt="Idasara Academy Logo" class="header-logo">
+      </div>
+      <p class="logo-text-si">ඉඩසර ඇකඩමිය</p>
+      <p class="logo-text-en">Idasara Digital (Pvt) Ltd.</p>
+    </div>
+  </header>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--bio)"></i>ජීවය හා ජීවන ක්‍රියාවලි</span>
+    <span><i class="dot" style="background:var(--chem)"></i>ද්‍රව්‍ය හා එහි වෙනස්වීම්</span>
+    <span><i class="dot" style="background:var(--phys)"></i>ශක්තිය හා බල</span>
+    <span><i class="dot" style="background:var(--earth)"></i>පෘථිවිය හා පරිසරය</span>
+    <span><i class="tag g10" style="padding:1px 7px">10</i>10 ශ්‍රේණිය</span>
+    <span><i class="tag g11" style="padding:1px 7px">11</i>11 ශ්‍රේණිය</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">සියල්ල විවෘත කරන්න</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">සියල්ල වසන්න</button>
+  </div>
+
+  <!-- STRAND 1 -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--bio)"></span>1 · ජීවය හා ජීවන ක්‍රියාවලි <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>සෛලය හා ජීවය යනු කුමක්ද</h3>
+        <p class="why">ජීව විද්‍යාවේ සියල්ල සෛලය මත ගොඩනැගේ. මේ කාණ්ඩය මුලින්ම ඉගෙන ගන්න — අනෙක් සියල්ල මෙයට සම්බන්ධ වේ.</p>
+        <div class="topic"><span class="name">ජීවයේ රසායනික පදනම<span class="en">Chemical basis of life</span></span><span class="tag g10">10</span><span class="code">1.1</span></div>
+        <div class="topic"><span class="name">ශාක හා සත්ව සෛල ව්‍යුහය හා සෛල විභජනය<span class="en">Plant &amp; animal cell structure</span></span><span class="tag g10">10</span><span class="code">1.2</span></div>
+        <div class="topic"><span class="name">ජීවීන්ගේ ලක්ෂණ<span class="en">Characteristics of living things</span></span><span class="tag g10">10</span><span class="code">1.3</span></div>
+        <div class="topic"><span class="name">ජීවීන් වර්ගීකරණය හා නම් කිරීම<span class="en">Classification of organisms</span></span><span class="tag g10">10</span><span class="code">1.4</span></div>
+        <div class="topic"><span class="name">ශාක පටක<span class="en">Plant tissues</span></span><span class="tag g11">11</span><span class="code">1.1</span></div>
+        <div class="topic"><span class="name">සත්ව පටක<span class="en">Animal tissues</span></span><span class="tag g11">11</span><span class="code">1.2</span></div>
+      </div>
+      <div class="cluster">
+        <h3>ශරීරය ක්‍රියා කරන ආකාරය (මානව දේහ ක්‍රියාවලි)</h3>
+        <p class="why">ආහාර දිරවීම, ශ්වසනය හා සම්බන්ධීකරණය එක ප්‍රශ්නයකට පිළිතුරු දෙයි: ශරීරය ක්‍රියාත්මකව තබා ගන්නේ කෙසේද? එකට පුනරීක්ෂණය කරන්න.</p>
+        <div class="topic"><span class="name">මිනිසාගේ ආහාර දිරවීම<span class="en">Digestion in humans</span></span><span class="tag g11">11</span><span class="code">1.4</span></div>
+        <div class="topic"><span class="name">මිනිසාගේ ශ්වසනය<span class="en">Respiration in humans</span></span><span class="tag g11">11</span><span class="code">1.5</span></div>
+        <div class="topic"><span class="name">සම්බන්ධීකරණය හා සමස්ථිතිය<span class="en">Co-ordination &amp; homeostasis</span></span><span class="tag g11">11</span><span class="code">1.8</span></div>
+        <div class="topic"><span class="name">ප්‍රභාසංස්ලේෂණය<span class="en">Photosynthesis</span></span><span class="tag g11">11</span><span class="code">1.3</span></div>
+      </div>
+      <div class="cluster">
+        <h3>ජීවයේ අඛණ්ඩතාව (ප්‍රජනනය හා පාරම්පරිකත්වය)</h3>
+        <p class="why">ජීවය තමා ඉදිරියට ගෙන යන ආකාරය — හා ලක්ෂණ ගමන් කරන ආකාරය. ශ්‍රේණි දෙකකට විහිදෙන එක කතාවක්.</p>
+        <div class="topic"><span class="name">ප්‍රජනනය හා ජීවීන්ගේ අඛණ්ඩතාව<span class="en">Reproduction &amp; continuity</span></span><span class="tag g10">10</span><span class="code">1.5</span></div>
+        <div class="topic"><span class="name">පාරම්පරික රටා හා ජානමය ආබාධ (ප්‍රවේණිය)<span class="en">Inheritance &amp; genetic disorders</span></span><span class="tag g10">10</span><span class="code">1.6</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRAND 2 -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--chem)"></span>2 · ද්‍රව්‍ය හා එහි වෙනස්වීම් <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>ද්‍රව්‍ය සෑදී ඇත්තේ කුමකින්ද</h3>
+        <p class="why">පරමාණු → බන්ධන → සූත්‍ර → මවුලය. සෑම පියවරකටම පෙර පියවර අවශ්‍යයි. නිශ්චිත අනුපිළිවෙළට ඉගෙන ගන්න.</p>
+        <div class="topic"><span class="name">ද්‍රව්‍යයේ ව්‍යුහය, පරමාණු හා ආවර්තිතා වගුව<span class="en">Structure of matter &amp; periodic table</span></span><span class="tag g10">10</span><span class="code">2.1</span></div>
+        <div class="topic"><span class="name">මවුලය — මූලද්‍රව්‍ය හා සංයෝග ප්‍රමාණනය<span class="en">The mole</span></span><span class="tag g10">10</span><span class="code">2.2</span></div>
+        <div class="topic"><span class="name">රසායනික බන්ධන (අයනික හා සහසංයුජ)<span class="en">Chemical bonds</span></span><span class="tag g10">10</span><span class="code">2.3</span></div>
+        <div class="topic"><span class="name">මිශ්‍රණ හා ද්‍රාව්‍යතාව<span class="en">Mixtures &amp; solubility</span></span><span class="tag g11">11</span><span class="code">2.1</span></div>
+        <div class="topic"><span class="name">මිශ්‍රණවල සංයුතිය හා සාන්ද්‍රණය<span class="en">Composition &amp; concentration</span></span><span class="tag g11">11</span><span class="code">2.2</span></div>
+        <div class="topic"><span class="name">වෙන් කිරීමේ ක්‍රම<span class="en">Separation techniques</span></span><span class="tag g11">11</span><span class="code">2.3</span></div>
+      </div>
+      <div class="cluster">
+        <h3>වෙනස් වන ද්‍රව්‍ය (ප්‍රතික්‍රියා)</h3>
+        <p class="why">සෑම ප්‍රතික්‍රියා පාඩමක්ම එක් අදහසක විවිධ රූප: කුමක් වෙනස් වේද, කෙතරම් වේගයෙන්ද, කොපමණ ශක්තියකින්ද.</p>
+        <div class="topic"><span class="name">රසායනික ප්‍රතික්‍රියා හා ක්‍රියාකාරී ශ්‍රේණිය<span class="en">Reactions &amp; activity series</span></span><span class="tag g10">10</span><span class="code">2.4</span></div>
+        <div class="topic"><span class="name">ප්‍රතික්‍රියා වේගය<span class="en">Rate of reaction</span></span><span class="tag g10">10</span><span class="code">2.5</span></div>
+        <div class="topic"><span class="name">අම්ල, භෂ්ම හා ලවණ<span class="en">Acids, bases &amp; salts</span></span><span class="tag g11">11</span><span class="code">2.4</span></div>
+        <div class="topic"><span class="name">රසායනික ප්‍රතික්‍රියා ආශ්‍රිත තාප විපර්යාස<span class="en">Heat changes in reactions</span></span><span class="tag g11">11</span><span class="code">2.5</span></div>
+        <div class="topic"><span class="name">විද්‍යුත් විච්ඡේදනය හා විද්‍යුත් ආලේපනය<span class="en">Electrolysis &amp; electroplating</span></span><span class="tag g11">11</span><span class="code">2.7</span></div>
+        <div class="topic"><span class="name">විඛාදනය හා මලකඩ බැඳීම<span class="en">Corrosion &amp; rusting</span></span><span class="tag g11">11</span><span class="code">2.8</span></div>
+        <div class="topic"><span class="name">බහුඅවයවක<span class="en">Polymers</span></span><span class="tag g11">11</span><span class="code">2.10</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRAND 3 -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--phys)"></span>3 · ශක්තිය හා බල <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>බල හා ඒවා සමතුලිත වන ආකාරය</h3>
+        <p class="why">ප්‍රශ්න පත්‍රයේ වඩාත්ම සම්බන්ධිත කාණ්ඩය. එක ප්‍රශ්නයකට චලිතය, බලය හා සමතුලිතතාව මිශ්‍ර විය හැක — එම නිසා මේවා වෙන් වෙන්ව පුනරීක්ෂණය නොකරන්න.</p>
+        <div class="topic"><span class="name">චලිතය හා චලිත ප්‍රස්තාර<span class="en">Motion &amp; graphs of motion</span></span><span class="tag g10">10</span><span class="code">3.1</span></div>
+        <div class="topic"><span class="name">නිව්ටන්ගේ චලිත නියම හා ගම්‍යතාව<span class="en">Newton's laws &amp; momentum</span></span><span class="tag g10">10</span><span class="code">3.2</span></div>
+        <div class="topic"><span class="name">ඝර්ෂණය<span class="en">Friction</span></span><span class="tag g10">10</span><span class="code">3.3</span></div>
+        <div class="topic"><span class="name">බලවල සම්ප්‍රයුක්තය<span class="en">Resultant of forces</span></span><span class="tag g10">10</span><span class="code">3.4</span></div>
+        <div class="topic"><span class="name">බලයක ඝූර්ණය<span class="en">Turning effect of a force</span></span><span class="tag g10">10</span><span class="code">3.5</span></div>
+        <div class="topic"><span class="name">බල සමතුලිතතාව<span class="en">Equilibrium of forces</span></span><span class="tag g10">10</span><span class="code">3.6</span></div>
+      </div>
+      <div class="cluster">
+        <h3>පීඩනය, කාර්යය හා ශක්තිය</h3>
+        <p class="why">බලය ශක්තිය හමුවන තැන — පාවීම, ඔසවීම, හා කාර්යයේ වියදම.</p>
+        <div class="topic"><span class="name">ද්‍රවස්ථිතික පීඩනය, ගිලීම හා පාවීම<span class="en">Hydrostatics</span></span><span class="tag g10">10</span><span class="code">3.7</span></div>
+        <div class="topic"><span class="name">කාර්යය, ශක්තිය හා බලය<span class="en">Work, energy &amp; power</span></span><span class="tag g10">10</span><span class="code">3.8</span></div>
+      </div>
+      <div class="cluster">
+        <h3>විදුලිය, තරංග, ආලෝකය හා තාපය</h3>
+        <p class="why">"එදිනෙදා ජීවිතයේ ශක්තිය" කාණ්ඩය — නිවසේ පරිපථ, ශබ්දය, කණ්ණාඩි, කාච හා තාපය.</p>
+        <div class="topic"><span class="name">ධාරා විදුලිය හා ඕම්ගේ නියමය<span class="en">Current electricity &amp; Ohm's law</span></span><span class="tag g10">10</span><span class="code">3.9</span></div>
+        <div class="topic"><span class="name">විද්‍යුත් උපකරණවල ජවය හා ශක්තිය<span class="en">Electrical energy &amp; power</span></span><span class="tag g11">11</span><span class="code">3.5</span></div>
+        <div class="topic"><span class="name">ඉලෙක්ට්‍රොනික විද්‍යාව<span class="en">Electronics</span></span><span class="tag g11">11</span><span class="code">3.6</span></div>
+        <div class="topic"><span class="name">තරංග<span class="en">Waves</span></span><span class="tag g11">11</span><span class="code">3.1</span></div>
+        <div class="topic"><span class="name">ශබ්ද තරංග<span class="en">Sound waves</span></span><span class="tag g11">11</span><span class="code">3.2</span></div>
+        <div class="topic"><span class="name">ප්‍රකාශ විද්‍යාව — කණ්ණාඩි හා කාච<span class="en">Geometrical optics</span></span><span class="tag g11">11</span><span class="code">3.3</span></div>
+        <div class="topic"><span class="name">තාපය හා තාප සංක්‍රමණය<span class="en">Thermal effects &amp; heat transfer</span></span><span class="tag g11">11</span><span class="code">3.4</span></div>
+        <div class="topic"><span class="name">සන්නායකයක් මත විද්‍යුත්...<span class="en">Electromagnetic force</span></span><span class="tag g11">11</span><span class="code">3.7</span></div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STRAND 4 -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--earth)"></span>4 · පෘථිවිය හා පරිසරය <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>ජීවී පද්ධති හා පරිසරය</h3>
+        <p class="why">"පහසු ලකුණු" කාණ්ඩය — කරුණු බහුලයි, ගණනය අඩුයි. මෙහි හොඳ පුනරීක්ෂණයක් ශ්‍රේණියක් ඉහළ දැමීමට ඇති ලාභම ක්‍රමයයි.</p>
+        <div class="topic"><span class="name">ජීවගෝලය හා එහි සංවිධානය<span class="en">The biosphere</span></span><span class="tag g11">11</span><span class="code">4.1</span></div>
+        <div class="topic"><span class="name">ශක්ති ප්‍රවාහය හා ද්‍රව්‍ය චක්‍රීකරණය<span class="en">Energy flow &amp; cycling of matter</span></span><span class="tag g11">11</span><span class="code">4.2</span></div>
+        <div class="topic"><span class="name">දූෂක හා ඒවායේ බලපෑම්<span class="en">Pollutants &amp; their effects</span></span><span class="tag g11">11</span><span class="code">4.3</span></div>
+        <div class="topic"><span class="name">ජීවන රටාවේ වෙනස්වීම්වල බලපෑම්<span class="en">Effects of changing lifestyle</span></span><span class="tag g11">11</span><span class="code">4.4</span></div>
+        <div class="topic"><span class="name">තිරසාර සංවර්ධනය හා අපද්‍රව්‍ය කළමනාකරණය<span class="en">Sustainable development &amp; waste management</span></span><span class="tag g11">11</span><span class="code">4.5</span></div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    ජා.අ.ආ. (NIE) සා/පෙළ විද්‍යා විෂය නිර්දේශයට (10 හා 11 ශ්‍රේණි) අනුකූලයි. දැක්වෙන අංක (උදා: 3.7) යනු විෂය නිර්දේශ නිපුණතා මට්ටම් අංකයි.<br>
+    <span class="brand">ඉඩසර ඇකඩමිය</span> · idasara.org
+    
+    <div class="copyright">
+      &copy; 2025-2026 Idasara Digital (Pvt) Ltd. All Rights Reserved.
+    </div>
+  </footer>
+</div>
+</body>
+</html>

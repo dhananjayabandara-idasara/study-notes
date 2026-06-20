@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara Academy — 8 ශ්‍රේණිය ගණිතය | සංඛ්‍යා පදනම</title>
+<style>
+  :root{
+    --navy:#0B2545; --navy-2:#13315C; --navy-3:#1B3F73;
+    --gold:#C9A227; --gold-2:#E0C766; --gold-soft:#F3E9C4;
+    --paper:#FAF7F0; --card:#FFFFFF; --ink:#16202E; --muted:#5C6B7C;
+    --line:#E6E0D2;
+    --l4:#0E7C86; --l4-soft:#E2F3F4;      /* directed numbers - teal */
+    --l7:#6D4AA0; --l7-soft:#EEE8F7;      /* factors - violet */
+    --l8:#C75B39; --l8-soft:#FBE9E2;      /* square root - coral */
+    --l10:#2E7D52; --l10-soft:#E4F2E9;    /* indices - green */
+    --pos:#1B7F4B; --neg:#C0392B;
+    --sin:"Noto Sans Sinhala","Iskoola Pota","Nirmala UI","Malithi Web","Yu Gothic UI",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:var(--sin); color:var(--ink);
+    background:var(--paper); line-height:1.75; font-size:17px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:0 16px;}
+
+  /* ---------- progress + nav ---------- */
+  #progress{position:fixed; top:0; left:0; height:4px; width:0%;
+    background:linear-gradient(90deg,var(--gold),var(--gold-2)); z-index:60; transition:width .15s;}
+  nav.chips{position:sticky; top:0; z-index:50; background:rgba(11,37,69,.97);
+    backdrop-filter:blur(6px); box-shadow:0 2px 12px rgba(0,0,0,.18);}
+  nav.chips .row{display:flex; gap:8px; overflow-x:auto; padding:10px 14px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  nav.chips .row::-webkit-scrollbar{display:none;}
+  nav.chips a{flex:0 0 auto; color:#EAF0F7; text-decoration:none; font-size:14px;
+    font-weight:600; padding:7px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+    white-space:nowrap; transition:.2s;}
+  nav.chips a:hover,nav.chips a:focus{background:var(--gold); color:var(--navy); border-color:var(--gold); outline:none;}
+
+  /* ---------- header ---------- */
+  header.hero{background:
+      radial-gradient(1200px 400px at 80% -10%,rgba(201,162,39,.22),transparent 60%),
+      linear-gradient(160deg,var(--navy),var(--navy-2) 70%,var(--navy-3));
+    color:#fff; padding:46px 0 40px; position:relative; overflow:hidden;}
+  header.hero .wrap{position:relative; z-index:2;}
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:26px;}
+  .brand .mark{width:42px; height:42px; border-radius:11px;
+    background:linear-gradient(145deg,var(--gold),var(--gold-2));
+    display:grid; place-items:center; color:var(--navy); font-weight:800; font-size:22px;
+    box-shadow:0 6px 18px rgba(201,162,39,.4);}
+  .brand .name{font-weight:800; letter-spacing:.14em; font-size:15px;}
+  .brand .tag{font-size:11.5px; color:var(--gold-2); letter-spacing:.22em; text-transform:uppercase;}
+  .eyebrow{display:inline-flex; gap:8px; align-items:center; font-size:13px; letter-spacing:.04em;
+    color:var(--gold-2); border:1px solid rgba(224,199,102,.4); padding:5px 12px; border-radius:999px;}
+  header.hero h1{font-size:clamp(28px,7vw,46px); line-height:1.2; margin:16px 0 6px; font-weight:800;}
+  header.hero .sub{color:#D6E0EC; max-width:640px; font-size:16.5px;}
+  header.hero .meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  header.hero .meta span{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+    padding:6px 13px; border-radius:10px; font-size:13.5px; font-weight:600;}
+  .floaters{position:absolute; inset:0; z-index:1; opacity:.13; pointer-events:none; font-weight:800;}
+  .floaters span{position:absolute; color:var(--gold-2); font-size:30px;}
+
+  /* ---------- generic blocks ---------- */
+  section.lesson{padding:34px 0 8px;}
+  .why{background:linear-gradient(180deg,#fff,#FBF7EC); border:1px solid var(--line);
+    border-radius:18px; padding:24px 22px; margin:26px 0; box-shadow:0 8px 28px rgba(11,37,69,.06);}
+  .why h2{margin:.1em 0 .4em; font-size:22px;}
+  .roadmap{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:18px;}
+  .road-card{display:block; text-decoration:none; color:var(--ink); border-radius:14px; padding:16px;
+    border:1px solid var(--line); background:#fff; transition:.2s; position:relative; overflow:hidden;}
+  .road-card:hover,.road-card:focus{transform:translateY(-3px); box-shadow:0 12px 26px rgba(0,0,0,.1); outline:none;}
+  .road-card b{display:block; font-size:16px; margin-bottom:2px;}
+  .road-card small{color:var(--muted); font-size:12.5px; letter-spacing:.02em;}
+  .road-card .num{position:absolute; right:10px; top:6px; font-size:40px; font-weight:800; opacity:.12;}
+
+  .lesson-head{border-radius:18px 18px 0 0; padding:22px 22px 18px; color:#fff; position:relative;}
+  .lesson-head .kicker{font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; opacity:.9;}
+  .lesson-head h2{margin:6px 0 4px; font-size:clamp(22px,5.5vw,30px); font-weight:800;}
+  .lesson-head p{margin:0; font-size:15px; opacity:.95;}
+  .lesson-head .badge{position:absolute; right:18px; top:18px; width:48px; height:48px; border-radius:50%;
+    background:rgba(255,255,255,.16); display:grid; place-items:center; font-weight:800; font-size:22px;
+    border:2px solid rgba(255,255,255,.5);}
+  .objectives{background:#fff; border:1px solid var(--line); border-top:none; padding:16px 22px;
+    border-radius:0 0 18px 18px; margin-bottom:18px;}
+  .objectives b{font-size:13.5px; letter-spacing:.04em;}
+  .objectives ul{margin:8px 0 0; padding-left:1.1em;}
+  .objectives li{margin:4px 0; font-size:15.5px;}
+
+  /* sub-topic = collapsible */
+  details.sub{background:var(--card); border:1px solid var(--line); border-radius:16px;
+    margin:14px 0; overflow:hidden; box-shadow:0 4px 16px rgba(11,37,69,.05);}
+  details.sub>summary{list-style:none; cursor:pointer; padding:16px 20px; display:flex;
+    align-items:center; gap:12px; font-weight:700; font-size:17.5px;}
+  details.sub>summary::-webkit-details-marker{display:none;}
+  details.sub>summary .dot{width:30px; height:30px; border-radius:9px; flex:0 0 auto; color:#fff;
+    display:grid; place-items:center; font-size:14px; font-weight:800;}
+  details.sub>summary .chev{margin-left:auto; transition:.25s; color:var(--muted); font-size:18px;}
+  details.sub[open]>summary .chev{transform:rotate(90deg);}
+  details.sub>summary:focus-visible{outline:3px solid var(--gold-2); outline-offset:-3px;}
+  .sub-body{padding:4px 20px 22px;}
+
+  .step{margin:18px 0 6px; display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px;
+    letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .step .n{width:22px; height:22px; border-radius:50%; background:var(--gold-soft); color:#7a5e0a;
+    display:grid; place-items:center; font-size:12px; flex:0 0 auto;}
+
+  .hook{background:var(--gold-soft); border-radius:13px; padding:14px 16px; font-size:16px;}
+  .hook b{color:#7a5e0a;}
+  .plain p{margin:.5em 0;}
+  .term{background:#fff3cf; border-bottom:2px solid var(--gold); padding:0 3px; border-radius:3px; font-weight:600;}
+
+  .box{border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .rule{background:#fff8e6; border:1px solid var(--gold-2);}
+  .rule b{color:#7a5e0a;}
+  .watch{background:#FDECEA; border:1px solid #F1B0A6;}
+  .watch .h{font-weight:800; color:var(--neg); display:flex; gap:8px; align-items:center; margin-bottom:6px;}
+  .mem{background:linear-gradient(135deg,#0B2545,#1B3F73); color:#fff; border-radius:13px; padding:14px 16px;
+    margin:16px 0; display:flex; gap:12px; align-items:flex-start;}
+  .mem .k{font-size:22px;}
+  .mem b{color:var(--gold-2);}
+
+  .work{background:#F6F8FB; border:1px solid #DEE6F0; border-radius:12px; padding:14px 16px; margin:12px 0;}
+  .work .lbl{font-weight:700; font-size:13.5px; color:var(--navy-2); margin-bottom:6px;}
+  .calc{font-family:"Cambria Math","Latin Modern Math",Georgia,serif; font-size:17px;}
+  .calc .ml{display:block; margin:3px 0;}
+
+  .turn{border:1.5px dashed var(--gold); border-radius:12px; padding:12px 16px; margin:12px 0; background:#fffdf5;}
+  .turn .q{font-weight:700;}
+  details.reveal{margin-top:8px;}
+  details.reveal>summary{cursor:pointer; list-style:none; display:inline-flex; gap:7px; align-items:center;
+    font-weight:700; font-size:14px; color:var(--navy); background:#fff; border:1px solid var(--line);
+    padding:6px 13px; border-radius:999px;}
+  details.reveal>summary::-webkit-details-marker{display:none;}
+  details.reveal>summary:focus-visible{outline:3px solid var(--gold-2);}
+  details.reveal[open]>summary{background:var(--gold-soft); border-color:var(--gold);}
+  details.reveal .ans{margin-top:8px; padding:10px 13px; background:#F0FBF4; border:1px solid #BFE6CC;
+    border-radius:10px; font-size:15.5px;}
+
+  .selfcheck{background:#fff; border:1px solid var(--line); border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .selfcheck .h{font-weight:800; display:flex; gap:8px; align-items:center; margin-bottom:8px; font-size:15.5px;}
+  .selfcheck ol{margin:0; padding-left:1.2em;}
+  .selfcheck li{margin:9px 0;}
+
+  table.tbl{width:100%; border-collapse:collapse; margin:12px 0; font-size:15px; background:#fff;
+    border-radius:10px; overflow:hidden; border:1px solid var(--line);}
+  table.tbl th,table.tbl td{border:1px solid var(--line); padding:8px 10px; text-align:center;}
+  table.tbl th{background:var(--navy); color:#fff; font-weight:700; font-size:14px;}
+  table.tbl tr:nth-child(even) td{background:#FAFBFD;}
+  .scroller{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+
+  /* math helpers */
+  .sqrt{display:inline-flex; align-items:flex-start; white-space:nowrap;}
+  .sqrt>.rad{border-top:1.6px solid currentColor; padding:0 3px; margin-top:1px;}
+  .sqrt::before{content:"√"; font-size:1.05em;}
+  .frac{display:inline-flex; flex-direction:column; text-align:center; vertical-align:middle;
+    margin:0 3px; line-height:1.05;}
+  .frac .n{border-bottom:1.4px solid currentColor; padding:0 4px;}
+  .frac .d{padding:0 4px;}
+  .pos{color:var(--pos); font-weight:700;} .neg{color:var(--neg); font-weight:700;}
+  .pill{display:inline-block; padding:1px 9px; border-radius:999px; font-weight:700; font-size:.92em;}
+  .pill.p{background:#E1F4E9; color:var(--pos);} .pill.n{background:#FBE3E0; color:var(--neg);}
+
+  /* interactive widgets */
+  .widget{border:1px solid var(--line); border-radius:14px; padding:16px; margin:16px 0;
+    background:linear-gradient(180deg,#fff,#FAFBFD);}
+  .widget .wh{font-weight:800; font-size:15px; display:flex; gap:8px; align-items:center; margin-bottom:10px;}
+  .widget .controls{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+  .widget select,.widget input{font-family:var(--sin); font-size:16px; padding:8px 10px; border-radius:10px;
+    border:1.5px solid var(--line); background:#fff; color:var(--ink);}
+  .widget button{font-family:var(--sin); font-weight:700; font-size:15px; padding:9px 16px; border:none;
+    border-radius:10px; background:var(--navy); color:#fff; cursor:pointer; transition:.15s;}
+  .widget button:hover{background:var(--navy-3);}
+  .widget button:focus-visible{outline:3px solid var(--gold-2);}
+  .widget .out{margin-top:12px; padding:12px 14px; border-radius:11px; background:#fff; border:1px solid var(--line);
+    font-size:16px; min-height:20px;}
+  .seg{display:inline-flex; border:1.5px solid var(--line); border-radius:10px; overflow:hidden;}
+  .seg button{background:#fff; color:var(--ink); border-radius:0; padding:8px 12px; font-size:14px;}
+  .seg button[aria-pressed="true"]{background:var(--navy); color:#fff;}
+
+  /* synthesis / test / cheat */
+  .synth{background:linear-gradient(160deg,var(--navy),var(--navy-2)); color:#fff; border-radius:18px;
+    padding:26px 22px; margin:30px 0;}
+  .synth h2{margin-top:0; color:var(--gold-2);}
+  .synth .chain{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:14px 0; font-weight:700;}
+  .synth .chain span{background:rgba(255,255,255,.1); padding:7px 13px; border-radius:10px; border:1px solid rgba(255,255,255,.2);}
+  .synth .chain .ar{color:var(--gold-2);}
+
+  .cheat{background:#fff; border:2px solid var(--navy); border-radius:18px; padding:24px 22px; margin:26px 0;}
+  .cheat h2{margin-top:0;}
+  .cheat .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .cheat .cc{border:1px solid var(--line); border-radius:12px; padding:14px; background:#FAFBFD;}
+  .cheat .cc h4{margin:0 0 6px; font-size:15px;}
+  .cheat .cc.l4{border-top:4px solid var(--l4);} .cheat .cc.l7{border-top:4px solid var(--l7);}
+  .cheat .cc.l8{border-top:4px solid var(--l8);} .cheat .cc.l10{border-top:4px solid var(--l10);}
+
+  footer{background:var(--navy); color:#C9D4E2; padding:30px 0 40px; margin-top:30px; text-align:center; font-size:14px;}
+  footer .brand{justify-content:center;}
+  .ref{font-size:12.5px; color:var(--muted); font-style:italic; margin-top:6px;}
+
+  .top-link{position:fixed; right:16px; bottom:16px; z-index:40; background:var(--gold); color:var(--navy);
+    width:46px; height:46px; border-radius:50%; display:grid; place-items:center; font-size:20px; font-weight:800;
+    text-decoration:none; box-shadow:0 8px 20px rgba(0,0,0,.25);}
+
+  @media (max-width:560px){
+    body{font-size:16px;}
+    .sub-body{padding:4px 14px 18px;}
+    details.sub>summary{padding:14px 14px; font-size:16.5px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important; transition:none!important;}}
+  @media print{
+    nav.chips,#progress,.top-link,.widget button{display:none!important;}
+    details.sub,details.reveal{open:true;}
+    details[open] .chev{display:none;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+<div id="progress" role="progressbar" aria-label="කියවීමේ ප්‍රගතිය"></div>
+
+<nav class="chips" aria-label="පාඩම් සංචලනය">
+  <div class="row">
+    <a href="#top">මුල</a>
+    <a href="#l4">4 · සදිශ සංඛ්‍යා</a>
+    <a href="#l7">7 · සාධක</a>
+    <a href="#l8">8 · වර්ගමූලය</a>
+    <a href="#l10">10 · දර්ශක</a>
+    <a href="#synth">සියල්ල එකට</a>
+    <a href="#test">ස්වයං පරීක්ෂණය</a>
+    <a href="#cheat">කෙටි සටහන</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="floaters" aria-hidden="true">
+    <span style="left:6%;top:30%;">+5</span><span style="left:88%;top:24%;">−3</span>
+    <span style="left:20%;top:74%;">√64</span><span style="left:70%;top:70%;">2³</span>
+    <span style="left:46%;top:16%;">2×3</span><span style="left:34%;top:50%;">(−2)</span>
+  </div>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">ඉ</div>
+      <div>
+        <div class="name">IDASARA ACADEMY</div>
+        <div class="tag">We empower · We free · We augment</div>
+      </div>
+    </div>
+    <span class="eyebrow">📘 8 ශ්‍රේණිය · ගණිතය · සිංහල මාධ්‍යය</span>
+    <h1>සංඛ්‍යා පදනම</h1>
+    <p class="sub">සෘණ සංඛ්‍යා → සාධක → වර්ගමූල → දර්ශක. එක් එක් පියවර පෙර එක මත ගොඩනැගේ.
+      මෙය ඔබේ මුළු වීජ ගණිතයටම හා මිනුම්වලටම අත්තිවාරම — එහෙයින් ඉදිරියට යාමට පෙර මේවා ස්ථිර කරගනිමු.</p>
+    <div class="meta">
+      <span>📐 පාඩම් 4ක්</span>
+      <span>⏱️ ඔබේම වේගයෙන්</span>
+      <span>✍️ සෑම පියවරකම විසඳුම්</span>
+      <span>📖 පෙළපොත අනුව (8 ශ්‍රේණිය, I කොටස)</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="why" id="intro">
+    <h2>මේ පාඩම ඇයි වැදගත්ද? 🤔</h2>
+    <p>හිතන්න ගොඩනැඟිල්ලක් ගැන. <b>අත්තිවාරම</b> දුර්වල නම්, උඩ තට්ටු කොච්චර ලස්සනට හැදුවත් ගොඩනැඟිල්ල
+      ස්ථිර නෑ. ගණිතයේදීත් එහෙමයි. ඔබ ඉදිරියට ඉගෙන ගන්න සමීකරණ, ප්‍රස්ථාර, ජ්‍යාමිතිය — හැම එකක්ම
+      පදනම් වෙන්නේ මේ පාඩම් හතර මත: සෘණ සංඛ්‍යා, සාධක, වර්ගමූල සහ දර්ශක.</p>
+    <p>දැන් ටිකක් දුර්වල කියලා හිතුණත් කමක් නෑ. අපි පටන් ගන්නේ හරිම සරලව, පොඩි පොඩි ජයග්‍රහණවලින්.
+      පහත කාඩ් එකක් තට්ටු කරලා ඕනෑම පාඩමකට කෙළින්ම යන්න පුළුවන් 👇</p>
+    <div class="roadmap">
+      <a class="road-card" href="#l4" style="border-top:4px solid var(--l4)"><span class="num">4</span>
+        <b>සදිශ සංඛ්‍යා</b><small>එකතු · අඩු · ගුණ · බෙදීම</small></a>
+      <a class="road-card" href="#l7" style="border-top:4px solid var(--l7)"><span class="num">7</span>
+        <b>සාධක</b><small>ම.පො.සා. · සාධකවලට වෙන් කිරීම</small></a>
+      <a class="road-card" href="#l8" style="border-top:4px solid var(--l8)"><span class="num">8</span>
+        <b>වර්ගමූලය</b><small>පූර්ණ වර්ග · වර්ගමූල සෙවීම</small></a>
+      <a class="road-card" href="#l10" style="border-top:4px solid var(--l10)"><span class="num">10</span>
+        <b>දර්ශක</b><small>පාද · බල · සෘණ නිබිල බල</small></a>
+    </div>
+  </section>
+
+  <!-- ===================== LESSON 4 ===================== -->
+  <section class="lesson" id="l4">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l4),#0a5b63)">
+      <div class="badge">4</div>
+      <div class="kicker">පාඩම 4 · පෙළපොත පි. 38–49</div>
+      <h2>සදිශ සංඛ්‍යා</h2>
+      <p>ධන සහ සෘණ සංඛ්‍යා එකතු, අඩු, ගුණ සහ බෙදීම — සියල්ල සරලව.</p>
+    </div>
+    <div class="objectives">
+      <b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul>
+        <li>සදිශ සංඛ්‍යා දෙකක් එකතු කිරීමට හා අඩු කිරීමට</li>
+        <li>සදිශ සංඛ්‍යා ගුණ කිරීමට හා බෙදීමට</li>
+      </ul>
+    </div>
+
+    <!-- 4.1 -->
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l4)">4.1</span> සදිශ සංඛ්‍යා මොනවද? <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">නුවරඑළියේ අලුයම උෂ්ණත්වය <b>+10°</b>, හවසට <b>−2°</b> දක්වා බසී. ලිෆ්ට් එකක <b>+3</b> කියන්නේ
+          තට්ටු 3ක් උඩ; <b>−2</b> කියන්නේ බිම් මහල් 2ක් යට (basement). මේ <b>+</b> සහ <b>−</b> සලකුණු ඇති සංඛ්‍යා
+          තමයි <span class="term">සදිශ සංඛ්‍යා</span> (directed numbers).</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain">
+          <p>සංඛ්‍යා රේඛාවේ <b>0</b> සිට <b>දකුණට</b> යන සංඛ්‍යාවලට <b>+ (ධන)</b> සලකුණත්, <b>වමට</b> යන ඒවාට
+          <b>− (සෘණ)</b> සලකුණත් යොදනවා. උදාහරණ: (+3), (−7), (+2.5), (−3.4).</p>
+          <p>0 සිට යම් ලක්ෂ්‍යයක් දක්වා ඇති <b>දුර</b> එම සංඛ්‍යාවේ <span class="term">විශාලත්වය</span> (magnitude) යි.
+          (+3)හි විශාලත්වය 3යි; (−2)හි විශාලත්වය 2යි. විශාලත්වය කවදත් ධනයි — දිශාව පෙන්වන්නේ සලකුණෙන්.</p>
+        </div>
+
+        <div class="step"><span class="n">3</span> ඇසට පෙනෙන්න</div>
+        <svg viewBox="0 0 600 90" role="img" aria-label="සංඛ්‍යා රේඛාව: Q ලක්ෂ්‍යය −2හි, P ලක්ෂ්‍යය +3හි" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px">
+          <line x1="20" y1="55" x2="580" y2="55" stroke="var(--l4)" stroke-width="2.5"/>
+          <polygon points="580,55 568,49 568,61" fill="var(--l4)"/><polygon points="20,55 32,49 32,61" fill="var(--l4)"/>
+          <g font-size="14" fill="#16202E" text-anchor="middle" font-family="Georgia,serif">
+            <g stroke="var(--l4)" stroke-width="2">
+              <line x1="90" y1="48" x2="90" y2="62"/><line x1="160" y1="48" x2="160" y2="62"/>
+              <line x1="230" y1="48" x2="230" y2="62"/><line x1="300" y1="48" x2="300" y2="62"/>
+              <line x1="370" y1="48" x2="370" y2="62"/><line x1="440" y1="48" x2="440" y2="62"/>
+              <line x1="510" y1="48" x2="510" y2="62"/></g>
+            <text x="90" y="80">−3</text><text x="160" y="80">−2</text><text x="230" y="80">−1</text>
+            <text x="300" y="80">0</text><text x="370" y="80">1</text><text x="440" y="80">2</text><text x="510" y="80">3</text>
+            <circle cx="160" cy="55" r="6" fill="#C0392B"/><text x="160" y="35" fill="#C0392B" font-weight="700">Q</text>
+            <circle cx="510" cy="55" r="6" fill="var(--l4)"/><text x="510" y="35" fill="var(--l4)" font-weight="700">P</text>
+          </g>
+        </svg>
+        <p class="ref">පෙළපොත රූපය, පි. 38 — P ලක්ෂ්‍යය (+3), Q ලක්ෂ්‍යය (−2).</p>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch">
+          <div class="h">⚠ පොදු වැරැද්ද</div>
+          (−5) කියන්නේ (+3)ට වඩා කුඩා සංඛ්‍යාවක්. සෘණ සංඛ්‍යාවක <b>විශාලත්වය</b> (5) ලොකු වුණත්,
+          වමට යන තරමට සංඛ්‍යාවේ <b>අගය</b> කුඩා වෙනවා. එනම් −5 &lt; −3 &lt; 0 &lt; +3.
+        </div>
+
+        <div class="step"><span class="n">7</span> මතක උපක්‍රමය</div>
+        <div class="mem"><span class="k">🔑</span><div><b>දකුණ = ධන, වම = සෘණ.</b> විශාලත්වය = 0 සිට ඇති දුර (හැම විටම ධන).</div></div>
+      </div>
+    </details>
+
+    <!-- 4.2 addition -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l4)">＋</span> සදිශ සංඛ්‍යා එකතු කිරීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">ඔබ ළඟ රු. <b>(+2)</b>ක් තියෙනවා. අම්මා තවත් රු. <b>(+3)</b>ක් දෙනවා. දැන් කීයද?
+          මුදල් එකතු වෙනකොට සංඛ්‍යා රේඛාවේ <b>දකුණට පනිනවා</b>.</div>
+
+        <div class="step"><span class="n">3</span> සංඛ්‍යා රේඛාවෙන්: (+2) + (+3)</div>
+        <svg viewBox="0 0 600 95" role="img" aria-label="(+2) සිට දකුණට ඒකක 3ක් පැනීම +5 ලබා දෙයි" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px">
+          <line x1="20" y1="62" x2="580" y2="62" stroke="#888" stroke-width="2"/><polygon points="580,62 568,56 568,68" fill="#888"/>
+          <g font-size="13" text-anchor="middle" font-family="Georgia,serif" fill="#16202E">
+            <g stroke="#888" stroke-width="1.5"><line x1="60" y1="56" x2="60" y2="68"/><line x1="135" y1="56" x2="135" y2="68"/><line x1="210" y1="56" x2="210" y2="68"/><line x1="285" y1="56" x2="285" y2="68"/><line x1="360" y1="56" x2="360" y2="68"/><line x1="435" y1="56" x2="435" y2="68"/><line x1="510" y1="56" x2="510" y2="68"/></g>
+            <text x="60" y="84">−1</text><text x="135" y="84">0</text><text x="210" y="84">1</text><text x="285" y="84">2</text><text x="360" y="84">3</text><text x="435" y="84">4</text><text x="510" y="84">5</text>
+            <path d="M285 56 Q360 18 435 56" fill="none" stroke="var(--l4)" stroke-width="2.5"/>
+            <path d="M360 56 Q397 22 435 56" fill="none" stroke="var(--l4)" stroke-width="2.5"/>
+            <polygon points="510,56 498,52 503,64" fill="var(--l4)"/>
+            <path d="M435 56 Q472 30 510 56" fill="none" stroke="var(--l4)" stroke-width="2.5"/>
+            <circle cx="285" cy="62" r="5" fill="var(--l4)"/><circle cx="510" cy="62" r="5" fill="#C0392B"/>
+          </g>
+        </svg>
+        <p>(+2) සිට ඒකක 3ක් දකුණට පැන්නම ලැබෙන්නේ <span class="pos">(+5)</span>. එනම් <b>(+2) + (+3) = (+5)</b>.</p>
+
+        <div class="step"><span class="n">2</span> රේඛාවක් නැතුව — දෙ රීතියක්</div>
+        <div class="box rule">
+          <b>රීතිය 1 — සලකුණු එක සමාන නම්:</b> විශාලත්ව එකතු කර, එම සලකුණම යොදන්න.<br>
+          (+3) + (+2) = <span class="pos">(+5)</span> &nbsp;·&nbsp; (−4) + (−6) = <span class="neg">(−10)</span>
+        </div>
+        <div class="box rule">
+          <b>රීතිය 2 — සලකුණු වෙනස් නම්:</b> විශාලත්ව අතරින් කුඩාව ලොකුවෙන් අඩු කර, <b>විශාලත්වය වැඩි</b>
+          සංඛ්‍යාවේ සලකුණ යොදන්න.<br>
+          (+8) + (−3): &nbsp; 8 − 3 = 5 → <span class="pos">(+5)</span> &nbsp;·&nbsp;
+          (+4.2) + (−6.3): &nbsp; 6.3 − 4.2 = 2.1 → <span class="neg">(−2.1)</span>
+        </div>
+
+        <div class="step"><span class="n">4</span> නිදසුන් (පෙළපොත, පි. 40)</div>
+        <div class="work"><div class="lbl">නිදසුන 1 · සංඛ්‍යා රේඛාවෙන්</div>
+          <span class="calc">(−3) + (−2): &nbsp; (−3) සිට ඒකක 2ක් වමට → <span class="neg">(−5)</span></span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: (−7) + (+4) කීයද?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary>
+            <div class="ans">සලකුණු වෙනස්. 7 − 4 = 3. විශාලත්වය වැඩි (−7)හි සලකුණ සෘණ. ∴ <span class="neg">(−3)</span></div></details></div>
+
+        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
+        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div>
+          <ol>
+            <li>(+6) + (+5) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><span class="pos">(+11)</span> — සලකුණු සමයි, විශාලත්ව එකතු කරනවා.</div></details></li>
+            <li>(−9) + (+9) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><span>0</span> — සමාන විශාලත්ව, විරුද්ධ සලකුණු එකිනෙක මකා දමයි.</div></details></li>
+            <li>(−2) + (−1) + (−4) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><span class="neg">(−7)</span></div></details></li>
+          </ol></div>
+
+        <div class="step"><span class="n">7</span> මතක උපක්‍රමය</div>
+        <div class="mem"><span class="k">🔑</span><div><b>එක සලකුණ → එකතු කර තියාගන්න. දෙ සලකුණ → අඩු කර, ලොක්කගේ සලකුණ.</b></div></div>
+      </div>
+    </details>
+
+    <!-- 4.3 subtraction -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l4)">−</span> සදිශ සංඛ්‍යා අඩු කිරීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">එකතු කිරීම = දකුණට පනිනවා නම්, <b>අඩු කිරීම = ආපහු හැරිලා පනිනවා</b>.
+          ඒ වුණත් ලේසිම ක්‍රමයක් තියෙනවා — අඩු කිරීම, <b>එකතු කිරීමක් බවට පෙරළන</b> එක.</div>
+
+        <div class="step"><span class="n">2</span> ආකල ප්‍රතිලෝමය</div>
+        <div class="plain"><p>සංඛ්‍යාවකට එකතු කළ විට පිළිතුර <b>0</b> වන අනුරූප සංඛ්‍යාව එහි
+          <span class="term">ආකල ප්‍රතිලෝමය</span> (additive inverse) යි. (+5)හි ආකල ප්‍රතිලෝමය (−5); (−2)හි එක (+2).</p></div>
+        <table class="tbl"><tr><th>සංඛ්‍යාව</th><th>ආකල ප්‍රතිලෝමය</th></tr>
+          <tr><td>(+5)</td><td>(−5)</td></tr><tr><td>(−5)</td><td>(+5)</td></tr>
+          <tr><td>(+3.5)</td><td>(−3.5)</td></tr><tr><td>(−<span class="frac"><span class="n">2</span><span class="d">3</span></span>)</td><td>(+<span class="frac"><span class="n">2</span><span class="d">3</span></span>)</td></tr></table>
+
+        <div class="box rule"><b>රන් රීතිය:</b> සංඛ්‍යාවකින් තවත් සංඛ්‍යාවක් <b>අඩු කිරීම</b> = පළමු සංඛ්‍යාවට,
+          දෙවන සංඛ්‍යාවේ <b>ආකල ප්‍රතිලෝමය එකතු කිරීම</b>.<br>
+          එවිට අඩු කිරීමේ ප්‍රශ්න ඔක්කොම, ඔබ දැනටමත් දන්න <b>එකතු කිරීමේ</b> ප්‍රශ්න බවට පෙරළෙනවා!</div>
+
+        <div class="step"><span class="n">4</span> නිදසුන් (පෙළපොත, පි. 44–45)</div>
+        <div class="work">
+          <span class="calc ml">නි.4: &nbsp;(+2) − (−4) = (+2) + (+4) = <span class="pos">(+6)</span></span>
+          <span class="calc ml">නි.5: &nbsp;(−5) − (+2) = (−5) + (−2) = <span class="neg">(−7)</span></span>
+          <span class="calc ml">නි.6: &nbsp;(−7) − (−3) = (−7) + (+3) = <span class="neg">(−4)</span></span>
+          <span class="calc ml">නි.7: &nbsp;(−12) − (−15) − (+5) = (−12)+(+15)+(−5) = (+3)+(−5) = <span class="neg">(−2)</span></span>
+          <span class="calc ml">නි.10: (−3.2) − (+1.4) = (−3.2)+(−1.4) = <span class="neg">(−4.6)</span></span>
+        </div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: (+7) − (−2) කීයද?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary>
+            <div class="ans">(−2)හි ආකල ප්‍රතිලෝමය (+2). ∴ (+7) + (+2) = <span class="pos">(+9)</span></div></details></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ ද්විත්ව සෘණ</div>
+          <b>− (−3)</b> දැක්කම බය වෙන්න එපා. දෙවන සංඛ්‍යාවේ සලකුණ පෙරළලා (+3) කර, එකතු කරන්න විතරයි.
+          "අඩු කිරීම + සෘණ = එකතු කිරීම".</div>
+
+        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
+        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
+          <li>(−8) − (−2) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">(−8)+(+2) = <span class="neg">(−6)</span></div></details></li>
+          <li>(+4) − (+9) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">(+4)+(−9) = <span class="neg">(−5)</span></div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>අඩු කිරීම = ආකල ප්‍රතිලෝමය එකතු කිරීම.</b> දෙවන සංඛ්‍යාවේ සලකුණ පෙරළලා + කරන්න.</div></div>
+      </div>
+    </details>
+
+    <!-- 4.4 multiply & divide + widget -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l4)">×÷</span> ගුණ කිරීම සහ බෙදීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> එකම සරල රීතිය</div>
+        <div class="plain"><p>ගුණ කිරීමේදී හා බෙදීමේදී <b>විශාලත්ව</b> සාමාන්‍ය විදිහට ගුණ/බෙදා, සලකුණ මෙහෙම තීරණය කරන්න:</p></div>
+        <div class="box rule">
+          <b>එකම සලකුණු දෙකක් → පිළිතුර ධන (+).</b><br>
+          <b>වෙනස් සලකුණු දෙකක් → පිළිතුර සෘණ (−).</b><br><br>
+          (+6) × (+2) = <span class="pos">(+12)</span> &nbsp;·&nbsp; (−6) × (−2) = <span class="pos">(+12)</span><br>
+          (−6) × (+2) = <span class="neg">(−12)</span> &nbsp;·&nbsp; (+6) ÷ (−2) = <span class="neg">(−3)</span> &nbsp;·&nbsp; (−6) ÷ (−2) = <span class="pos">(+3)</span>
+        </div>
+
+        <div class="step"><span class="n">3</span> සලකුණු වගුව</div>
+        <table class="tbl"><tr><th>×&nbsp;හෝ&nbsp;÷</th><th>+</th><th>−</th></tr>
+          <tr><th>+</th><td class="pos">+</td><td class="neg">−</td></tr>
+          <tr><th>−</th><td class="neg">−</td><td class="pos">+</td></tr></table>
+
+        <div class="step"><span class="n">4</span> නිදසුන් (පෙළපොත, පි. 47–48)</div>
+        <div class="work"><span class="calc ml">(−4) × (−3) × (+2) = (+12) × (+2) = <span class="pos">(+24)</span></span>
+          <span class="calc ml">(−3.4) × (−12) = <span class="pos">(+40.8)</span></span>
+          <span class="calc ml">(−9) ÷ (+3) = <span class="neg">(−3)</span></span></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ සංඛ්‍යා තුනක් ගුණ වෙනකොට</div>
+          සෘණ සලකුණු <b>ඔත්තේ ගණනක්</b> නම් පිළිතුර සෘණ; <b>ඉරට්ටේ ගණනක්</b> නම් ධන.
+          (−2)×(−2)×(−2) → සෘණ 3යි (ඔත්තේ) → <span class="neg">(−8)</span>.</div>
+
+        <!-- WIDGET: directed number calculator -->
+        <div class="widget" id="dnw">
+          <div class="wh">🧮 සදිශ සංඛ්‍යා ගණක යන්ත්‍රය — ඔබම අත්හදා බලන්න</div>
+          <div class="controls">
+            <select id="dn-s1" aria-label="පළමු සලකුණ"><option value="1">+</option><option value="-1">−</option></select>
+            <input id="dn-a" type="number" value="6" style="width:80px" aria-label="පළමු සංඛ්‍යාව">
+            <div class="seg" role="group" aria-label="ක්‍රියාව">
+              <button data-op="+" aria-pressed="true">+</button>
+              <button data-op="-" aria-pressed="false">−</button>
+              <button data-op="×" aria-pressed="false">×</button>
+              <button data-op="÷" aria-pressed="false">÷</button>
+            </div>
+            <select id="dn-s2" aria-label="දෙවන සලකුණ"><option value="-1">−</option><option value="1">+</option></select>
+            <input id="dn-b" type="number" value="2" style="width:80px" aria-label="දෙවන සංඛ්‍යාව">
+            <button id="dn-go">පිළිතුර</button>
+          </div>
+          <div class="out" id="dn-out" aria-live="polite">පහත "පිළිතුර" ඔබන්න — රීතියත් එක්ක පැහැදිලි කරනවා.</div>
+        </div>
+
+        <div class="mem"><span class="k">🔑</span><div><b>සම සලකුණු = +, වෙනස් සලකුණු = −.</b> ගුණ/බෙදීම් දෙකටම එකම රීතිය.</div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== LESSON 7 ===================== -->
+  <section class="lesson" id="l7">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l7),#4a2f78)">
+      <div class="badge">7</div>
+      <div class="kicker">පාඩම 7 · පෙළපොත පි. 81–90</div>
+      <h2>සාධක</h2>
+      <p>මහා පොදු සාධකය (ම.පො.සා.) සොයා, වීජීය ප්‍රකාශන සාධකවලට වෙන් කිරීම.</p>
+    </div>
+    <div class="objectives">
+      <b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul>
+        <li>වීජීය පද කිහිපයක ම.පො.සා. සෙවීමට</li>
+        <li>වීජීය ප්‍රකාශනයක් එහි සාධකවල ගුණිතයක් ලෙස ලිවීමට (factorise)</li>
+        <li>එම සාධකවලින් ආපසු ගුණ කර පිළිතුර තහවුරු කරගැනීමට</li>
+      </ul>
+    </div>
+
+    <!-- 7.1/7.2 GCD -->
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l7)">7.1</span> මහා පොදු සාධකය (ම.පො.සා.) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">ටොෆි <b>12</b>ක් සහ බිස්කට් <b>18</b>ක් යාළුවන්ට <b>එක හා සමානව</b> බෙදන්න ඕන.
+          කී දෙනෙකුට බෙදන්න පුළුවන්ද? දෙකම බෙදිය හැකි <b>ලොකුම</b> සංඛ්‍යාව මොකක්ද? ඒ තමයි ම.පො.සා.!</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain"><p>යම් සංඛ්‍යාවක් පූර්ණ සංඛ්‍යා දෙකක ගුණිතයක් ලෙස ලියූ විට, ඒ ඒ සංඛ්‍යා එහි
+          <span class="term">සාධක</span> (factors) යි. සංඛ්‍යා කිහිපයකම <b>පොදු</b> සාධක අතරින් <b>විශාලතම</b> එක
+          <span class="term">මහා පොදු සාධකය (ම.පො.සා.)</span> යි.</p></div>
+
+        <div class="step"><span class="n">4</span> ක්‍රමය — ප්‍රථමක සාධක (පි. 82)</div>
+        <div class="work"><div class="lbl">6, 12, 18 හි ම.පො.සා.</div>
+          <span class="calc ml">6 &nbsp;= 2 × 3</span>
+          <span class="calc ml">12 = 2 × 2 × 3</span>
+          <span class="calc ml">18 = 2 × 3 × 3</span>
+          <span class="calc ml">පොදු: &nbsp;<b>2 × 3 = 6</b> &nbsp;∴ ම.පො.සා. = <b>6</b></span></div>
+
+        <div class="step"><span class="n">3</span> දැන් අකුරු සමඟ — වීජීය පද (පි. 82–83)</div>
+        <div class="work"><div class="lbl">4x, 8xy, 6xyz හි ම.පො.සා.</div>
+          <span class="calc ml">4x &nbsp;&nbsp;= 2 × 2 × x</span>
+          <span class="calc ml">8xy &nbsp;= 2 × 2 × 2 × x × y</span>
+          <span class="calc ml">6xyz = 2 × 3 × x × y × z</span>
+          <span class="calc ml">පොදු: 2 සහ x &nbsp; ∴ ම.පො.සා. = <b>2x</b></span></div>
+
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 2pq සහ 4pqr හි ම.පො.සා.?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary>
+            <div class="ans">2pq = 2×p×q; &nbsp; 4pqr = 2×2×p×q×r. පොදු = 2, p, q. ∴ ම.පො.සා. = <b>2pq</b></div></details></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ පොදු එක <b>විතරයි</b> ගන්න</div>
+          ම.පො.සා.ට ගන්නේ <b>සියලුම</b> පදවල පොදු සාධක විතරයි. එක් පදයක විතරක් ඇති අකුරක් (යම් පදයක y නැතිනම්)
+          ම.පො.සා.ට ගන්න බෑ.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>ප්‍රථමක සාධකවලට කඩන්න → පොදු ඒවා ගුණ කරන්න = ම.පො.සා.</b></div></div>
+      </div>
+    </details>
+
+    <!-- 7.3 factorising -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l7)">7.3</span> සාධකවල ගුණිතයක් ලෙස ලිවීම (factorise) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">හතරැස් කුඹුරක දිග <b>x</b>, පළල <b>y</b> නම් වටප්‍රමාණය = x + y + x + y = <b>2x + 2y</b>.
+          නැතිනම් (දිග+පළල)×2 = <b>2(x + y)</b>. දෙකම එකම පිළිතුර! එනම් <b>2x + 2y = 2(x + y)</b>.
+          මේ පෙරළීම තමයි <span class="term">සාධකවලට වෙන් කිරීම</span>.</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain"><p>එකතු කිරීමක් ලෙස තිබෙන ප්‍රකාශනයක් (2x + 2y), <b>ගුණ කිරීමක්</b> ලෙස 2(x + y) ලෙස
+          ලිවීම — එයයි factorise කිරීම. මේ සඳහා ම.පො.සා. පිට බ්‍රැකට් එකට ගන්නවා.</p></div>
+
+        <div class="step"><span class="n">3</span> ඇයි ම.පො.සා. <b>ම</b> ගත යුත්තේ? (පි. 84)</div>
+        <div class="work"><div class="lbl">12x + 18y</div>
+          <span class="calc ml">2(6x + 9y) ✗ — තවම 3ක් පොදුව ඇත</span>
+          <span class="calc ml">3(4x + 6y) ✗ — තවම 2ක් පොදුව ඇත</span>
+          <span class="calc ml"><b>6(2x + 3y)</b> ✓ — දැන් බ්‍රැකට් ඇතුළේ පොදුවක් නෑ!</span></div>
+
+        <div class="box rule"><b>පියවර 3ක්:</b> ① පදවල ම.පො.සා. සොයන්න. ② එම ම.පො.සා.න් එක් එක් පදය බෙදන්න.
+          ③ ම.පො.සා.(බෙදුම් පිළිතුරු) ලෙස ලියන්න.</div>
+
+        <div class="step"><span class="n">4</span> නිදසුන් (පි. 85, 88)</div>
+        <div class="work"><span class="calc ml">36a + 60b = 12(3a + 5b) &nbsp; <small>[ම.පො.සා. = 12]</small></span>
+          <span class="calc ml">12x + 20y + 16z = 4(3x + 5y + 4z) &nbsp; <small>[ම.පො.සා. = 4]</small></span>
+          <span class="calc ml">3a + 6ab + 12ac = 3a(1 + 2b + 4c) &nbsp; <small>[ම.පො.සා. = 3a]</small></span></div>
+
+        <!-- WIDGET: factorise stepper -->
+        <div class="widget" id="fcw">
+          <div class="wh">🧩 සාධක පියවරෙන් පියවර — උදාහරණයක් තෝරන්න</div>
+          <div class="controls">
+            <select id="fc-sel" aria-label="ප්‍රකාශනය තෝරන්න">
+              <option value="0">8x + 12y</option>
+              <option value="1">15pq + 45qr + 60q</option>
+              <option value="2">−4x − 16y</option>
+              <option value="3">18x + 24xy + 12xz</option>
+            </select>
+            <button id="fc-go">පියවර පෙන්වන්න</button>
+          </div>
+          <div class="out" id="fc-out" aria-live="polite">ප්‍රකාශනයක් තෝරා "පියවර පෙන්වන්න" ඔබන්න.</div>
+        </div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්! — සෘණ සාධක (පි. 86–87)</div>
+        <div class="box watch"><div class="h">⚠ පිට ගත්තේ සෘණ එකක් නම්…</div>
+          බ්‍රැකට් ඇතුළේ <b>හැම සලකුණක්ම පෙරළෙනවා</b>.<br>
+          −2x + 6y = <b>−2(x − 3y)</b> &nbsp;·&nbsp; −8m + 24n − 16 = <b>−8(m − 3n + 2)</b></div>
+
+        <div class="step"><span class="n">4</span> තහවුරු කරගන්න — ආපසු ගුණ කරන්න</div>
+        <div class="work"><span class="calc ml">3a(1 + 2b + 4c) = 3a + 6ab + 12ac ✓ &nbsp; <small>(මුල් එකම ලැබුණා!)</small></span></div>
+
+        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
+        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
+          <li>p + pq factorise කරන්න <details class="reveal"><summary>පිළිතුර</summary><div class="ans">පොදුව p. ∴ <b>p(1 + q)</b> &nbsp;<small>(1 ලියන්න අමතක කරන්න එපා!)</small></div></details></li>
+          <li>4p − 16pq + 12pr <details class="reveal"><summary>පිළිතුර</summary><div class="ans">ම.පො.සා. = 4p. ∴ <b>4p(1 − 4q + 3r)</b></div></details></li>
+          <li>−6ab − 8b² + 12ac … පළමු සාධකය −2 ලෙස <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><b>−2(3ab + 4b² − 6ac)</b> &nbsp;<small>(සලකුණු පෙරළුණා)</small></div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>ම.පො.සා. පිට ගන්න → බෙදන්න → ආපහු ගුණ කර check කරන්න.</b> පදයක් මුළුමනින්ම ගියොත්, ඉතිරිය <b>1</b>.</div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== LESSON 8 ===================== -->
+  <section class="lesson" id="l8">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l8),#9c3f24)">
+      <div class="badge">8</div>
+      <div class="kicker">පාඩම 8 · පෙළපොත පි. 91–101</div>
+      <h2>වර්ගමූලය</h2>
+      <p>පූර්ණ වර්ග හඳුනා, 1 සිට 1000 දක්වා සංඛ්‍යාවල වර්ගමූලය සෙවීම.</p>
+    </div>
+    <div class="objectives">
+      <b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul>
+        <li>1 සිට 20 දක්වා සංඛ්‍යාවල වර්ගය ලිවීමට</li>
+        <li>1 සිට 1000 දක්වා පූර්ණ වර්ගවල වර්ගමූලය — නිරීක්ෂණයෙන් සහ ප්‍රථමක සාධකවලින් — සෙවීමට</li>
+      </ul>
+    </div>
+
+    <!-- 8.1 squares -->
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l8)">8.1</span> වර්ගය සහ පූර්ණ වර්ග <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">කැරම් බෝඩ් එකක් වගේ <b>හතරැස්</b> එකක. පැත්තක ටයිල් <b>4</b>ක් නම්, මුළු ටයිල් ගණන 4×4 = <b>16</b>.
+          මෙහෙම තිත් හතරැසකට හරියටම සැකසිය හැකි සංඛ්‍යා — 1, 4, 9, 16 … තමයි <span class="term">පූර්ණ වර්ග</span>.</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain"><p>සංඛ්‍යාවක් <b>එම සංඛ්‍යාවෙන්ම</b> ගුණ කළ විට ලැබෙන්නේ එහි <span class="term">වර්ගය</span> (square).
+          දර්ශක අංකනයෙන්: 1², 2², 3², 4² … . මෙසේ ලැබෙන 1, 4, 9, 16 … <span class="term">පූර්ණ වර්ග</span> වේ.</p></div>
+
+        <div class="step"><span class="n">3</span> ඇසට පෙනෙන්න — තිත් හතරැස්</div>
+        <svg viewBox="0 0 520 120" role="img" aria-label="1, 4, 9, 16 තිත් හතරැස් ලෙස" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px">
+          <g fill="var(--l8)">
+            <circle cx="30" cy="60" r="7"/>
+            <g transform="translate(95,42)"><circle cx="0" cy="0" r="7"/><circle cx="22" cy="0" r="7"/><circle cx="0" cy="22" r="7"/><circle cx="22" cy="22" r="7"/></g>
+            <g transform="translate(190,30)"><circle cx="0" cy="0" r="7"/><circle cx="22" cy="0" r="7"/><circle cx="44" cy="0" r="7"/><circle cx="0" cy="22" r="7"/><circle cx="22" cy="22" r="7"/><circle cx="44" cy="22" r="7"/><circle cx="0" cy="44" r="7"/><circle cx="22" cy="44" r="7"/><circle cx="44" cy="44" r="7"/></g>
+            <g transform="translate(330,18)"><circle cx="0" cy="0" r="7"/><circle cx="22" cy="0" r="7"/><circle cx="44" cy="0" r="7"/><circle cx="66" cy="0" r="7"/><circle cx="0" cy="22" r="7"/><circle cx="22" cy="22" r="7"/><circle cx="44" cy="22" r="7"/><circle cx="66" cy="22" r="7"/><circle cx="0" cy="44" r="7"/><circle cx="22" cy="44" r="7"/><circle cx="44" cy="44" r="7"/><circle cx="66" cy="44" r="7"/><circle cx="0" cy="66" r="7"/><circle cx="22" cy="66" r="7"/><circle cx="44" cy="66" r="7"/><circle cx="66" cy="66" r="7"/></g>
+          </g>
+          <g text-anchor="middle" font-size="14" fill="#16202E" font-family="Georgia,serif">
+            <text x="30" y="105">1²=1</text><text x="106" y="105">2²=4</text><text x="212" y="105">3²=9</text><text x="363" y="105">4²=16</text></g>
+        </svg>
+
+        <div class="step"><span class="n">4</span> 1 සිට 15 දක්වා වර්ග</div>
+        <div class="scroller"><table class="tbl"><tr><th>n</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+          <tr><th>n²</th><td>1</td><td>4</td><td>9</td><td>16</td><td>25</td><td>36</td><td>49</td><td>64</td><td>81</td><td>100</td><td>121</td><td>144</td><td>169</td><td>196</td><td>225</td></tr></table></div>
+        <p class="ref">මේ වර්ග 15ම මතක තබාගැනීම වර්ගමූල සෙවීම ලේසි කරයි.</p>
+        <div class="mem"><span class="k">🔑</span><div><b>වර්ගය = සංඛ්‍යාව × එම සංඛ්‍යාවම.</b> n × n = n².</div></div>
+      </div>
+    </details>
+
+    <!-- 8.2 units digit -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l8)">8.2</span> එකස්ථානයේ ඉලක්කම පරීක්ෂාව <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">යමක් පූර්ණ වර්ගයක්ද කියලා, <b>එකපාරටම</b> දැනගන්න රහසක් තියෙනවා — එහි <b>අවසාන ඉලක්කම</b> බලන්න!</div>
+
+        <div class="step"><span class="n">2</span> රන් රීතිය</div>
+        <div class="box rule">
+          පූර්ණ වර්ගයක <span class="term">එකස්ථානයේ ඉලක්කම</span> (units digit) හැම විටම
+          <b>1, 4, 5, 6, 9 හෝ 0</b> වේ.<br>
+          ∴ එකස්ථානයේ ඉලක්කම <b>2, 3, 7 හෝ 8</b> නම් — එය <b>කිසිසේත්ම</b> පූර්ණ වර්ගයක් නොවේ.</div>
+
+        <div class="step"><span class="n">4</span> නිදසුන (පි. 94)</div>
+        <div class="work"><span class="calc ml">272 → අවසාන ඉලක්කම <b>2</b> → ∴ පූර්ණ වර්ගයක් <b>නොවේ</b>.</span></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ අනෙක් පැත්ත හැම විටම සත්‍ය නෑ</div>
+          අවසානය 0,1,4,5,6,9 වුණා කියලා <b>නියත වශයෙන්ම</b> පූර්ණ වර්ගයක් කියලා කියන්න බෑ.
+          උදා: <b>26</b> අවසානය 6 වුණත් පූර්ණ වර්ගයක් නෙවෙයි. මෙය <b>"නෑ" කියන්න</b> පමණක් ස්ථිර පරීක්ෂාවක්.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>2, 3, 7, 8 න් අවසන් වුණොත් — පූර්ණ වර්ගයක් නෙවෙයි, ක්ෂණිකව!</b></div></div>
+      </div>
+    </details>
+
+    <!-- 8.3 sqrt prime factors -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l8)">8.3</span> වර්ගමූලය — ප්‍රථමක සාධකවලින් <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">හතරැස් මල් පාත්තියක වර්ගඵලය <b>64 m²</b> නම්, පැත්තක දිග කීයද? පැත්ත × පැත්ත = 64 වෙන්න ඕන.
+          8×8 = 64. ∴ පැත්ත <b>8 m</b>. මේ "ආපහු යන" ක්‍රියාව <span class="term">වර්ගමූලය</span> (square root) යි.</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain"><p>c = a² නම්, c හි වර්ගමූලය a යි. සංඛ්‍යාවක වර්ගමූලය <b><span class="sqrt"><span class="rad">&nbsp;&nbsp;</span></span></b> ලකුණෙන් දක්වයි.
+          <span class="sqrt"><span class="rad">16</span></span> = <span class="sqrt"><span class="rad">4²</span></span> = 4, &nbsp; <span class="sqrt"><span class="rad">100</span></span> = 10.</p></div>
+
+        <div class="step"><span class="n">4</span> ක්‍රමය — ප්‍රථමක සාධක යුගල (පි. 95)</div>
+        <div class="work"><div class="lbl"><span class="sqrt"><span class="rad">36</span></span> සොයමු</div>
+          <span class="calc ml">36 = 2 × 2 × 3 × 3</span>
+          <span class="calc ml">&nbsp;&nbsp;&nbsp;&nbsp;= (2 × 3) × (2 × 3) = (2 × 3)²</span>
+          <span class="calc ml">∴ <span class="sqrt"><span class="rad">36</span></span> = 2 × 3 = <b>6</b></span></div>
+        <div class="work"><div class="lbl">නිදසුන 1 · <span class="sqrt"><span class="rad">576</span></span></div>
+          <span class="calc ml">576 = (2×2×2×3) × (2×2×2×3) = 24²</span>
+          <span class="calc ml">∴ <span class="sqrt"><span class="rad">576</span></span> = <b>24</b></span></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ යුගල හැදෙන්නේ නැතිනම්…</div>
+          ප්‍රථමක සාධක <b>හරියටම යුගල</b> බවට පත් වුණොත් විතරයි මෙය පූර්ණ වර්ගයක්.
+          <span class="sqrt"><span class="rad">500</span></span> = 2×2×5×5×5 — 5 යුගලයක් හදන්න බෑ. ∴ 500 පූර්ණ වර්ගයක් නෙවෙයි, මෙ ක්‍රමයෙන් වර්ගමූලය ලබාගත නොහැක.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>ප්‍රථමක සාධක යුගල හදන්න → හැම යුගලයකින් එකක් ගන්න → ගුණ කරන්න.</b></div></div>
+      </div>
+    </details>
+
+    <!-- 8.3 observation + widget -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l8)">8.3</span> වර්ගමූලය — නිරීක්ෂණයෙන් (ඉක්මන් ක්‍රමය) <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> දෙ පියවරක රහස</div>
+        <div class="plain"><p>101–1000 අතර පූර්ණ වර්ගවල වර්ගමූල <b>11 හා 31</b> අතර ඉලක්කම් <b>දෙකකි</b>.
+          අපි <b>එකස්ථානයේ</b> ඉලක්කමත් <b>දසස්ථානයේ</b> ඉලක්කමත් වෙන වෙනම සොයමු.</p></div>
+
+        <div class="step"><span class="n">3</span> පියවර 1 — එකස්ථානයේ ඉලක්කම</div>
+        <table class="tbl"><tr><th>වර්ගයේ අවසාන ඉලක්කම</th><th>මූලයේ අවසාන ඉලක්කම</th></tr>
+          <tr><td>1</td><td>1 හෝ 9</td></tr><tr><td>4</td><td>2 හෝ 8</td></tr><tr><td>5</td><td>5</td></tr>
+          <tr><td>6</td><td>4 හෝ 6</td></tr><tr><td>9</td><td>3 හෝ 7</td></tr><tr><td>0</td><td>0</td></tr></table>
+
+        <div class="step"><span class="n">3</span> පියවර 2 — දසස්ථානයේ ඉලක්කම</div>
+        <div class="box rule">අවසාන ඉලක්කම් (දෙක) <b>ඉවත් කර</b>, ඉතිරි ඉලක්කම් බලන්න.
+          ඊට <b>සමාන හෝ ඊට ආසන්නම පහළ පූර්ණ වර්ගයේ</b> මූලය = දසස්ථානයේ ඉලක්කම.</div>
+
+        <div class="step"><span class="n">4</span> නිදසුන් (පි. 98–99)</div>
+        <div class="work"><div class="lbl"><span class="sqrt"><span class="rad">961</span></span></div>
+          <span class="calc ml">අවසානය 1 → මූලය 1 හෝ 9න් අවසන්.</span>
+          <span class="calc ml">ඉතිරිය 9 → <span class="sqrt"><span class="rad">9</span></span> = 3 → දසස්ථානය 3. ⟹ 31 හෝ 39.</span>
+          <span class="calc ml">31² = 961 ✓ &nbsp; ∴ <span class="sqrt"><span class="rad">961</span></span> = <b>31</b></span></div>
+        <div class="work"><div class="lbl"><span class="sqrt"><span class="rad">784</span></span> (ක්‍රම 2)</div>
+          <span class="calc ml">20²=400, 30²=900 → 400 &lt; 784 &lt; 900 → මූලය 20–30 අතර.</span>
+          <span class="calc ml">අවසානය 4 → 2 හෝ 8න් අවසන් → 22 හෝ 28.</span>
+          <span class="calc ml">784, 900ට ආසන්නයි → 28. 28²=784 ✓ ∴ <b>28</b></span></div>
+
+        <!-- WIDGET: perfect-square / sqrt checker -->
+        <div class="widget" id="sqw">
+          <div class="wh">🔍 වර්ග / වර්ගමූල පරීක්ෂකය — සංඛ්‍යාවක් ඇතුළු කරන්න (1–1000)</div>
+          <div class="controls">
+            <input id="sq-n" type="number" value="729" min="1" max="1000" style="width:120px" aria-label="සංඛ්‍යාව">
+            <button id="sq-go">පරීක්ෂා කරන්න</button>
+          </div>
+          <div class="out" id="sq-out" aria-live="polite">සංඛ්‍යාවක් දී "පරීක්ෂා කරන්න" ඔබන්න — එකස්ථානය හා දසස්ථානය නිරීක්ෂණයෙන් පැහැදිලි කරයි.</div>
+        </div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ දෙ අපේක්ෂාවෙන් හරියට තෝරන්න</div>
+          අවසාන ඉලක්කම මූලයට හැකියාවන් <b>දෙකක්</b> දෙයි (උදා: 2 හෝ 8). නියම එක තෝරන්නේ දසස්ථානය / ආසන්න
+          පූර්ණ වර්ග බලලා. දෙකම වර්ග කරලා මුල් සංඛ්‍යාව ලැබෙන එක තෝරන්න.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>අවසානය → මූලයේ අවසානය. ඉතිරිය → ආසන්න පහළ වර්ගයේ මූලය.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== LESSON 10 ===================== -->
+  <section class="lesson" id="l10">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l10),#1f5a3a)">
+      <div class="badge">10</div>
+      <div class="kicker">පාඩම 10 · පෙළපොත පි. 114–118</div>
+      <h2>දර්ශක</h2>
+      <p>බල, ගුණිතයක් ලෙස ලිවීම · ගුණිතයක බලය · සෘණ නිබිලයක බල.</p>
+    </div>
+    <div class="objectives">
+      <b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul>
+        <li>ගුණිතයක බලයක්, බලවල ගුණිතයක් ලෙස ප්‍රකාශ කිරීමට</li>
+        <li>බලවල ගුණිතයක්, ගුණිතයක බලයක් ලෙස ප්‍රකාශ කිරීමට</li>
+        <li>සෘණ නිබිලයක බලයක් ප්‍රසාරණය කර අගය සෙවීමට</li>
+      </ul>
+    </div>
+
+    <!-- 10.1 indices basics -->
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l10)">10.1</span> පාද, දර්ශක සහ බල <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">පණිවිඩයක් යාළුවො <b>2</b> දෙනෙකුට යවනවා. ඒ දෙන්නා තවත් 2 බැගින් යවනවා … 2, 4, 8, 16 …
+          මේ වේගවත් ගුණ වීම ලියන්න කෙටි ක්‍රමයක් ඕන. ඒ තමයි <span class="term">දර්ශක</span> (indices)!</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain"><p>2 × 2 × 2 කියන එක කෙටියෙන් <b>2³</b> ලෙස ලියනවා. මෙහි පහළ සංඛ්‍යාව <span class="term">පාදය</span> (base);
+          උඩ පොඩි එක <span class="term">දර්ශකය</span> (index); මුළු එක <span class="term">බලය</span> (power) යි.</p>
+          <p>2³ = 2×2×2, &nbsp; x⁴ = x×x×x×x, &nbsp; 3x²y³ = 3×x×x×y×y×y.</p></div>
+
+        <div class="step"><span class="n">3</span> ඇසට පෙනෙන්න</div>
+        <svg viewBox="0 0 360 130" role="img" aria-label="2 ඝන 3හි කොටස් — පාදය, දර්ශකය, බලය" style="width:100%;max-width:360px;height:auto;display:block;margin:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px">
+          <text x="150" y="70" font-size="58" font-family="Georgia,serif" fill="var(--navy)">2</text>
+          <text x="196" y="44" font-size="34" font-family="Georgia,serif" fill="var(--l10)">3</text>
+          <text x="120" y="105" font-size="13" fill="var(--navy)" text-anchor="middle">පාදය</text>
+          <line x1="150" y1="78" x2="120" y2="95" stroke="var(--navy)" stroke-width="1.5"/>
+          <text x="250" y="105" font-size="13" fill="var(--l10)" text-anchor="middle">දර්ශකය</text>
+          <line x1="205" y1="50" x2="250" y2="92" stroke="var(--l10)" stroke-width="1.5"/>
+          <text x="60" y="40" font-size="13" fill="var(--muted)">බලය</text>
+        </svg>
+
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 4² × x³ ප්‍රසාරණය කරන්න.</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">4 × 4 × x × x × x</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>පාදය = යටින්, දර්ශකය = උඩින්. දර්ශකය = පාදය කී වරක් ගුණ වෙනවද කියන ගණන.</b></div></div>
+      </div>
+    </details>
+
+    <!-- 10.2 power of product + widget -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l10)">10.2</span> ගුණිතයක බලය: (ab)ⁿ = aⁿbⁿ <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> ප්‍රසාරණයෙන් සොයමු</div>
+        <div class="work"><span class="calc ml">(2 × 3)² = (2×3)×(2×3) = 2×2×3×3 = 2² × 3²</span>
+          <span class="calc ml">(2 × 3)³ = 2³ × 3³</span>
+          <span class="calc ml">(ab)³ = a×b×a×b×a×b = a³ × b³ = a³b³</span></div>
+        <div class="box rule"><b>රීතිය:</b> (ab)ⁿ = aⁿ × bⁿ &nbsp;·&nbsp; (abc)ⁿ = aⁿ bⁿ cⁿ.
+          ගුණිතයක බලය = එහි එක් එක් සාධකයේ බලවල ගුණිතය.</div>
+
+        <div class="step"><span class="n">4</span> දෙ පැත්තටම (පි. 116)</div>
+        <div class="work"><span class="calc ml">(2x)³ = 2³x³ = 8x³ &nbsp;·&nbsp; (3ab)³ = 3³a³b³ = 27a³b³</span>
+          <span class="calc ml">36x² = 6²x² = (6x)² &nbsp;·&nbsp; a³b³ = (ab)³ &nbsp;·&nbsp; 4a² = (2a)²</span></div>
+
+        <!-- WIDGET: power expander -->
+        <div class="widget" id="pw">
+          <div class="wh">⚡ බල ප්‍රසාරකය — තෝරන්න</div>
+          <div class="controls">
+            <select id="pw-sel" aria-label="ප්‍රකාශනය">
+              <option value="0">(2 × 5)³</option>
+              <option value="1">(3ab)³</option>
+              <option value="2">(2x)² × y²</option>
+              <option value="3">100m²  →  ගුණිතයක බලය</option>
+            </select>
+            <button id="pw-go">පෙන්වන්න</button>
+          </div>
+          <div class="out" id="pw-out" aria-live="polite">තෝරා "පෙන්වන්න" ඔබන්න.</div>
+        </div>
+        <div class="mem"><span class="k">🔑</span><div><b>බ්‍රැකට් එකේ බලය = ඇතුළේ හැම දෙයකටම බෙදී යනවා:</b> (ab)ⁿ = aⁿbⁿ.</div></div>
+      </div>
+    </details>
+
+    <!-- 10.3 negative integer powers + widget -->
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l10)">10.3</span> සෘණ නිබිලයක බල <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> සලකුණ තීරණය වෙන්නේ දර්ශකයෙන්</div>
+        <div class="box rule">
+          ධන නිබිලයක ඕනෑම බලයක් <b>ධන</b>.<br>
+          සෘණ නිබිලයක දර්ශකය <b>ඉරට්ටේ</b> (2, 4, 6…) නම් → පිළිතුර <span class="pos">ධන</span>.<br>
+          සෘණ නිබිලයක දර්ශකය <b>ඔත්තේ</b> (1, 3, 5…) නම් → පිළිතුර <span class="neg">සෘණ</span>.</div>
+
+        <div class="step"><span class="n">4</span> නිදසුන් (පි. 118)</div>
+        <div class="work"><span class="calc ml">(−2)⁴ = 2⁴ = <span class="pos">16</span> &nbsp; <small>(දර්ශකය 4 — ඉරට්ටේ)</small></span>
+          <span class="calc ml">(−5)³ = −(5)³ = <span class="neg">−125</span> &nbsp; <small>(දර්ශකය 3 — ඔත්තේ)</small></span></div>
+
+        <div class="step"><span class="n">3</span> ඇයි එහෙම? — සෘණ සලකුණු ගණන් කරමු</div>
+        <div class="plain"><p>(−2)⁴ = (−2)(−2)(−2)(−2). සෘණ සලකුණු 4ක් (ඉරට්ටේ) යුගල් වී එකිනෙක ධන කරයි. නමුත් (−2)³ දී
+          සෘණ 3ක් (ඔත්තේ) — එකක් යුගලයක් නැතුව ඉතිරි වී පිළිතුර සෘණ කරයි. <b>එයම</b> සදිශ සංඛ්‍යා ගුණ කිරීමේ
+          රීතියයි! (පාඩම 4 මතකද?)</p></div>
+
+        <!-- WIDGET: negative power -->
+        <div class="widget" id="npw">
+          <div class="wh">± සෘණ බල පුරෝකථනය — දර්ශකය මාරු කරන්න</div>
+          <div class="controls">
+            <span>(−</span><input id="np-b" type="number" value="2" min="1" style="width:70px" aria-label="පාදය"><span>)</span>
+            <span>දර්ශකය:</span><input id="np-e" type="number" value="3" min="0" max="10" style="width:70px" aria-label="දර්ශකය">
+            <button id="np-go">පුරෝකථනය</button>
+          </div>
+          <div class="out" id="np-out" aria-live="polite">පාදය හා දර්ශකය දී "පුරෝකථනය" ඔබන්න.</div>
+        </div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ බ්‍රැකට් එක ඉතා වැදගත්</div>
+          <b>(−2)⁴</b> සහ <b>−2⁴</b> එක නෙවෙයි! (−2)⁴ = +16 (මුළු −2ම බලයට). නමුත් −2⁴ = −(2⁴) = −16
+          (දර්ශකය 2ට විතරයි). සෘණ සංඛ්‍යාවක බලයක් ලියන විට <b>බ්‍රැකට්</b> දාන්න.</div>
+
+        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
+        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
+          <li>(−1)¹⁰ = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">දර්ශකය ඉරට්ටේ → <span class="pos">1</span></div></details></li>
+          <li>(−4)³ = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">දර්ශකය ඔත්තේ → −(4³) = <span class="neg">−64</span></div></details></li>
+          <li>(−1)¹⁰⁰¹ vs (−1)²⁰² — ලොකු කවරෙක්ද? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">(−1)¹⁰⁰¹ = −1 (ඔත්තේ), (−1)²⁰² = +1 (ඉරට්ටේ). ∴ <span class="pos">(−1)²⁰²</span> ලොකුයි.</div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>සෘණ පාදය + ඉරට්ටේ දර්ශකය = ධන. සෘණ පාදය + ඔත්තේ දර්ශකය = සෘණ.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== SYNTHESIS ===================== -->
+  <section class="synth" id="synth">
+    <h2>සියල්ල එකට — දාමය 🔗</h2>
+    <p>මේ පාඩම් හතර හුදකලා නෙවෙයි — එකක් අනෙකට අත්වැල් බැඳ ගොඩනැගෙනවා:</p>
+    <div class="chain">
+      <span>සදිශ සංඛ්‍යා</span><span class="ar">→</span>
+      <span>සාධක</span><span class="ar">→</span>
+      <span>වර්ගමූල</span><span class="ar">→</span>
+      <span>දර්ශක</span>
+    </div>
+    <p style="opacity:.95">
+      • <b>සදිශ සංඛ්‍යා</b>වල සලකුණු රීතිය (සම=+, වෙනස්=−), <b>දර්ශක</b> පාඩමේ සෘණ බලවල සලකුණ තීරණය කරයි.<br>
+      • <b>සාධක</b> පාඩමේ ප්‍රථමක සාධකවලට කැඩීම, <b>වර්ගමූල</b> සෙවීමට කෙළින්ම යොදනවා.<br>
+      • <b>දර්ශක</b> අංකනය (2³, n²) පූර්ණ වර්ග හා ප්‍රථමක සාධක ලිවීම කෙටි කරයි.<br>
+      එක තැනක දුර්වලකම අනෙක් තැනටත් දැනෙනවා — ඒ නිසා මේ අත්තිවාරම ස්ථිර කරගැනීම වටිනවා.</p>
+  </section>
+
+  <!-- ===================== MIXED SELF-TEST ===================== -->
+  <section id="test">
+    <h2 style="text-align:center;margin-top:30px">🏁 අවසන් ස්වයං පරීක්ෂණය</h2>
+    <p style="text-align:center;color:var(--muted)">පළමුව ඔබම කරන්න — පසුව පිළිතුර බලන්න. හැම එකක්ම නිවැරදි නම් ඔබ සූදානම්!</p>
+    <div class="selfcheck">
+      <div class="h">A · සදිශ සංඛ්‍යා</div>
+      <ol>
+        <li>(−7) + (+12) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">12−7=5, ලොක්කා +. = <span class="pos">(+5)</span></div></details></li>
+        <li>(−4) − (−9) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">(−4)+(+9) = <span class="pos">(+5)</span></div></details></li>
+        <li>(−5) × (+3) × (−2) = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">සෘණ 2ක් (ඉරට්ටේ) → ධන. 5×3×2 = <span class="pos">(+30)</span></div></details></li>
+        <li><span class="frac"><span class="n">(−36)</span><span class="d">(−6)×(−2)</span></span> = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">(−6)×(−2)=+12. (−36)÷(+12) = <span class="neg">(−3)</span></div></details></li>
+      </ol>
+    </div>
+    <div class="selfcheck">
+      <div class="h">B · සාධක</div>
+      <ol>
+        <li>8x − 12y + 20z factorise කරන්න <details class="reveal"><summary>පිළිතුර</summary><div class="ans">ම.පො.සා.=4. <b>4(2x − 3y + 5z)</b></div></details></li>
+        <li>2r(2p² + q + pq) ප්‍රසාරණය කරන්න <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><b>4p²r + 2qr + 2pqr</b></div></details></li>
+        <li>15a + 18b හි ම.පො.සා. <details class="reveal"><summary>පිළිතුර</summary><div class="ans">15=3×5, 18=2×3×3 → පොදු <b>3</b>. ∴ 3(5a+6b)</div></details></li>
+      </ol>
+    </div>
+    <div class="selfcheck">
+      <div class="h">C · වර්ගමූලය</div>
+      <ol>
+        <li>952 පූර්ණ වර්ගයක්ද? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">අවසානය 2 → <b>නෑ</b>, කිසිසේත්ම පූර්ණ වර්ගයක් නොවේ.</div></details></li>
+        <li><span class="sqrt"><span class="rad">441</span></span> = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">අවසානය 1→1/9න්. ඉතිරිය 4→<span class="sqrt"><span class="rad">4</span></span>=2. ⟹ 21 හෝ 29. 21²=441. ∴ <b>21</b></div></details></li>
+        <li><span class="sqrt"><span class="rad">324</span></span> = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">අවසානය 4→2/8න්. ඉතිරිය 3→<span class="sqrt"><span class="rad">3</span></span>≈<span class="sqrt"><span class="rad">1</span></span>=1. ⟹ 12 හෝ 18. 18²=324. ∴ <b>18</b></div></details></li>
+      </ol>
+    </div>
+    <div class="selfcheck">
+      <div class="h">D · දර්ශක</div>
+      <ol>
+        <li>(3a)² × (2x)² = 36a²x² බව පෙන්වන්න <details class="reveal"><summary>පිළිතුර</summary><div class="ans">9a² × 4x² = 36a²x² ✓</div></details></li>
+        <li>(−2)⁵ = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">දර්ශකය ඔත්තේ → −(2⁵) = <span class="neg">−32</span></div></details></li>
+        <li>1000x³ = (10x)³ බව පෙන්වන්න <details class="reveal"><summary>පිළිතුර</summary><div class="ans">(10x)³ = 10³x³ = 1000x³ ✓</div></details></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== CHEAT SHEET ===================== -->
+  <section class="cheat" id="cheat">
+    <h2>📋 කෙටි සටහන (Cheat Sheet)</h2>
+    <p style="color:var(--muted);margin-top:0">විභාගයට පෙර මේ පිටුව විතරක් බැලුවත් ඇති.</p>
+    <div class="grid">
+      <div class="cc l4"><h4>4 · සදිශ සංඛ්‍යා</h4>
+        එකතු: සම සලකුණ → එකතු; වෙනස් → අඩු කර ලොක්කගේ සලකුණ.<br>
+        අඩු: ආකල ප්‍රතිලෝමය එකතු කරන්න (සලකුණ පෙරළන්න).<br>
+        ×, ÷: සම සලකුණු=<span class="pos">+</span>, වෙනස්=<span class="neg">−</span>.</div>
+      <div class="cc l7"><h4>7 · සාධක</h4>
+        ම.පො.සා.: ප්‍රථමක සාධකවලට කඩා පොදු ඒවා ගුණ කරන්න.<br>
+        Factorise: ම.පො.සා. පිට → බෙදන්න → check කරන්න.<br>
+        සෘණ පිට ගත්තොත් ඇතුළේ සලකුණු පෙරළේ.</div>
+      <div class="cc l8"><h4>8 · වර්ගමූලය</h4>
+        අවසානය 2,3,7,8 → පූර්ණ වර්ග <b>නොවේ</b>.<br>
+        ප්‍රථමක ක්‍රමය: යුගල හදා, එක බැගින් ගුණ.<br>
+        නිරීක්ෂණය: අවසානය→මූල අවසානය; ඉතිරිය→ආසන්න පහළ වර්ග මූලය.</div>
+      <div class="cc l10"><h4>10 · දර්ශක</h4>
+        2³ = පාදය 2, දර්ශකය 3.<br>
+        (ab)ⁿ = aⁿbⁿ ; (abc)ⁿ = aⁿbⁿcⁿ.<br>
+        සෘණ පාදය: ඉරට්ටේ දර්ශකය=<span class="pos">+</span>, ඔත්තේ=<span class="neg">−</span>.</div>
+    </div>
+  </section>
+
+</main>
+
+<a class="top-link" href="#top" aria-label="ඉහළට">↑</a>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="justify-content:center">
+      <div class="mark">ඉ</div>
+      <div style="text-align:left"><div class="name">IDASARA ACADEMY</div>
+        <div class="tag">We empower · We free · We augment</div></div>
+    </div>
+    <p style="margin:14px 0 4px">8 ශ්‍රේණිය · ගණිතය · සංඛ්‍යා පදනම — ඔබේම වේගයෙන් ඉගෙනීමට.</p>
+    <p class="ref" style="color:#8FA2B8">මූලාශ්‍රය: 8 ශ්‍රේණිය ගණිතය පෙළපොත (I කොටස), අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුව — පාඩම් 4, 7, 8, 10.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  // ---- reading progress ----
+  var bar=document.getElementById('progress');
+  function prog(){
+    var h=document.documentElement, sc=h.scrollTop||document.body.scrollTop;
+    var max=(h.scrollHeight-h.clientHeight)||1;
+    bar.style.width=(sc/max*100)+'%';
+  }
+  window.addEventListener('scroll',prog,{passive:true}); prog();
+
+  // ---- only one sub-topic open per lesson (accordion-lite) ----
+  document.querySelectorAll('section.lesson').forEach(function(sec){
+    var subs=sec.querySelectorAll('details.sub');
+    subs.forEach(function(d){
+      d.addEventListener('toggle',function(){
+        if(d.open){ subs.forEach(function(o){ if(o!==d) o.open=false; }); }
+      });
+    });
+  });
+
+  var fmt=function(v){ return (v>=0?'(+'+v+')':'(−'+Math.abs(v)+')'); };
+  var round=function(x){ return Math.round(x*1e6)/1e6; };
+
+  // ===== WIDGET 1: directed number calculator =====
+  var op='+';
+  var seg=document.querySelectorAll('#dnw .seg button');
+  seg.forEach(function(b){ b.addEventListener('click',function(){
+    op=b.dataset.op; seg.forEach(function(x){x.setAttribute('aria-pressed',x===b);});
+  });});
+  document.getElementById('dn-go').addEventListener('click',function(){
+    var a=parseFloat(document.getElementById('dn-a').value)*parseInt(document.getElementById('dn-s1').value);
+    var bb=parseFloat(document.getElementById('dn-b').value)*parseInt(document.getElementById('dn-s2').value);
+    var out=document.getElementById('dn-out'), res, why;
+    if(isNaN(a)||isNaN(bb)){ out.textContent='කරුණාකර සංඛ්‍යා දෙකම ඇතුළු කරන්න.'; return; }
+    if(op==='+'){ res=a+bb;
+      why=(Math.sign(a)===Math.sign(bb)||a===0||bb===0)?'සලකුණු සමයි → විශාලත්ව එකතු කර එම සලකුණම.':'සලකුණු වෙනස් → විශාලත්ව අඩු කර, ලොක්කගේ සලකුණ.'; }
+    else if(op==='-'){ res=a-bb; why='අඩු කිරීම = '+fmt(bb)+' හි ආකල ප්‍රතිලෝමය '+fmt(-bb)+' එකතු කිරීම. ∴ '+fmt(a)+' + '+fmt(-bb)+'.'; }
+    else if(op==='×'){ res=a*bb; why=(Math.sign(a)===Math.sign(bb))?'සලකුණු සමයි → පිළිතුර ධන.':'සලකුණු වෙනස් → පිළිතුර සෘණ.'; }
+    else { if(bb===0){ out.textContent='0 න් බෙදිය නොහැක!'; return; } res=a/bb;
+      why=(Math.sign(a)===Math.sign(bb))?'සලකුණු සමයි → පිළිතුර ධන.':'සලකුණු වෙනස් → පිළිතුර සෘණ.'; }
+    res=round(res);
+    out.innerHTML='<b style="font-size:18px">'+fmt(a)+' '+op+' '+fmt(bb)+' = '+
+      '<span style="color:'+(res<0?'#C0392B':'#1B7F4B')+'">'+fmt(res)+'</span></b><br><span style="color:#5C6B7C;font-size:14.5px">'+why+'</span>';
+  });
+
+  // ===== WIDGET 2: factorise stepper =====
+  var FC=[
+    {e:'8x + 12y', terms:[['2','2','2','x'],['2','2','3','y']], gcd:'4', inside:'2x + 3y', res:'4(2x + 3y)'},
+    {e:'15pq + 45qr + 60q', terms:[['3','5','p','q'],['3','3','5','q','r'],['2','2','3','5','q']], gcd:'15q', inside:'p + 3r + 4', res:'15q(p + 3r + 4)'},
+    {e:'−4x − 16y', terms:[['−1','2','2','x'],['−1','2','2','2','2','y']], gcd:'−4', inside:'x + 4y', res:'−4(x + 4y)', note:'සෘණ පිට ගත් නිසා ඇතුළේ සලකුණු පෙරළුණා.'},
+    {e:'18x + 24xy + 12xz', terms:[['2','3','3','x'],['2','2','2','3','x','y'],['2','2','3','x','z']], gcd:'6x', inside:'3 + 4y + 2z', res:'6x(3 + 4y + 2z)'}
+  ];
+  document.getElementById('fc-go').addEventListener('click',function(){
+    var d=FC[+document.getElementById('fc-sel').value], o=document.getElementById('fc-out');
+    var rows=d.e.split('+').length;
+    var t=d.e.split(/\s(?=[+−])/);
+    var html='<b>① ප්‍රථමක සාධකවලට කඩන්න:</b><br><span class="calc">';
+    t.forEach(function(term,i){ html+='&nbsp;&nbsp;'+term.trim()+' = '+d.terms[i].join(' × ')+'<br>'; });
+    html+='</span><b>② ම.පො.සා. = '+d.gcd+'</b><br>';
+    html+='<b>③ ම.පො.සා. පිට ගන්න:</b> <span class="calc" style="font-size:18px;color:#6D4AA0;font-weight:700">'+d.res+'</span>';
+    if(d.note) html+='<br><span style="color:#C0392B;font-size:14px">⚠ '+d.note+'</span>';
+    html+='<br><span style="color:#5C6B7C;font-size:14px">✓ '+d.gcd+' × ('+d.inside+') ආපසු ගුණ කළොත් මුල් එකම ලැබේ.</span>';
+    o.innerHTML=html;
+  });
+
+  // ===== WIDGET 3: perfect square / sqrt checker =====
+  document.getElementById('sq-go').addEventListener('click',function(){
+    var n=parseInt(document.getElementById('sq-n').value), o=document.getElementById('sq-out');
+    if(isNaN(n)||n<1){ o.textContent='1ට වැඩි පූර්ණ සංඛ්‍යාවක් දෙන්න.'; return; }
+    var u=n%10, badEnd=[2,3,7,8];
+    if(badEnd.indexOf(u)>=0){
+      o.innerHTML='<b>'+n+'</b> හි අවසාන ඉලක්කම <b>'+u+'</b>.<br>2,3,7,8 න් අවසන් වන නිසා — මෙය <span style="color:#C0392B;font-weight:700">පූර්ණ වර්ගයක් නොවේ</span>.';
+      return;
+    }
+    var r=Math.round(Math.sqrt(n));
+    if(r*r===n){
+      var endMap={0:'0',1:'1 හෝ 9',4:'2 හෝ 8',5:'5',6:'4 හෝ 6',9:'3 හෝ 7'};
+      var rest=Math.floor(n/100);
+      var tens=Math.floor(Math.sqrt(rest));
+      o.innerHTML='<b style="color:#1B7F4B">'+n+' පූර්ණ වර්ගයකි ✓</b><br>'+
+        '<span class="calc">• අවසානය '+u+' → මූලයේ අවසානය '+endMap[u]+'.<br>'+
+        (n>100?('• ඉතිරිය '+rest+' → ආසන්න පහළ වර්ගය '+(tens*tens)+' → දසස්ථානය '+tens+'.<br>'):'')+
+        '∴ <b style="font-size:18px;color:#C75B39">√'+n+' = '+r+'</b></span>';
+    } else {
+      o.innerHTML='<b>'+n+'</b> හි අවසානය '+u+' නිසා "නෑ" කියන්න බෑ — නමුත් පරීක්ෂා කළාම '+
+        '<b>'+n+'</b> පූර්ණ වර්ගයක් <span style="color:#C0392B;font-weight:700">නොවේ</span> ('+(r-1)+'² හා '+r+'² අතර වැටේ).';
+    }
+  });
+
+  // ===== WIDGET 4: power expander =====
+  var PW=[
+    {q:'(2 × 5)³', a:'2³ × 5³ = 8 × 125 = 1000'},
+    {q:'(3ab)³', a:'3³ × a³ × b³ = 27a³b³'},
+    {q:'(2x)² × y²', a:'(2x)² = 2²x² = 4x². &nbsp; ∴ 4x²y² = (2xy)²'},
+    {q:'100m²', a:'100 = 10² ⟹ 100m² = 10²m² = (10m)²'}
+  ];
+  document.getElementById('pw-go').addEventListener('click',function(){
+    var d=PW[+document.getElementById('pw-sel').value];
+    document.getElementById('pw-out').innerHTML='<span class="calc"><b>'+d.q+'</b> = <span style="color:#2E7D52;font-weight:700">'+d.a+'</span></span>';
+  });
+
+  // ===== WIDGET 5: negative power predictor =====
+  document.getElementById('np-go').addEventListener('click',function(){
+    var b=parseInt(document.getElementById('np-b').value), e=parseInt(document.getElementById('np-e').value);
+    var o=document.getElementById('np-out');
+    if(isNaN(b)||isNaN(e)||b<1||e<0){ o.textContent='පාදය (≥1) හා දර්ශකය (≥0) දෙන්න.'; return; }
+    var even=(e%2===0), mag=Math.pow(b,e), val=even?mag:-mag;
+    var sign=even?'ඉරට්ටේ → <span style="color:#1B7F4B;font-weight:700">ධන</span>':'ඔත්තේ → <span style="color:#C0392B;font-weight:700">සෘණ</span>';
+    o.innerHTML='<span class="calc">(−'+b+')<sup>'+e+'</sup> : දර්ශකය '+e+' '+sign+'.<br>'+
+      'විශාලත්වය '+b+'<sup>'+e+'</sup> = '+mag+'.<br>'+
+      '∴ <b style="font-size:18px;color:'+(val<0?'#C0392B':'#1B7F4B')+'">'+val+'</b></span>';
+  });
+})();
+</script>
+</body>
+</html>

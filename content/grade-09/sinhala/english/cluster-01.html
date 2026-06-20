@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara Academy — Grade 9 English | Self, Talents &amp; Wellbeing</title>
+<style>
+  :root{
+    --navy:#0B2545; --navy-2:#13315C; --navy-3:#1B3F73;
+    --gold:#C9A227; --gold-2:#E0C766; --gold-soft:#F3E9C4;
+    --paper:#FAF7F0; --card:#FFFFFF; --ink:#16202E; --muted:#5C6B7C; --line:#E6E0D2;
+    --u1:#0E7C86; --u1-soft:#E2F3F4;    /* Everybody good - teal */
+    --u9:#2E7D52; --u9-soft:#E4F2E9;    /* Greatest wealth - green */
+    --u10:#6D4AA0; --u10-soft:#EEE8F7;  /* Be you - violet */
+    --pos:#1B7F4B; --neg:#C0392B;
+    --ui:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,"Noto Sans Sinhala",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:var(--ui); color:var(--ink); background:var(--paper); line-height:1.7; font-size:17px; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 16px;}
+
+  #progress{position:fixed; top:0; left:0; height:4px; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-2)); z-index:60; transition:width .15s;}
+  nav.chips{position:sticky; top:0; z-index:50; background:rgba(11,37,69,.97); backdrop-filter:blur(6px); box-shadow:0 2px 12px rgba(0,0,0,.18);}
+  nav.chips .row{display:flex; gap:8px; overflow-x:auto; padding:10px 14px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  nav.chips .row::-webkit-scrollbar{display:none;}
+  nav.chips a{flex:0 0 auto; color:#EAF0F7; text-decoration:none; font-size:14px; font-weight:600; padding:7px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.18); white-space:nowrap; transition:.2s;}
+  nav.chips a:hover,nav.chips a:focus{background:var(--gold); color:var(--navy); border-color:var(--gold); outline:none;}
+
+  header.hero{background:radial-gradient(1200px 400px at 80% -10%,rgba(201,162,39,.22),transparent 60%),linear-gradient(160deg,var(--navy),var(--navy-2) 70%,var(--navy-3)); color:#fff; padding:46px 0 40px; position:relative; overflow:hidden;}
+  header.hero .wrap{position:relative; z-index:2;}
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:26px;}
+  .brand .mark{width:42px; height:42px; border-radius:11px; background:linear-gradient(145deg,var(--gold),var(--gold-2)); display:grid; place-items:center; color:var(--navy); font-weight:800; font-size:22px; box-shadow:0 6px 18px rgba(201,162,39,.4);}
+  .brand .name{font-weight:800; letter-spacing:.14em; font-size:15px;}
+  .brand .tag{font-size:11.5px; color:var(--gold-2); letter-spacing:.22em; text-transform:uppercase;}
+  .eyebrow{display:inline-flex; gap:8px; align-items:center; font-size:13px; color:var(--gold-2); border:1px solid rgba(224,199,102,.4); padding:5px 12px; border-radius:999px;}
+  header.hero h1{font-size:clamp(26px,6vw,42px); line-height:1.2; margin:16px 0 6px; font-weight:800;}
+  header.hero .sub{color:#D6E0EC; max-width:640px; font-size:16.5px;}
+  header.hero .meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  header.hero .meta span{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); padding:6px 13px; border-radius:10px; font-size:13.5px; font-weight:600;}
+  .floaters{position:absolute; inset:0; z-index:1; opacity:.13; pointer-events:none; font-weight:800;}
+  .floaters span{position:absolute; color:var(--gold-2); font-size:25px;}
+
+  section.lesson{padding:34px 0 8px;}
+  .why{background:linear-gradient(180deg,#fff,#FBF7EC); border:1px solid var(--line); border-radius:18px; padding:24px 22px; margin:26px 0; box-shadow:0 8px 28px rgba(11,37,69,.06);}
+  .why h2{margin:.1em 0 .4em; font-size:22px;}
+  .roadmap{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin-top:18px;}
+  .road-card{display:block; text-decoration:none; color:var(--ink); border-radius:14px; padding:16px; border:1px solid var(--line); background:#fff; transition:.2s; position:relative; overflow:hidden;}
+  .road-card:hover,.road-card:focus{transform:translateY(-3px); box-shadow:0 12px 26px rgba(0,0,0,.1); outline:none;}
+  .road-card b{display:block; font-size:15.5px; margin-bottom:2px;}
+  .road-card small{color:var(--muted); font-size:12.5px;}
+  .road-card .num{position:absolute; right:10px; top:6px; font-size:38px; font-weight:800; opacity:.12;}
+
+  .lesson-head{border-radius:18px 18px 0 0; padding:22px 22px 18px; color:#fff; position:relative;}
+  .lesson-head .kicker{font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; opacity:.9;}
+  .lesson-head h2{margin:6px 0 4px; font-size:clamp(21px,5vw,28px); font-weight:800;}
+  .lesson-head p{margin:0; font-size:15px; opacity:.95;}
+  .lesson-head .badge{position:absolute; right:18px; top:18px; min-width:48px; height:48px; padding:0 6px; border-radius:24px; background:rgba(255,255,255,.16); display:grid; place-items:center; font-weight:800; font-size:20px; border:2px solid rgba(255,255,255,.5);}
+  .objectives{background:#fff; border:1px solid var(--line); border-top:none; padding:16px 22px; border-radius:0 0 18px 18px; margin-bottom:18px;}
+  .objectives b{font-size:13.5px;}
+  .objectives ul{margin:8px 0 0; padding-left:1.1em;} .objectives li{margin:4px 0; font-size:15.5px;}
+
+  details.sub{background:var(--card); border:1px solid var(--line); border-radius:16px; margin:14px 0; overflow:hidden; box-shadow:0 4px 16px rgba(11,37,69,.05);}
+  details.sub>summary{list-style:none; cursor:pointer; padding:16px 20px; display:flex; align-items:center; gap:12px; font-weight:700; font-size:17px;}
+  details.sub>summary::-webkit-details-marker{display:none;}
+  details.sub>summary .dot{min-width:30px; height:30px; padding:0 6px; border-radius:9px; flex:0 0 auto; color:#fff; display:grid; place-items:center; font-size:13px; font-weight:800;}
+  details.sub>summary .chev{margin-left:auto; transition:.25s; color:var(--muted); font-size:18px;}
+  details.sub[open]>summary .chev{transform:rotate(90deg);}
+  details.sub>summary:focus-visible{outline:3px solid var(--gold-2); outline-offset:-3px;}
+  .sub-body{padding:4px 20px 22px;}
+
+  .step{margin:18px 0 6px; display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .step .n{width:22px; height:22px; border-radius:50%; background:var(--gold-soft); color:#7a5e0a; display:grid; place-items:center; font-size:12px; flex:0 0 auto;}
+
+  .hook{background:var(--gold-soft); border-radius:13px; padding:14px 16px; font-size:16px;}
+  .hook b{color:#7a5e0a;}
+  .plain p{margin:.5em 0;}
+  .term{background:#fff3cf; border-bottom:2px solid var(--gold); padding:0 3px; border-radius:3px; font-weight:600;}
+
+  .box{border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .rule{background:#fff8e6; border:1px solid var(--gold-2);} .rule b{color:#7a5e0a;}
+  .watch{background:#FDECEA; border:1px solid #F1B0A6;}
+  .watch .h{font-weight:800; color:var(--neg); display:flex; gap:8px; align-items:center; margin-bottom:6px;}
+  .mem{background:linear-gradient(135deg,#0B2545,#1B3F73); color:#fff; border-radius:13px; padding:14px 16px; margin:16px 0; display:flex; gap:12px; align-items:flex-start;}
+  .mem .k{font-size:22px;} .mem b{color:var(--gold-2);}
+
+  .eg{border-left:4px solid var(--u9); background:#F8FAFD; border-radius:0 12px 12px 0; padding:12px 16px; margin:12px 0;}
+  .eg .x{font-size:16.5px;} .eg .note{font-size:14px; color:var(--muted); margin-top:4px;}
+  .hl{background:#fff3cf; color:#7a5e0a; font-weight:700; border-radius:4px; padding:0 4px;}
+  .hl2{background:#E2F3F4; color:#0a5b63; font-weight:700; border-radius:4px; padding:0 4px;}
+  .corr{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0;}
+  .corr .c{flex:1 1 220px; border-radius:11px; padding:10px 13px; font-size:15.5px;}
+  .corr .bad{background:#FDECEA; border:1px solid #F1B0A6;} .corr .bad::before{content:"✗ "; color:var(--neg); font-weight:800;}
+  .corr .good{background:#F0FBF4; border:1px solid #BFE6CC;} .corr .good::before{content:"✓ "; color:var(--pos); font-weight:800;}
+
+  .work{background:#F6F8FB; border:1px solid #DEE6F0; border-radius:12px; padding:14px 16px; margin:12px 0;}
+  .work .lbl{font-weight:700; font-size:13.5px; color:var(--navy-2); margin-bottom:6px;}
+  .turn{border:1.5px dashed var(--gold); border-radius:12px; padding:12px 16px; margin:12px 0; background:#fffdf5;}
+  .turn .q{font-weight:700;}
+  details.reveal{margin-top:8px;}
+  details.reveal>summary{cursor:pointer; list-style:none; display:inline-flex; gap:7px; align-items:center; font-weight:700; font-size:14px; color:var(--navy); background:#fff; border:1px solid var(--line); padding:6px 13px; border-radius:999px;}
+  details.reveal>summary::-webkit-details-marker{display:none;}
+  details.reveal>summary:focus-visible{outline:3px solid var(--gold-2);}
+  details.reveal[open]>summary{background:var(--gold-soft); border-color:var(--gold);}
+  details.reveal .ans{margin-top:8px; padding:10px 13px; background:#F0FBF4; border:1px solid #BFE6CC; border-radius:10px; font-size:15.5px;}
+
+  .selfcheck{background:#fff; border:1px solid var(--line); border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .selfcheck .h{font-weight:800; display:flex; gap:8px; align-items:center; margin-bottom:8px; font-size:15.5px;}
+  .selfcheck ol{margin:0; padding-left:1.2em;} .selfcheck li{margin:9px 0;}
+
+  table.tbl{width:100%; border-collapse:collapse; margin:12px 0; font-size:15px; background:#fff; border-radius:10px; overflow:hidden; border:1px solid var(--line);}
+  table.tbl th,table.tbl td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  table.tbl th{background:var(--navy); color:#fff; font-weight:700; font-size:14px;}
+  table.tbl tr:nth-child(even) td{background:#FAFBFD;}
+  .scroller{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .chips2{display:flex; flex-wrap:wrap; gap:7px; margin:8px 0;}
+  .chips2 span{background:#fff; border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:14px; font-weight:600; color:var(--navy);}
+
+  /* conditional timeline */
+  .cond{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0;}
+  .cond .c{flex:1 1 240px; border:1px solid var(--line); border-radius:13px; padding:14px; background:#fff;}
+  .cond .c.t1{border-top:4px solid var(--u9);} .cond .c.t2{border-top:4px solid var(--u10);}
+  .cond .c h4{margin:0 0 6px; font-size:15.5px;}
+  .cond .f{font-weight:700; background:#F6F8FB; border-radius:8px; padding:6px 9px; margin:6px 0; font-size:14.5px;}
+
+  .widget{border:1px solid var(--line); border-radius:14px; padding:16px; margin:16px 0; background:linear-gradient(180deg,#fff,#FAFBFD);}
+  .widget .wh{font-weight:800; font-size:15px; display:flex; gap:8px; align-items:center; margin-bottom:10px;}
+  .widget .qtext{font-size:16.5px; margin-bottom:10px;}
+  .widget .opts{display:flex; flex-wrap:wrap; gap:8px;}
+  .widget .opts button{font-family:var(--ui); font-weight:600; font-size:15px; padding:9px 15px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); cursor:pointer; transition:.15s;}
+  .widget .opts button:hover{border-color:var(--navy);}
+  .widget .opts button.right{background:#E1F4E9; border-color:var(--pos); color:var(--pos);}
+  .widget .opts button.wrong{background:#FDECEA; border-color:var(--neg); color:var(--neg);}
+  .widget .opts button:focus-visible{outline:3px solid var(--gold-2);}
+  .widget .fb{margin-top:10px; font-size:15px; min-height:18px;}
+  .widget .nextbtn{margin-top:10px; font-weight:700; font-size:14px; padding:8px 14px; border:none; border-radius:10px; background:var(--navy); color:#fff; cursor:pointer;}
+
+  .synth{background:linear-gradient(160deg,var(--navy),var(--navy-2)); color:#fff; border-radius:18px; padding:26px 22px; margin:30px 0;}
+  .synth h2{margin-top:0; color:var(--gold-2);}
+  .synth .order{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:14px 0; font-weight:700;}
+  .synth .order span{background:rgba(255,255,255,.1); padding:7px 13px; border-radius:10px; border:1px solid rgba(255,255,255,.2);}
+  .synth .order .ar{color:var(--gold-2);}
+
+  .cheat{background:#fff; border:2px solid var(--navy); border-radius:18px; padding:24px 22px; margin:26px 0;}
+  .cheat h2{margin-top:0;}
+  .cheat .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .cheat .cc{border:1px solid var(--line); border-radius:12px; padding:14px; background:#FAFBFD;}
+  .cheat .cc h4{margin:0 0 6px; font-size:15px;}
+  .cheat .cc.u1{border-top:4px solid var(--u1);} .cheat .cc.u9{border-top:4px solid var(--u9);} .cheat .cc.u10{border-top:4px solid var(--u10);}
+
+  footer{background:var(--navy); color:#C9D4E2; padding:30px 0 40px; margin-top:30px; text-align:center; font-size:14px;}
+  footer .brand{justify-content:center;}
+  .ref{font-size:12.5px; color:#8FA2B8; font-style:italic; margin-top:6px;}
+  .top-link{position:fixed; right:16px; bottom:16px; z-index:40; background:var(--gold); color:var(--navy); width:46px; height:46px; border-radius:50%; display:grid; place-items:center; font-size:20px; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(0,0,0,.25);}
+
+  @media (max-width:560px){ body{font-size:16px;} .sub-body{padding:4px 14px 18px;} details.sub>summary{padding:14px 14px; font-size:16px;} }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important; transition:none!important;}}
+  @media print{ nav.chips,#progress,.top-link,.widget .opts button,.widget .nextbtn{display:none!important;} details.sub,details.reveal{open:true;} body{background:#fff;} }
+</style>
+</head>
+<body>
+<div id="progress" role="progressbar" aria-label="Reading progress"></div>
+
+<nav class="chips" aria-label="Section navigation">
+  <div class="row">
+    <a href="#top">Top</a>
+    <a href="#u1">1 · Everybody is Good…</a>
+    <a href="#u9">9 · The Greatest Wealth</a>
+    <a href="#u10">10 · Be Happy, Be You!</a>
+    <a href="#synth">Grammar map</a>
+    <a href="#test">Self-Test</a>
+    <a href="#cheat">Cheat Sheet</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="floaters" aria-hidden="true">
+    <span style="left:6%;top:30%;">If I…, I will…</span><span style="left:78%;top:22%;">un- · -ness</span>
+    <span style="left:22%;top:74%;">said that…</span><span style="left:66%;top:70%;">a team of…</span>
+    <span style="left:46%;top:15%;">noun · verb</span><span style="left:34%;top:50%;">next to</span>
+  </div>
+  <div class="wrap">
+    <div class="brand"><div class="mark">i</div>
+      <div><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div></div>
+    <span class="eyebrow">📘 Grade 9 · English · English medium</span>
+    <h1>Self, Talents &amp; Wellbeing</h1>
+    <p class="sub">Three units about building YOU — finding your talents, looking after your health, and living positively. Three grammar power-tools: prepositions, conditionals and reported speech.</p>
+    <div class="meta"><span>📗 3 units</span><span>🔤 grammar + vocabulary</span><span>✍️ practice in every section</span><span>📖 Grade 9 textbook, Units 1, 9, 10</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="why" id="intro">
+    <h2>Why does this cluster matter? 🌟</h2>
+    <p>This whole cluster is about <b>you</b> — your talents (Unit 1), your health, "the greatest wealth" (Unit 9), and your happiness (Unit 10). And the three units hide three of the most useful grammar tools in English: <b>prepositions, conditionals (if…), and reported speech</b>.</p>
+    <p>Feeling weak at English? No problem — we go step by step, with small wins along the way. Tap a card to jump in 👇</p>
+    <div class="roadmap">
+      <a class="road-card" href="#u1" style="border-top:4px solid var(--u1)"><span class="num">1</span><b>Everybody is Good at Something</b><small>Prepositions · collective &amp; compound nouns</small></a>
+      <a class="road-card" href="#u9" style="border-top:4px solid var(--u9)"><span class="num">9</span><b>The Greatest Wealth</b><small>Conditionals (Type 1 &amp; 2) · affixes</small></a>
+      <a class="road-card" href="#u10" style="border-top:4px solid var(--u10)"><span class="num">10</span><b>Be Happy, Be Bright, Be You!</b><small>Reported speech · word classes</small></a>
+    </div>
+  </section>
+
+  <!-- ===================== UNIT 1 ===================== -->
+  <section class="lesson" id="u1">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--u1),#0a5b63)">
+      <div class="badge">01</div><div class="kicker">Unit 1 · p.01</div>
+      <h2>Everybody is Good at Something</h2>
+      <p>Everyone is talented at something! Grammar: prepositions · Vocabulary: collective &amp; compound nouns.</p>
+    </div>
+    <div class="objectives"><b>By the end of this unit you will be able to 🎯</b>
+      <ul><li>use prepositions of place, time and "good at"</li><li>use collective nouns (with the right verb) and form compound nouns</li><li>read a talent-show dialogue, write descriptions, and act out conversations</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--u1)">1a</span> Grammar: Prepositions <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">When you tell a friend where the kade is — "<b>next to</b> the bank, <b>opposite</b> the temple, <b>at</b> the corner" — those little linking words are <span class="term">prepositions</span>. Tiny words, but they decide the whole meaning!</div>
+
+        <div class="step"><span class="n">2</span> Plain explanation</div>
+        <div class="plain"><p>A preposition shows the <b>place, time or direction</b> of something. It comes <b>before</b> a noun or pronoun.</p></div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Type</th><th>Words</th><th>Example</th></tr>
+          <tr><td>Place</td><td>in, on, at, under, behind, next to, opposite, between</td><td>The bag is <b>under</b> the desk.</td></tr>
+          <tr><td>Time</td><td>at (time), on (day), in (month/year)</td><td><b>at</b> 5 o'clock · <b>on</b> Monday · <b>in</b> April</td></tr>
+          <tr><td>Talent</td><td>good <b>at</b> + (activity)</td><td>She is good <b>at</b> singing.</td></tr>
+        </table></div>
+        <div class="eg"><div class="x">We celebrate Avurudu <span class="hl">in</span> April, <span class="hl">on</span> the 14th, <span class="hl">at</span> the auspicious time.</div>
+          <div class="note">Remember: <b>AT</b> a time, <b>ON</b> a day, <b>IN</b> a month/year (smallest → largest).</div></div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ "good at", not "good in"</div>For a talent always say <b>good <u>at</u></b> (good at maths, good at cricket). And <b>since</b> = from a point in time (since 2015); <b>for</b> = a length of time (for two years).</div>
+
+        <div class="turn"><div class="q">✏️ Your turn: "The match starts ___ 3 p.m. ___ Sunday."</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">starts <b>at</b> 3 p.m. <b>on</b> Sunday. (time → at; day → on)</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>AT a time · ON a day · IN a month. Talent = good AT something.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--u1)">1b</span> Vocabulary: Collective &amp; compound nouns <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">A group of cricketers playing together is a <b>team</b>. One word for a whole group — that's a <span class="term">collective noun</span>.</div>
+
+        <div class="step"><span class="n">2</span> Collective nouns (Grade 9 textbook, Unit 1)</div>
+        <div class="chips2"><span>army</span><span>audience</span><span>band</span><span>board</span><span>committee</span><span>crew</span><span>family</span><span>jury</span><span>orchestra</span><span>public</span><span>staff</span><span>team</span></div>
+        <div class="box rule"><b>Singular or plural verb?</b> Use a <b>singular</b> verb if the group acts as one unit; a <b>plural</b> verb if the members act individually.</div>
+        <div class="eg"><div class="x">There <span class="hl">was</span> quite a large audience. <span style="color:var(--muted)">(the audience as one unit)</span><br>The audience <span class="hl">were</span> already clapping their hands. <span style="color:var(--muted)">(members acting individually)</span></div></div>
+
+        <div class="step"><span class="n">3</span> Compound nouns</div>
+        <div class="plain"><p>Two words joined to make one new noun.</p></div>
+        <div class="chips2"><span>foot + ball = football</span><span>black + board = blackboard</span><span>rain + bow = rainbow</span><span>tooth + brush = toothbrush</span></div>
+
+        <!-- WIDGET 1 -->
+        <div class="widget" id="w1">
+          <div class="wh">🎮 Collective &amp; compound nouns — choose the answer</div>
+          <div class="qtext" id="w1q"></div>
+          <div class="opts" id="w1o"></div>
+          <div class="fb" id="w1f" aria-live="polite"></div>
+          <button class="nextbtn" id="w1n">Next question →</button>
+        </div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Match the verb to the meaning</div>"The team <b>is</b> strong" (one unit) vs "The team <b>are</b> wearing their new jerseys" (each player). Decide: one unit or individuals?</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Collective = one word for a group; verb = singular if "as one", plural if "as members". Compound = two words → one new noun.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--u1)">1c</span> Reading · Writing · Speaking &amp; Listening <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> The four skills in this unit</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Skill</th><th>What to do</th></tr>
+          <tr><td>📖 Reading</td><td>A talent-show dialogue &amp; texts — read for who is good at what.</td></tr>
+          <tr><td>✍️ Writing</td><td>Descriptions of people/things — use adjectives + "good at".</td></tr>
+          <tr><td>💬 Speaking/Listening</td><td>Act out dialogues; describe pictures; listen for specific information.</td></tr>
+        </table></div>
+        <div class="eg"><div class="x">My friend Nimal is <span class="hl">tall</span> and <span class="hl">friendly</span>. He is very good <span class="hl">at</span> cricket and plays <span class="hl">for</span> the school team.</div>
+          <div class="note">A good description = adjectives (tall, friendly) + what they are good at.</div></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Describe with adjectives; say talents with "good at"; listen for the exact detail asked.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== UNIT 9 ===================== -->
+  <section class="lesson" id="u9">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--u9),#1f5a3a)">
+      <div class="badge">09</div><div class="kicker">Unit 9 · p.91</div>
+      <h2>The Greatest Wealth</h2>
+      <p>Health is the greatest wealth. Grammar: conditional clauses (Type 1 &amp; 2) · Vocabulary: affixes, synonyms &amp; antonyms.</p>
+    </div>
+    <div class="objectives"><b>By the end of this unit you will be able to 🎯</b>
+      <ul><li>build Type 1 (real) and Type 2 (unreal) conditional sentences</li><li>form words with prefixes &amp; suffixes; give synonyms &amp; antonyms</li><li>read folk tales, write instructions, and handle telephone conversations</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--u9)">9a</span> Grammar: Conditional clauses — Type 1 &amp; Type 2 <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Two friends dream: "If I won the Mahajana Sampatha lottery, I would build a house!" The other: "If I won, I would just stay healthy and happy." Both are conditionals — sentences that start with <b>if</b>. The big question: real or just a dream?</div>
+
+        <div class="step"><span class="n">2</span> The key difference</div>
+        <div class="cond">
+          <div class="c t1"><h4>Type 1 — real / likely</h4>
+            <p style="margin:5px 0;font-size:14.5px">Something that can really happen. The result happens only if the condition is met.</p>
+            <div class="f">If + present, … will + verb</div></div>
+          <div class="c t2"><h4>Type 2 — unreal / unlikely</h4>
+            <p style="margin:5px 0;font-size:14.5px">Imaginary or contrary to fact.</p>
+            <div class="f">If + past, … would + verb</div></div>
+        </div>
+
+        <div class="step"><span class="n">4</span> Examples (Grade 9 textbook, Unit 9)</div>
+        <div class="eg"><div class="x">Type 1: If I <span class="hl">go</span> to the pharmacy, I <span class="hl2">will buy</span> a roll of bandage.</div>
+          <div class="note">If-clause first → use a comma. (No comma if the main clause comes first.)</div></div>
+        <div class="eg"><div class="x">Type 1: If it <span class="hl">rains</span> today, they <span class="hl2">will call off</span> the match. 🏏☔</div></div>
+        <div class="eg"><div class="x">Type 2: If I <span class="hl">knew</span> his phone number, I <span class="hl2">would give</span> him a call.</div>
+          <div class="note">Fact: I don't know it → that's why it's Type 2. Past tense, but the meaning is present/future — NOT past.</div></div>
+
+        <!-- WIDGET 2 -->
+        <div class="widget" id="w2">
+          <div class="wh">🎮 Complete the conditional — choose the correct verb</div>
+          <div class="qtext" id="w2q"></div>
+          <div class="opts" id="w2o"></div>
+          <div class="fb" id="w2f" aria-live="polite"></div>
+          <button class="nextbtn" id="w2n">Next question →</button>
+        </div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Don't put "will" in the if-clause</div>Type 1 is "If it <b>rains</b>…" — NOT "If it <b>will rain</b>…". And in Type 2, the past tense (knew/saw) means present/future, not the past.</div>
+        <div class="turn"><div class="q">✏️ Your turn: "If you eat too much sugar, you ___ (get) sick." (Type 1)</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">you <b>will get</b> sick. (Type 1: if + present → will + verb)</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Type 1 = real (present → will). Type 2 = dream (past → would). "would" = a dream!"</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--u9)">9b</span> Vocabulary: Affixes · Synonyms &amp; Antonyms <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> Affixes (prefixes &amp; suffixes)</div>
+        <div class="plain"><p>An <span class="term">affix</span> is added to the start or end of a word to make a new word. <i>(e.g. healthy → unhealthy, polite → impolite, neat → neatness)</i></p></div>
+        <div class="scroller"><table class="tbl">
+          <tr><th></th><th>Prefix (at the start)</th><th>Suffix (at the end)</th></tr>
+          <tr><td>Effect</td><td>changes the <b>meaning</b></td><td>changes the <b>word class</b></td></tr>
+          <tr><td>e.g.</td><td>un-, dis-, im-, ir-, in-, mis-, re-</td><td>-ful, -less, -ness, -ment, -tion, -able, -ly</td></tr>
+          <tr><td>sample</td><td>happy → <b>un</b>happy · advantage → <b>dis</b>advantage</td><td>use → use<b>less</b> · agree → agree<b>ment</b></td></tr>
+        </table></div>
+        <div class="eg"><div class="x">forget (verb) → forget<span class="hl">ful</span> (adjective) · happy (adj) → happi<span class="hl">ness</span> (noun) · angry (adj) → angri<span class="hl">ly</span> (adverb)</div>
+          <div class="note">A suffix changes the word's "job" (its word class).</div></div>
+
+        <div class="step"><span class="n">3</span> Synonyms &amp; Antonyms</div>
+        <div class="cond">
+          <div class="c"><h4>Synonyms (same meaning)</h4><p style="margin:5px 0">big = large · happy = glad · begin = start · clever = smart</p></div>
+          <div class="c"><h4>Antonyms (opposite)</h4><p style="margin:5px 0">healthy ↔ unhealthy · increase ↔ decrease · win ↔ lose</p></div>
+        </div>
+        <div class="turn"><div class="q">✏️ Your turn: "She answered with great ___ (confident)."</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">confidence (a noun is needed → confident → confidence)</div></details></div>
+        <div class="box watch"><div class="h">⚠ Prefix vs suffix</div>Prefix changes <b>meaning</b> (un-/dis- = "not" → opposites). Suffix changes <b>word class</b> (-ly → adverb, -ness → noun).</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Prefix = meaning; Suffix = word class. Synonym = same; Antonym = opposite.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--u9)">9c</span> Reading · Writing · Speaking &amp; Listening <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="scroller"><table class="tbl">
+          <tr><th>Skill</th><th>What to do</th></tr>
+          <tr><td>📖 Reading</td><td>Folk tales — and <b>inferring</b> information that isn't stated directly.</td></tr>
+          <tr><td>✍️ Writing</td><td>Instructions (use imperative verbs: <i>Boil the water. Add tea.</i>) and compositions.</td></tr>
+          <tr><td>💬 Speaking/Listening</td><td>Telephone conversations ("Hello, may I speak to…?") and describing pictures.</td></tr>
+        </table></div>
+        <div class="box rule"><b>Inference tip:</b> the text may not say it directly — work it out from clues. "He wiped his sweat and drank all the water at once." → He was <b>very thirsty / hot</b> (clue, not stated).</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Instructions = imperative verbs. Inference = read between the lines. Phone = polite set phrases.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== UNIT 10 ===================== -->
+  <section class="lesson" id="u10">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--u10),#4a2f78)">
+      <div class="badge">10</div><div class="kicker">Unit 10 · p.107</div>
+      <h2>Be Happy, Be Bright, Be You!</h2>
+      <p>Live positively, be yourself. Grammar: reported speech · Vocabulary: word classes.</p>
+    </div>
+    <div class="objectives"><b>By the end of this unit you will be able to 🎯</b>
+      <ul><li>turn direct speech into reported speech (with the right changes)</li><li>identify word classes: noun, verb, adjective, adverb</li><li>read poems, infer meaning, and write for official purposes</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--u10)">10a</span> Grammar: Reported speech <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> Hook</div>
+        <div class="hook">Reported speech is basically how you pass on a message (or share a bit of gossip 😄). Your brother said "I am hungry." You tell amma: "Malli said he <b>was</b> hungry." Notice — "am" became "was"!</div>
+
+        <div class="step"><span class="n">2</span> The changes (Grade 9 textbook, Unit 10)</div>
+        <div class="plain"><p>When we report what someone said, we don't use their exact words. Three things change:</p></div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>1. Tense shifts back</th><th>2. Time / place words</th></tr>
+          <tr><td>present → past (like → liked)</td><td>today → that day</td></tr>
+          <tr><td>past → past perfect (went → had gone)</td><td>tomorrow → the next day</td></tr>
+          <tr><td>present perfect → past perfect</td><td>here → there · this → that · now → then</td></tr>
+        </table></div>
+        <p style="font-size:14.5px;color:var(--muted)">(3. Pronouns change too: I → he/she, my → his/her …)</p>
+        <div class="eg"><div class="x">Direct: "I <span class="hl">like</span> English Literature."<br>Reported: She said that she <span class="hl2">liked</span> English Literature.</div></div>
+        <div class="box rule"><b>By sentence type:</b> <b>Statement</b> → say/tell + that ("…that she liked…"). <b>Imperative (command)</b> → told + (someone) + to + verb: "Amali, do Art." → She <b>told Amali to do</b> Art.</div>
+
+        <!-- WIDGET 3 -->
+        <div class="widget" id="w3">
+          <div class="wh">🎮 Reported speech — choose the correct version</div>
+          <div class="qtext" id="w3q"></div>
+          <div class="opts" id="w3o"></div>
+          <div class="fb" id="w3f" aria-live="polite"></div>
+          <button class="nextbtn" id="w3n">Next question →</button>
+        </div>
+
+        <div class="step"><span class="n">5</span> Watch out!</div>
+        <div class="box watch"><div class="h">⚠ Don't forget all three changes</div>(1) shift the tense back, (2) change pronouns, (3) change today→that day, here→there. Many students change the tense but forget the time words!</div>
+        <div class="turn"><div class="q">✏️ Your turn: She said, "I will come tomorrow." → reported?</div>
+          <details class="reveal"><summary>Show answer</summary><div class="ans">She said that she <b>would come the next day</b>. (will→would; tomorrow→the next day)</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>Reported = tense back + pronouns change + today→that day. say + that; tell + (sb) + to.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--u10)">10b</span> Vocabulary: Word classes <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> Every word has a "job"</div>
+        <div class="scroller"><table class="tbl">
+          <tr><th>Class</th><th>Job</th><th>Examples</th></tr>
+          <tr><td>Noun</td><td>names a person/thing/place</td><td>teacher, Colombo, happiness</td></tr>
+          <tr><td>Verb</td><td>an action or state</td><td>run, sing, is, become</td></tr>
+          <tr><td>Adjective</td><td>describes a noun</td><td>happy, tall, bright</td></tr>
+          <tr><td>Adverb</td><td>describes a verb</td><td>quickly, happily, well</td></tr>
+        </table></div>
+        <div class="eg"><div class="x">happy (adjective) → happi<span class="hl">ness</span> (noun) → happi<span class="hl">ly</span> (adverb)</div>
+          <div class="note">Just like affixes — a suffix changes the word class! (-ly is usually an adverb.)</div></div>
+        <div class="box watch"><div class="h">⚠ Spot the job in the sentence</div>Look at what the word <b>does</b>. -ly → usually adverb; -ness/-ment/-tion → noun; -ful/-less → adjective.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Noun=name, Verb=action, Adjective=describes noun, Adverb=describes verb.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--u10)">10c</span> Reading · Writing · Speaking &amp; Listening <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="scroller"><table class="tbl">
+          <tr><th>Skill</th><th>What to do</th></tr>
+          <tr><td>📖 Reading</td><td>Poems — infer meaning and find the general idea.</td></tr>
+          <tr><td>✍️ Writing</td><td>Official writing (letters, notices) — formal, polite language.</td></tr>
+          <tr><td>💬 Speaking/Listening</td><td>Describe positions; use question words (what/where/when/who/why/how); transfer information.</td></tr>
+        </table></div>
+        <div class="box rule"><b>Question words (WH):</b> What (thing), Where (place), When (time), Who (person), Why (reason), How (manner). Use these to ask for information.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>Poems = infer the idea. Official writing = formal. WH words ask for information.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== SYNTHESIS ===================== -->
+  <section class="synth" id="synth">
+    <h2>Putting it all together — your grammar map 🧭</h2>
+    <p>These three units gave you three big grammar tools, each a step up in difficulty:</p>
+    <div class="order"><span>Prepositions</span><span class="ar">→</span><span>Conditionals (Type 1 &amp; 2)</span><span class="ar">→</span><span>Reported speech</span></div>
+    <p style="opacity:.95">
+      • <b>Prepositions</b> (Unit 1) — the small linking words: AT a time, ON a day, IN a month; good AT something.<br>
+      • <b>Conditionals</b> (Unit 9) — Type 1 real (present → will), Type 2 unreal (past → would).<br>
+      • <b>Reported speech</b> (Unit 10) — tense back + pronouns + today→that day.<br>
+      • <b>Vocabulary thread:</b> affixes &amp; word classes connect Units 9 and 10 — a suffix changes a word's class.</p>
+  </section>
+
+  <!-- ===================== MIXED TEST ===================== -->
+  <section id="test">
+    <h2 style="text-align:center;margin-top:30px">🏁 Final Self-Test</h2>
+    <p style="text-align:center;color:var(--muted)">Try each one yourself first — then reveal the answer.</p>
+    <div class="selfcheck"><div class="h">Unit 1</div><ol>
+      <li>"She is very good ___ playing the violin." <details class="reveal"><summary>Answer</summary><div class="ans">good <b>at</b> playing</div></details></li>
+      <li>"A herd ___ elephants ___ (is/are) crossing the road together." <details class="reveal"><summary>Answer</summary><div class="ans">A herd <b>of</b> elephants <b>is</b> crossing (the herd as one unit).</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">Unit 9</div><ol>
+      <li>"If it ___ (rain) tomorrow, we will stay home." (Type 1) <details class="reveal"><summary>Answer</summary><div class="ans">If it <b>rains</b> tomorrow, we will stay home.</div></details></li>
+      <li>"If I ___ (be) a doctor, I would help the poor." (Type 2) <details class="reveal"><summary>Answer</summary><div class="ans">If I <b>were/was</b> a doctor, I would help… (Type 2: past → would)</div></details></li>
+      <li>Make the opposite with a prefix: honest → ? <details class="reveal"><summary>Answer</summary><div class="ans"><b>dis</b>honest</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">Unit 10</div><ol>
+      <li>Reported: Nimal said, "I am tired." <details class="reveal"><summary>Answer</summary><div class="ans">Nimal said that he <b>was</b> tired. (am→was, I→he)</div></details></li>
+      <li>Imperative: The teacher said, "Open your books." <details class="reveal"><summary>Answer</summary><div class="ans">The teacher <b>told</b> us <b>to open</b> our books.</div></details></li>
+      <li>Word class of "beautifully" in "She sings beautifully"? <details class="reveal"><summary>Answer</summary><div class="ans">Adverb (it describes the verb "sings"; -ly ending).</div></details></li>
+    </ol></div>
+  </section>
+
+  <!-- ===================== CHEAT SHEET ===================== -->
+  <section class="cheat" id="cheat">
+    <h2>📋 Cheat Sheet</h2>
+    <p style="color:var(--muted);margin-top:0">Skim just this page right before the exam.</p>
+    <div class="grid">
+      <div class="cc u1"><h4>Unit 1 · Prepositions / Nouns</h4>AT a time, ON a day, IN a month; good AT something.<br>Collective noun: singular verb (as one) / plural verb (as members).<br>Compound = two words → one noun.</div>
+      <div class="cc u9"><h4>Unit 9 · Conditionals / Affixes</h4>Type 1 (real): If + present, will + verb.<br>Type 2 (unreal): If + past, would + verb.<br>Prefix = meaning; Suffix = word class.</div>
+      <div class="cc u10"><h4>Unit 10 · Reported / Word classes</h4>Reported: tense back + pronouns + today→that day.<br>Statement → said that; Command → told (sb) to.<br>Noun/Verb/Adjective/Adverb (-ly = adverb).</div>
+    </div>
+  </section>
+
+</main>
+
+<a class="top-link" href="#top" aria-label="Back to top">↑</a>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="justify-content:center"><div class="mark">i</div>
+      <div style="text-align:left"><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div></div>
+    <p style="margin:14px 0 4px">Grade 9 English · Self, Talents &amp; Wellbeing — learn at your own pace.</p>
+    <p class="ref">Source: Grade 9 English Pupil's Book (Educational Publications Department) — Unit 1 (p.1), Unit 9 (p.91), Unit 10 (p.107). Cross-check page numbers against your own copy.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var bar=document.getElementById('progress');
+  function prog(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;bar.style.width=(sc/mx*100)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+
+  document.querySelectorAll('section.lesson').forEach(function(sec){
+    var subs=sec.querySelectorAll('details.sub');
+    subs.forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ subs.forEach(function(o){ if(o!==d)o.open=false; }); } }); });
+  });
+
+  function quiz(id,data){
+    var i=0, qEl=document.getElementById(id+'q'), oEl=document.getElementById(id+'o'),
+        fEl=document.getElementById(id+'f'), nEl=document.getElementById(id+'n');
+    function render(){
+      var q=data[i]; qEl.innerHTML=q.q; fEl.textContent=''; oEl.innerHTML='';
+      q.opts.forEach(function(opt){
+        var b=document.createElement('button'); b.textContent=opt;
+        b.addEventListener('click',function(){
+          Array.prototype.forEach.call(oEl.children,function(x){x.disabled=true;});
+          if(opt===q.a){ b.className='right'; fEl.innerHTML='<span style="color:#1B7F4B;font-weight:700">✓ Correct!</span> '+(q.why||''); }
+          else { b.className='wrong'; Array.prototype.forEach.call(oEl.children,function(x){ if(x.textContent===q.a)x.className='right'; });
+            fEl.innerHTML='<span style="color:#C0392B;font-weight:700">✗ </span>Correct answer: <b>'+q.a+'</b>. '+(q.why||''); }
+        });
+        oEl.appendChild(b);
+      });
+    }
+    nEl.addEventListener('click',function(){ i=(i+1)%data.length; render(); });
+    render();
+  }
+
+  quiz('w1',[
+    {q:'The whole ___ cheered when the team scored. (collective noun for spectators)',opts:['audience','herd','flock'],a:'audience'},
+    {q:'tooth + brush = ?',opts:['toothbrush','brushtooth','tooth-brush'],a:'toothbrush',why:'A compound noun joins two words.'},
+    {q:'"The team ___ wearing their new jerseys." (members individually)',opts:['is','are','was'],a:'are',why:'Members acting individually → plural verb.'},
+    {q:'rain + bow = ?',opts:['bowrain','rainbow','rain bow'],a:'rainbow'}
+  ]);
+  quiz('w2',[
+    {q:'If you heat ice, it ___ . (Type 1, real)',opts:['melts','melted','would melt'],a:'melts',why:'A fact/real result → present (or will).'},
+    {q:'If I ___ rich, I would travel the world. (Type 2, dream)',opts:['am','were','will be'],a:'were',why:'Type 2 dream → past tense (were/was).'},
+    {q:'If it rains today, they ___ the match. (Type 1)',opts:['will call off','called off','would call off'],a:'will call off',why:'If + present → will + verb.'},
+    {q:'If I knew his number, I ___ him. (Type 2)',opts:['will call','would call','call'],a:'would call',why:'Type 2 → would + verb.'}
+  ]);
+  quiz('w3',[
+    {q:'"I am happy." → He said that he ___ happy.',opts:['is','was','will be'],a:'was',why:'present → past (am→was).'},
+    {q:'"I will come tomorrow." → She said she would come ___ .',opts:['tomorrow','the next day','that day'],a:'the next day',why:'tomorrow → the next day.'},
+    {q:'Command: "Sit down." → The teacher told us ___ down.',opts:['to sit','sit','sat'],a:'to sit',why:'Imperative → told (sb) + to + verb.'},
+    {q:'"I like this book." → He said he liked ___ book.',opts:['this','that','the'],a:'that',why:'this → that.'}
+  ]);
+})();
+</script>
+</body>
+</html>

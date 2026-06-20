@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 ශ්‍රේණිය ඉංග්‍රීසි — සම්පූර්ණ සිතියම · ඉඩසර ඇකඩමිය</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --cA:#3050c8; --cB:#2f8f3e; --cC:#c0344b; --cD:#c8962a; --gram:#6d28d9;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Noto Sans Sinhala','Iskoola Pota','Segoe UI',system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.74rem;letter-spacing:.05em;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.5rem}
+  header p{margin:.5rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:66ch}
+  .strategy{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:12px;padding:14px 18px;margin:16px 0 4px;font-size:.92rem;color:#5a4410}
+  .strategy b{color:#3a2a06}
+  .legend{display:flex;flex-wrap:wrap;gap:9px;margin:16px 2px 6px;font-size:.84rem;color:var(--muted);align-items:center}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.84rem;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:14px 0 6px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:1rem;color:var(--navy)}
+  .cluster .why{margin:0 0 14px;font-size:.85rem;color:var(--muted)}
+  .chain{position:relative;margin-left:4px}
+  .step{position:relative;padding:6px 0 16px 42px}
+  .step::before{content:'';position:absolute;left:14px;top:6px;bottom:0;border-left:2px dashed #c4ccd6}
+  .step:last-child::before{bottom:auto;height:24px}
+  .step .uno{position:absolute;left:0;top:4px;width:30px;height:30px;border-radius:9px;color:#fff;font-weight:700;font-size:.82rem;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+  .step .name{font-size:.98rem;font-weight:700;color:var(--ink)}
+  .step .en{display:inline;font-size:.82rem;color:var(--muted);font-weight:400}
+  .tagpg{display:inline-block;font-size:.66rem;font-weight:700;color:var(--muted);background:#eef1f5;border:1px solid var(--line);border-radius:20px;padding:1px 8px;margin:0 6px;vertical-align:middle;white-space:nowrap}
+  ul.subs{margin:8px 0 0;padding:0;list-style:none}
+  ul.subs li{font-size:.88rem;color:#37424f;padding:3px 0;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .sk{font-size:.66rem;font-weight:700;border-radius:20px;padding:2px 9px;white-space:nowrap;flex:none}
+  .sk.gr{background:#efe8fd;color:#6d28d9}
+  .sk.rd{background:#e1ecfb;color:#2456a0}
+  .sk.vo{background:#d7efec;color:#0b5752}
+  .sk.wr{background:#fdf0dc;color:#a85a08}
+  .sk.sl{background:#e3f5e6;color:#2f8f3e}
+  ul.subs li .en2{color:var(--muted);font-size:.8rem}
+  footer{margin-top:24px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.7}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.step{padding-left:38px}.tagpg{margin-left:0;display:inline-block;margin-top:2px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">ඉඩසර ඇකඩමිය · ඉංග්‍රීසි · 8 ශ්‍රේණිය</div>
+    <h1>8 ශ්‍රේණිය ඉංග්‍රීසි — සම්පූර්ණ සිතියම</h1>
+    <p>ඉංග්‍රීසි යනු වෙන් වෙන් පාඩම් නොවේ — එක් එක් ඒකකයක් තේමාවක් වටා, <b>කුසලතා පහක්</b> එකට ගෙතෙයි: කියවීම, ව්‍යාකරණ, වචන, ලිවීම, සහ කථන/ශ්‍රවණ. පොතේ ඇති තේමාත්මක ඒකක 10, සමීප තේමා අනුව <b>පවුල් 4කට</b> එක් කර, එක් එක් ඒකකය තුළ ඉගෙන ගන්නා කුසලතා මෙහි පෙන්වා ඇත. අන්තිමට, ඒකක හරහා දිවෙන <b>ව්‍යාකරණ ප්‍රගතිය</b> එක තැනකට ගෙන ඇත.</p>
+  </header>
+
+  <div class="strategy">
+    <b>සිතියම පාවිච්චි කරන හැටි.</b> එක් එක් ඒකකය යටම, එහි කුසලතා කොටස් — <span class="sk rd">📖 කියවීම</span> <span class="sk gr">🔤 ව්‍යාකරණ</span> <span class="sk vo">🔠 වචන</span> <span class="sk wr">✍️ ලිවීම</span> <span class="sk sl">💬 කථන/ශ්‍රවණ</span> — වෙන් වෙන්ව ලැයිස්තුගත කර ඇත; <b>එකක්වත් අත්හැර නැත</b>. <span class="tagpg">පි.01</span> වැනි ටැගයෙන් එය පොතේ කොතැනද කියා සොයාගන්න. විභාගයට වැදගත්ම පටුව <b>ව්‍යාකරණයයි</b> — ඒ නිසා සෑම ඒකකයකම ව්‍යාකරණ කරුණ දම්පාට කර, අන්තිමට ඒවා පිළිවෙළට (ඒකකය 1 → 10) එක් කර ඇත.
+  </div>
+
+  <div class="legend">
+    <span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--cA);display:inline-block"></i>මා සහ මාගේ වර්ධනය</span>
+    <span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--cB);display:inline-block"></i>සොබාදහම</span>
+    <span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--cC);display:inline-block"></i>මිනිසුන් හා සමාජය</span>
+    <span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--cD);display:inline-block"></i>පුළුල් ලෝකය</span>
+    <span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--gram);display:inline-block"></i>ව්‍යාකරණ ප්‍රගතිය</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">සියල්ල විවෘත කරන්න</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">සියල්ල වසන්න</button>
+  </div>
+
+  <!-- CLUSTER A · MYSELF & GROWTH -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--cA)"></span>1 · මා සහ මාගේ වර්ධනය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· සැලසුම්, ජයග්‍රහණ හා ඉගෙනීම</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <p class="why">තමන්ව සංවිධානය කරගැනීම, ඉලක්ක කරා යාම සහ පන්ති කාමරයෙන් ඔබ්බට ඉගෙනීම — තමා ගොඩනඟා ගැනීමේ තේමා තුනක්.</p>
+        <div class="chain">
+
+          <div class="step">
+            <span class="uno" style="background:var(--cA)">01</span>
+            <div class="name">Plan the Work, Work the Plan <span class="tagpg">පි.01</span><span class="en">සැලසුම් කිරීම හා කාල කළමනාකරණය</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Reflexive pronouns · Countable nouns (singular &amp; plural)</li>
+              <li><span class="sk rd">📖 කියවීම</span> සැලසුම්කරණය පිළිබඳ කවියක් හා සංවාදයක්</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> පෑන් මිතුරෙකුට ලිපියක්; අවශ්‍ය බඩු ලැයිස්තුවක්</li>
+              <li><span class="sk sl">💬 කථන/ශ්‍රවණ</span> ලැයිස්තුවක් අසා සටහන් කිරීම; සැලසුම් ගැන කතා කිරීම</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="uno" style="background:var(--cA)">09</span>
+            <div class="name">On Top of the World <span class="tagpg">පි.97</span><span class="en">ජයග්‍රහණ හා දක්ෂතා</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Adverbs of frequency (always, usually, often, rarely, never)</li>
+              <li><span class="sk rd">📖 කියවීම</span> දක්ෂයන් පිළිබඳ සම්මුඛ සාකච්ඡා, පාඨ හා සංවාද</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> ඡේදයක්; විස්තරයක්</li>
+              <li><span class="sk sl">💬 කථන</span> දිනචරියාව/දක්ෂතා ගැන සම්මුඛ සාකච්ඡාවක්</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="uno" style="background:var(--cA)">10</span>
+            <div class="name">Beyond the Classroom <span class="tagpg">පි.104</span><span class="en">පන්ති කාමරයෙන් ඔබ්බට ඉගෙනීම</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> The Past Perfect Tense (had + past participle)</li>
+              <li><span class="sk rd">📖 කියවීම</span> පාඨ, සංවාද හා දෙබස්</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> අත්දැකීම් මත පදනම් වූ ලිවීම</li>
+              <li><span class="sk sl">💬 කථන</span> දෙබසක්/සංවාදයක්</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- CLUSTER B · NATURE -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--cB)"></span>2 · සොබාදහම හා පරිසරය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· පක්ෂීන් හා සොබා මෑණියන්</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <p class="why">අප වටා ඇති සොබා ලෝකය — පක්ෂීන්ගේ සිට මුළු පරිසරය දක්වා. විස්තර කිරීම හා ඒවා ආරක්ෂා කිරීම පිළිබඳ දැනුවත්භාවය.</p>
+        <div class="chain">
+
+          <div class="step">
+            <span class="uno" style="background:var(--cB)">02</span>
+            <div class="name">Winged Friends <span class="tagpg">පි.12</span><span class="en">පියාපත් සහිත මිතුරෝ (පක්ෂීන්)</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Modal verbs — must / have to / should (යුතුකම් හා උපදෙස්)</li>
+              <li><span class="sk vo">🔠 වචන</span> ශබ්දකෝෂ භාවිතය හා වචන අර්ථ (උදා: crest)</li>
+              <li><span class="sk rd">📖 කියවීම</span> පක්ෂීන් පිළිබඳ තොරතුරු පාඨ හා විස්තර</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> විස්තරයක් (පක්ෂියෙකු ගැන)</li>
+              <li><span class="sk sl">💬 කථන</span> modal යොදා වාක්‍ය සෑදීම</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="uno" style="background:var(--cB)">04</span>
+            <div class="name">Mother Nature <span class="tagpg">පි.34</span><span class="en">සොබා මෑණියෝ (පරිසරය)</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Prepositions · Collective nouns (plural forms)</li>
+              <li><span class="sk rd">📖 කියවීම</span> පරිසරය පිළිබඳ කවි හා පාඨ</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> ලිපියක් (උදා: උද්භිද උද්‍යානයක්); දැන්වීමක්</li>
+              <li><span class="sk sl">💬 කථන</span> ඔබ දන්නා ස්ථානයක් ගැන කතා කිරීම</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- CLUSTER C · PEOPLE & SOCIETY -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--cC)"></span>3 · මිනිසුන්, වටිනාකම් හා සමාජය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· සැලකිල්ල, එකමුතුව හා ළමා අයිතිවාසිකම්</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <p class="why">අන් අය සමඟ ජීවත් වීම — සැලකිලිමත් වීම, එකමුතුව හා ළමයින්ගේ ලෝකය. හොඳ වටිනාකම් සහ ආචාරශීලී භාෂාව.</p>
+        <div class="chain">
+
+          <div class="step">
+            <span class="uno" style="background:var(--cC)">03</span>
+            <div class="name">Let's Be Considerate <span class="tagpg">පි.23</span><span class="en">සැලකිලිමත් වෙමු</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Conjunctions · Uncountable nouns &amp; quantifiers</li>
+              <li><span class="sk rd">📖 කියවීම</span> උපමා කතාවක්, කවියක් හා සංවාදයක්</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> ආචාරශීලී යෙදුම් / දෙබසක්</li>
+              <li><span class="sk sl">💬 කථන</span> ආචාරශීලී ප්‍රකාශන, භූමිකා රඟ දැක්වීම</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="uno" style="background:var(--cC)">06</span>
+            <div class="name">When We Are Together <span class="tagpg">පි.62</span><span class="en">අප එක්ව සිටින විට</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Passive Voice — Present Tense</li>
+              <li><span class="sk rd">📖 කියවීම</span> සංවාද, සම්මුඛ සාකච්ඡා, විස්තර හා කවි</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> විස්තර</li>
+              <li><span class="sk sl">💬 කථන</span> සම්මුඛ සාකච්ඡාවක්, කණ්ඩායම් කතාබහ</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="uno" style="background:var(--cC)">07</span>
+            <div class="name">The World of Children <span class="tagpg">පි.71</span><span class="en">ළමා ලෝකය හා අයිතිවාසිකම්</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Passive Voice — Simple Past Tense</li>
+              <li><span class="sk rd">📖 කියවීම</span> ධෛර්යවන්ත ළමයින්ගේ කතා (උදා: Hans); ළමා අයිතිවාසිකම් පිළිබඳ කතාවක්</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> කතාවක්; ලිපියක් (චාරිකාවක් විස්තර කරමින්); දැන්වීමක්</li>
+              <li><span class="sk sl">💬 කථන</span> ළමා අයිතිවාසිකම් ගැන කතා කිරීම</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- CLUSTER D · WIDER WORLD -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--cD)"></span>4 · පුළුල් ලෝකය හා සන්නිවේදනය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· දුර හා ගෝලීය ලෝකය</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <p class="why">අපගේ ගමෙන් ඔබ්බට — දුර පරතරයක් හරහා සන්නිවේදනය, සහ විවිධ සංස්කෘතීන් සහිත කුඩා ලෝකය.</p>
+        <div class="chain">
+
+          <div class="step">
+            <span class="uno" style="background:var(--cD)">05</span>
+            <div class="name">Between the Miles <span class="tagpg">පි.49</span><span class="en">සැතපුම් අතරින් (දුර හා සන්නිවේදනය)</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Comparative &amp; Superlative adjectives (+ suffixes)</li>
+              <li><span class="sk rd">📖 කියවීම</span> කවි, සංවාද හා පාඨ</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> විස්තරයක්</li>
+              <li><span class="sk sl">💬 කථන/ශ්‍රවණ</span> සංවාදයක් ඇසීම; දේවල් සැසඳීම</li>
+            </ul>
+          </div>
+
+          <div class="step">
+            <span class="uno" style="background:var(--cD)">08</span>
+            <div class="name">It's a Small World <span class="tagpg">පි.86</span><span class="en">මෙය කුඩා ලෝකයකි (සංස්කෘති)</span></div>
+            <ul class="subs">
+              <li><span class="sk gr">🔤 ව්‍යාකරණ</span> Passive Voice — Simple Future Tense</li>
+              <li><span class="sk vo">🔠 වචන</span> Consonant blends — str / sch / scr / spr / sn / sm</li>
+              <li><span class="sk rd">📖 කියවීම</span> කතාවක්, පුවත්පත් ලිපියක්, දිනපොතක්, හා තොරතුරු කියවීම් (කලා, ඉතිහාසය, විද්‍යාව, අභ්‍යවකාශය)</li>
+              <li><span class="sk wr">✍️ ලිවීම</span> දිනපොත් සටහනක්; කෙටි ලිපියක්</li>
+              <li><span class="sk sl">💬 ශ්‍රවණ</span> ගුවන් යානා නිවේදනයක් අසා නිවැරදි තොරතුරු තේරීම</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- GRAMMAR PROGRESSION -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--gram)"></span>★ ව්‍යාකරණ ප්‍රගතිය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· ඒකක 1 → 10 පිළිවෙළට</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <p class="why">ඒකක හරහා දිවෙන විභාගයට වැදගත්ම පටුව. Passive Voice එක <b>වර්තමාන → අතීත → අනාගත</b> ලෙස ඒකක 6–7–8 හරහා පියවරෙන් පියවර ගොඩනැගෙන ආකාරය සැලකිල්ලට ගන්න.</p>
+        <div class="chain">
+          <div class="step"><span class="uno" style="background:var(--gram)">01</span><div class="name">Reflexive pronouns <span class="en2">· myself, yourself, themselves…</span></div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">01</span><div class="name">Countable nouns — singular &amp; plural</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">02</span><div class="name">Modal verbs — must / have to / should <span class="en2">· යුතුකම් හා උපදෙස්</span></div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">03</span><div class="name">Conjunctions <span class="en2">· and, but, so, because…</span></div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">03</span><div class="name">Uncountable nouns &amp; quantifiers</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">04</span><div class="name">Prepositions</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">04</span><div class="name">Collective nouns — plural forms</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">05</span><div class="name">Comparative &amp; superlative adjectives</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">06</span><div class="name">Passive Voice — Present Tense</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">07</span><div class="name">Passive Voice — Simple Past Tense</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">08</span><div class="name">Passive Voice — Simple Future Tense</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">09</span><div class="name">Adverbs of frequency</div></div>
+          <div class="step"><span class="uno" style="background:var(--gram)">10</span><div class="name">The Past Perfect Tense</div></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුවේ 8 ශ්‍රේණිය ඉංග්‍රීසි Pupil's Book හා Workbook මත පදනම්ව සකස් කරන ලදී. තේමාත්මක ඒකක 10 · කුසලතා 5 · ව්‍යාකරණ කරුණු 13 — සියල්ල ඇතුළත්.<br>
+    <span class="brand">ඉඩසර ඇකඩමිය</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

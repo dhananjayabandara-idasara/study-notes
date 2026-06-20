@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idasara Academy — 9 ශ්‍රේණිය ගණිතය | සංඛ්‍යා හා ඒවායේ ස්වරූප</title>
+<style>
+  :root{
+    --navy:#0B2545; --navy-2:#13315C; --navy-3:#1B3F73;
+    --gold:#C9A227; --gold-2:#E0C766; --gold-soft:#F3E9C4;
+    --paper:#FAF7F0; --card:#FFFFFF; --ink:#16202E; --muted:#5C6B7C;
+    --line:#E6E0D2;
+    --l1:#0E7C86; --l1-soft:#E2F3F4;      /* number patterns - teal */
+    --l2:#6D4AA0; --l2-soft:#EEE8F7;      /* binary - violet */
+    --l3:#C75B39; --l3-soft:#FBE9E2;      /* fractions - coral */
+    --l13:#2E7D52; --l13-soft:#E4F2E9;    /* scientific notation - green */
+    --l11:#2B6CB0; --l11-soft:#E4EEF8;    /* calculator - blue */
+    --pos:#1B7F4B; --neg:#C0392B;
+    --sin:"Noto Sans Sinhala","Iskoola Pota","Nirmala UI","Malithi Web","Yu Gothic UI",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:var(--sin); color:var(--ink); background:var(--paper); line-height:1.75; font-size:17px; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:880px; margin:0 auto; padding:0 16px;}
+
+  #progress{position:fixed; top:0; left:0; height:4px; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-2)); z-index:60; transition:width .15s;}
+  nav.chips{position:sticky; top:0; z-index:50; background:rgba(11,37,69,.97); backdrop-filter:blur(6px); box-shadow:0 2px 12px rgba(0,0,0,.18);}
+  nav.chips .row{display:flex; gap:8px; overflow-x:auto; padding:10px 14px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  nav.chips .row::-webkit-scrollbar{display:none;}
+  nav.chips a{flex:0 0 auto; color:#EAF0F7; text-decoration:none; font-size:14px; font-weight:600; padding:7px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.18); white-space:nowrap; transition:.2s;}
+  nav.chips a:hover,nav.chips a:focus{background:var(--gold); color:var(--navy); border-color:var(--gold); outline:none;}
+
+  header.hero{background:radial-gradient(1200px 400px at 80% -10%,rgba(201,162,39,.22),transparent 60%),linear-gradient(160deg,var(--navy),var(--navy-2) 70%,var(--navy-3)); color:#fff; padding:46px 0 40px; position:relative; overflow:hidden;}
+  header.hero .wrap{position:relative; z-index:2;}
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:26px;}
+  .brand .mark{width:42px; height:42px; border-radius:11px; background:linear-gradient(145deg,var(--gold),var(--gold-2)); display:grid; place-items:center; color:var(--navy); font-weight:800; font-size:22px; box-shadow:0 6px 18px rgba(201,162,39,.4);}
+  .brand .name{font-weight:800; letter-spacing:.14em; font-size:15px;}
+  .brand .tag{font-size:11.5px; color:var(--gold-2); letter-spacing:.22em; text-transform:uppercase;}
+  .eyebrow{display:inline-flex; gap:8px; align-items:center; font-size:13px; letter-spacing:.04em; color:var(--gold-2); border:1px solid rgba(224,199,102,.4); padding:5px 12px; border-radius:999px;}
+  header.hero h1{font-size:clamp(28px,7vw,46px); line-height:1.2; margin:16px 0 6px; font-weight:800;}
+  header.hero .sub{color:#D6E0EC; max-width:640px; font-size:16.5px;}
+  header.hero .meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  header.hero .meta span{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); padding:6px 13px; border-radius:10px; font-size:13.5px; font-weight:600;}
+  .floaters{position:absolute; inset:0; z-index:1; opacity:.13; pointer-events:none; font-weight:800;}
+  .floaters span{position:absolute; color:var(--gold-2); font-size:28px;}
+
+  section.lesson{padding:34px 0 8px;}
+  .why{background:linear-gradient(180deg,#fff,#FBF7EC); border:1px solid var(--line); border-radius:18px; padding:24px 22px; margin:26px 0; box-shadow:0 8px 28px rgba(11,37,69,.06);}
+  .why h2{margin:.1em 0 .4em; font-size:22px;}
+  .roadmap{display:grid; grid-template-columns:repeat(auto-fit,minmax(165px,1fr)); gap:12px; margin-top:18px;}
+  .road-card{display:block; text-decoration:none; color:var(--ink); border-radius:14px; padding:16px; border:1px solid var(--line); background:#fff; transition:.2s; position:relative; overflow:hidden;}
+  .road-card:hover,.road-card:focus{transform:translateY(-3px); box-shadow:0 12px 26px rgba(0,0,0,.1); outline:none;}
+  .road-card b{display:block; font-size:16px; margin-bottom:2px;}
+  .road-card small{color:var(--muted); font-size:12.5px; letter-spacing:.02em;}
+  .road-card .num{position:absolute; right:10px; top:6px; font-size:40px; font-weight:800; opacity:.12;}
+
+  .lesson-head{border-radius:18px 18px 0 0; padding:22px 22px 18px; color:#fff; position:relative;}
+  .lesson-head .kicker{font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; opacity:.9;}
+  .lesson-head h2{margin:6px 0 4px; font-size:clamp(22px,5.5vw,30px); font-weight:800;}
+  .lesson-head p{margin:0; font-size:15px; opacity:.95;}
+  .lesson-head .badge{position:absolute; right:18px; top:18px; min-width:48px; height:48px; padding:0 8px; border-radius:24px; background:rgba(255,255,255,.16); display:grid; place-items:center; font-weight:800; font-size:20px; border:2px solid rgba(255,255,255,.5);}
+  .objectives{background:#fff; border:1px solid var(--line); border-top:none; padding:16px 22px; border-radius:0 0 18px 18px; margin-bottom:18px;}
+  .objectives b{font-size:13.5px; letter-spacing:.04em;}
+  .objectives ul{margin:8px 0 0; padding-left:1.1em;}
+  .objectives li{margin:4px 0; font-size:15.5px;}
+
+  details.sub{background:var(--card); border:1px solid var(--line); border-radius:16px; margin:14px 0; overflow:hidden; box-shadow:0 4px 16px rgba(11,37,69,.05);}
+  details.sub>summary{list-style:none; cursor:pointer; padding:16px 20px; display:flex; align-items:center; gap:12px; font-weight:700; font-size:17.5px;}
+  details.sub>summary::-webkit-details-marker{display:none;}
+  details.sub>summary .dot{min-width:34px; height:30px; padding:0 5px; border-radius:9px; flex:0 0 auto; color:#fff; display:grid; place-items:center; font-size:13px; font-weight:800;}
+  details.sub>summary .chev{margin-left:auto; transition:.25s; color:var(--muted); font-size:18px;}
+  details.sub[open]>summary .chev{transform:rotate(90deg);}
+  details.sub>summary:focus-visible{outline:3px solid var(--gold-2); outline-offset:-3px;}
+  .sub-body{padding:4px 20px 22px;}
+
+  .step{margin:18px 0 6px; display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .step .n{width:22px; height:22px; border-radius:50%; background:var(--gold-soft); color:#7a5e0a; display:grid; place-items:center; font-size:12px; flex:0 0 auto;}
+
+  .hook{background:var(--gold-soft); border-radius:13px; padding:14px 16px; font-size:16px;}
+  .hook b{color:#7a5e0a;}
+  .plain p{margin:.5em 0;}
+  .term{background:#fff3cf; border-bottom:2px solid var(--gold); padding:0 3px; border-radius:3px; font-weight:600;}
+
+  .box{border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .rule{background:#fff8e6; border:1px solid var(--gold-2);}
+  .rule b{color:#7a5e0a;}
+  .watch{background:#FDECEA; border:1px solid #F1B0A6;}
+  .watch .h{font-weight:800; color:var(--neg); display:flex; gap:8px; align-items:center; margin-bottom:6px;}
+  .mem{background:linear-gradient(135deg,#0B2545,#1B3F73); color:#fff; border-radius:13px; padding:14px 16px; margin:16px 0; display:flex; gap:12px; align-items:flex-start;}
+  .mem .k{font-size:22px;}
+  .mem b{color:var(--gold-2);}
+
+  .work{background:#F6F8FB; border:1px solid #DEE6F0; border-radius:12px; padding:14px 16px; margin:12px 0;}
+  .work .lbl{font-weight:700; font-size:13.5px; color:var(--navy-2); margin-bottom:6px;}
+  .calc{font-family:"Cambria Math","Latin Modern Math",Georgia,serif; font-size:17px;}
+  .calc .ml{display:block; margin:3px 0;}
+  .bin{font-family:"Cambria Math",Consolas,monospace; font-weight:700; letter-spacing:.06em;}
+
+  .turn{border:1.5px dashed var(--gold); border-radius:12px; padding:12px 16px; margin:12px 0; background:#fffdf5;}
+  .turn .q{font-weight:700;}
+  details.reveal{margin-top:8px;}
+  details.reveal>summary{cursor:pointer; list-style:none; display:inline-flex; gap:7px; align-items:center; font-weight:700; font-size:14px; color:var(--navy); background:#fff; border:1px solid var(--line); padding:6px 13px; border-radius:999px;}
+  details.reveal>summary::-webkit-details-marker{display:none;}
+  details.reveal>summary:focus-visible{outline:3px solid var(--gold-2);}
+  details.reveal[open]>summary{background:var(--gold-soft); border-color:var(--gold);}
+  details.reveal .ans{margin-top:8px; padding:10px 13px; background:#F0FBF4; border:1px solid #BFE6CC; border-radius:10px; font-size:15.5px;}
+
+  .selfcheck{background:#fff; border:1px solid var(--line); border-radius:13px; padding:14px 16px; margin:14px 0;}
+  .selfcheck .h{font-weight:800; display:flex; gap:8px; align-items:center; margin-bottom:8px; font-size:15.5px;}
+  .selfcheck ol{margin:0; padding-left:1.2em;}
+  .selfcheck li{margin:9px 0;}
+
+  table.tbl{width:100%; border-collapse:collapse; margin:12px 0; font-size:15px; background:#fff; border-radius:10px; overflow:hidden; border:1px solid var(--line);}
+  table.tbl th,table.tbl td{border:1px solid var(--line); padding:8px 10px; text-align:center;}
+  table.tbl th{background:var(--navy); color:#fff; font-weight:700; font-size:14px;}
+  table.tbl tr:nth-child(even) td{background:#FAFBFD;}
+  .scroller{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+
+  .sqrt{display:inline-flex; align-items:flex-start; white-space:nowrap;}
+  .sqrt>.rad{border-top:1.6px solid currentColor; padding:0 3px; margin-top:1px;}
+  .sqrt::before{content:"√"; font-size:1.05em;}
+  .frac{display:inline-flex; flex-direction:column; text-align:center; vertical-align:middle; margin:0 3px; line-height:1.05;}
+  .frac .n{border-bottom:1.4px solid currentColor; padding:0 4px;}
+  .frac .d{padding:0 4px;}
+  .pos{color:var(--pos); font-weight:700;} .neg{color:var(--neg); font-weight:700;}
+
+  .widget{border:1px solid var(--line); border-radius:14px; padding:16px; margin:16px 0; background:linear-gradient(180deg,#fff,#FAFBFD);}
+  .widget .wh{font-weight:800; font-size:15px; display:flex; gap:8px; align-items:center; margin-bottom:10px;}
+  .widget .controls{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+  .widget select,.widget input{font-family:var(--sin); font-size:16px; padding:8px 10px; border-radius:10px; border:1.5px solid var(--line); background:#fff; color:var(--ink);}
+  .widget button{font-family:var(--sin); font-weight:700; font-size:15px; padding:9px 16px; border:none; border-radius:10px; background:var(--navy); color:#fff; cursor:pointer; transition:.15s;}
+  .widget button:hover{background:var(--navy-3);}
+  .widget button:focus-visible{outline:3px solid var(--gold-2);}
+  .widget .out{margin-top:12px; padding:12px 14px; border-radius:11px; background:#fff; border:1px solid var(--line); font-size:16px; min-height:20px;}
+  .seg{display:inline-flex; border:1.5px solid var(--line); border-radius:10px; overflow:hidden;}
+  .seg button{background:#fff; color:var(--ink); border-radius:0; padding:8px 12px; font-size:14px;}
+  .seg button[aria-pressed="true"]{background:var(--navy); color:#fff;}
+
+  .synth{background:linear-gradient(160deg,var(--navy),var(--navy-2)); color:#fff; border-radius:18px; padding:26px 22px; margin:30px 0;}
+  .synth h2{margin-top:0; color:var(--gold-2);}
+  .synth .chain{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:14px 0; font-weight:700;}
+  .synth .chain span{background:rgba(255,255,255,.1); padding:7px 13px; border-radius:10px; border:1px solid rgba(255,255,255,.2);}
+  .synth .chain .ar{color:var(--gold-2);}
+
+  .cheat{background:#fff; border:2px solid var(--navy); border-radius:18px; padding:24px 22px; margin:26px 0;}
+  .cheat h2{margin-top:0;}
+  .cheat .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .cheat .cc{border:1px solid var(--line); border-radius:12px; padding:14px; background:#FAFBFD;}
+  .cheat .cc h4{margin:0 0 6px; font-size:15px;}
+  .cheat .cc.l1{border-top:4px solid var(--l1);} .cheat .cc.l2{border-top:4px solid var(--l2);}
+  .cheat .cc.l3{border-top:4px solid var(--l3);} .cheat .cc.l13{border-top:4px solid var(--l13);} .cheat .cc.l11{border-top:4px solid var(--l11);}
+
+  footer{background:var(--navy); color:#C9D4E2; padding:30px 0 40px; margin-top:30px; text-align:center; font-size:14px;}
+  footer .brand{justify-content:center;}
+  .ref{font-size:12.5px; color:var(--muted); font-style:italic; margin-top:6px;}
+  .top-link{position:fixed; right:16px; bottom:16px; z-index:40; background:var(--gold); color:var(--navy); width:46px; height:46px; border-radius:50%; display:grid; place-items:center; font-size:20px; font-weight:800; text-decoration:none; box-shadow:0 8px 20px rgba(0,0,0,.25);}
+
+  @media (max-width:560px){ body{font-size:16px;} .sub-body{padding:4px 14px 18px;} details.sub>summary{padding:14px 14px; font-size:16.5px;} }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important; transition:none!important;}}
+  @media print{ nav.chips,#progress,.top-link,.widget button{display:none!important;} details.sub,details.reveal{open:true;} details[open] .chev{display:none;} body{background:#fff;} }
+</style>
+</head>
+<body>
+<div id="progress" role="progressbar" aria-label="කියවීමේ ප්‍රගතිය"></div>
+
+<nav class="chips" aria-label="පාඩම් සංචලනය">
+  <div class="row">
+    <a href="#top">මුල</a>
+    <a href="#l1">1 · සංඛ්‍යා රටා</a>
+    <a href="#l2">2 · ද්විමය සංඛ්‍යා</a>
+    <a href="#l3">3 · භාග</a>
+    <a href="#l13">13 · විද්‍යාත්මක අංකනය</a>
+    <a href="#l11">11 · ගණකය</a>
+    <a href="#synth">සියල්ල එකට</a>
+    <a href="#test">ස්වයං පරීක්ෂණය</a>
+    <a href="#cheat">කෙටි සටහන</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="floaters" aria-hidden="true">
+    <span style="left:6%;top:30%;">5, 11, 17…</span><span style="left:84%;top:24%;">1101₂</span>
+    <span style="left:20%;top:74%;">⅔ න්</span><span style="left:70%;top:70%;">×10ⁿ</span>
+    <span style="left:46%;top:15%;">Tₙ</span><span style="left:34%;top:50%;">√ x²</span>
+  </div>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">ඉ</div>
+      <div><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div>
+    </div>
+    <span class="eyebrow">📘 9 ශ්‍රේණිය · ගණිතය · සිංහල මාධ්‍යය</span>
+    <h1>සංඛ්‍යා හා ඒවායේ ස්වරූප</h1>
+    <p class="sub">රටා හඳුනාගැනීමේ සිට, විවිධ සංඛ්‍යා ක්‍රම, භාග, විද්‍යාත්මක අංකනය හා ගණකය දක්වා — ගණිතයේ අත්තිවාරම. මේවා ස්ථිර කරගත්තොත් ඉස්සරහ එන හැම පාඩමක්ම ලේසියි.</p>
+    <div class="meta">
+      <span>📐 පාඩම් 5ක්</span><span>⏱️ ඔබේම වේගයෙන්</span><span>✍️ සෑම පියවරකම විසඳුම්</span><span>📖 පෙළපොත අනුව (9 ශ්‍රේණිය, I &amp; II කොටස්)</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="why" id="intro">
+    <h2>මේ පාඩම ඇයි වැදගත්ද? 🤔</h2>
+    <p>හිතන්න ගොඩනැඟිල්ලක් ගැන. <b>අත්තිවාරම</b> දුර්වල නම් උඩ තට්ටු කොච්චර ලස්සනට හැදුවත් ස්ථිර නෑ. ගණිතයේදීත් එහෙමයි — සමීකරණ, ප්‍රස්තාර, මිනුම් හැම එකක්ම පදනම් වෙන්නේ සංඛ්‍යා පිළිබඳ මේ මූලික පාඩම් මතයි.</p>
+    <p>දැන් ටිකක් දුර්වල කියලා හිතුණත් කමක් නෑ. අපි පටන් ගන්නේ හරිම සරලව, පොඩි පොඩි ජයග්‍රහණවලින්. පහත කාඩ් එකක් තට්ටු කරලා ඕනෑම පාඩමකට යන්න 👇</p>
+    <div class="roadmap">
+      <a class="road-card" href="#l1" style="border-top:4px solid var(--l1)"><span class="num">1</span><b>සංඛ්‍යා රටා</b><small>සාධාරණ පදය Tₙ · ගැටළු</small></a>
+      <a class="road-card" href="#l2" style="border-top:4px solid var(--l2)"><span class="num">2</span><b>ද්විමය සංඛ්‍යා</b><small>0 හා 1 · පරිවර්තනය · ± </small></a>
+      <a class="road-card" href="#l3" style="border-top:4px solid var(--l3)"><span class="num">3</span><b>භාග</b><small>‘න්’ යෙදුම · BODMAS</small></a>
+      <a class="road-card" href="#l13" style="border-top:4px solid var(--l13)"><span class="num">13</span><b>විද්‍යාත්මක අංකනය</b><small>A×10ⁿ · වටයෑම</small></a>
+      <a class="road-card" href="#l11" style="border-top:4px solid var(--l11)"><span class="num">11</span><b>ගණකය</b><small>% · x² · √ යතුරු</small></a>
+    </div>
+  </section>
+
+  <!-- ============ LESSON 1: NUMBER PATTERNS ============ -->
+  <section class="lesson" id="l1">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l1),#0a5b63)">
+      <div class="badge">01</div>
+      <div class="kicker">පාඩම 1 · පොත I · පි. 1</div>
+      <h2>සංඛ්‍යා රටා</h2>
+      <p>රටාවක සාධාරණ පදය (Tₙ) සොයා, ඕනෑම පදයක් කල්තියා කීම.</p>
+    </div>
+    <div class="objectives"><b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul><li>සංඛ්‍යා රටාවක සාධාරණ පදය (Tₙ) ලිවීමට</li><li>Tₙ ප්‍රකාශනය යොදා ඕනෑම පදයක් සෙවීමට</li><li>රටා ඇතුළත් ‘වචන ගැටළු’ විසඳීමට</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l1)">1.1</span> සංඛ්‍යා රටාවක සාධාරණ පදය <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">අවුරුදු මේසෙට අම්මා කැවුම් අතුරනවා: පළවෙනි පේළියේ <b>5</b>යි, ඊළඟට <b>11</b>යි, ඊළඟට <b>17</b>යි… මල්ලී අහනවා “100 වෙනි පේළියට කීයද?” පේළි 100ක් අතුරන්නෙ නැතුව — <b>සූත්‍රයකින්</b> හොයාගන්න පුළුවන්! ඒකයි අද ඉගෙන ගන්නේ.</div>
+
+        <div class="step"><span class="n">2</span> සරල විදිහට</div>
+        <div class="plain"><p>රටාවක එක එක සංඛ්‍යාවට කියන්නේ <span class="term">පදයක්</span> (term). ඒවා නම් කරන්නේ මෙහෙමයි: පළමු පදය <b>T₁</b>, දෙවැනි <b>T₂</b>, තුන්වැනි <b>T₃</b> … n වෙනි පදය <b>Tₙ</b>. මේ <b>Tₙ</b> ට කියන්නේ <span class="term">සාධාරණ පදය</span> (general term). මෙහි <b>n</b> යනු පදයේ <b>ස්ථානයයි</b> — n කවදත් ධන නිඛිලයක් (1, 2, 3 …); ‘1.5 වෙනි පදයක්’ නෑ!</p></div>
+
+        <div class="step"><span class="n">3</span> ඇසට පෙනෙන්න</div>
+        <svg viewBox="0 0 560 96" role="img" aria-label="රටාව 5,11,17,23 — හැම පදයක්ම 6කින් වැඩි වෙයි" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px">
+          <g font-family="Georgia,serif" text-anchor="middle">
+            <g fill="var(--l1-soft)" stroke="var(--l1)" stroke-width="2">
+              <rect x="20" y="30" width="60" height="46" rx="10"/><rect x="150" y="30" width="60" height="46" rx="10"/><rect x="280" y="30" width="60" height="46" rx="10"/><rect x="410" y="30" width="60" height="46" rx="10"/></g>
+            <g font-size="22" font-weight="700" fill="#0a5b63"><text x="50" y="60">5</text><text x="180" y="60">11</text><text x="310" y="60">17</text><text x="440" y="60">23</text></g>
+            <g font-size="12" fill="var(--muted)"><text x="50" y="90">T₁</text><text x="180" y="90">T₂</text><text x="310" y="90">T₃</text><text x="440" y="90">T₄</text></g>
+            <g font-size="13" font-weight="700" fill="var(--gold)"><text x="115" y="22">+6</text><text x="245" y="22">+6</text><text x="375" y="22">+6</text></g>
+            <path d="M82 26 Q115 6 148 26" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+            <path d="M212 26 Q245 6 278 26" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+            <path d="M342 26 Q375 6 408 26" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+          </g>
+        </svg>
+        <p>හැම පදයක්ම කලින් එකට <b>6 බැගින්</b> වැඩි වෙනවා. මේ ‘පොදු වෙනස’ට කියන්නේ <b>d = 6</b>.</p>
+
+        <div class="step"><span class="n">4</span> සාධාරණ පදය හොයමු</div>
+        <div class="work"><div class="lbl">රටාව: 5, 11, 17, 23, …</div>
+          <span class="calc ml">පොදු වෙනස d = 6 → Tₙ = 6n + ?</span>
+          <span class="calc ml">T₁ = 5 නම්: 6(1) + ? = 5 → ? = −1</span>
+          <span class="calc ml"><b>Tₙ = 6n − 1</b></span>
+          <span class="calc ml">පරීක්ෂාව: n=3 → 6(3)−1 = 17 ✓ &nbsp; n=4 → 23 ✓</span></div>
+        <div class="box rule"><b>ඉක්මන් සූත්‍රය:</b> පොදු වෙනස <b>d</b> හොයලා → <b>Tₙ = d·n + (T₁ − d)</b>. මෙතන 6n + (5−6) = 6n − 1!</div>
+
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 3, 7, 11, 15, … රටාවේ Tₙ සොයන්න.</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">d=4, T₁=3 → Tₙ = 4n + (3−4) = <b>4n − 1</b>. පරීක්ෂාව: n=3 → 11 ✓</div></details></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ d·n න් නවතින්න එපා</div>Tₙ = dn ලෙස නවතින්න එපා — <b>(T₁ − d)</b> කොටසත් එකතු කරන්න ඕනේ! 5,11,17 → 6n නෙවෙයි, <b>6n − 1</b>.</div>
+
+        <div class="step"><span class="n">6</span> ඉක්මන් පරීක්ෂාව</div>
+        <div class="selfcheck"><div class="h">✅ ඉක්මන් පරීක්ෂාව</div><ol>
+          <li>2, 5, 8, 11, … හි Tₙ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">d=3, T₁=2 → <b>3n − 1</b></div></details></li>
+          <li>10, 20, 30, … හි Tₙ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">d=10, T₁=10 → 10n + 0 = <b>10n</b></div></details></li>
+        </ol></div>
+        <div class="mem"><span class="k">🔑</span><div><b>d හොයන්න → Tₙ = d·n + (T₁ − d).</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l1)">1.2</span> n වෙනි පදය සඳහා ප්‍රකාශනයක් <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> අනික් පැත්ත</div>
+        <div class="plain"><p>දැන් Tₙ දීලා තියෙනවා නම්, n වෙනුවට 1, 2, 3 … දාලා රටාව හදන්නත්, ඕනෑම පදයක් සොයන්නත් පුළුවන්.</p></div>
+
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය (පොත I, පි. 2)</div>
+        <div class="work"><div class="lbl">Tₙ = 2n + 3 රටාවේ පළමු පද 4 හා 20 වෙනි පදය</div>
+          <span class="calc ml">n=1,2,3,4 → 5, 7, 9, 11</span>
+          <span class="calc ml">20 වෙනි පදය: T₂₀ = 2(20) + 3 = <b>43</b></span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: Tₙ = 3n + 2 රටාවේ 10 වෙනි පදය?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">T₁₀ = 3(10)+2 = <b>32</b></div></details></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ ‘අගය’ ද ‘ස්ථානය’ ද?</div>“කවර පදය 50ට සමානද?” ඇහුවොත් — සමීකරණයක් (Tₙ = 50) හදලා <b>n</b> හොයන්න! “20 වෙනි පදයේ අගය?” ඇහුවොත් — n=20 දාලා <b>Tₙ</b> හොයන්න.</div>
+
+        <div class="step"><span class="n">7</span> මතක උපක්‍රමය</div>
+        <div class="mem"><span class="k">🔑</span><div><b>n = ස්ථානය (කීවෙනිද). Tₙ = ඒ ස්ථානයේ අගය.</b> පදය හොයන්න n දාන්න; ස්ථානය හොයන්න සමීකරණයක්.</div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l1)">1.3</span> රටා ඇතුළත් ගැටළු විසඳීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">මේසයකට පුටු 4ක්. මේස 2ක් එකට තිබ්බම පුටු 6ක්, 3ක් එකට 8ක්… මේස <b>n</b> කට කීයද? මේ ‘කතාව’ රටාවකට හරවලා සූත්‍රයකින් විසඳමු!</div>
+
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය</div>
+        <div class="work"><span class="calc ml">මේස 1→4, 2→6, 3→8 … පොදු වෙනස d=2</span>
+          <span class="calc ml">Tₙ = 2n + (4−2) = <b>2n + 2</b></span>
+          <span class="calc ml">මේස 10කට: T₁₀ = 2(10)+2 = <b>22 පුටු</b></span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: ටයිල් මෝස්තරයක රූප 1ට ටයිල් 5, රූප 2ට 9, රූප 3ට 13… රූප 8ට කීයද?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">d=4, T₁=5 → Tₙ = 4n+1. රූප 8: 4(8)+1 = <b>33</b></div></details></div>
+
+        <!-- WIDGET: nth term builder -->
+        <div class="widget" id="ntw">
+          <div class="wh">🧮 සාධාරණ පද යන්ත්‍රය — Tₙ = a·n + b</div>
+          <div class="controls">
+            <span>Tₙ =</span><input id="nt-a" type="number" value="6" style="width:70px" aria-label="a"><span>n +</span>
+            <input id="nt-b" type="number" value="-1" style="width:70px" aria-label="b">
+            <span>· n =</span><input id="nt-n" type="number" value="20" style="width:70px" aria-label="n">
+            <button id="nt-go">පදය සොයන්න</button>
+          </div>
+          <div class="out" id="nt-out" aria-live="polite">a, b සහ n දී "පදය සොයන්න" ඔබන්න — රටාවත් පෙන්වයි.</div>
+        </div>
+
+        <div class="step"><span class="n">7</span> මතක උපක්‍රමය</div>
+        <div class="mem"><span class="k">🔑</span><div><b>කතාව → රටාව → d හොයන්න → Tₙ සූත්‍රය → අගය දාන්න.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ LESSON 2: BINARY ============ -->
+  <section class="lesson" id="l2">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l2),#4a2f78)">
+      <div class="badge">02</div>
+      <div class="kicker">පාඩම 2 · පොත I · පි. 16</div>
+      <h2>ද්විමය සංඛ්‍යා</h2>
+      <p>0 සහ 1 පමණක් යොදන, පරිගණකවල භාෂාව. පරිවර්තනය, එකතු හා අඩු කිරීම.</p>
+    </div>
+    <div class="objectives"><b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul><li>ද්විමය ස්ථානීය අගය (2 හි බල) තේරුම් ගැනීමට</li><li>ද්විමය ↔ දශම පරිවර්තනය කිරීමට</li><li>ද්විමය සංඛ්‍යා එකතු හා අඩු කිරීමට</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l2)">2.1</span> ද්විමය සංඛ්‍යා හැඳින්වීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">විදුලි ස්විච් එකක් වගේ — <b>OFF = 0</b>, <b>ON = 1</b>. පරිගණක, දුරකථන, ගණක යන්ත්‍ර හැම එකක්ම ‘තේරුම් ගන්නේ’ මේ <b>0 සහ 1</b> ඉලක්කම් දෙක විතරයි! මේකට කියන්නේ <span class="term">ද්විමය (binary)</span> ක්‍රමය.</div>
+        <div class="hook" style="margin-top:8px;background:#EEE8F7">😄 ලෝකේ මිනිස්සු <b>10</b> ආකාරයි: ද්විමය තේරෙන අයයි, නොතේරෙන අයයි! (මෙතන <span class="bin">10</span> = දශමයෙන් <b>2</b> — ඉවර වෙනකොට ඔයාට මේක තේරෙයි! 😉)</div>
+
+        <div class="step"><span class="n">2</span> ස්ථානීය අගය</div>
+        <div class="plain"><p>දශම ක්‍රමයේ ස්ථානවල අගය <b>10 හි බල</b> (1, 10, 100…). <b>3725 = 3×10³ + 7×10² + 2×10¹ + 5×10⁰</b>. ද්විමය ක්‍රමයේ පාදය <b>2</b> — ස්ථානවල අගය <b>2 හි බල</b>:</p></div>
+        <div class="scroller"><table class="tbl"><tr><th>බලය</th><td>2⁰</td><td>2¹</td><td>2²</td><td>2³</td><td>2⁴</td><td>2⁵</td><td>2⁶</td></tr>
+          <tr><th>අගය</th><td>1</td><td>2</td><td>4</td><td>8</td><td>16</td><td>32</td><td>64</td></tr></table></div>
+        <div class="mem"><span class="k">🔑</span><div>ඕනෑම පාදයක <b>බිංදුවේ බලය = 1</b>. ඒ නිසා 10⁰=1 වගේම <b>2⁰=1</b>.</div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l2)">2.2</span> ද්විමය ↔ දශම පරිවර්තනය <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> ද්විමය → දශම (ලේසියි!)</div>
+        <div class="work"><div class="lbl"><span class="bin">1101</span>₂ දශමයට</div>
+          <span class="calc ml"><span class="bin">1</span>×8 + <span class="bin">1</span>×4 + <span class="bin">0</span>×2 + <span class="bin">1</span>×1</span>
+          <span class="calc ml">= 8 + 4 + 0 + 1 = <b>13</b></span></div>
+
+        <div class="step"><span class="n">4</span> දශම → ද්විමය (2න් බෙදීම)</div>
+        <div class="work"><div class="lbl">13 ද්විමයට</div>
+          <span class="calc ml">13 ÷ 2 = 6 ඉතිරි <b>1</b></span>
+          <span class="calc ml">6 ÷ 2 = 3 ඉතිරි <b>0</b></span>
+          <span class="calc ml">3 ÷ 2 = 1 ඉතිරි <b>1</b></span>
+          <span class="calc ml">1 ÷ 2 = 0 ඉතිරි <b>1</b></span>
+          <span class="calc ml">ඉතිරි <b>යටින් උඩට</b> කියවන්න → <span class="bin">1101</span>₂</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: <span class="bin">110</span>₂ දශමයට; 9 ද්විමයට.</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><span class="bin">110</span>₂ = 4+2 = <b>6</b>. &nbsp; 9 = 8+1 = <span class="bin">1001</span>₂</div></details></div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ ඉතිරි පිළිවෙළ</div>2න් බෙදීමේ ඉතිරි <b>යටින් උඩට</b> කියවන්න (උඩින් යටට නෙවෙයි!). ස්ථාන අගය දකුණේ සිට 1, 2, 4, 8… — <b>1න් පටන් ගන්න</b>.</div>
+
+        <!-- WIDGET: binary converter -->
+        <div class="widget" id="bcw">
+          <div class="wh">🔁 ද්විමය ↔ දශම පරිවර්තකය</div>
+          <div class="controls">
+            <div class="seg" role="group" aria-label="දිශාව">
+              <button data-m="d2b" aria-pressed="true">දශම → ද්විමය</button>
+              <button data-m="b2d" aria-pressed="false">ද්විමය → දශම</button>
+            </div>
+            <input id="bc-in" type="text" value="13" style="width:120px" aria-label="ආදානය">
+            <button id="bc-go">පරිවර්තනය</button>
+          </div>
+          <div class="out" id="bc-out" aria-live="polite">සංඛ්‍යාවක් දී "පරිවර්තනය" ඔබන්න — පියවරෙන් පියවර පෙන්වයි.</div>
+        </div>
+        <div class="mem"><span class="k">🔑</span><div><b>ද්විමය→දශම: ස්ථාන අගය ගුණ කර එකතු. දශම→ද්විමය: 2න් බෙදා ඉතිරි යටින් උඩට.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l2)">2.3</span> ද්විමය සංඛ්‍යා එකතු කිරීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> නීති 4ක් විතරයි</div>
+        <div class="box rule"><b>0+0=0 · 0+1=1 · 1+0=1 · 1+1=<span class="bin">10</span></b> (0 ලියා 1 ඉදිරියට — carry).</div>
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය</div>
+        <div class="work"><div class="lbl"><span class="bin">101</span> + <span class="bin">11</span></div>
+          <span class="calc ml bin" style="white-space:pre">&#32;&#32;1 1   ← carry
+&#32;&#32;1 0 1
++&#32;&#32; 1 1
+───────
+1 0 0 0</span>
+          <span class="calc ml">පරීක්ෂාව: 5 + 3 = 8, &nbsp; <span class="bin">1000</span>₂ = 8 ✓</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: <span class="bin">1011</span> + <span class="bin">101</span> = ?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><span class="bin">10000</span>₂ &nbsp;(11 + 5 = 16)</div></details></div>
+        <div class="box watch"><div class="h">⚠ 1+1 = 2 ලෙස ලියන්න එපා!</div>ද්විමයේ <b>2 කියන ඉලක්කම නෑ</b>. 1+1 = <span class="bin">10</span> (0 ලියා carry 1).</div>
+        <div class="mem"><span class="k">🔑</span><div><b>1+1 = <span style="color:var(--gold-2)">10</span> (0 ලියා 1 අරගෙන යන්න).</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l2)">2.4</span> ද්විමය සංඛ්‍යා අඩු කිරීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> ණයට ගැනීම (borrow)</div>
+        <div class="plain"><p>දශමයේ වගේම ‘ණයට ගැනීම’ තියෙනවා — ඒත් ද්විමයේ ණයට ගත්තම එය <b>2</b>ක් (10ක් නෙවෙයි).</p></div>
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය</div>
+        <div class="work"><div class="lbl"><span class="bin">1010</span> − <span class="bin">11</span></div>
+          <span class="calc ml bin" style="white-space:pre">&#32;1 0 1 0
+−&#32;&#32; 1 1
+───────
+&#32; 1 1 1</span>
+          <span class="calc ml">පරීක්ෂාව: 10 − 3 = 7, &nbsp; <span class="bin">111</span>₂ = 7 ✓</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: <span class="bin">10010</span> − <span class="bin">111</span> = ?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><span class="bin">1011</span>₂ &nbsp;(18 − 7 = 11)</div></details></div>
+        <div class="box watch"><div class="h">⚠ අවුල් නම් — දශමයට හරවන්න</div>අවුල් වුණොත්, දෙකම <b>දශමයට හරවලා</b> අඩු කරලා, පිළිතුර ආපහු ද්විමයට හරවන්න — හැම විටම නිවැරදියි.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>ණයට ගත්තම 2ක්.</b> අවුල් නම් දශමයෙන් කරලා පරීක්ෂා කරන්න.</div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ LESSON 3: FRACTIONS ============ -->
+  <section class="lesson" id="l3">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l3),#9c3f24)">
+      <div class="badge">03</div>
+      <div class="kicker">පාඩම 3 · පොත I · පි. 27</div>
+      <h2>භාග</h2>
+      <p>‘න්’ යෙදුම සහිත ප්‍රකාශන සහ වරහන් සහිත ප්‍රකාශන BODMAS අනුව සුළු කිරීම.</p>
+    </div>
+    <div class="objectives"><b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul><li>‘න්’ (of) යනු ගුණ කිරීමක් බව තේරුම් ගැනීමට</li><li>වරහන් සහිත භාග ප්‍රකාශන BODMAS අනුව සුළු කිරීමට</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l3)">3.1</span> ‘න්’ යෙදුම සහිත ප්‍රකාශන <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">අම්මා වටලප්පන් එකක් හදලා කිව්වා “මේකෙන් <span class="frac"><span class="n">1</span><span class="d">2</span></span> <b>න්</b> <span class="frac"><span class="n">1</span><span class="d">2</span></span>ක් තාත්තාට.” මල්ලී දුවගෙන ගිහින් අඩක්ම කෑවා! 😅 ‘අඩකින් අඩක්’ කියන්නේ <span class="frac"><span class="n">1</span><span class="d">4</span></span>ක් විතරයි — මුළු අඩක්ම නෙවෙයි! අන්න ‘<b>න්</b>’ කියන්නේ <b>ගුණ කිරීමක්</b>.</div>
+
+        <div class="step"><span class="n">2</span> රහස</div>
+        <div class="box rule"><b>‘න්’ = ‘× (ගුණ කිරීම)’ විතරයි!</b><br>
+          රු. 100<b>න්</b> <span class="frac"><span class="n">1</span><span class="d">2</span></span> = 100 × <span class="frac"><span class="n">1</span><span class="d">2</span></span> = රු. 50 &nbsp;·&nbsp; <span class="frac"><span class="n">2</span><span class="d">3</span></span><b>න්</b> 12 = <span class="frac"><span class="n">2</span><span class="d">3</span></span> × 12 = 8</div>
+
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය</div>
+        <div class="work"><div class="lbl">සුළු කරන්න: <span class="frac"><span class="n">2</span><span class="d">3</span></span><b>න්</b> 12 + 5</div>
+          <span class="calc ml">මුලින් ‘න්’ (×): <span class="frac"><span class="n">2</span><span class="d">3</span></span> × 12 = 8</span>
+          <span class="calc ml">ඊට පස්සේ +: 8 + 5 = <b>13</b></span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: <span class="frac"><span class="n">3</span><span class="d">4</span></span><b>න්</b> <span class="frac"><span class="n">4</span><span class="d">5</span></span> සොයන්න.</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><span class="frac"><span class="n">3</span><span class="d">4</span></span> × <span class="frac"><span class="n">4</span><span class="d">5</span></span> = <span class="frac"><span class="n">12</span><span class="d">20</span></span> = <span class="frac"><span class="n">3</span><span class="d">5</span></span></div></details></div>
+        <div class="box watch"><div class="h">⚠ ‘න්’ එකතුවක් නෙවෙයි</div><span class="frac"><span class="n">1</span><span class="d">2</span></span>න් <span class="frac"><span class="n">1</span><span class="d">2</span></span> = <span class="frac"><span class="n">1</span><span class="d">4</span></span> (ගුණ කිරීම), <span class="frac"><span class="n">1</span><span class="d">1</span></span> නෙවෙයි!</div>
+        <div class="mem"><span class="k">🔑</span><div><b>‘න්’ දැක්කම ‘×’ කියලා හිතන්න.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l3)">3.2</span> වරහන් සහිත ප්‍රකාශන — BODMAS <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> පිළිවෙළ</div>
+        <div class="box rule"><b>B</b> වරහන් → <b>O</b> ‘න්’ (of) → <b>D/M</b> බෙදීම/ගුණ කිරීම (වමේ සිට දකුණට) → <b>A/S</b> එකතු/අඩු කිරීම (වමේ සිට දකුණට).</div>
+
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණ</div>
+        <div class="work"><div class="lbl">( <span class="frac"><span class="n">2</span><span class="d">3</span></span> + <span class="frac"><span class="n">1</span><span class="d">4</span></span> ) <b>න්</b> <span class="frac"><span class="n">1</span><span class="d">2</span></span></div>
+          <span class="calc ml">වරහන මුලින් (හරය 12): <span class="frac"><span class="n">8</span><span class="d">12</span></span> + <span class="frac"><span class="n">3</span><span class="d">12</span></span> = <span class="frac"><span class="n">11</span><span class="d">12</span></span></span>
+          <span class="calc ml">ඊට පස්සේ ‘න්’ (×): <span class="frac"><span class="n">11</span><span class="d">12</span></span> × <span class="frac"><span class="n">1</span><span class="d">2</span></span> = <span class="frac"><span class="n">11</span><span class="d">24</span></span></span></div>
+        <div class="work"><div class="lbl"><span class="frac"><span class="n">3</span><span class="d">4</span></span> ÷ <span class="frac"><span class="n">1</span><span class="d">2</span></span> × <span class="frac"><span class="n">2</span><span class="d">3</span></span></div>
+          <span class="calc ml"><span class="frac"><span class="n">3</span><span class="d">4</span></span> × <span class="frac"><span class="n">2</span><span class="d">1</span></span> × <span class="frac"><span class="n">2</span><span class="d">3</span></span> = <span class="frac"><span class="n">3</span><span class="d">2</span></span> × <span class="frac"><span class="n">2</span><span class="d">3</span></span> = <b>1</b></span></div>
+
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: ( <span class="frac"><span class="n">3</span><span class="d">4</span></span> − <span class="frac"><span class="n">1</span><span class="d">2</span></span> ) <b>න්</b> <span class="frac"><span class="n">2</span><span class="d">5</span></span> සුළු කරන්න.</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">වරහන: <span class="frac"><span class="n">3</span><span class="d">4</span></span>−<span class="frac"><span class="n">1</span><span class="d">2</span></span>=<span class="frac"><span class="n">1</span><span class="d">4</span></span>. ×: <span class="frac"><span class="n">1</span><span class="d">4</span></span>×<span class="frac"><span class="n">2</span><span class="d">5</span></span>=<span class="frac"><span class="n">2</span><span class="d">20</span></span>=<span class="frac"><span class="n">1</span><span class="d">10</span></span></div></details></div>
+
+        <!-- WIDGET: BODMAS stepper -->
+        <div class="widget" id="bsw">
+          <div class="wh">🧩 BODMAS පියවර — උදාහරණයක් තෝරන්න</div>
+          <div class="controls">
+            <select id="bs-sel" aria-label="ප්‍රකාශනය">
+              <option value="0">(⅔ + ¼) න් ½</option>
+              <option value="1">¾ ÷ ½ × ⅔</option>
+              <option value="2">⅚ − (⅓ + ¼) න් 2</option>
+              <option value="3">⅗ න් 20 + 4</option>
+            </select>
+            <button id="bs-go">පියවර පෙන්වන්න</button>
+          </div>
+          <div class="out" id="bs-out" aria-live="polite">තෝරා "පියවර පෙන්වන්න" ඔබන්න.</div>
+        </div>
+
+        <div class="step"><span class="n">5</span> පරිස්සමින්!</div>
+        <div class="box watch"><div class="h">⚠ ÷ සහ × — වමේ සිට දකුණට!</div>÷ සහ × එකට ඇති විට <b>වමේ සිට දකුණට</b> පිළිවෙළට. D හැම තිස්සෙම M ට කලින් කරනවා කියලා වැරදි අදහසක් තබාගන්න එපා.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>B → O(‘න්’) → D/M → A/S.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ LESSON 13: SCIENTIFIC NOTATION ============ -->
+  <section class="lesson" id="l13">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l13),#1f5a3a)">
+      <div class="badge">13</div>
+      <div class="kicker">පාඩම 13 · පොත II · පි. 31</div>
+      <h2>වටයෑම හා විද්‍යාත්මක අංකනය</h2>
+      <p>ලොකුම/පොඩිම සංඛ්‍යා A×10ⁿ ලෙස කෙටියෙන්; ආසන්න අගයට වටයෑම.</p>
+    </div>
+    <div class="objectives"><b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul><li>සංඛ්‍යාවක් විද්‍යාත්මක අංකනයෙන් (A×10ⁿ) ලිවීමට</li><li>0–1 අතර සංඛ්‍යා සෘණ බල යොදා ලිවීමට</li><li>විද්‍යාත්මක අංකනය ආපසු සාමාන්‍ය ආකාරයට ගැනීමට</li><li>ආසන්න 10ට (හා පූර්ණ සංඛ්‍යාවට) වටකිරීමට</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l13)">13.1</span> විද්‍යාත්මක අංකනය <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">ශ්‍රී ලංකාවේ ජනගහනය ~22,000,000. බිංදු ගණන් කරගෙන ඇඟිලි අඩු වෙනවා! 😅 ඒ වෙනුවට <b>2.2 × 10⁷</b> කියලා ලියන්න පුළුවන් — කෙටියි, වැරදීමත් අඩුයි.</div>
+        <div class="step"><span class="n">2</span> ආකෘතිය</div>
+        <div class="box rule"><b>A × 10ⁿ</b> &nbsp;— මෙහි <b>1 ≤ A &lt; 10</b> (A යනු 1 හා 10 අතර තනි සංඛ්‍යාවක්), n යනු නිඛිලයකි.</div>
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය</div>
+        <div class="work"><div class="lbl">54,300 විද්‍යාත්මක අංකනයෙන්</div>
+          <span class="calc ml">තිත 1–10 අතරට වමට ගෙනියන්න: 5.4300 → A = 5.43</span>
+          <span class="calc ml">තිත ස්ථාන 4ක් ගියා → n = 4</span>
+          <span class="calc ml">54,300 = <b>5.43 × 10⁴</b></span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 8,200 විද්‍යාත්මක අංකනයෙන්?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><b>8.2 × 10³</b></div></details></div>
+        <div class="mem"><span class="k">🔑</span><div>ලොකු සංඛ්‍යා → <b>n ධනයි (+)</b>. තිත කී ස්ථානයක් ගියාද — ඒ ගණනමයි n.</div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l13)">13.2</span> 0 ත් 1 ත් අතර සංඛ්‍යා <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> පොඩි සංඛ්‍යා → සෘණ බල</div>
+        <div class="plain"><p>0 හා 1 අතර සංඛ්‍යාවකදී තිත <b>දකුණට</b> ගෙනියන්න ඕනේ — එවිට n <b>සෘණයි</b>.</p></div>
+        <div class="work"><div class="lbl">0.0075 විද්‍යාත්මක අංකනයෙන්</div>
+          <span class="calc ml">A = 7.5 එනකම් තිත දකුණට (ස්ථාන 3)</span>
+          <span class="calc ml">0.0075 = <b>7.5 × 10⁻³</b></span>
+          <span class="calc ml">තවත්: 0.75 = <b>7.5 × 10⁻¹</b></span></div>
+        <div class="box rule"><b>ලොකු සංඛ්‍යා → n ධන (+); &nbsp; පොඩි (0–1) සංඛ්‍යා → n සෘණ (−).</b> A හැම විටම 1 හා 10 අතර.</div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 0.00045 විද්‍යාත්මක අංකනයෙන්?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><b>4.5 × 10⁻⁴</b></div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>පොඩි = සෘණ බල; ලොකු = ධන බල.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l13)">13.3</span> සාමාන්‍ය ආකාරයට ගැනීම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> අනික් පැත්ත</div>
+        <div class="scroller"><table class="tbl"><tr><th>විද්‍යාත්මක</th><th>තිත යන්නේ</th><th>සාමාන්‍ය</th></tr>
+          <tr><td>5.43 × 10⁴</td><td>දකුණට 4</td><td>54,300</td></tr>
+          <tr><td>6.05 × 10³</td><td>දකුණට 3</td><td>6,050</td></tr>
+          <tr><td>5.43 × 10⁻⁴</td><td>වමට 4</td><td>0.000543</td></tr></table></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 6.05 × 10³ සාමාන්‍ය ආකාරයට?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans"><b>6,050</b> (තිත දකුණට ස්ථාන 3)</div></details></div>
+
+        <!-- WIDGET: sci notation converter -->
+        <div class="widget" id="scw">
+          <div class="wh">🔬 විද්‍යාත්මක අංකන පරිවර්තකය</div>
+          <div class="controls">
+            <input id="sc-in" type="text" value="54300" style="width:140px" aria-label="සංඛ්‍යාව">
+            <button id="sc-go">A × 10ⁿ බවට</button>
+          </div>
+          <div class="out" id="sc-out" aria-live="polite">සංඛ්‍යාවක් දී ඔබන්න — A හා n පියවරෙන් පියවර පෙන්වයි.</div>
+        </div>
+        <div class="mem"><span class="k">🔑</span><div><b>n ධන → තිත දකුණට; n සෘණ → තිත වමට. ස්ථාන ගණන = |n|.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l13)">13.4</span> ආසන්න අගයට වටයෑම <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> රන් රීතිය</div>
+        <div class="box rule">බලන ඊළඟ ඉලක්කම <b>5 හෝ ඊට වැඩි නම් ඉහළට</b>, <b>5ට අඩු නම් පහළට</b>.</div>
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණ</div>
+        <div class="work"><div class="lbl">ආසන්න 10ට</div>
+          <span class="calc ml">47 → <b>50</b> (7≥5) &nbsp;·&nbsp; 53 → <b>50</b> (3&lt;5) &nbsp;·&nbsp; 12 → <b>10</b></span></div>
+        <div class="work"><div class="lbl">ආසන්න පූර්ණ සංඛ්‍යාවට / දශමස්ථානයට</div>
+          <span class="calc ml">12.7 → <b>13</b> &nbsp;·&nbsp; 12.3 → <b>12</b> &nbsp;·&nbsp; 3.74 → <b>3.7</b> (1 dp)</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 68 ආසන්න 10ට; 36.8 ආසන්න පූර්ණ සංඛ්‍යාවට.</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">68 → <b>70</b> &nbsp;·&nbsp; 36.8 → <b>37</b></div></details></div>
+        <div class="box watch"><div class="h">⚠ බලන්නේ ඊළඟ ඉලක්කම පමණයි</div>12.49 ආසන්න පූර්ණ සංඛ්‍යාවට → <b>12</b> (පළමු දශම 4 බලනවා, 9 නෙවෙයි!). 9 ඉහළට ගියාම carry සිදුවෙයි: 149.96 → 1 dp → <b>150.0</b>.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>5 හෝ වැඩි → ඉහළට; අඩු → පහළට.</b> වටයෑම ඇස්තමේන්තුවටත් (estimate) උපකාරී: 47×9 ≈ 50×9 = 450.</div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ LESSON 11: CALCULATOR ============ -->
+  <section class="lesson" id="l11">
+    <div class="lesson-head" style="background:linear-gradient(150deg,var(--l11),#1f4e80)">
+      <div class="badge">11</div>
+      <div class="kicker">පාඩම 11 · පොත II · පි. 12</div>
+      <h2>ගණකය</h2>
+      <p>ගණකය නිවැරදිව භාවිතය — %, x², √ යතුරු සහ BODMAS.</p>
+    </div>
+    <div class="objectives"><b>මේ පාඩම අවසානයේ ඔබට පුළුවන් වෙයි 🎯</b>
+      <ul><li>ගණකයෙන් සරල ගණනය නිවැරදිව කිරීමට</li><li>%, x², √ යතුරු යෙදීමට</li><li>ගණකය BODMAS පිළිපදින බව තේරුම් ගැනීමට</li></ul>
+    </div>
+
+    <details class="sub" open>
+      <summary><span class="dot" style="background:var(--l11)">11.1</span> ගණකයෙන් ගණනය කිරීම් <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">1</span> හිතන්න…</div>
+        <div class="hook">මුදලාලි ÷ සහ × පටලවලා “රු. 5” කිව්වා! 😅 ගණකය බුද්ධිමත් — ඒත් <b>ඔයා එබූ දේ විතරයි</b> කරන්නේ. නිවැරදිව එබුවොත් විතරයි නිවැරදි උත්තරය!</div>
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණ</div>
+        <div class="work"><span class="calc ml">5.25 × 35.4 = <b>185.85</b> &nbsp; <small>(ඇස්තමේන්තුව 5×35≈175 — හරි!)</small></span>
+          <span class="calc ml">5.52 ÷ 6 = <b>0.92</b></span></div>
+        <div class="box watch"><div class="h">⚠ ගණකයත් BODMAS පිළිපදිනවා!</div>2 + 3 × 4 ටයිප් කළොත් ගණකය දෙන්නේ <b>14</b> (මුලින් 3×4). 20ක් ඕනේ නම් <b>වරහන්</b> දාන්න: (2 + 3) × 4.</div>
+        <div class="mem"><span class="k">🔑</span><div><b>එකතුව මුලින් ඕනේ නම් වරහන් අත්‍යවශ්‍යයි. හැම විටම estimate කරලා පරීක්ෂා කරන්න.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l11)">11.2</span> % (ප්‍රතිශත) යතුර <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">4</span> වැඩ කළ උදාහරණය</div>
+        <div class="work"><div class="lbl">240 හි 15%</div>
+          <span class="calc ml">240 × 15 % &nbsp;→&nbsp; <b>36</b> &nbsp; <small>(% යතුර = ÷100)</small></span>
+          <span class="calc ml">% යතුර නැතිනම්: 240 × 15 ÷ 100 = 36</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 480 හි 25%?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">480 × 25 ÷ 100 = <b>120</b></div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>% = ÷100.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l11)">11.3</span> x² යතුර <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> වර්ග කිරීම</div>
+        <div class="plain"><p><b>x²</b> යතුර = සංඛ්‍යාව <b>එහිම අගයෙන් ගුණ කිරීම</b>.</p></div>
+        <div class="work"><span class="calc ml">4.1 [x²] = <b>16.81</b> &nbsp;(4.1 × 4.1)</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: 12² සහ 2.5²?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">144 &nbsp;·&nbsp; 6.25</div></details></div>
+        <div class="mem"><span class="k">🔑</span><div><b>x² යතුර නැතිනම් සංඛ්‍යාව × එහිම අගයෙන් කරන්න.</b></div></div>
+      </div>
+    </details>
+
+    <details class="sub">
+      <summary><span class="dot" style="background:var(--l11)">11.4</span> √ (වර්ගමූල) යතුර <span class="chev">›</span></summary>
+      <div class="sub-body">
+        <div class="step"><span class="n">2</span> x² ට ප්‍රතිවිරුද්ධ</div>
+        <div class="plain"><p><b>√</b> යතුර = ‘මොන සංඛ්‍යාවද එහිම අගයෙන් ගුණ වුණේ?’ කියා හෙවීම.</p></div>
+        <div class="work"><span class="calc ml">[√] 5.29 = <b>2.3</b> &nbsp;(2.3 × 2.3 = 5.29)</span></div>
+        <div class="turn"><div class="q">✏️ ඔබේ වාරය: <span class="sqrt"><span class="rad">169</span></span> සහ <span class="sqrt"><span class="rad">16</span></span>?</div>
+          <details class="reveal"><summary>පිළිතුර බලන්න</summary><div class="ans">13 &nbsp;·&nbsp; 4</div></details></div>
+
+        <!-- WIDGET: calculator keys -->
+        <div class="widget" id="ckw">
+          <div class="wh">🔢 ගණක යතුරු — අත්හදා බලන්න</div>
+          <div class="controls">
+            <input id="ck-n" type="number" value="5.29" style="width:120px" aria-label="සංඛ්‍යාව">
+            <button data-k="sq" class="ckbtn">x²</button>
+            <button data-k="rt" class="ckbtn">√</button>
+          </div>
+          <div class="controls" style="margin-top:8px">
+            <input id="ck-p" type="number" value="15" style="width:70px" aria-label="ප්‍රතිශතය"><span>% of</span>
+            <input id="ck-b" type="number" value="240" style="width:90px" aria-label="පදනම"><button data-k="pc" class="ckbtn">%</button>
+          </div>
+          <div class="out" id="ck-out" aria-live="polite">යතුරක් ඔබන්න — පිළිතුර පෙන්වයි.</div>
+        </div>
+        <div class="box watch"><div class="h">⚠ ක්‍රමය ඔයා දැනගෙන ඉන්න ඕනේ</div>ගණකය මෙවලමක් විතරයි — විභාගයේ සමහර ප්‍රශ්නවලට පියවර පෙන්වන්නත් වෙනවා!</div>
+        <div class="mem"><span class="k">🔑</span><div><b>x² = ×එහිම අගය; √ = ආපහු හරවනවා; % = ÷100.</b></div></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ SYNTHESIS ============ -->
+  <section class="synth" id="synth">
+    <h2>සියල්ල එකට — දාමය 🔗</h2>
+    <p>මේ පාඩම් 5 හුදකලා නෙවෙයි — එකිනෙකට බැඳී තියෙනවා:</p>
+    <div class="chain"><span>සංඛ්‍යා රටා</span><span class="ar">→</span><span>ද්විමය</span><span class="ar">→</span><span>භාග</span><span class="ar">→</span><span>විද්‍යාත්මක අංකනය</span><span class="ar">→</span><span>ගණකය</span></div>
+    <p style="opacity:.95">
+      • <b>ද්විමය</b> පාඩමේ ‘ස්ථානීය අගය = පාදයේ බල’ අදහස, <b>විද්‍යාත්මක අංකනයේ</b> ‘10 හි බල’ ට කෙළින්ම සම්බන්ධයි.<br>
+      • <b>භාග</b> පාඩමේ BODMAS, <b>ගණකය</b> පාඩමේ වරහන් භාවිතයටම යොදනවා.<br>
+      • <b>සංඛ්‍යා රටා</b> Tₙ සූත්‍රය, ඉස්සරහ එන වීජ ගණිතයට පදනම.<br>
+      • <b>වටයෑම</b>, ගණකයෙන් ලැබෙන පිළිතුරු ‘ඇස්තමේන්තු කර’ පරීක්ෂා කරන්න උපකාරී.</p>
+  </section>
+
+  <!-- ============ MIXED TEST ============ -->
+  <section id="test">
+    <h2 style="text-align:center;margin-top:30px">🏁 අවසන් ස්වයං පරීක්ෂණය</h2>
+    <p style="text-align:center;color:var(--muted)">පළමුව ඔබම කරන්න — පසුව පිළිතුර බලන්න. හැම එකක්ම හරි නම් ඔබ සූදානම්!</p>
+    <div class="selfcheck"><div class="h">1 · සංඛ්‍යා රටා</div><ol>
+      <li>5, 11, 17, 23, … හි 50 වෙනි පදය? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">Tₙ=6n−1 → 6(50)−1 = <b>299</b></div></details></li>
+      <li>Tₙ = 2n + 2 නම්, කවර පදය 50ට සමානද? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">2n+2=50 → n=<b>24</b> (24 වෙනි පදය)</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">2 · ද්විමය සංඛ්‍යා</div><ol>
+      <li>25 ද්විමයට? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">16+8+1 → <span class="bin">11001</span>₂</div></details></li>
+      <li><span class="bin">1101</span> + <span class="bin">1011</span> = ? (දශමයෙන්) <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><span class="bin">11000</span>₂ = <b>24</b> (13+11)</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">3 · භාග</div><ol>
+      <li>සුළු කරන්න: <span class="frac"><span class="n">1</span><span class="d">2</span></span> + <span class="frac"><span class="n">1</span><span class="d">4</span></span> න් <span class="frac"><span class="n">2</span><span class="d">3</span></span> <details class="reveal"><summary>පිළිතුර</summary><div class="ans">‘න්’ මුලින්: <span class="frac"><span class="n">1</span><span class="d">4</span></span>×<span class="frac"><span class="n">2</span><span class="d">3</span></span>=<span class="frac"><span class="n">1</span><span class="d">6</span></span>. ∴ <span class="frac"><span class="n">1</span><span class="d">2</span></span>+<span class="frac"><span class="n">1</span><span class="d">6</span></span>=<span class="frac"><span class="n">4</span><span class="d">6</span></span>=<b><span class="frac"><span class="n">2</span><span class="d">3</span></span></b></div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">13 · විද්‍යාත්මක අංකනය</div><ol>
+      <li>0.0036 විද්‍යාත්මක අංකනයෙන්? <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><b>3.6 × 10⁻³</b></div></details></li>
+      <li>846 ආසන්න 10ට? <details class="reveal"><summary>පිළිතුර</summary><div class="ans"><b>850</b> (6≥5)</div></details></li>
+    </ol></div>
+    <div class="selfcheck"><div class="h">11 · ගණකය</div><ol>
+      <li>3.2² + <span class="sqrt"><span class="rad">81</span></span> = ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">10.24 + 9 = <b>19.24</b></div></details></li>
+      <li>(18 + 7) × 4 ගණකයෙන් කරන්නේ? <details class="reveal"><summary>පිළිතුර</summary><div class="ans">වරහන් එබිය යුතුයි: (1 8 + 7) × 4 = <b>100</b> (වරහන් නැතුව 46 — වැරදි!)</div></details></li>
+    </ol></div>
+  </section>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section class="cheat" id="cheat">
+    <h2>📋 කෙටි සටහන (Cheat Sheet)</h2>
+    <p style="color:var(--muted);margin-top:0">විභාගයට පෙර මේ පිටුව විතරක් බැලුවත් ඇති.</p>
+    <div class="grid">
+      <div class="cc l1"><h4>1 · සංඛ්‍යා රටා</h4>Tₙ = සාධාරණ පදය, n = ස්ථානය.<br>d හොයන්න → <b>Tₙ = d·n + (T₁ − d)</b>.<br>අගය → n දාන්න; ස්ථානය → සමීකරණයක්.</div>
+      <div class="cc l2"><h4>2 · ද්විමය</h4>ස්ථාන අගය = 2 හි බල (1,2,4,8…).<br>දශම→ද්විමය: 2න් බෙදා ඉතිරි යටින් උඩට.<br>1+1=<span class="bin">10</span>; ණයට ගත්තම 2ක්.</div>
+      <div class="cc l3"><h4>3 · භාග</h4><b>‘න්’ = ×.</b><br>පිළිවෙළ: B → O(න්) → D/M → A/S.<br>÷,× — වමේ සිට දකුණට.</div>
+      <div class="cc l13"><h4>13 · විද්‍යාත්මක අංකනය</h4><b>A × 10ⁿ (1 ≤ A &lt; 10).</b><br>ලොකු→+, පොඩි(0–1)→−.<br>වටකරනකොට 5 හෝ වැඩි → ඉහළට.</div>
+      <div class="cc l11"><h4>11 · ගණකය</h4>BODMAS පිළිපදිනවා → එකතුවට වරහන්.<br>x² = ×එහිම අගය; √ = ආපහු; % = ÷100.<br>හැම විටම estimate කර පරීක්ෂා කරන්න.</div>
+    </div>
+  </section>
+
+</main>
+
+<a class="top-link" href="#top" aria-label="ඉහළට">↑</a>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="justify-content:center"><div class="mark">ඉ</div>
+      <div style="text-align:left"><div class="name">IDASARA ACADEMY</div><div class="tag">We empower · We free · We augment</div></div></div>
+    <p style="margin:14px 0 4px">9 ශ්‍රේණිය · ගණිතය · සංඛ්‍යා හා ඒවායේ ස්වරූප — ඔබේම වේගයෙන් ඉගෙනීමට.</p>
+    <p class="ref" style="color:#8FA2B8">මූලාශ්‍රය: 9 ශ්‍රේණිය ගණිතය පෙළපොත (I &amp; II කොටස්), අධ්‍යාපන ප්‍රකාශන දෙපාර්තමේන්තුව — පාඩම් 1, 2, 3 (I කොටස), 11, 13 (II කොටස).</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var bar=document.getElementById('progress');
+  function prog(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=(h.scrollHeight-h.clientHeight)||1;bar.style.width=(sc/mx*100)+'%';}
+  window.addEventListener('scroll',prog,{passive:true}); prog();
+
+  // accordion-lite: one sub open per lesson
+  document.querySelectorAll('section.lesson').forEach(function(sec){
+    var subs=sec.querySelectorAll('details.sub');
+    subs.forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open){ subs.forEach(function(o){ if(o!==d) o.open=false; }); } }); });
+  });
+
+  var round=function(x){return Math.round(x*1e6)/1e6;};
+
+  // ===== W1: nth term =====
+  document.getElementById('nt-go').addEventListener('click',function(){
+    var a=parseFloat(document.getElementById('nt-a').value),b=parseFloat(document.getElementById('nt-b').value),n=parseInt(document.getElementById('nt-n').value),o=document.getElementById('nt-out');
+    if(isNaN(a)||isNaN(b)||isNaN(n)||n<1){o.textContent='a, b සහ ධන නිඛිල n දෙන්න.';return;}
+    var seq=[];for(var i=1;i<=5;i++)seq.push(round(a*i+b));
+    var term=round(a*n+b), bs=(b<0?'− '+Math.abs(b):'+ '+b);
+    o.innerHTML='<span class="calc">Tₙ = '+a+'n '+bs+'<br>පළමු පද 5: '+seq.join(', ')+', …<br>T<sub>'+n+'</sub> = '+a+'('+n+') '+bs+' = <b style="color:#0a5b63;font-size:18px">'+term+'</b></span>';
+  });
+
+  // ===== W2: binary converter =====
+  var bmode='d2b';
+  var bseg=document.querySelectorAll('#bcw .seg button');
+  bseg.forEach(function(btn){btn.addEventListener('click',function(){bmode=btn.dataset.m;bseg.forEach(function(x){x.setAttribute('aria-pressed',x===btn);});document.getElementById('bc-in').value=(bmode==='d2b'?'13':'1101');});});
+  document.getElementById('bc-go').addEventListener('click',function(){
+    var v=document.getElementById('bc-in').value.trim(),o=document.getElementById('bc-out');
+    if(bmode==='d2b'){
+      var n=parseInt(v,10); if(isNaN(n)||n<0){o.textContent='ධන දශම සංඛ්‍යාවක් දෙන්න.';return;}
+      if(n===0){o.innerHTML='0 = <b>0</b>₂';return;}
+      var steps='',q=n,bits='';
+      while(q>0){var r=q%2;steps+='&nbsp;&nbsp;'+q+' ÷ 2 = '+Math.floor(q/2)+' ඉතිරි <b>'+r+'</b><br>';bits=r+bits;q=Math.floor(q/2);}
+      o.innerHTML='<span class="calc">'+steps+'ඉතිරි යටින් උඩට → <b style="color:#6D4AA0;font-size:18px" class="bin">'+bits+'</b>₂</span>';
+    } else {
+      if(!/^[01]+$/.test(v)){o.textContent='0 සහ 1 පමණක් යොදන්න.';return;}
+      var sum=0,exp=v.length-1,parts=[];
+      for(var i=0;i<v.length;i++){var d=+v[i],pv=Math.pow(2,exp-i);if(d)parts.push(d+'×'+pv);sum+=d*pv;}
+      o.innerHTML='<span class="calc">'+(parts.join(' + ')||'0')+' = <b style="color:#6D4AA0;font-size:18px">'+sum+'</b></span>';
+    }
+  });
+
+  // ===== W3: BODMAS stepper (preset) =====
+  var BS=[
+    {q:'(⅔ + ¼) න් ½', steps:['වරහන: ⅔ + ¼ = 8/12 + 3/12 = 11/12','‘න්’ (×): 11/12 × ½ = <b>11/24</b>']},
+    {q:'¾ ÷ ½ × ⅔', steps:['වමේ සිට: ¾ ÷ ½ = ¾ × 2 = 3/2','× ⅔: 3/2 × ⅔ = <b>1</b>']},
+    {q:'⅚ − (⅓ + ¼) න් 2', steps:['වරහන: ⅓ + ¼ = 7/12','‘න්’ 2 (×): 7/12 × 2 = 7/6','අඩු: ⅚ − 7/6 = 5/6 − 7/6 = <b>−1/3</b>']},
+    {q:'⅗ න් 20 + 4', steps:['‘න්’ (×): ⅗ × 20 = 12','+ 4: 12 + 4 = <b>16</b>']}
+  ];
+  document.getElementById('bs-go').addEventListener('click',function(){
+    var d=BS[+document.getElementById('bs-sel').value],h='<span class="calc"><b>'+d.q+'</b><br>';
+    d.steps.forEach(function(s,i){h+='&nbsp;&nbsp;'+(i+1)+'. '+s+'<br>';});
+    document.getElementById('bs-out').innerHTML=h+'</span>';
+  });
+
+  // ===== W4: scientific notation =====
+  document.getElementById('sc-go').addEventListener('click',function(){
+    var v=parseFloat(document.getElementById('sc-in').value),o=document.getElementById('sc-out');
+    if(isNaN(v)||v===0){o.textContent='0 නොවන සංඛ්‍යාවක් දෙන්න.';return;}
+    var sign=v<0?'−':'',x=Math.abs(v),e=Math.floor(Math.log10(x)),A=round(x/Math.pow(10,e));
+    if(A>=10){A=round(A/10);e++;} if(A<1){A=round(A*10);e--;}
+    var dir=e>=0?'වමට':'දකුණට',why=(x>=1?'ලොකු සංඛ්‍යා → n ධන':'පොඩි (0–1) සංඛ්‍යා → n සෘණ');
+    o.innerHTML='<span class="calc">'+sign+x+' : තිත '+dir+' ස්ථාන '+Math.abs(e)+' → A = '+A+'<br>'+why+' → n = '+e+'<br>∴ <b style="color:#2E7D52;font-size:18px">'+sign+A+' × 10<sup>'+e+'</sup></b></span>';
+  });
+
+  // ===== W5: calculator keys =====
+  document.querySelectorAll('#ckw .ckbtn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.dataset.k,o=document.getElementById('ck-out'),n=parseFloat(document.getElementById('ck-n').value);
+      if(k==='sq'){ if(isNaN(n)){o.textContent='සංඛ්‍යාවක් දෙන්න.';return;} o.innerHTML='<span class="calc">'+n+' [x²] = '+n+' × '+n+' = <b style="color:#2B6CB0;font-size:18px">'+round(n*n)+'</b></span>'; }
+      else if(k==='rt'){ if(isNaN(n)||n<0){o.textContent='0 හෝ ධන සංඛ්‍යාවක් දෙන්න.';return;} o.innerHTML='<span class="calc">[√] '+n+' = <b style="color:#2B6CB0;font-size:18px">'+round(Math.sqrt(n))+'</b></span>'; }
+      else { var p=parseFloat(document.getElementById('ck-p').value),b=parseFloat(document.getElementById('ck-b').value); if(isNaN(p)||isNaN(b)){o.textContent='ප්‍රතිශතය සහ පදනම දෙන්න.';return;} o.innerHTML='<span class="calc">'+b+' × '+p+' % = '+b+' × '+p+' ÷ 100 = <b style="color:#2B6CB0;font-size:18px">'+round(b*p/100)+'</b></span>'; }
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>සා/පෙළ ගණිතය — සම්පූර්ණ සිතියම · ඉඩසර ඇකඩමිය</title>
+<style>
+  :root{
+    --navy:#0f2747; --navy2:#1b3a63; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --ink:#1c2530; --muted:#5c6b7a; --line:#dfe4ea; --bg:#f6f8fb; --card:#ffffff;
+    --alg:#2b6fb3; --geo:#b6562e; --stat:#2f8f5b; --num:#7a5bb0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Noto Sans Sinhala','Iskoola Pota','Segoe UI',system-ui,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:26px 26px 22px;box-shadow:0 10px 30px rgba(15,39,71,.18)}
+  header .kicker{font-size:.74rem;letter-spacing:.05em;color:var(--gold-soft);font-weight:700}
+  header h1{margin:.3rem 0 .1rem;font-size:1.5rem}
+  header p{margin:.5rem 0 0;color:#d6e0ee;font-size:.95rem;max-width:64ch}
+  .strategy{background:var(--gold-soft);border:1px solid #e7d2a0;border-radius:12px;padding:14px 18px;margin:16px 0 4px;font-size:.92rem;color:#5a4410}
+  .strategy b{color:#3a2a06}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:16px 2px 6px;font-size:.84rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .controls{display:flex;gap:10px;margin:14px 2px 22px}
+  .controls button{border:1px solid var(--line);background:var(--card);color:var(--navy);font-weight:600;font-size:.84rem;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:inherit}
+  .controls button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .strand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(20,40,70,.04)}
+  .strand>summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:13px;font-weight:700;font-size:1.05rem}
+  .strand>summary::-webkit-details-marker{display:none}
+  .strand>summary .chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:.8rem}
+  .strand[open]>summary .chev{transform:rotate(90deg)}
+  .bar{width:5px;align-self:stretch;border-radius:4px;min-height:26px}
+  .strand .body{padding:2px 18px 14px}
+  .cluster{border-top:1px solid var(--line);padding:13px 0 6px}
+  .cluster:first-child{border-top:none}
+  .cluster h3{margin:0 0 3px;font-size:1rem;color:var(--navy)}
+  .cluster .why{margin:0 0 12px;font-size:.85rem;color:var(--muted)}
+  .chain{position:relative;margin-left:6px}
+  .step{position:relative;display:flex;align-items:baseline;gap:10px;padding:8px 0 8px 26px}
+  .step::before{content:'';position:absolute;left:6px;top:0;bottom:0;border-left:2px dashed #c4ccd6}
+  .step:last-child::before{bottom:50%}
+  .step .num{position:absolute;left:0;top:9px;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--muted)}
+  .step .name{flex:1;font-size:.94rem}
+  .step .en{display:block;font-size:.76rem;color:var(--muted)}
+  .arrow{font-size:.78rem;color:var(--muted)}
+  .tag{font-size:.7rem;font-weight:700;color:#fff;padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .p1{background:var(--stat)}
+  footer{margin-top:24px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.7}
+  .brand{color:var(--gold);font-weight:700}
+  @media(max-width:520px){.step{flex-wrap:wrap;gap:5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">ඉඩසර ඇකඩමිය · විභාග නිදහස</div>
+    <h1>සා/පෙළ ගණිතය — සම්පූර්ණ සිතියම</h1>
+    <p>ගණිතය යනු පාඩම් ගොඩක් නොවේ. එය දාමයකි — සෑම පියවරක්ම පෙර පියවර මත රඳා පවතී. ටියුෂන් පාඩම් අනුපිළිවෙළින් තොරව, සතියකට එකක් උගන්වයි. මේ සිතියම ඒවා සැබවින්ම රඳා පවතින අනුපිළිවෙළ, විභාගය විභාග කරන ආකාරයටම පෙන්වයි. දාමය අනුගමනය කරන්න. ඇවිත් බලන්න.</p>
+  </header>
+
+  <div class="strategy">
+    <b>මුලින්ම මෙය කියවන්න — කිසිවෙකු නොකියන විභාග රහස.</b> ප්‍රශ්න පත්‍රය කොටස් දෙකකි, එක එක ලකුණු වලින් අඩක්. <b>I ප්‍රශ්න පත්‍රය</b> අත්‍යවශ්‍ය ඉගෙනුම් සංකල්ප මත කෙටි ප්‍රශ්න (පහත <span class="tag p1" style="padding:1px 6px">P1</span> ලෙස සලකුණු කර ඇත). <b>II ප්‍රශ්න පත්‍රය</b> දිගු රචනා ප්‍රශ්න — A කොටස වීජ ගණිතය, B කොටස ජ්‍යාමිතිය. සියල්ල වෙනස් කරන කොටස මෙයයි: <b>I ප්‍රශ්න පත්‍රයෙන් පමණක් 70%ක් ලබා ගතහොත් ඔබ ගණිතයෙන් සමත් වේ — II ප්‍රශ්න පත්‍රයෙන් ශූන්‍යයක් ලැබුණත්.</b> එම නිසා ඔබ සමත්වීමට සටන් කරනවා නම්, කොළ <span class="tag p1" style="padding:1px 6px">P1</span> පාඩම් වලින් සෑම පැයක්ම මුලින්ම ප්‍රතිලාභ ලබා දෙයි.
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--num)"></i>සංඛ්‍යා හා මූල්‍ය</span>
+    <span><i class="dot" style="background:var(--alg)"></i>වීජ ගණිතය (II පත්‍රය, A)</span>
+    <span><i class="dot" style="background:var(--geo)"></i>ජ්‍යාමිතිය හා මිනුම් (II පත්‍රය, B)</span>
+    <span><i class="dot" style="background:var(--stat)"></i>සංඛ්‍යානය, කුලක හා සම්භාවිතාව</span>
+    <span><i class="tag p1" style="padding:1px 7px">P1</i>I පත්‍රයේ අත්‍යවශ්‍ය</span>
+  </div>
+
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=true)">සියල්ල විවෘත කරන්න</button>
+    <button onclick="document.querySelectorAll('.strand').forEach(d=>d.open=false)">සියල්ල වසන්න</button>
+  </div>
+
+  <!-- NUMBER -->
+  <details class="strand" open>
+    <summary><span class="bar" style="background:var(--num)"></span>1 · සංඛ්‍යා හා මූල්‍ය <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>සංඛ්‍යා පදනම</h3>
+        <p class="why">අත්තිවාරම. වර්ගමූල හා අනුපාත චින්තනය අනෙක් සියල්ලට පාදක වේ — ඉදිරියට යාමට පෙර මේවා ස්ථිර කරගන්න.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">තාත්වික සංඛ්‍යා හා වර්ගමූල (ආසන්න කරණය)<span class="en">Real numbers &amp; square roots</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">භාග ඇසුරින් ගැටළු විසඳීම (BODMAS)<span class="en">Problems with fractions</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">දර්ශක හා ලඝුගණක<span class="en">Indices &amp; logarithms</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>මූල්‍ය ගණිතය</h3>
+        <p class="why">සියල්ල එක පවුලක්: එදිනෙදා ජීවිතයට යෙදූ ප්‍රතිශත. අනුපාත මුලින් ඉගෙන ගන්න, එවිට මේවා පහසු ලකුණු වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">අනුපාත හා ප්‍රතිලෝම සමානුපාත (කාර්ය හා කාලය)<span class="en">Ratio &amp; inverse proportion</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">බදු — අනුපාත, තීරුබදු, ආදායම් බදු, VAT<span class="en">Taxes</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">සරල පොලිය <span class="arrow">→</span> චක්‍රවෘද්ධි පොලිය<span class="en">Simple → compound interest</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">කොටස් හා සීමාසහිත සමාගම්<span class="en">Shares &amp; limited companies</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>ශ්‍රේඪි</h3>
+        <p class="why">රටා දෙකක්, එක් අදහසක් — මීළඟ පදය ජනනය කරන නියමයක්. සමාන්තර මුලින්, පසුව ගුණෝත්තර එයම පිළිබිඹු කරයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">සමාන්තර ශ්‍රේඪි <span class="arrow">→</span> ගුණෝත්තර ශ්‍රේඪි<span class="en">Arithmetic → geometric progressions</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- ALGEBRA -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--alg)"></span>2 · වීජ ගණිතය <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· II පත්‍රය, A කොටස</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>වීජ ගණිත දාමය — දැඩි අනුපිළිවෙළින්</h3>
+        <p class="why">මුළු විෂයයේම වඩාත්ම අනුපිළිවෙළ මත රඳා පවතින මාර්ගය. එක් පුරුකක් මග හැරියොත් මීළඟ එක කඩා වැටේ. ටියුෂන් එකේ "සතියකට පාඩමක්" වැඩියෙන්ම රිදවන්නේ මෙතැනයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">ax² + bx + c සාධක<span class="en">Factorising quadratics</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">වීජීය පදවල කු.පො.ගු. (LCM)<span class="en">LCM of algebraic terms</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">වීජීය භාග — එකතු, අඩු, ගුණ, බෙදීම<span class="en">Algebraic fractions</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">වීජීය භාග සහිත රේඛීය සමීකරණ<span class="en">Linear equations with fractions</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">සමගාමී සමීකරණ<span class="en">Simultaneous equations</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">වර්ගජ සමීකරණ (සාධක යොදා)<span class="en">Quadratic equations</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">අසමානතා හා සංඛ්‍යා රේඛාව<span class="en">Inequalities</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>ප්‍රස්තාර හා න්‍යාස</h3>
+        <p class="why">වීජ ගණිතය දෘශ්‍ය වන තැන. සරල රේඛා ප්‍රස්තාරය අනුක්‍රමණයට හා සංඛ්‍යා කොටසේ වේග–කාල ප්‍රස්තාරයට කෙලින්ම සම්බන්ධ වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">y = mx + c සරල රේඛාව — අනුක්‍රමණය හා අන්තඃඛණ්ඩය<span class="en">Straight line, gradient &amp; intercept</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">න්‍යාස — එකතු, අඩු, අදිශ හා න්‍යාස ගුණ කිරීම<span class="en">Matrices</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- GEOMETRY -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--geo)"></span>3 · ජ්‍යාමිතිය හා මිනුම් <span style="font-weight:500;font-size:.8rem;color:var(--muted)">· II පත්‍රය, B කොටස</span> <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>මිනුම් (පරිමිතිය, වර්ගඵලය, පරිමාව)</h3>
+        <p class="why">පරිමිතිය → වර්ගඵලය → පෘෂ්ඨ වර්ගඵලය → පරිමාව. එක එක පෙර එක මත ගොඩනැගේ. නිතර එන, ගණනය මත පදනම් වූ විශ්වසනීය ලකුණු.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">ඛණ්ඩවල හා සංයුක්ත රූපවල පරිමිතිය හා වර්ගඵලය<span class="en">Perimeter &amp; area of sectors</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">ඝන වස්තුවල පෘෂ්ඨ වර්ගඵලය හා පරිමාව — සිලින්ඩරය, ත්‍රිකෝණාකාර ප්‍රිස්මය<span class="en">Surface area &amp; volume</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>ත්‍රිකෝණමිතිය හා පයිතගරස්</h3>
+        <p class="why">අනුපිළිවෙළ වෙනස් කළ නොහැක: සැමවිටම ත්‍රිකෝණමිතික අනුපාතවලට පෙර පයිතගරස්. දෙකම උන්නතාංශ/අවනතාංශ ගැටළු විවෘත කරයි.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">පයිතගරස් ප්‍රමේයය<span class="en">Pythagoras' theorem</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">ත්‍රිකෝණමිතික අනුපාත — sine, cosine, tangent<span class="en">Trigonometric ratios</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">උන්නතාංශ හා අවනතාංශ කෝණ<span class="en">Angles of elevation &amp; depression</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">දුර, කාලය හා වේග ප්‍රස්තාර<span class="en">Distance, time &amp; speed</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>ප්‍රමේය හා සාධන (තල ජ්‍යාමිතිය)</h3>
+        <p class="why">විශාල B කොටස් පොකුර. ත්‍රිකෝණ → සමාන්තරාස්‍ර → වෘත්ත, සෑම ප්‍රමේයයක්ම පෙර ඒවා මත රඳා පවතී. විභාගය විභාග කරන්නේ ප්‍රමේයය <i>යොදා ගණනය කිරීම</i>ය, එය ඔප්පු කිරීම නොවේ.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">ත්‍රිකෝණයක කෝණ (අභ්‍යන්තර හා බාහිර)<span class="en">Angles of a triangle</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">සර්වසමතාව හා සමද්විපාද ත්‍රිකෝණ<span class="en">Congruency &amp; isosceles</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">සමාන්තරාස්‍ර හා මධ්‍ය ලක්ෂ්‍ය ප්‍රමේයය<span class="en">Parallelograms &amp; mid-point theorem</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">වෘත්ත ප්‍රමේය — කේන්ද්‍රය/පරිධිය, ජ්‍යා<span class="en">Circle theorems</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">එකම ඛණ්ඩයේ කෝණ, අර්ධවෘත්ත, චක්‍රීය චතුරස්‍ර<span class="en">Cyclic quadrilaterals</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">පථ හා නිර්මාණ<span class="en">Loci &amp; constructions</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- STATS -->
+  <details class="strand">
+    <summary><span class="bar" style="background:var(--stat)"></span>4 · සංඛ්‍යානය, කුලක හා සම්භාවිතාව <span class="chev">▶</span></summary>
+    <div class="body">
+      <div class="cluster">
+        <h3>සංඛ්‍යානය (දත්ත හැසිරවීම)</h3>
+        <p class="why">එක දිගු දාමයක්: දත්ත සංවිධානය → නිරූපණය → සාරාංශය → වක්‍රයෙන් චතුර්ථක කියවීම. සංචිත සංඛ්‍යාත වක්‍රය අවසන් ප්‍රතිඵලයයි — ඒ සඳහා පෙර පියවර ඉගෙන ගන්න.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">දත්ත වර්ග හා සමූහිත සංඛ්‍යාත, මධ්‍ය අගය<span class="en">Types of data, grouped frequency</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">කව් සටහන් හා සමූහිත දත්තවල මධ්‍යන්‍යය<span class="en">Pie charts &amp; mean</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">ච්‍ඡේදක (histogram) හා සංඛ්‍යාත බහුඅස්‍ර<span class="en">Histograms &amp; frequency polygons</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">සංචිත සංඛ්‍යාත වක්‍රය, චතුර්ථක හා අන්තඃචතුර්ථක පරාසය<span class="en">Cumulative frequency, quartiles &amp; IQR</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+      <div class="cluster">
+        <h3>කුලක හා සම්භාවිතාව</h3>
+        <p class="why">කුලක භාෂාව දෙයි; සම්භාවිතාව එය භාවිතා කරයි. මෙහි වෙන් රූප සටහන් සම්භාවිතා ජාලය විසඳන එම මෙවලමම වේ.</p>
+        <div class="chain">
+          <div class="step"><span class="num"></span><span class="name">කුලක අංකනය හා වෙන් රූප සටහන් (කුලක 2)<span class="en">Set notation &amp; Venn diagrams</span></span><span class="tag p1">P1</span></div>
+          <div class="step"><span class="num"></span><span class="name">සම්භාවිතාව — සිදුවීම්, ජාල හා රුක් සටහන්<span class="en">Probability — grids &amp; tree diagrams</span></span><span class="tag p1">P1</span></div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <footer>
+    ජා.අ.ආ. (NIE) සා/පෙළ ගණිත විෂය නිර්දේශයට (10 හා 11 ශ්‍රේණි) හා අත්‍යවශ්‍ය ඉගෙනුම් සංකල්ප ලේඛනයට අනුකූලයි. <span class="tag p1" style="padding:1px 6px">P1</span> මඟින් I ප්‍රශ්න පත්‍රයේ අත්‍යවශ්‍ය පාඩම් සලකුණු කරයි.<br>
+    <span class="brand">ඉඩසර ඇකඩමිය</span> · idasara.org
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Idasara Academy — study notes for Grades 6–13. Choose your grade, medium and subject. We empower. We free. We augment.">
+<title>Idasara Academy · Study Notes</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --surface:#fff; --ink:#2a2520; --ink-soft:#6b6155; --line:#e7ded1;
+    --teal:#0f766e; --teal-deep:#0b5752; --teal-soft:#d7efec;
+    --leaf:#2f8f3e; --leaf-soft:#e3f5e6;
+    --amber:#c2680a; --amber-soft:#fdf0dc;
+    --navy:#0f2747; --gold:#c8962a; --gold-soft:#f3e6c8;
+    --shadow:0 1px 2px rgba(42,37,32,.06),0 8px 24px rgba(42,37,32,.07);
+    --radius:16px;
+    --font:'Noto Sans Sinhala','Noto Sans Tamil','Yaldevi','Iskoola Pota','Nirmala UI',system-ui,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--font);color:var(--ink);line-height:1.65;font-size:17px;
+    background:radial-gradient(900px 500px at 100% -10%,#eaf6ec 0,transparent 60%),
+               radial-gradient(700px 500px at -10% 0,#e8f4f2 0,transparent 55%),var(--bg);
+    min-height:100vh}
+  a{color:inherit}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---------- header ---------- */
+  header{padding:30px 0 8px}
+  .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;
+    text-transform:uppercase;font-size:.72rem;color:var(--teal-deep)}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--leaf);
+    box-shadow:0 0 0 4px var(--leaf-soft)}
+  .hero{margin-top:14px;background:linear-gradient(135deg,var(--leaf),var(--teal-deep));color:#fff;
+    border-radius:22px;padding:30px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hero::after{content:"📚";position:absolute;right:22px;bottom:-12px;font-size:96px;opacity:.16}
+  .hero h1{margin:0;font-size:1.9rem;line-height:1.2}
+  .hero p{margin:8px 0 0;opacity:.92;max-width:60ch}
+  .hero .tag{display:inline-block;margin-top:14px;background:rgba(255,255,255,.16);
+    padding:5px 13px;border-radius:999px;font-size:.78rem;font-weight:600}
+
+  /* ---------- search ---------- */
+  .searchbar{position:relative;margin:18px 0 6px}
+  .searchbar input{width:100%;padding:15px 18px 15px 48px;font-size:1rem;font-family:inherit;
+    border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);
+    box-shadow:var(--shadow);outline:none}
+  .searchbar input:focus{border-color:var(--teal)}
+  .searchbar .ic{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:1.1rem;opacity:.5}
+  .searchbar .clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:none;
+    background:var(--line);color:var(--ink-soft);border-radius:50%;width:26px;height:26px;cursor:pointer;
+    font-size:.9rem;line-height:1;display:none}
+  .searchbar.has .clear{display:block}
+
+  /* ---------- breadcrumb ---------- */
+  nav.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:18px 2px 14px;font-size:.9rem}
+  nav.crumbs a,nav.crumbs span{color:var(--ink-soft);text-decoration:none}
+  nav.crumbs a{cursor:pointer;font-weight:600;color:var(--teal-deep)}
+  nav.crumbs a:hover{text-decoration:underline}
+  nav.crumbs .sep{opacity:.45}
+  nav.crumbs .here{color:var(--ink);font-weight:700}
+
+  /* ---------- grids & cards ---------- */
+  .sectionhead{margin:6px 2px 14px;font-size:1.15rem;font-weight:800;color:var(--teal-deep)}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .card{display:block;text-decoration:none;color:inherit;background:var(--surface);
+    border:1px solid var(--line);border-left:6px solid var(--teal);border-radius:14px;
+    padding:18px 20px;box-shadow:var(--shadow);transition:transform .14s,border-color .14s;cursor:pointer}
+  .card:hover{transform:translateY(-2px);border-left-color:var(--leaf)}
+  .card .ic{font-size:1.7rem;line-height:1}
+  .card h3{margin:8px 0 2px;font-size:1.12rem;color:var(--teal-deep)}
+  .card .sub{font-size:.82rem;color:var(--ink-soft)}
+  .card .count{display:inline-block;margin-top:10px;font-size:.74rem;font-weight:700;color:var(--amber);
+    background:var(--amber-soft);padding:2px 9px;border-radius:999px}
+  .card.empty{opacity:.55;cursor:default;border-left-color:var(--line)}
+  .card.empty:hover{transform:none}
+
+  /* grade ladder pills */
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin:4px 2px 20px}
+  .pill{border:1px solid var(--line);background:var(--surface);color:var(--teal-deep);font-weight:700;
+    font-size:.82rem;padding:7px 14px;border-radius:999px;cursor:pointer;font-family:inherit;text-decoration:none}
+  .pill:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .pill.active{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep)}
+  .pill.soon{opacity:.5;cursor:default}
+  .pill.soon:hover{background:var(--surface);color:var(--teal-deep);border-color:var(--line)}
+
+  /* subject map feature card */
+  .mapcard{display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;
+    background:linear-gradient(135deg,var(--navy),#1b3a63);border-radius:14px;padding:18px 22px;
+    box-shadow:var(--shadow);margin-bottom:18px;transition:transform .14s}
+  .mapcard:hover{transform:translateY(-2px)}
+  .mapcard .ic{font-size:1.8rem}
+  .mapcard h3{margin:0;font-size:1.05rem}
+  .mapcard .sub{font-size:.82rem;color:var(--gold-soft)}
+
+  /* cluster list */
+  .cluster{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--amber);
+    border-radius:14px;padding:16px 20px;box-shadow:var(--shadow);margin-bottom:14px}
+  .cluster .top{display:flex;align-items:flex-start;gap:13px;text-decoration:none;color:inherit}
+  .cluster .no{flex:none;width:38px;height:38px;border-radius:11px;background:var(--amber);color:#fff;
+    display:grid;place-items:center;font-weight:800}
+  .cluster h3{margin:0;font-size:1.06rem;color:var(--amber)}
+  .cluster .go{font-size:.84rem;font-weight:700;color:var(--amber);margin-top:4px;display:inline-block}
+  .cluster ul.lessons{margin:12px 0 0;padding:0;list-style:none;border-top:1px dashed var(--line);padding-top:10px}
+  .cluster ul.lessons li{margin:0}
+  .cluster ul.lessons a{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink);
+    padding:7px 8px;border-radius:9px;font-size:.92rem}
+  .cluster ul.lessons a:hover{background:var(--teal-soft)}
+  .cluster ul.lessons .ln{flex:none;font-size:.72rem;font-weight:700;color:var(--teal-deep);
+    background:var(--teal-soft);border-radius:7px;padding:2px 7px;min-width:26px;text-align:center}
+
+  /* search results */
+  .results .r{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);margin-bottom:10px;text-decoration:none;color:inherit}
+  .results .r:hover{border-color:var(--teal)}
+  .results .r .ic{font-size:1.3rem}
+  .results .r .bc{font-size:.74rem;color:var(--ink-soft);font-weight:600}
+  .results .r .ti{font-size:.98rem;color:var(--teal-deep);font-weight:700}
+  .results .r .kind{margin-left:auto;font-size:.68rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);background:#f1ece3;padding:3px 9px;border-radius:999px}
+
+  .empty-note{background:var(--surface);border:1px dashed var(--line);border-radius:14px;
+    padding:22px;text-align:center;color:var(--ink-soft)}
+
+  footer{text-align:center;margin-top:44px;color:var(--ink-soft);font-size:.85rem;line-height:1.9}
+  footer .t{color:var(--teal-deep);font-weight:800}
+  @media(max-width:560px){.hero h1{font-size:1.5rem}body{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="dot"></span> Idasara Academy</div>
+    <div class="hero">
+      <h1>Study Notes</h1>
+      <p>Notes, lesson maps and cluster guides for Grades 6–13 — built so you can learn on your own, at your own pace.</p>
+      <span class="tag">We empower · We free · We augment</span>
+    </div>
+    <div class="searchbar" id="searchbar">
+      <span class="ic">🔍</span>
+      <input id="q" type="search" placeholder="Search a subject, cluster or lesson…" autocomplete="off" aria-label="Search">
+      <button class="clear" id="clear" aria-label="Clear search">✕</button>
+    </div>
+  </header>
+
+  <nav class="crumbs" id="crumbs"></nav>
+  <main id="view"></main>
+
+  <footer>
+    <div class="t">Idasara Academy</div>
+    අපි බලගන්වමු · අපි නිදහස් කරමු · අපි ශක්තිමත් කරමු<br>
+    Education is the only path. Learning is in your hands.
+  </footer>
+</div>
+
+<script src="manifest.js"></script>
+<script>
+(function(){
+  "use strict";
+  var M = window.IDASARA_MANIFEST || { stats:{}, grades:[] };
+
+  // Full grade ladder so the vision is visible even before content exists.
+  var LADDER = [
+    {slug:'grade-06',title:'Grade 6'},{slug:'grade-07',title:'Grade 7'},
+    {slug:'grade-08',title:'Grade 8'},{slug:'grade-09',title:'Grade 9'},
+    {slug:'ol',title:'O/L'},{slug:'al',title:'A/L'}
+  ];
+
+  var el = function(id){ return document.getElementById(id); };
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  var bySlug = function(arr,slug){ for(var i=0;i<arr.length;i++) if(arr[i].slug===slug) return arr[i]; return null; };
+  function clusterCount(s){ return (s.clusters||[]).length; }
+  function subjStat(s){
+    var c = clusterCount(s), l=0; (s.clusters||[]).forEach(function(x){ l += (x.lessons||[]).length; });
+    if(!c) return s.map ? 'Map only' : 'Coming soon';
+    return c + (c===1?' cluster':' clusters') + (l?' · '+l+' lessons':'');
+  }
+
+  /* ---------------- search index ---------------- */
+  var INDEX = [];
+  M.grades.forEach(function(g){ g.mediums.forEach(function(m){ m.subjects.forEach(function(s){
+    var bc = g.title+' › '+m.title+' › '+s.title;
+    if(s.map) INDEX.push({kind:'map',ic:'🗺️',title:s.title+' — Cluster Map',bc:bc,href:s.map.href});
+    (s.clusters||[]).forEach(function(c){
+      INDEX.push({kind:'cluster',ic:s.icon,title:c.title,bc:bc,href:c.href});
+      (c.lessons||[]).forEach(function(l){
+        INDEX.push({kind:'lesson',ic:'📄',title:l.title,bc:bc+' › '+c.title,href:l.href});
+      });
+    });
+  });});});
+
+  /* ---------------- routing ---------------- */
+  function parseHash(){
+    var h = (location.hash||'').replace(/^#\/?/,'');
+    var parts = h.split('/').filter(Boolean).map(decodeURIComponent);
+    return { grade:parts[0]||null, medium:parts[1]||null, subject:parts[2]||null };
+  }
+  function go(path){ location.hash = path ? '#/'+path : '#/'; }
+
+  /* ---------------- views ---------------- */
+  function crumbs(r){
+    var c = el('crumbs'); var html = '<a data-go="">🏠 Home</a>';
+    if(r.grade){ var g=bySlug(M.grades,r.grade);
+      html += ' <span class="sep">›</span> '+(g? (r.medium||r.subject?'<a data-go="'+r.grade+'">'+esc(g.title)+'</a>':'<span class="here">'+esc(g.title)+'</span>'):esc(r.grade)); }
+    if(r.grade&&r.medium){ var g2=bySlug(M.grades,r.grade); var m=g2&&bySlug(g2.mediums,r.medium);
+      html += ' <span class="sep">›</span> '+(m? (r.subject?'<a data-go="'+r.grade+'/'+r.medium+'">'+esc(m.title)+'</a>':'<span class="here">'+esc(m.title)+'</span>'):esc(r.medium)); }
+    if(r.grade&&r.medium&&r.subject){ var g3=bySlug(M.grades,r.grade); var m3=g3&&bySlug(g3.mediums,r.medium); var s=m3&&bySlug(m3.subjects,r.subject);
+      html += ' <span class="sep">›</span> <span class="here">'+esc(s?s.title:r.subject)+'</span>'; }
+    c.innerHTML = html;
+  }
+
+  function gradePills(active){
+    var present = {}; M.grades.forEach(function(g){ present[g.slug]=g; });
+    return '<div class="pills">'+LADDER.map(function(L){
+      var g = present[L.slug];
+      if(g) return '<a class="pill'+(active===g.slug?' active':'')+'" data-go="'+g.slug+'">'+esc(g.title)+'</a>';
+      return '<span class="pill soon" title="Coming soon">'+esc(L.title)+' · soon</span>';
+    }).join('')+'</div>';
+  }
+
+  function viewHome(){
+    var html = gradePills(null);
+    if(!M.grades.length){ el('view').innerHTML = html+'<div class="empty-note">No content yet. Add files under <code>content/</code> and the site will list them automatically.</div>'; return; }
+    html += '<div class="sectionhead">Choose your grade</div><div class="grid">';
+    M.grades.forEach(function(g){
+      var nSub=0,nCl=0; g.mediums.forEach(function(m){ nSub+=m.subjects.length; m.subjects.forEach(function(s){ nCl+=clusterCount(s); }); });
+      html += '<a class="card" data-go="'+g.slug+'"><div class="ic">🎓</div>'+
+        '<h3>'+esc(g.title)+'</h3>'+(g.sub?'<div class="sub">'+esc(g.sub)+'</div>':'')+
+        '<span class="count">'+g.mediums.length+(g.mediums.length===1?' medium':' mediums')+' · '+nSub+' subjects</span></a>';
+    });
+    html += '</div>';
+    el('view').innerHTML = html;
+  }
+
+  function viewGrade(g){
+    var html = gradePills(g.slug)+'<div class="sectionhead">Select medium</div><div class="grid">';
+    var icons={english:'🔤',sinhala:'🇱🇰',tamil:'🌸'};
+    g.mediums.forEach(function(m){
+      var nSub=m.subjects.length;
+      html += '<a class="card" data-go="'+g.slug+'/'+m.slug+'"><div class="ic">'+(icons[m.slug]||'🗣️')+'</div>'+
+        '<h3>'+esc(m.title)+' medium</h3><span class="count">'+nSub+' subjects</span></a>';
+    });
+    html += '</div>';
+    el('view').innerHTML = html;
+  }
+
+  function viewMedium(g,m){
+    var html = '<div class="sectionhead">'+esc(g.title)+' · '+esc(m.title)+' medium — subjects</div><div class="grid">';
+    m.subjects.forEach(function(s){
+      html += '<a class="card" data-go="'+g.slug+'/'+m.slug+'/'+s.slug+'"><div class="ic">'+esc(s.icon)+'</div>'+
+        '<h3>'+esc(s.title)+'</h3><span class="count">'+esc(subjStat(s))+'</span></a>';
+    });
+    html += '</div>';
+    el('view').innerHTML = html;
+  }
+
+  function viewSubject(g,m,s){
+    var html = '<div class="sectionhead">'+esc(s.icon)+' '+esc(s.title)+' — '+esc(g.title)+' · '+esc(m.title)+'</div>';
+    if(s.map){
+      html += '<a class="mapcard" href="'+esc(s.map.href)+'" target="_blank" rel="noopener">'+
+        '<div class="ic">🗺️</div><div><h3>Full Cluster Map</h3>'+
+        '<div class="sub">See how every lesson groups into clusters — the big picture first.</div></div></a>';
+    }
+    var cl = s.clusters||[];
+    if(!cl.length){
+      html += '<div class="empty-note">Study materials for this subject are on the way.'+(s.map?' For now, explore the cluster map above.':'')+'</div>';
+    } else {
+      html += '<div class="sectionhead" style="font-size:1rem">Clusters</div>';
+      cl.forEach(function(c,i){
+        var no = (c.num && c.num<9999) ? String(c.num).padStart(2,'0') : String(i+1).padStart(2,'0');
+        html += '<div class="cluster"><a class="top" href="'+esc(c.href)+'" target="_blank" rel="noopener">'+
+          '<span class="no">'+esc(no)+'</span><div><h3>'+esc(c.title)+'</h3>'+
+          '<span class="go">Open '+(c.type==='multi'?'cluster':'study notes')+' →</span></div></a>';
+        if(c.lessons && c.lessons.length){
+          html += '<ul class="lessons">';
+          c.lessons.forEach(function(l){
+            html += '<li><a href="'+esc(l.href)+'" target="_blank" rel="noopener"><span class="ln">'+
+              (l.num&&l.num<9999?esc(String(l.num)):'•')+'</span>'+esc(l.title)+'</a></li>';
+          });
+          html += '</ul>';
+        }
+        html += '</div>';
+      });
+    }
+    el('view').innerHTML = html;
+  }
+
+  /* ---------------- search view ---------------- */
+  function viewSearch(q){
+    var ql = q.toLowerCase();
+    var hits = INDEX.filter(function(e){
+      return e.title.toLowerCase().indexOf(ql)>=0 || e.bc.toLowerCase().indexOf(ql)>=0;
+    }).slice(0,60);
+    el('crumbs').innerHTML = '<a data-go="">🏠 Home</a> <span class="sep">›</span> <span class="here">Search</span>';
+    var html = '<div class="sectionhead">'+hits.length+' result'+(hits.length===1?'':'s')+' for “'+esc(q)+'”</div><div class="results">';
+    if(!hits.length){ html += '<div class="empty-note">Nothing matched. Try a shorter or different word.</div>'; }
+    hits.forEach(function(e){
+      html += '<a class="r" href="'+esc(e.href)+'" target="_blank" rel="noopener"><span class="ic">'+esc(e.ic)+'</span>'+
+        '<div><div class="bc">'+esc(e.bc)+'</div><div class="ti">'+esc(e.title)+'</div></div>'+
+        '<span class="kind">'+esc(e.kind)+'</span></a>';
+    });
+    html += '</div>';
+    el('view').innerHTML = html;
+  }
+
+  /* ---------------- render dispatch ---------------- */
+  function render(){
+    var q = el('q').value.trim();
+    el('searchbar').classList.toggle('has', !!q);
+    if(q){ viewSearch(q); return; }
+    var r = parseHash();
+    crumbs(r);
+    var g = r.grade && bySlug(M.grades, r.grade);
+    if(!g){ viewHome(); return; }
+    var m = r.medium && bySlug(g.mediums, r.medium);
+    if(!m){ viewGrade(g); return; }
+    var s = r.subject && bySlug(m.subjects, r.subject);
+    if(!s){ viewMedium(g,m); return; }
+    viewSubject(g,m,s);
+  }
+
+  /* ---------------- events ---------------- */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-go]');
+    if(t){ e.preventDefault();
+      if(el('q').value){ el('q').value=''; }      // leaving search
+      go(t.getAttribute('data-go')); }
+  });
+  window.addEventListener('hashchange', render);
+  var timer;
+  el('q').addEventListener('input', function(){ clearTimeout(timer); timer=setTimeout(render,120); });
+  el('clear').addEventListener('click', function(){ el('q').value=''; render(); el('q').focus(); });
+
+  render();
+})();
+</script>
+</body>
+</html>
