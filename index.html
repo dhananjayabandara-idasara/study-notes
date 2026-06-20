@@ -38,6 +38,19 @@
   .hero p{margin:8px 0 0;opacity:.92;max-width:60ch}
   .hero .tag{display:inline-block;margin-top:14px;background:rgba(255,255,255,.16);
     padding:5px 13px;border-radius:999px;font-size:.78rem;font-weight:600}
+  .hero .brandmark{position:absolute;top:20px;right:22px;z-index:3;display:flex;flex-direction:column;
+    align-items:center;text-align:center;width:104px}
+  .hero .brandmark .ring{width:58px;height:58px;border-radius:50%;overflow:hidden;background:#fff;
+    border:3px solid var(--gold-soft);box-shadow:0 4px 12px rgba(0,0,0,.18);display:flex;
+    align-items:center;justify-content:center}
+  .hero .brandmark img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero .brandmark .si{font-size:.72rem;font-weight:800;color:var(--gold-soft);margin:6px 0 0}
+  .hero .brandmark .en{font-size:.6rem;color:#eef4ff;opacity:.92;white-space:nowrap}
+  @media(min-width:601px){.hero{padding-right:148px}}
+  @media(max-width:600px){.hero .brandmark{width:auto;top:14px;right:14px}.hero .brandmark .si,
+    .hero .brandmark .en{display:none}.hero .brandmark .ring{width:44px;height:44px;border-width:2px}}
+  .copyright{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
+    font-size:.78rem;color:var(--ink-soft)}
 
   /* ---------- search ---------- */
   .searchbar{position:relative;margin:18px 0 6px}
@@ -131,6 +144,11 @@
   <header>
     <div class="brand"><span class="dot"></span> Idasara Academy</div>
     <div class="hero">
+      <div class="brandmark">
+        <span class="ring"><img src="assets/idasara-logo.jpeg" alt="Idasara Academy logo"></span>
+        <span class="si">ඉඩසර ඇකඩමිය</span>
+        <span class="en">Idasara Digital (Pvt) Ltd.</span>
+      </div>
       <h1>Study Notes</h1>
       <p>Notes, lesson maps and cluster guides for Grades 6–13 — built so you can learn on your own, at your own pace.</p>
       <span class="tag">We empower · We free · We augment</span>
@@ -149,6 +167,7 @@
     <div class="t">Idasara Academy</div>
     අපි බලගන්වමු · අපි නිදහස් කරමු · අපි ශක්තිමත් කරමු<br>
     Education is the only path. Learning is in your hands.
+    <div class="copyright">&copy; 2025-2026 Idasara Digital (Pvt) Ltd. All Rights Reserved.</div>
   </footer>
 </div>
 

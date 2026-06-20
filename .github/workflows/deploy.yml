@@ -31,6 +31,9 @@ jobs:
       - name: Regenerate navigation manifest from content/
         run: node tools/build-manifest.mjs
 
+      - name: Apply Idasara branding (logo + copyright) to all pages
+        run: node tools/apply-branding.mjs
+
       - uses: actions/configure-pages@v5
 
       - name: Upload site artifact
